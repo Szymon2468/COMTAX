@@ -1,0 +1,139 @@
+@import '../../../styles/variables.scss';
+
+.footer {
+  width: 100%;
+  height: auto;
+  background-color: $textColor;
+  color: white;
+  padding: 10px 0;
+
+  .footerItemsContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 70px 0 0 50px;
+
+    .address {
+      width: 300px;
+      display: flex;
+      flex-wrap: wrap;
+
+      .greenColor {
+        color: $mainColor;
+        font-size: 22px;
+        line-height: 28px;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+
+      .addressItem {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+    }
+
+    .sideMap {
+      width: auto;
+      margin-right: 50px;
+    }
+  }
+}
+
+.sideMap {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  height: auto;
+
+  .navItemsContainer {
+    width: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 50px;
+    height: auto;
+
+    .navItems {
+      width: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    .navIcons {
+      width: auto;
+      display: flex;
+      justify-content: space-between;
+      margin-left: 70px;
+    }
+  }
+}
+
+.iconMargin {
+  margin-right: 10px;
+}
+
+.bottomMargin {
+  margin-bottom: 10px;
+  margin-right: 25px;
+  display: block;
+}
+
+.navItem {
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 500;
+  display: flex;
+  margin-left: 35px;
+  height: auto;
+}
+
+.sideMapItem {
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.footerIcons {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  margin-left: 35px;
+}
+
+.belt {
+  width: 1000px;
+  background-color: white;
+  height: 1px;
+  margin: 35px auto 0 auto;
+}
+
+.footerInfoContainer {
+  width: 1000px;
+  margin: 0 auto;
+  margin-bottom: 70px;
+
+  .footerInfoItem {
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: 500;
+    margin: 0;
+
+    span {
+      color: $mainColor;
+    }
+  }
+
+  .priv {
+    width: 100%;
+    text-align: end;
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: 500;
+  }
+}

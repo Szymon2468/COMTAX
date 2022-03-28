@@ -1,0 +1,41 @@
+@import '../../../styles/variables.scss';
+
+.offerTileContainer {
+  width: 100%;
+  height: auto;
+
+  .offerTile {
+    width: 1005px;
+    height: 660px;
+    border-radius: 10px;
+    margin-top: 105px;
+
+    .title {
+      margin: 0 auto 70px auto;
+      padding-top: 105px;
+      width: auto;
+      color: white;
+      text-align: center;
+    }
+
+    .textRight {
+      margin: 0 0 70px 35px;
+      width: 805px;
+      color: white;
+    }
+
+    .btnContainer {
+      width: 840px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.offerTileGreen {
+  background-color: $mainColor;
+}
+
+.offerTileBlue {
+  background-color: $blueBgColor;
+}
