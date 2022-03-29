@@ -5,29 +5,35 @@
   filter: drop-shadow(-2px 2px 4px rgba(0, 0, 0, 0.25));
   border-radius: 10px;
   font-size: 22px;
+  padding: 0 20px;
+  font-weight: 700;
 }
 
 .fullGreen {
   background-color: $mainColor;
+  color: white;
+  border: $mainColor 4px solid;
 }
 
 .fullBlue {
   background-color: $blueBgColor;
+  color: white;
+  border: $blueBgColor 4px solid;
 }
 
 .outlinedGreen {
-  border: $mainColor 3px solid;
+  border: $mainColor 4px solid;
   color: $mainColor;
   background-color: white;
 }
 
 .outlinedBlue {
-  border: $blueBgColor 3px solid;
+  border: $blueBgColor 4px solid;
   color: $blueBgColor;
   background-color: white;
 }
 
 .outlined {
   color: white;
-  border: white 3px solid;
+  border: white 4px solid;
 }

@@ -1,0 +1,30 @@
+@import '../../../styles/variables.scss';
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  margin-top: 35px;
+  justify-content: center;
+
+  input,
+  textarea,
+  select {
+    width: 400px;
+    height: 44px;
+    border-radius: 5px;
+    filter: drop-shadow(-2px 2px 4px rgba(0, 0, 0, 0.25));
+    border: none;
+    box-sizing: border-box;
+    padding: 10px 0 10px 20px;
+  }
+
+  textarea {
+    min-height: 150px;
+  }
+
+  .info {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+  }
+}

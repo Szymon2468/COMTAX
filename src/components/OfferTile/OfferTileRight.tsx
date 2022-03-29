@@ -10,7 +10,7 @@ interface OfferTileType {
   bgColor: BACKGROUND_COLOR;
   title: String;
   text: String;
-  imgUrl?: String;
+  imgUrl: string;
   btnText: String;
   btnOnClick: Function;
   btnColor: BUTTON_COLOR;
@@ -52,7 +52,11 @@ function OfferTileRight({
           </div>
         </main>
       </div>
-      <div className={styles.img}></div>
+      <img
+        className={`${styles.img} ${styles.imgRight}`}
+        src={imgUrl}
+        alt='idk'
+      ></img>
     </section>
   );
 }

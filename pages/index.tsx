@@ -7,6 +7,13 @@ import SubTile1 from '../src/assets/homepage/Tiles/SubTile1';
 import SubTile2 from '../src/assets/homepage/Tiles/SubTile2';
 import SubTile3 from '../src/assets/homepage/Tiles/SubTile3';
 import SubTile4 from '../src/assets/homepage/Tiles/SubTile4';
+import ContactIcon from '../src/assets/homepage/icons/ContactIcon';
+import OfferIcon from '../src/assets/homepage/icons/OfferIcon';
+import Button from '../src/components/Button/Button';
+import about1 from '../src/assets/homepage/photos/about1.jpg';
+import about2 from '../src/assets/homepage/photos/about2.jpg';
+import about3 from '../src/assets/homepage/photos/about3.jpg';
+import OfferTileLeft from '../src/components/OfferTile/OfferTileLeft';
 
 const Home = () => {
   let pageDescription = '';
@@ -52,8 +59,26 @@ const Home = () => {
                   </p>
                 </div>
                 <div className={styles.icons}>
-                  <div className={styles.icon}></div>
-                  <div className={styles.icon}></div>
+                  <div className={styles.icon}>
+                    <ContactIcon />
+                    <Button
+                      text='Skontaktuj się z nami'
+                      onClick={() => {}}
+                      color='GREEN'
+                      type='FULL'
+                      btnWidth={300}
+                    ></Button>
+                  </div>
+                  <div className={styles.icon}>
+                    <OfferIcon />
+                    <Button
+                      text='Nasza Oferta'
+                      onClick={() => {}}
+                      color='GREEN'
+                      type='OUTLINED'
+                      btnWidth={300}
+                    ></Button>
+                  </div>
                 </div>
               </div>
               <Image
@@ -97,6 +122,41 @@ const Home = () => {
             btnType='OUTLINED'
             btnOnClick={() => {}}
             btnText='Przeczytaj o Nas więcej'
+            imgUrl={about1.src}
+          ></OfferTileRight>
+
+          <OfferTileLeft
+            title='KSIĘGOWOŚĆ, KTÓREJ MOŻESZ ZAUFAĆ'
+            text={`Nie chcesz więcej tracić czasu na comiesięczne zajmowanie się dokumentami oraz deklaracjami? Skorzystaj z usług sprawdzonego biura rachunkowego. Prowadzimy obsługę księgową firm na terenie Katowic oraz całej aglomeracji śląskiej.
+
+          Prowadzimy między innymi:
+          - Księgi Rachunkowe
+          - Podatkową księgę przychodów i rozchodów
+          - Ewidencję przychodów / VAT / środków trwałych i wyposażenia
+          - Sprawozdawczość finansową i GUS
+          ... i wiele innych! Nasza oferta księgowości jest dużo bardziej rozwinięta.`}
+            bgColor='GREEN'
+            btnColor='TRANSPARENT'
+            btnType='OUTLINED'
+            btnOnClick={() => {}}
+            btnText='Poznaj naszą ofertę księgowości'
+            imgUrl={about2.src}
+          ></OfferTileLeft>
+
+          <OfferTileRight
+            title='WIRTUALNE BIURO W KATOWICACH + SALA KONFERENCYJNA
+            Krasińskiego 29 - nowy adres Twojej firmy'
+            text='SZUKASZ WIRTUALNEGO BIURA LUB SALI KONFERENCYJNEJ W CENTRUM AGLOMERACJI ŚLĄSKIEJ?
+            Wirtualne Biuro w Katowicach to świetne rozwiązanie dla małych firm i osób prowadzących 
+            działalność gospodarczą z domu lub zdalnie. Z kolei sala konferencyjna to miejsce, 
+            w którym możesz zorganizować spotkanie ze swoim Klientem lub partnerem biznesowym. 
+            Zapewniamy miejsce parkingowe.'
+            bgColor='BLUE'
+            btnColor='TRANSPARENT'
+            btnType='OUTLINED'
+            btnOnClick={() => {}}
+            btnText='Przeczytaj o Nas więcej'
+            imgUrl={about3.src}
           ></OfferTileRight>
         </div>
       </main>

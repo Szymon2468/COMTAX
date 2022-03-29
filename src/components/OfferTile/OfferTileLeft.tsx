@@ -10,7 +10,7 @@ interface OfferTileType {
   bgColor: BACKGROUND_COLOR;
   title: String;
   text: String;
-  imgUrl?: String;
+  imgUrl: string;
   btnText: String;
   btnOnClick: Function;
   btnColor: BUTTON_COLOR;
@@ -24,16 +24,28 @@ function OfferTileLeft({
   btnText,
   btnOnClick,
   btnColor,
-  btnType
+  btnType,
+  bgColor
 }: OfferTileType) {
+  let bgclr = '';
+  if (bgColor === 'BLUE') {
+    bgclr = styles.offerTileBlue;
+  } else {
+    bgclr = styles.offerTileGreen;
+  }
   return (
     <section className={styles.offerTileContainer}>
-      <div className={styles.offerTile}>
+      <img
+        className={`${styles.img} ${styles.imgLeft}`}
+        src={imgUrl}
+        alt='idk'
+      ></img>
+      <div className={`${styles.offerTile} ${bgclr} ${styles.offerTileLeft}`}>
         <header>
           <h2 className={styles.title}>{title}</h2>
         </header>
         <main>
-          <p className={styles.text}>{text}</p>
+          <p className={styles.textLeft}>{text}</p>
           <Button
             text={btnText}
             onClick={() => btnOnClick()}
@@ -42,7 +54,6 @@ function OfferTileLeft({
           ></Button>
         </main>
       </div>
-      <div className={styles.img}></div>
     </section>
   );
 }

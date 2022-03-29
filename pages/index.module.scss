@@ -21,6 +21,8 @@
           font-size: 28px;
           font-weight: 900;
           color: $mainColor;
+          padding-top: 35px;
+          margin-bottom: 35px;
         }
 
         .text {
@@ -34,12 +36,17 @@
         display: flex;
         justify-content: space-between;
         min-width: 450px;
-        padding-bottom: 70px;
+        padding-bottom: 35px;
 
         .icon {
-          width: 200px;
-          height: 150px;
-          background-color: black;
+          width: 300px;
+          height: 225px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-around;
+          background-color: white;
+          border-radius: 10px;
         }
       }
     }
@@ -60,7 +67,7 @@
     font-weight: 900;
     width: 500px;
     color: white;
-    padding-bottom: 100px;
+    padding-bottom: 70px;
   }
 
   .trustTiles {
