@@ -32,7 +32,9 @@ function Nav() {
                 <p>Wirtualne Biuro</p>
               </Link>
 
-              <p>Sala Konferencyjna</p>
+              <Link href={'/sale-konferencyjne'}>
+                <p>Sala Konferencyjna</p>
+              </Link>
             </div>
           </Collapsible>
           <div className={styles.navItem}>O Firmie</div>

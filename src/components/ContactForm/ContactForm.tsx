@@ -12,7 +12,7 @@ function ContactForm() {
       <section className={styles.contacFormContainer}>
         <header className={styles.header}>
           <h2 className={styles.title}>
-            PRZEKONAJ SIĘ JAK MOŻEMY CI POMÓC SKONTAKTUJ SIĘ Z NAMI
+            PRZEKONAJ SIĘ JAK MOŻEMY CI POMÓC <br /> SKONTAKTUJ SIĘ Z NAMI
           </h2>
         </header>
         <div className={styles.content}>
