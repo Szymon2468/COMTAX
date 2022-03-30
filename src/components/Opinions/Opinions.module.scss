@@ -1,10 +1,11 @@
 @import '../../../styles/variables.scss';
 
 .landingPage {
-  height: 100vh;
+  height: auto;
   width: 100vw;
   background-color: $turquoiseBgColor;
   margin-top: 105px;
+  padding-bottom: 105px;
 
   .title {
     width: 100%;
@@ -13,6 +14,30 @@
 
     span {
       color: $blueBgColor;
+    }
+  }
+
+  .googleContainer {
+    display: flex;
+    margin-bottom: 70px;
+
+    .opinion {
+      margin: 0 70px 0 35px;
+
+      .description {
+        margin-bottom: 35px;
+
+        p {
+          font-weight: 500;
+        }
+      }
+
+      .author {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
     }
   }
 
@@ -26,7 +51,6 @@
     border: 1px solid #79c05f;
     box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    // margin-bottom: 105px;
 
     .logosTitle {
       margin: 35px;

@@ -4,11 +4,14 @@ import Collapsible from 'react-collapsible';
 import ArrowIcon from '../Icons/arrowIcon';
 import AdminPanelIcon from '../Icons/AdminPanelIcon';
 import FacebookIcon from '../Icons/FacebookIcon';
+import Link from 'next/link';
 
 function Nav() {
   return (
     <nav className={styles.nav}>
-      <img className={styles.logo} src={logo.src} alt='logo' />
+      <Link href={'/'}>
+        <img className={styles.logo} src={logo.src} alt='logo' />
+      </Link>
       <div className={styles.navItemsContainer}>
         <div className={styles.navItems}>
           <Collapsible
@@ -21,8 +24,14 @@ function Nav() {
             }
           >
             <div className={styles.offer}>
-              <p>Księgowość</p>
-              <p>Wirtualne Biuro</p>
+              <Link href={'/ksiegowosc'}>
+                <p>Księgowość</p>
+              </Link>
+
+              <Link href={'/wirtualne-biuro'}>
+                <p>Wirtualne Biuro</p>
+              </Link>
+
               <p>Sala Konferencyjna</p>
             </div>
           </Collapsible>

@@ -30,7 +30,8 @@ function Tile({ direction, bgColor, imgText, text, imgUrl }: TileType) {
   return (
     <div className={styles.tile}>
       {direction === 'LEFT' && (
-        <div style={{ backgroundImage: imgUrl }} className={styles.leftImg}>
+        <div className={styles.leftImg}>
+          <img src={imgUrl} />
           <p>{imgText}</p>
         </div>
       )}
@@ -38,7 +39,8 @@ function Tile({ direction, bgColor, imgText, text, imgUrl }: TileType) {
         <p className={styles.text}>{text}</p>
       </div>
       {direction === 'RIGHT' && (
-        <div style={{ backgroundImage: imgUrl }} className={styles.rightImg}>
+        <div className={styles.rightImg}>
+          <img src={imgUrl} />
           <p>{imgText}</p>
         </div>
       )}

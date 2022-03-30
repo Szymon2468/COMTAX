@@ -1,6 +1,12 @@
 import styles from './AccountsPage.module.scss';
 import Tile from './Tile/Tile';
 import photo1 from '../../src/assets/accountspage/Photo1.jpg';
+import photo2 from '../../src/assets/accountspage/Photo2.jpg';
+import photo3 from '../../src/assets/accountspage/Photo3.jpg';
+import photo4 from '../../src/assets/accountspage/Photo4.jpg';
+import photo5 from '../../src/assets/accountspage/Photo5.jpg';
+import photo6 from '../../src/assets/accountspage/Photo6.jpg';
+import photo7 from '../../src/assets/accountspage/Photo7.jpg';
 
 function AccountsPage() {
   return (
@@ -29,7 +35,7 @@ function AccountsPage() {
               > ewidencja środków trwałych i wyposażenia
               > sprawozdawczość finansowa i GUS'
             imgText='KSIĘGOWOŚĆ'
-            imgUrl={'../../src/assets/accountspage/Photo1.jpg'}
+            imgUrl={photo1.src}
           ></Tile>
 
           <Tile
@@ -43,7 +49,7 @@ function AccountsPage() {
               > ewidencja środków trwałych i wyposażenia
               > sprawozdawczość finansowa i GUS'
             imgText='KSIĘGOWOŚĆ'
-            imgUrl={'../../src/assets/accountspage/Photo1.jpg'}
+            imgUrl={photo2.src}
           ></Tile>
 
           <Tile
@@ -57,7 +63,7 @@ function AccountsPage() {
               > ewidencja środków trwałych i wyposażenia
               > sprawozdawczość finansowa i GUS'
             imgText='KSIĘGOWOŚĆ'
-            imgUrl={'../../src/assets/accountspage/Photo1.jpg'}
+            imgUrl={photo3.src}
           ></Tile>
 
           <Tile
@@ -71,7 +77,7 @@ function AccountsPage() {
               > ewidencja środków trwałych i wyposażenia
               > sprawozdawczość finansowa i GUS'
             imgText='KSIĘGOWOŚĆ'
-            imgUrl={'../../src/assets/accountspage/Photo1.jpg'}
+            imgUrl={photo4.src}
           ></Tile>
 
           <Tile
@@ -85,7 +91,7 @@ function AccountsPage() {
               > ewidencja środków trwałych i wyposażenia
               > sprawozdawczość finansowa i GUS'
             imgText='KSIĘGOWOŚĆ'
-            imgUrl={'../../src/assets/accountspage/Photo1.jpg'}
+            imgUrl={photo5.src}
           ></Tile>
 
           <Tile
@@ -99,7 +105,7 @@ function AccountsPage() {
               > ewidencja środków trwałych i wyposażenia
               > sprawozdawczość finansowa i GUS'
             imgText='KSIĘGOWOŚĆ'
-            imgUrl={'../../src/assets/accountspage/Photo1.jpg'}
+            imgUrl={photo6.src}
           ></Tile>
 
           <Tile
@@ -113,7 +119,7 @@ function AccountsPage() {
               > ewidencja środków trwałych i wyposażenia
               > sprawozdawczość finansowa i GUS'
             imgText='KSIĘGOWOŚĆ'
-            imgUrl={'../../src/assets/accountspage/Photo1.jpg'}
+            imgUrl={photo7.src}
           ></Tile>
         </div>
       </section>
