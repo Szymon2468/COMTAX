@@ -1,9 +1,10 @@
 import styles from './Nav.module.scss';
 import logo from './logo.png';
 import Collapsible from 'react-collapsible';
-import ArrowIcon from '../Icons/arrowIcon';
 import AdminPanelIcon from '../Icons/AdminPanelIcon';
 import FacebookIcon from '../Icons/FacebookIcon';
+import ArrowIcon from '../Icons/ArrowIcon';
+import Link from 'next/link';
 
 function Nav() {
   return (
@@ -21,7 +22,9 @@ function Nav() {
             }
           >
             <div className={styles.offer}>
-              <p>Księgowość</p>
+              <p>
+                <Link href='/ksiegowosc'>Księgowość</Link>
+              </p>
               <p>Wirtualne Biuro</p>
               <p>Sala Konferencyjna</p>
             </div>
