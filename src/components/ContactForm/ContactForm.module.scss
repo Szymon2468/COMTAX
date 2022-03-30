@@ -1,4 +1,6 @@
+@import '../../../styles/breakpoints.scss';
 @import '../../../styles/variables.scss';
+@import 'include-media';
 
 .contacFormContainer {
   margin-top: 105px;
@@ -19,6 +21,10 @@
   .content {
     display: flex;
     width: 100%;
+
+    @include media('<=mobile') {
+      flex-direction: column;
+    }
 
     .contactInfoTiles {
       width: 50%;
