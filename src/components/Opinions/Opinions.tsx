@@ -7,7 +7,7 @@ import logo5 from '../../assets/opinions/Logo5.jpg';
 import Opinie from './Opinie';
 import QuotesIcon from './QuotesIcon';
 import ArrowsIcon from './ArrowsIcon';
-import ArrowIcon from '../Icons/arrowIcon';
+import ArrowIcon from '../Icons/ArrowIcon';
 
 function Opinions() {
   const logos = [logo1, logo2, logo3, logo4, logo5];

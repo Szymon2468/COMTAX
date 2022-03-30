@@ -1,9 +1,9 @@
 import styles from './Nav.module.scss';
 import logo from './logo.png';
 import Collapsible from 'react-collapsible';
-import ArrowIcon from '../Icons/arrowIcon';
 import AdminPanelIcon from '../Icons/AdminPanelIcon';
 import FacebookIcon from '../Icons/FacebookIcon';
+import ArrowIcon from '../Icons/ArrowIcon';
 import Link from 'next/link';
 
 function Nav() {
@@ -37,8 +37,14 @@ function Nav() {
               </Link>
             </div>
           </Collapsible>
-          <div className={styles.navItem}>O Firmie</div>
-          <div className={styles.navItem}>Kontakt</div>
+        </div>
+        <div className={styles.navItem}>O Firmie</div>
+        <div className={styles.navItem}>Kontakt</div>
+      </div>
+      <div className={styles.navIcons}>
+        <div className={styles.navItem} style={{ opacity: 0.5 }}>
+          <span className={styles.iconMargin}>Panel Klienta</span>
+          <AdminPanelIcon />
         </div>
         <div className={styles.navIcons}>
           <div className={styles.navItem} style={{ opacity: 0.5 }}>
