@@ -39,7 +39,7 @@ function OfferTileRight({
         <header>
           <h2 className={styles.title}>{title}</h2>
         </header>
-        <main>
+        <main className={styles.tileRight}>
           <p className={styles.textRight}>{text}</p>
           <div className={styles.btnContainer}>
             <Button

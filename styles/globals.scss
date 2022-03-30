@@ -70,6 +70,12 @@ a,
 .a {
   color: inherit;
   text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 h1,
@@ -77,6 +83,7 @@ h1,
   font-size: 28px;
   font-weight: 700;
   line-height: 40px;
+  color: $textColor;
 }
 
 h2,
@@ -84,6 +91,7 @@ h2,
   font-size: 24px;
   font-weight: 700;
   line-height: 34px;
+  color: $textColor;
 }
 
 h3,
@@ -91,6 +99,7 @@ h3,
   font-size: 22px;
   font-weight: 700;
   line-height: 32px;
+  color: $textColor;
 }
 
 @include media('<=mobile') {
@@ -98,13 +107,13 @@ h3,
   .p {
     font-size: 18px;
     font-weight: 500;
-    // line-height: 26px;
+    color: $textColor;
   }
 
   p.smaller {
     font-size: 16px;
     font-weight: 500;
-    // line-height: 24px;
+    color: $textColor;
   }
 }
 
@@ -113,12 +122,22 @@ h3,
   .p {
     font-size: 20px;
     font-weight: 500;
-    // line-height: 28px;
+    color: $textColor;
   }
 
   p.smaller {
     font-size: 18px;
     font-weight: 500;
-    // line-height: 26px;
+    color: $textColor;
   }
 }
+
+// nav {
+//   .Collapsible {
+//     .Collapsible__trigger .is-open {
+//       .Collapsible__contentInner {
+//         position: absolute;
+//       }
+//     }
+//   }
+// }

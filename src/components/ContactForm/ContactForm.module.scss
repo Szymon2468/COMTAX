@@ -20,6 +20,7 @@
 
   .content {
     display: flex;
+    justify-content: center;
     width: 100%;
 
     @include media('<=mobile') {
@@ -27,7 +28,8 @@
     }
 
     .contactInfoTiles {
-      width: 50%;
+      width: fit-content;
+      margin-right: 140px;
 
       .contactTile {
         display: flex;
@@ -52,7 +54,7 @@
     }
 
     .formContact {
-      width: 50%;
+      width: fit-content;
       display: flex;
       flex-direction: column;
       align-items: center;

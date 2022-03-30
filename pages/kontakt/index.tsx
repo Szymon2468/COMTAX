@@ -32,7 +32,8 @@ function index() {
           <div className={`container ${styles.contactContainer}`}>
             <header>
               <h1>
-                ZAPRASZAMY DO KONTAKTU Z NAMI - CZEKAMY NA TWÓJ TELEFON <br />
+                ZAPRASZAMY DO KONTAKTU Z NAMI <br /> CZEKAMY NA TWÓJ TELEFON{' '}
+                <br />
               </h1>
               <br />
               <h2>Godziny otwarcia </h2>

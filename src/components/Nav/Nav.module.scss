@@ -17,6 +17,10 @@
   .logo {
     width: auto;
     margin-left: 50px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .navItemsContainer {
@@ -49,6 +53,10 @@
 
 .iconMargin {
   margin-right: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .navItem {

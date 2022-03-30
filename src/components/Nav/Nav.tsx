@@ -1,9 +1,9 @@
 import styles from './Nav.module.scss';
 import logo from './logo.png';
 import Collapsible from 'react-collapsible';
+import ArrowIcon from '../Icons/ArrowIcon';
 import AdminPanelIcon from '../Icons/AdminPanelIcon';
 import FacebookIcon from '../Icons/FacebookIcon';
-import ArrowIcon from '../Icons/ArrowIcon';
 import Link from 'next/link';
 
 function Nav() {
@@ -15,7 +15,7 @@ function Nav() {
       <div className={styles.navItemsContainer}>
         <div className={styles.navItems}>
           <Collapsible
-            className='instructors'
+            className=''
             trigger={
               <div className={styles.navItem}>
                 <span className={styles.iconMargin}>Nasza Oferta</span>
@@ -33,18 +33,14 @@ function Nav() {
               </Link>
 
               <Link href={'/sale-konferencyjne'}>
-                <p>Sala Konferencyjna</p>
+                <p>Sale Konferencyjne</p>
               </Link>
             </div>
           </Collapsible>
-        </div>
-        <div className={styles.navItem}>O Firmie</div>
-        <div className={styles.navItem}>Kontakt</div>
-      </div>
-      <div className={styles.navIcons}>
-        <div className={styles.navItem} style={{ opacity: 0.5 }}>
-          <span className={styles.iconMargin}>Panel Klienta</span>
-          <AdminPanelIcon />
+          <div className={styles.navItem}>O Firmie</div>
+          <div className={styles.navItem}>
+            <Link href='/kontakt'>Kontakt</Link>
+          </div>
         </div>
         <div className={styles.navIcons}>
           <div className={styles.navItem} style={{ opacity: 0.5 }}>

@@ -44,7 +44,7 @@ function OfferTileLeft({
         <header>
           <h2 className={styles.title}>{title}</h2>
         </header>
-        <main>
+        <main className={styles.tileLeft}>
           <p className={styles.textLeft}>{text}</p>
           <Button
             text={btnText}

@@ -1,5 +1,5 @@
 import styles from './Footer.module.scss';
-import ArrowIcon from '../Icons/arrowIcon';
+import ArrowIcon from '../Icons/ArrowIcon';
 import AdminPanelIcon from '../Icons/AdminPanelIcon';
 import FacebookIcon from '../Icons/FacebookIcon';
 
@@ -55,10 +55,13 @@ function Footer() {
         <p className={styles.footerInfoItem}>
           © Copyright 2022, Biuro Rachunkowe COMTAX. All Rights Reserved.
         </p>
-        <p className={styles.footerInfoItem}>
-          Strona stworzona przez <span> Gancle Studio</span> | This site was
-          created by <span>Gancle Studio</span> .
-        </p>
+
+        <a href='https://gancle-studio.pl'>
+          <p className={styles.footerInfoItemCreator}>
+            Strona stworzona przez <span> Gancle Studio</span> | This site was
+            created by <span>Gancle Studio</span> .
+          </p>
+        </a>
       </div>
     </footer>
   );

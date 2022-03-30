@@ -8,6 +8,16 @@
   align-items: center;
   position: relative;
 
+  .tileLeft {
+    margin-right: 35px;
+    margin-left: 105px;
+  }
+
+  .tileRight {
+    margin-right: 105px;
+    margin-left: 35px;
+  }
+
   .offerTile {
     width: 1005px;
     height: 660px;

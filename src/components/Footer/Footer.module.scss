@@ -7,6 +7,10 @@
   color: white;
   padding: 10px 0;
 
+  p {
+    color: white;
+  }
+
   .footerItemsContainer {
     // width: 100%;
     display: flex;
@@ -89,6 +93,12 @@
   display: flex;
   margin-left: 35px;
   height: auto;
+
+  svg {
+    path {
+      fill: white;
+    }
+  }
 }
 
 .sideMapItem {
@@ -119,13 +129,20 @@
   margin-bottom: 70px;
 
   .footerInfoItem {
-    font-size: 18px;
-    line-height: 30px;
-    font-weight: 500;
+    margin: 0;
+  }
+
+  .footerInfoItemCreator {
     margin: 0;
 
     span {
-      color: $mainColor;
+      color: #5cb25d;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: #5cb25d;
+      transition: color 0.2s linear;
     }
   }
 
