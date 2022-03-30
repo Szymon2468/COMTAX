@@ -1,0 +1,55 @@
+@import '../../styles/variables.scss';
+
+.landingPage {
+  height: calc(100vh - 80px);
+  width: 100vw;
+  background-image: url('./contactLanding.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+.contactContainer {
+  header {
+    color: white;
+    max-width: 1000px;
+
+    .address {
+      h3 {
+        line-height: 22px;
+      }
+    }
+  }
+}
+
+.mapContainer {
+  margin-top: 105px;
+  width: 100%;
+
+  header {
+    display: flex;
+    justify-content: center;
+
+    h2 {
+      max-width: 650px;
+      text-align: center;
+      margin-bottom: 70px;
+      color: $textColor;
+
+      span {
+        color: $mainColor;
+      }
+    }
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    div {
+      width: 800px;
+      height: 500px;
+    }
+  }
+}

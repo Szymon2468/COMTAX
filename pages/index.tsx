@@ -19,7 +19,7 @@ const Home = () => {
   let pageDescription = '';
 
   return (
-    <div className='fluid-container'>
+    <>
       <Head>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <title>
@@ -160,7 +160,7 @@ const Home = () => {
           ></OfferTileRight>
         </div>
       </main>
-    </div>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import styles from './AccountsPage.module.scss';
-import Tile from './Tile/Tile';
+import Tile from '../../src/components/Tile/Tile';
 import photo1 from '../../src/assets/accountspage/Photo1.jpg';
 import photo2 from '../../src/assets/accountspage/Photo2.jpg';
 import photo3 from '../../src/assets/accountspage/Photo3.jpg';

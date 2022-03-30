@@ -8,48 +8,50 @@ import Link from 'next/link';
 
 function Nav() {
   return (
-    <nav className={styles.nav}>
-      <Link href={'/'}>
-        <img className={styles.logo} src={logo.src} alt='logo' />
-      </Link>
-      <div className={styles.navItemsContainer}>
-        <div className={styles.navItems}>
-          <Collapsible
-            className='instructors'
-            trigger={
-              <div className={styles.navItem}>
-                <span className={styles.iconMargin}>Nasza Oferta</span>
-                <ArrowIcon />
+    <div className={styles.navbarSticky}>
+      <nav className={styles.nav}>
+        <Link href={'/'}>
+          <img className={styles.logo} src={logo.src} alt='logo' />
+        </Link>
+        <div className={styles.navItemsContainer}>
+          <div className={styles.navItems}>
+            <Collapsible
+              className='instructors'
+              trigger={
+                <div className={styles.navItem}>
+                  <span className={styles.iconMargin}>Nasza Oferta</span>
+                  <ArrowIcon />
+                </div>
+              }
+            >
+              <div className={styles.offer}>
+                <Link href={'/ksiegowosc'}>
+                  <p>Księgowość</p>
+                </Link>
+
+                <Link href={'/wirtualne-biuro'}>
+                  <p>Wirtualne Biuro</p>
+                </Link>
+
+                <p>Sala Konferencyjna</p>
               </div>
-            }
-          >
-            <div className={styles.offer}>
-              <Link href={'/ksiegowosc'}>
-                <p>Księgowość</p>
-              </Link>
-
-              <Link href={'/wirtualne-biuro'}>
-                <p>Wirtualne Biuro</p>
-              </Link>
-
-              <p>Sala Konferencyjna</p>
+            </Collapsible>
+            <div className={styles.navItem}>O Firmie</div>
+            <div className={styles.navItem}>Kontakt</div>
+          </div>
+          <div className={styles.navIcons}>
+            <div className={styles.navItem} style={{ opacity: 0.5 }}>
+              <span className={styles.iconMargin}>Panel Klienta</span>
+              <AdminPanelIcon />
             </div>
-          </Collapsible>
-          <div className={styles.navItem}>O Firmie</div>
-          <div className={styles.navItem}>Kontakt</div>
-        </div>
-        <div className={styles.navIcons}>
-          <div className={styles.navItem} style={{ opacity: 0.5 }}>
-            <span className={styles.iconMargin}>Panel Klienta</span>
-            <AdminPanelIcon />
-          </div>
 
-          <div className={styles.navItem}>
-            <FacebookIcon />
+            <div className={styles.navItem}>
+              <FacebookIcon />
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }
 
