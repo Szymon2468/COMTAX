@@ -1,0 +1,36 @@
+@import '../../../styles/variables.scss';
+
+.packageTile {
+  height: 700px;
+  width: 320px;
+  border-radius: 20px;
+  border: 5px solid $blueBgColor;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  h2 {
+    margin: 35px 0;
+
+    color: $blueBgColor;
+  }
+
+  p {
+    margin: 0 35px;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .price {
+    position: absolute;
+    bottom: 70px;
+    font-size: 28px;
+    font-weight: 500;
+  }
+}
+
+.activePackageTile {
+  color: white;
+  background-color: $blueBgColor;
+}
