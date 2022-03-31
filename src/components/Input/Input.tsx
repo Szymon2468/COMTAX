@@ -4,7 +4,7 @@ import styles from './Input.module.scss';
 type TypeOfInput = 'INPUT' | 'TEXTAREA' | 'SELECT';
 
 interface InputType {
-  label: string;
+  label?: string;
   className?: string;
   placeholder?: string;
   id?: string;

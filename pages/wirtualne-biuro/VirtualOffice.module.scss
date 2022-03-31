@@ -9,8 +9,131 @@
   background-size: cover;
   display: flex;
   align-items: center;
+  margin-bottom: 105px;
 
   .title {
+    color: white;
+  }
+}
+
+.comparisonTitle {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.table {
+  background-color: $blueBgColor;
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 70px;
+
+  .tableHeader {
+    display: grid;
+    grid-template: 100% / 50% 25% 25%;
+    position: sticky;
+
+    h2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding: 20px 35px;
+      margin: 0;
+      border: black 1px solid;
+
+      select {
+        option {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .priceListTitleContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background-color: white;
+    border-right: black 1px solid;
+    border-left: black 1px solid;
+
+    .priceListTitle {
+      width: fit-content;
+      text-align: center;
+      padding: 10px 0;
+      margin: 0;
+    }
+
+    .belt {
+      width: 100%;
+      margin: 0 10px;
+      border-bottom-left-radius: 100%;
+      border-bottom-right-radius: 100%;
+      border-top-left-radius: 100%;
+      border-top-right-radius: 100%;
+      background-color: $textColor;
+      height: 3px;
+    }
+  }
+
+  .tableContentOffers {
+    display: grid;
+    grid-template: repeat(12, 1fr) / 50% 25% 25%;
+
+    div {
+      display: flex;
+      align-items: center;
+      color: white;
+      border: black 0.8px solid;
+      padding: 10px;
+    }
+  }
+
+  .tableContentPriceList {
+    display: grid;
+    grid-template: repeat(3, 1fr) / 50% 25% 25%;
+
+    div {
+      display: flex;
+      align-items: center;
+      color: white;
+      border: black 0.7px solid;
+      padding: 10px;
+    }
+  }
+
+  .tableContentAddedOffers {
+    display: grid;
+    grid-template: repeat(7, 1fr) / 50% 25% 25%;
+
+    div {
+      display: flex;
+      align-items: center;
+      color: white;
+      border: black 0.7px solid;
+      padding: 10px;
+    }
+  }
+}
+
+.carouselleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 105px;
+}
+
+.activePackageTile {
+  color: white;
+  background-color: $blueBgColor;
+  height: 760px;
+
+  h2 {
+    color: white;
+  }
+
+  p {
     color: white;
   }
 }
