@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+.landingPage {
+  height: calc(100vh - 80px);
+  width: 100vw;
+  background-image: url('./Background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  margin-bottom: 105px;
+
+  .title {
+    color: white;
+  }
+
+  .about {
+    color: white;
+    margin-top: 70px;
+  }
+}

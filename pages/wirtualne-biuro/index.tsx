@@ -3,36 +3,52 @@ import LeftArrowIcon from '../../src/assets/virtualofficepage/icons/LeftArrowIco
 import RightArrowIcon from '../../src/assets/virtualofficepage/icons/RightArrowIcon';
 import PackageTile from './PackageTile/PackageTile';
 import Input from '../../src/components/Input/Input';
+import { useState } from 'react';
 
-const offers: string[] = [
-  'adres do korespondencji',
-  'odbiór przesyłek listowych',
-  'przechowywanie przesyłek listowych',
-  'odbiór przesyłek kurierskich',
-  'przechowywanie przesyłek kurierskich',
-  'adres do rejestracji firmy',
-  'możliwość umieszczenia adresu na materiałach reklamowych',
-  'powiadamianie o odebranej korespondencji (e-mail)',
-  'dostęp do sali konferencyjnej/pokoju spotkań biznesowych, stanowiska pracy wraz z miejscem parkingowym 2',
-  'skanowanie korespondencji i przesyłanie w formacie pdf na wskazany adres e-mail 3',
-  'dyżur telefoniczny do godz. 20:00',
-  'obsługa poczty wychodzącej'
+const offers: JSX.Element[] = [
+  <p>adres do korespondencji</p>,
+  <p>odbiór przesyłek listowych</p>,
+  <p>przechowywanie przesyłek listowych</p>,
+  <p>odbiór przesyłek kurierskich</p>,
+  <p>przechowywanie przesyłek kurierskich</p>,
+  <p>adres do rejestracji firmy</p>,
+  <p>możliwość umieszczenia adresu na materiałach reklamowych</p>,
+  <p>powiadamianie o odebranej korespondencji (e-mail)</p>,
+  <p>
+    dostęp do sali konferencyjnej/pokoju spotkań biznesowych, stanowiska pracy
+    wraz z miejscem parkingowym <sup>2</sup>
+  </p>,
+  <p>
+    skanowanie korespondencji i przesyłanie w formacie pdf na wskazany adres
+    e-mail <sup>3</sup>
+  </p>,
+  <p>dyżur telefoniczny do godz. 20:00</p>,
+  <p>obsługa poczty wychodzącej</p>
 ];
 
-const addedOffers: string[] = [
-  'powiadamianie o odebranej korespondencji (e-mail)',
-  'obsługa poczty wychodzącej',
-  'fakturowanie',
-  'dostęp do sali konferencyjnej/pokoju spotkań biznesowych wraz z miejscem parkingowym',
-  'dostęp do stanowiska pracy wraz z miejscem parkingowym',
-  'skanowanie korespondencji i przesyłanie w formacie pdf na wskazany adres e-mail',
-  'przesyłanie odebranej korespondencji na wskazany adres w Polsce (raz w miesiącu)'
+const addedOffers: JSX.Element[] = [
+  <p>powiadamianie o odebranej korespondencji (e-mail)</p>,
+  <p>obsługa poczty wychodzącej</p>,
+  <p>fakturowanie</p>,
+  <p>
+    dostęp do sali konferencyjnej/pokoju spotkań biznesowych wraz z miejscem
+    parkingowym
+  </p>,
+  <p>dostęp do stanowiska pracy wraz z miejscem parkingowym</p>,
+  <p>
+    skanowanie korespondencji i przesyłanie w formacie pdf na wskazany adres
+    e-mail
+  </p>,
+  <p>
+    przesyłanie odebranej korespondencji na wskazany adres w Polsce (raz w
+    miesiącu)
+  </p>
 ];
 
-const priceList: string[] = [
-  'płatność za 1 m-c z góry',
-  'płatność za 6 m-cy z góry',
-  'płatność za 12 m-cy z góry'
+const priceList: JSX.Element[] = [
+  <p>płatność za 1 miesiąc z góry</p>,
+  <p>płatność za 6 miesięcy z góry</p>,
+  <p>płatność za 12 miesięcy z góry</p>
 ];
 
 interface PackageTileData {
@@ -108,33 +124,36 @@ const comparisingTableSelectOptions: string[] = [
   'FIRMA+'
 ];
 
-const generatePackagesTiles = (start: number) => {
-  let results: JSX.Element[] = [];
-  for (let i = start; i < start + 3; i++) {
-    if (i === start + 1) {
-      results.push(
-        <PackageTile
-          title={packageTiles[i].title}
-          content={packageTiles[i].content}
-          price={packageTiles[i].price}
-          className={styles.activePackageTile}
-        />
-      );
-    } else {
-      results.push(
-        <PackageTile
-          title={packageTiles[i].title}
-          content={packageTiles[i].content}
-          price={packageTiles[i].price}
-        />
-      );
-    }
-  }
-  return results;
-};
-
 function VirtualOffice() {
-  const generateOfferTable = (tab: string[]) => {
+  const [start, setStart] = useState(0);
+
+  const generatePackagesTiles = (start: number) => {
+    let results: JSX.Element[] = [];
+    for (let i = start; i < start + 3; i++) {
+      console.log(packageTiles[i]);
+      if (i === start + 1) {
+        results.push(
+          <PackageTile
+            title={packageTiles[i].title}
+            content={packageTiles[i].content}
+            price={packageTiles[i].price}
+            className={styles.activePackageTile}
+          />
+        );
+      } else {
+        results.push(
+          <PackageTile
+            title={packageTiles[i].title}
+            content={packageTiles[i].content}
+            price={packageTiles[i].price}
+          />
+        );
+      }
+    }
+    return results;
+  };
+
+  const generateOfferTable = (tab: JSX.Element[]) => {
     const result: JSX.Element[] = [];
     tab.map((el) =>
       result.push(
@@ -146,6 +165,20 @@ function VirtualOffice() {
       )
     );
     return result;
+  };
+
+  const handleLeftArrowClick = () => {
+    if (start > 0) {
+      setStart(start - 1);
+    }
+    return;
+  };
+
+  const handleRightArrowClick = () => {
+    if (start < 5) {
+      setStart(start + 1);
+    }
+    return;
   };
 
   return (
@@ -164,9 +197,13 @@ function VirtualOffice() {
 
       <section>
         <div className={`container ${styles.carouselleContainer}`}>
-          <LeftArrowIcon />
-          {generatePackagesTiles(0)}
-          <RightArrowIcon />
+          <div onClick={handleLeftArrowClick()}>
+            <LeftArrowIcon />
+          </div>
+          {generatePackagesTiles(start)}
+          <div onClick={handleRightArrowClick()}>
+            <RightArrowIcon />
+          </div>
         </div>
       </section>
 

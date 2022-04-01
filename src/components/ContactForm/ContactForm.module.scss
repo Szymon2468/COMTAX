@@ -23,13 +23,18 @@
     justify-content: center;
     width: 100%;
 
-    @include media('<=mobile') {
+    @include media('<=tablet-landscape') {
       flex-direction: column;
+      align-items: center;
     }
 
     .contactInfoTiles {
       width: fit-content;
       margin-right: 140px;
+
+      @include media('<=tablet-landscape') {
+        margin: 0;
+      }
 
       .contactTile {
         display: flex;
@@ -64,5 +69,13 @@
         margin-top: 35px;
       }
     }
+  }
+}
+
+.form {
+  input,
+  select,
+  textarea {
+    margin-top: 35px;
   }
 }

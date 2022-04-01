@@ -37,7 +37,9 @@ function Nav() {
               </Link>
             </div>
           </Collapsible>
-          <div className={styles.navItem}>O Firmie</div>
+          <div className={styles.navItem}>
+            <Link href='/o-firmie-COMTAX'>O Firmie</Link>
+          </div>
           <div className={styles.navItem}>
             <Link href='/kontakt'>Kontakt</Link>
           </div>

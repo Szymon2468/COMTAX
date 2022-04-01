@@ -52,7 +52,7 @@ function ContactForm() {
             <h3 className={styles.formTitle}>
               Wypełnij formularz a to MY <br /> skontaktujemy się z TOBĄ
             </h3>
-            <form>
+            <form className={styles.form}>
               <Input
                 label=''
                 placeholder='Imię i Nazwisko'
