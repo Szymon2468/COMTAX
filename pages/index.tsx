@@ -67,6 +67,7 @@ const Home = () => {
                       color='GREEN'
                       type='FULL'
                       btnWidth={300}
+                      className={styles.landingPageBtn}
                     ></Button>
                   </div>
                   <div className={styles.icon}>
@@ -77,6 +78,7 @@ const Home = () => {
                       color='GREEN'
                       type='OUTLINED'
                       btnWidth={300}
+                      className={styles.landingPageBtn}
                     ></Button>
                   </div>
                 </div>
@@ -86,6 +88,7 @@ const Home = () => {
                 alt='photo lol idk what to write'
                 width='450px'
                 height='600px'
+                className={styles.homePageImg}
               />
             </div>
           </div>
