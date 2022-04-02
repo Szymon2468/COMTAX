@@ -6,6 +6,8 @@ import InternetIcon from '../../src/assets/conferencerooms/icons/InternetIcon';
 import KalendarIcon from '../../src/assets/conferencerooms/icons/KalendarIcon';
 import WIFIIcon from '../../src/assets/conferencerooms/icons/WIFIIcon';
 import Button from '../../src/components/Button/Button';
+import Gallery, { IImage } from './Gallery/Gallery';
+import BackgroundImage from './sala8.jpeg';
 
 interface Icon {
   icon: JSX.Element;
@@ -56,6 +58,41 @@ const icons: Icon[] = [
         NA MIEJSCU
       </h3>
     )
+  }
+];
+
+const images: IImage[] = [
+  {
+    url: BackgroundImage.src,
+    title: 'a'
+  },
+  {
+    url: BackgroundImage.src,
+    title: 'ab'
+  },
+  {
+    url: BackgroundImage.src,
+    title: 'ac'
+  },
+  {
+    url: BackgroundImage.src,
+    title: 'ad'
+  },
+  {
+    url: BackgroundImage.src,
+    title: 'a'
+  },
+  {
+    url: BackgroundImage.src,
+    title: 'ab'
+  },
+  {
+    url: BackgroundImage.src,
+    title: 'ac'
+  },
+  {
+    url: BackgroundImage.src,
+    title: 'ad'
   }
 ];
 
@@ -128,6 +165,12 @@ function index() {
           </div>
         </div>
       </section>
+
+      <div className='section'>
+        <section className={styles.gallery}>
+          <Gallery images={images} />
+        </section>
+      </div>
 
       <section>
         <div className='container'>

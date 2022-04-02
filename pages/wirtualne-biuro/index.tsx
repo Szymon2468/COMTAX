@@ -4,6 +4,7 @@ import RightArrowIcon from '../../src/assets/virtualofficepage/icons/RightArrowI
 import PackageTile from './PackageTile/PackageTile';
 import Input from '../../src/components/Input/Input';
 import { useState } from 'react';
+import Gallery from '../sale-konferencyjne/Gallery/Gallery';
 
 const offers: JSX.Element[] = [
   <p>adres do korespondencji</p>,
@@ -175,7 +176,8 @@ function VirtualOffice() {
   };
 
   const handleRightArrowClick = () => {
-    if (start < 5) {
+    console.log(start);
+    if (start < 2) {
       setStart(start + 1);
     }
     return;
@@ -197,11 +199,11 @@ function VirtualOffice() {
 
       <section>
         <div className={`container ${styles.carouselleContainer}`}>
-          <div onClick={handleLeftArrowClick()}>
+          <div onClick={handleLeftArrowClick}>
             <LeftArrowIcon />
           </div>
           {generatePackagesTiles(start)}
-          <div onClick={handleRightArrowClick()}>
+          <div onClick={handleRightArrowClick}>
             <RightArrowIcon />
           </div>
         </div>

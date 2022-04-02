@@ -72,6 +72,10 @@
 
     h3 {
       width: fit-content;
+
+      @include media('>=tablet-landscape') {
+        font-size: 18px;
+      }
     }
   }
 
@@ -85,4 +89,12 @@
 .galleryTitle {
   width: 100%;
   text-align: center;
+}
+
+.gallery {
+  max-width: 1500px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
 }
