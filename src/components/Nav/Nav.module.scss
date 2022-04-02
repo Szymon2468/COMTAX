@@ -101,3 +101,38 @@
     margin: 0;
   }
 }
+
+.offerTile p,
+.offerTile p:after,
+.offerTile p:before,
+.navItems a,
+.navItems a:after,
+.navItems a:before {
+  transition: all 0.3s;
+}
+.navItems a:hover {
+  color: $textColor;
+}
+
+/* stroke */
+.offerTile p,
+.navItem a {
+  position: relative;
+}
+.offerTile p:after,
+.navItem a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #aaa;
+  height: 2px;
+}
+.offerTile p:hover:after,
+.navItem a:hover:after {
+  width: 100%;
+}

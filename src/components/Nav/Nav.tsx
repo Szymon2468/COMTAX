@@ -37,10 +37,7 @@ function Nav() {
             onMouseEnter={() => setSubmenuExpanded(true)}
             onMouseLeave={() => setSubmenuExpanded(false)}
           >
-            <div
-              className={styles.navItem}
-              onClick={() => setSubmenuExpanded(!submenuExpanded)}
-            >
+            <div className={styles.navItem}>
               <span className={styles.iconMargin}>Nasza Oferta</span>
               <ArrowIcon />
             </div>
@@ -64,23 +61,23 @@ function Nav() {
                     onMouseEnter={() => setSubmenuExpanded(true)}
                     onMouseLeave={() => setSubmenuExpanded(false)}
                   >
-                    <Link href={'/ksiegowosc'}>
-                      <div className={styles.offerTile}>
+                    <div className={styles.offerTile}>
+                      <Link href={'/ksiegowosc'}>
                         <p>Księgowość</p>
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
 
-                    <Link href={'/wirtualne-biuro'}>
-                      <div className={styles.offerTile}>
+                    <div className={styles.offerTile}>
+                      <Link href={'/wirtualne-biuro'}>
                         <p>Wirtualne Biuro</p>
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
 
-                    <Link href={'/sale-konferencyjne'}>
-                      <div className={styles.offerTile}>
+                    <div className={styles.offerTile}>
+                      <Link href={'/sale-konferencyjne'}>
                         <p>Sale Konferencyjne</p>
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
                   </div>
                 )}
               </div>
