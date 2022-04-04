@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bootstrap-css-only": "^4.4.1",
+    "hamburger-react": "^2.4.1",
     "include-media": "^1.4.10",
     "next": "12.1.0",
     "react": "17.0.2",
