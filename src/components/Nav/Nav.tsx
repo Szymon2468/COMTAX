@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import useWindowSize, { WindowSize } from '../../hooks/useWindowSize';
-import HamburgerMenuButton from '../HamburgerMenuButton/HamburgerMenuButton';
+import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
 
 const duration = 200;
 
@@ -26,12 +26,20 @@ const transitionStyles = {
 
 function Nav() {
   const [submenuExpanded, setSubmenuExpanded] = useState(false);
+  const [logoClicked, setLogoClicked] = useState(false);
   const windowSize: WindowSize = useWindowSize();
 
   return (
     <nav className={styles.nav}>
       <Link href={'/'}>
-        <img className={styles.logo} src={logo.src} alt='logo' />
+        <img
+          className={styles.logo}
+          src={logo.src}
+          alt='logo'
+          onClick={() => {
+            setLogoClicked(!logoClicked);
+          }}
+        />
       </Link>
       {windowSize.width >= 1024 && (
         <>
@@ -115,9 +123,9 @@ function Nav() {
       )}
 
       {windowSize.width < 1024 && (
-        <>
-          <HamburgerMenuButton />
-        </>
+        <div className={styles.hamburgerMenu}>
+          <HamburgerMenu logoClicked={logoClicked} />
+        </div>
       )}
     </nav>
   );

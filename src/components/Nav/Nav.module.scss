@@ -12,7 +12,9 @@
   background-color: $turquoiseBgColor;
   border-bottom: 1px $mainColor solid;
   height: 80px;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 999999;
 
   .logo {
     width: auto;
@@ -110,16 +112,17 @@
 }
 
 .navItems {
-  .offerTile p,
-  .offerTile p:after,
-  .offerTile p:before,
-  .navItems a,
-  .navItems a:after,
-  .navItems a:before {
+  p,
+  p:after,
+  p:before,
+  a,
+  a:after,
+  a:before {
     transition: all 0.3s;
   }
-  .navItems a:hover {
-    color: $textColor;
+  p:hover,
+  a:hover {
+    color: $mainColor;
   }
 
   /* stroke */
@@ -144,4 +147,8 @@
   .navItem a:hover:after {
     width: 100%;
   }
+}
+
+.hamburgerMenu {
+  margin-right: 50px;
 }

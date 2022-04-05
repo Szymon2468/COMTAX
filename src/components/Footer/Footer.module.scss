@@ -17,6 +17,11 @@
     justify-content: space-between;
     margin: 70px 0 0 50px;
 
+    @include media('<=tablet-landscape') {
+      flex-direction: column;
+      margin: 50px 0 0 10px;
+    }
+
     .address {
       width: 300px;
       display: flex;
@@ -58,7 +63,8 @@
     flex-direction: row;
     justify-content: space-between;
     margin-right: 50px;
-    height: auto;
+    height: fit-content;
+    flex-wrap: wrap;
 
     .navItems {
       width: auto;
@@ -72,6 +78,10 @@
       display: flex;
       justify-content: space-between;
       margin-left: 70px;
+    }
+
+    @include media('<=tablet-landscape') {
+      padding-left: 0;
     }
   }
 }
@@ -94,6 +104,11 @@
   margin-left: 35px;
   height: auto;
 
+  @include media('<=tablet-landscape') {
+    margin-left: 0;
+    margin-right: 35px;
+  }
+
   svg {
     path {
       fill: white;
@@ -114,17 +129,23 @@
   flex-direction: row;
   height: 100%;
   margin-left: 35px;
+
+  @include media('<=tablet-landscape') {
+    margin-left: 0;
+  }
 }
 
 .belt {
-  width: 1000px;
+  width: 92%;
+  max-width: 1000px;
   background-color: white;
   height: 1px;
   margin: 35px auto 0 auto;
 }
 
 .footerInfoContainer {
-  width: 1000px;
+  width: 90%;
+  max-width: 1000px;
   margin: 0 auto;
   margin-bottom: 70px;
 
