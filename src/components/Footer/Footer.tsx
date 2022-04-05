@@ -2,6 +2,7 @@ import styles from './Footer.module.scss';
 import ArrowIcon from '../Icons/ArrowIcon';
 import AdminPanelIcon from '../Icons/AdminPanelIcon';
 import FacebookIcon from '../Icons/FacebookIcon';
+import Link from 'next/link';
 
 function Footer() {
   return (
@@ -27,14 +28,24 @@ function Footer() {
                   >
                     Nasza Oferta
                   </span>
-                  <p className={styles.sideMapItem}>Księgowość</p>
-                  <p className={styles.sideMapItem}>Wirtualne Biuro</p>
-                  <p className={styles.sideMapItem}>Sala Konferencyjna</p>
+                  <p className={styles.sideMapItem}>
+                    <Link href='/ksiegowosc'>Księgowość</Link>
+                  </p>
+                  <p className={styles.sideMapItem}>
+                    <Link href='/wirtualne-biuro'>Wirtualne Biuro</Link>
+                  </p>
+                  <p className={styles.sideMapItem}>
+                    <Link href='/sale-konferencyjne'>Sale Konferencyjne</Link>
+                  </p>
                 </div>
               </div>
 
-              <div className={styles.navItem}>O Firmie</div>
-              <div className={styles.navItem}>Kontakt</div>
+              <div className={styles.navItem}>
+                <Link href='/o-firmie-COMTAX'>O Firmie</Link>
+              </div>
+              <div className={styles.navItem}>
+                <Link href='/kontakt'>Kontakt</Link>
+              </div>
             </div>
             <div className={styles.footerIcons}>
               <div className={styles.navItem} style={{ opacity: 0.5 }}>
@@ -43,7 +54,13 @@ function Footer() {
               </div>
 
               <div className={styles.navItem}>
-                <FacebookIcon />
+                <a
+                  className={styles.navItem}
+                  href='https://www.facebook.com/comtaxkatowice'
+                  target='_blank'
+                >
+                  <FacebookIcon />
+                </a>
               </div>
             </div>
           </div>
@@ -51,7 +68,9 @@ function Footer() {
       </div>
       <div className={styles.belt}></div>
       <div className={styles.footerInfoContainer}>
-        <p className={styles.priv}>Polityka Prywatności</p>
+        <p className={styles.priv}>
+          <Link href='polityka-prywatnosci'>Polityka Prywatności</Link>
+        </p>
         <p className={styles.footerInfoItem}>
           © Copyright 2022, Biuro Rachunkowe COMTAX. All Rights Reserved.
         </p>
