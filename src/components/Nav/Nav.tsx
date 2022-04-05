@@ -29,10 +29,6 @@ function Nav() {
   const [logoClicked, setLogoClicked] = useState(false);
   const windowSize: WindowSize = useWindowSize();
 
-  useEffect(() => {
-    setSubmenuExpanded(false);
-  }, [logoClicked]);
-
   return (
     <nav className={styles.nav}>
       <Link href={'/'}>
