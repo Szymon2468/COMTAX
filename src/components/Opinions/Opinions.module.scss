@@ -12,6 +12,10 @@
     text-align: center;
     padding: 105px 0;
 
+    @include media('<=tablet-landscape') {
+      padding: 50px 0;
+    }
+
     span {
       color: $blueBgColor;
     }
@@ -21,22 +25,58 @@
     display: flex;
     margin-bottom: 70px;
 
-    .opinion {
-      margin: 0 70px 0 35px;
+    @include media('<=tablet-landscape') {
+      flex-direction: column-reverse;
+    }
 
-      .description {
-        margin-bottom: 35px;
+    .quotesAndTextContainer {
+      display: flex;
 
-        p {
-          font-weight: 500;
+      .quotes {
+        @include media('<=mobile') {
+          display: none;
         }
       }
 
-      .author {
+      .opinion {
+        margin: 0 70px 0 35px;
+
+        @include media('<=mobile') {
+          margin: 0;
+        }
+
+        .description {
+          margin-bottom: 35px;
+
+          @include media('<=mobile') {
+            text-align: center;
+          }
+
+          p {
+            font-weight: 500;
+          }
+        }
+
+        .author {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+
+          @include media('<=mobile') {
+            p {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+
+    .google {
+      @include media('<=tablet-landscape') {
+        margin-bottom: 50px;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
+        justify-content: center;
       }
     }
   }
@@ -65,6 +105,14 @@
       display: flex;
       justify-content: space-around;
       box-sizing: border-box;
+
+      @include media('<=bigger-tablet-landscape') {
+        flex-wrap: wrap;
+      }
+
+      img {
+        margin: 10px;
+      }
     }
   }
 }

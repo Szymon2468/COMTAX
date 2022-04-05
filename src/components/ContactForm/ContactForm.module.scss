@@ -67,6 +67,11 @@
       .submitBtnContainer {
         width: 400px;
         margin-top: 35px;
+
+        @include media('<=mobile') {
+          display: flex;
+          justify-content: center;
+        }
       }
     }
   }
@@ -77,5 +82,11 @@
   select,
   textarea {
     margin-top: 35px;
+  }
+
+  .contactInput {
+    @include media('<=extra-mobile') {
+      width: 250px;
+    }
   }
 }

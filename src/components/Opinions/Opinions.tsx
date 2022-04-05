@@ -28,28 +28,30 @@ function Opinions() {
             TO <span>NASI KLIENCI</span> SĄ DLA NAS <span>NASI KLIENCI</span>
           </h2>
           <div className={styles.googleContainer}>
-            <div className={styles.google}>
-              <QuotesIcon />
-            </div>
-            <div className={styles.opinion}>
-              <h3 className={styles.description}>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean sit amet sagittis massa. Praesent viverra molestie
-                  ligula, in scelerisque velit vehicula in. Cras mi dui,
-                  tincidunt vitae orci ac, placerat suscipit odio. Donec justo
-                  leo, volutpat mattis tellus id, finibus sollicitudin enim.
-                </p>
-                <p>
-                  Suspendisse placerat iaculis mauris et finibus. Aliquam
-                  tincidunt nisi in mi sodales, nec laoreet nisl dapibus.
-                </p>{' '}
-              </h3>
-              <div className={styles.author}>
-                <p>~ Jan Kowalski, 2022</p>
-                <p>
-                  Następna opinia <ArrowIcon />
-                </p>
+            <div className={styles.quotesAndTextContainer}>
+              <div className={styles.quotes}>
+                <QuotesIcon />
+              </div>
+              <div className={styles.opinion}>
+                <h3 className={styles.description}>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Aenean sit amet sagittis massa. Praesent viverra molestie
+                    ligula, in scelerisque velit vehicula in. Cras mi dui,
+                    tincidunt vitae orci ac, placerat suscipit odio. Donec justo
+                    leo, volutpat mattis tellus id, finibus sollicitudin enim.
+                  </p>
+                  <p>
+                    Suspendisse placerat iaculis mauris et finibus. Aliquam
+                    tincidunt nisi in mi sodales, nec laoreet nisl dapibus.
+                  </p>{' '}
+                </h3>
+                <div className={styles.author}>
+                  <p>~ Jan Kowalski, 2022</p>
+                  <p>
+                    Następna opinia <ArrowIcon />
+                  </p>
+                </div>
               </div>
             </div>
             <div className={styles.google}>

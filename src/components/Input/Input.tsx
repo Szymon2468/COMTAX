@@ -35,15 +35,15 @@ const Input = ({
   } else if (typeOfInput === 'SELECT') {
     return (
       <div className={styles.inputContainer}>
-        <select>
+        <select className={className}>
           {options && options.map((el) => <option value={el}>{el}</option>)}
         </select>
       </div>
     );
   } else if (typeOfInput === 'TEXTAREA') {
     return (
-      <div className={styles.inputContainer}>
-        <p className={`info ${className}`}>{label}</p>
+      <div className={`${styles.inputContainer} ${className}`}>
+        <p className={styles.info}>{label}</p>
         <textarea placeholder={placeholder} id={id} />
       </div>
     );

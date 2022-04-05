@@ -16,8 +16,12 @@
       justify-content: space-between;
       flex-direction: column;
 
-      @include media('>=tablet-portrait') {
+      @include media('>=tablet-landscape', '<bigger-tablet-landscape') {
         width: calc(100% - 400px);
+      }
+
+      @include media('>=tablet-portrait', '<tablet-landscape') {
+        width: calc(100% - 340px);
       }
 
       .titleAndTextContainer {
@@ -27,12 +31,20 @@
           color: $mainColor;
           padding-top: 35px;
           margin-bottom: 35px;
+
+          @include media('>=tablet-portrait', '<tablet-landscape') {
+            font-size: 24px;
+          }
         }
 
         .text {
           font-size: 22px;
           font-weight: 900;
           color: $textColor;
+
+          @include media('>=tablet-portrait', '<tablet-landscape') {
+            font-size: 20px;
+          }
         }
       }
 
@@ -41,6 +53,7 @@
         justify-content: space-between;
         min-width: 450px;
         padding-bottom: 35px;
+        margin-top: 35px;
 
         .icon {
           width: 300px;
@@ -52,34 +65,61 @@
           background-color: white;
           border-radius: 10px;
 
-          @include media('>=tablet-portrait') {
+          @include media('>=bigger-tablet-landscape', '<desktop') {
+            width: 240px;
+            height: 180px;
+          }
+
+          @include media('>=tablet-landscape', '<bigger-tablet-landscape') {
             width: 200px;
             height: 150px;
           }
 
+          @include media('>=tablet-portrait', '<tablet-landscape') {
+            width: 160px;
+            height: 120px;
+          }
+
           .landingPageBtn {
-            @include media('>=tablet-portrait') {
-              width: 200px !important;
-              font-size: 16px;
+            @include media('>=bigger-tablet-landscape', '<desktop') {
+              width: 240px !important;
+              font-size: 20px;
               padding: 8px;
+            }
+
+            @include media('>=tablet-landscape', '<bigger-tablet-landscape') {
+              width: 200px !important;
+              font-size: 18px;
+              padding: 8px;
+            }
+
+            @include media('>=tablet-portrait', '<tablet-landscape') {
+              width: 180px !important;
+              font-size: 16px;
+              padding: 4px;
             }
           }
 
           svg {
             height: 150px;
 
-            @include media('>=tablet-portrait') {
+            @include media('>=bigger-tablet-landscape', '<desktop') {
+              width: 120px;
+              height: 90px;
+            }
+
+            @include media('>=tablet-landscape', '<bigger-tablet-landscape') {
               width: 100px;
               height: 75px;
+            }
+
+            @include media('>=tablet-portrait', '<tablet-landscape') {
+              width: 80px;
+              height: 60px;
             }
           }
         }
       }
-    }
-
-    .homePageImg {
-      max-height: 400px !important;
-      max-width: 300px !important;
     }
   }
 }
@@ -113,8 +153,12 @@
     margin: 0 auto;
     flex-wrap: wrap;
 
-    @include media('<=tablet-portrait') {
-      width: fit-content;
+    @include media('<=tablet-landscape') {
+      max-width: 500px;
+    }
+
+    @include media('<=mobile') {
+      max-width: 300px;
     }
 
     svg {
