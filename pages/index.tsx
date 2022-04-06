@@ -26,29 +26,29 @@ const Home = () => {
     height: number;
   }
 
-  const setHomepageImgSize = (): SetHomepageImgSizeReturnedValues => {
-    if (windowSize.width >= 1200) {
-      return {
-        width: 450,
-        height: 600
-      };
-    } else if (windowSize.width >= 1024 && windowSize.width < 1200) {
-      return {
-        width: 300,
-        height: 400
-      };
-    } else if (windowSize.width >= 768 && windowSize.width < 1024) {
-      return {
-        width: 240,
-        height: 320
-      };
-    } else {
-      return {
-        width: 0,
-        height: 0
-      };
-    }
-  };
+  // const setHomepageImgSize = (): SetHomepageImgSizeReturnedValues => {
+  //   if (windowSize.width >= 1200) {
+  //     return {
+  //       width: 450,
+  //       height: 600
+  //     };
+  //   } else if (windowSize.width >= 1024 && windowSize.width < 1200) {
+  //     return {
+  //       width: 300,
+  //       height: 400
+  //     };
+  //   } else if (windowSize.width >= 768 && windowSize.width < 1024) {
+  //     return {
+  //       width: 240,
+  //       height: 320
+  //     };
+  //   } else {
+  //     return {
+  //       width: 0,
+  //       height: 0
+  //     };
+  //   }
+  // };
 
   return (
     <>
@@ -115,11 +115,11 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <Image
+              <img
                 src={img.src}
                 alt='photo lol idk what to write'
-                width={setHomepageImgSize().width}
-                height={setHomepageImgSize().height}
+                // width={setHomepageImgSize().width}
+                // height={setHomepageImgSize().height}
                 className={styles.homePageImg}
               />
             </div>

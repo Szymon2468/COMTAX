@@ -5,10 +5,26 @@
   width: 100vw;
   background-color: $menuColor;
 
+  @include media('<bigger-tablet-landscape') {
+    padding-bottom: 70px;
+    height: auto;
+  }
+
   .homePageContainer {
     display: flex;
     justify-content: space-between;
     padding-top: 40px;
+
+    .homePageImg {
+      @include media('>=bigger-tablet-landscape') {
+        width: 450px;
+        height: 600px;
+      }
+
+      @include media('<bigger-tablet-landscape') {
+        display: none;
+      }
+    }
 
     .infoContainer {
       width: calc(100% - 600px);
@@ -16,12 +32,8 @@
       justify-content: space-between;
       flex-direction: column;
 
-      @include media('>=tablet-landscape', '<bigger-tablet-landscape') {
-        width: calc(100% - 400px);
-      }
-
-      @include media('>=tablet-portrait', '<tablet-landscape') {
-        width: calc(100% - 340px);
+      @include media('<bigger-tablet-landscape') {
+        width: 100%;
       }
 
       .titleAndTextContainer {
@@ -45,6 +57,10 @@
           @include media('>=tablet-portrait', '<tablet-landscape') {
             font-size: 20px;
           }
+
+          @include media('<=tablet-portrait') {
+            font-size: 18px;
+          }
         }
       }
 
@@ -54,6 +70,20 @@
         min-width: 450px;
         padding-bottom: 35px;
         margin-top: 35px;
+
+        @include media('<bigger-tablet-landscape') {
+          justify-content: space-around;
+          min-width: 0;
+        }
+
+        @include media('<tablet-portrait') {
+          justify-content: space-between;
+        }
+
+        @include media('<mobile') {
+          flex-direction: column;
+          align-items: center;
+        }
 
         .icon {
           width: 300px;
@@ -70,14 +100,16 @@
             height: 180px;
           }
 
-          @include media('>=tablet-landscape', '<bigger-tablet-landscape') {
+          @include media('<tablet-portrait') {
             width: 200px;
             height: 150px;
           }
 
-          @include media('>=tablet-portrait', '<tablet-landscape') {
-            width: 160px;
-            height: 120px;
+          @include media('<mobile') {
+            width: 240px;
+            height: 180px;
+            margin-bottom: 70px;
+            margin-top: 35px;
           }
 
           .landingPageBtn {
@@ -87,16 +119,16 @@
               padding: 8px;
             }
 
-            @include media('>=tablet-landscape', '<bigger-tablet-landscape') {
+            @include media('<tablet-portrait') {
               width: 200px !important;
               font-size: 18px;
               padding: 8px;
             }
 
-            @include media('>=tablet-portrait', '<tablet-landscape') {
-              width: 180px !important;
-              font-size: 16px;
-              padding: 4px;
+            @include media('<mobile') {
+              width: 240px !important;
+              font-size: 20px;
+              padding: 8px;
             }
           }
 
@@ -108,14 +140,14 @@
               height: 90px;
             }
 
-            @include media('>=tablet-landscape', '<bigger-tablet-landscape') {
+            @include media('<tablet-portrait') {
               width: 100px;
               height: 75px;
             }
 
-            @include media('>=tablet-portrait', '<tablet-landscape') {
-              width: 80px;
-              height: 60px;
+            @include media('<mobile') {
+              width: 120px;
+              height: 90px;
             }
           }
         }
@@ -132,6 +164,11 @@
   background-repeat: no-repeat;
   background-size: cover;
 
+  @include media('<mobile') {
+    height: 100%;
+    padding-bottom: 35px;
+  }
+
   .text {
     padding-top: 370px;
     font-size: 28px;
@@ -139,6 +176,10 @@
     width: 500px;
     color: white;
     padding-bottom: 70px;
+
+    @include media('<tablet-landscape') {
+      padding-top: 300px;
+    }
   }
 
   .trustTiles {
@@ -163,6 +204,10 @@
 
     svg {
       margin: 10px;
+
+      @include media('<mobile') {
+        margin: 20px;
+      }
     }
   }
 }
