@@ -131,12 +131,7 @@
   justify-content: space-around;
   margin-bottom: 105px;
 
-  @media screen and (max-width: 1400px) {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  @media screen and (max-width: 1000px) {
+  @include media('<=desktop') {
     svg {
       height: 50px;
       width: 30px;
@@ -178,6 +173,10 @@
   margin-right: -6px;
   -webkit-overflow-scrolling: touch;
   -ms-scroll-snap-type: x mandatory;
+
+  @include media('<=bigger-tablet-landscape') {
+    width: 675px;
+  }
 
   .offerSliderContent {
     display: flex;

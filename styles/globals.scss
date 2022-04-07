@@ -16,10 +16,17 @@ body {
 
 .container {
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 8px;
+  padding-left: 8px;
   margin-right: auto;
   margin-left: auto;
+}
+
+@media (min-width: 420px) {
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
 }
 
 @media (min-width: 576px) {
@@ -34,9 +41,9 @@ body {
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
   .container {
-    max-width: 960px;
+    max-width: 1000px;
   }
 }
 
@@ -46,7 +53,7 @@ body {
   }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1440px) {
   .container {
     max-width: 1320px;
   }

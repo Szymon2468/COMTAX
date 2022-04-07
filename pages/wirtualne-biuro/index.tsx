@@ -129,21 +129,6 @@ const comparisingTableSelectOptions: string[] = [
 function VirtualOffice() {
   const [start, setStart] = useState(0);
 
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 5000, min: 1160 },
-      items: 3
-    },
-    tablet: {
-      breakpoint: { max: 1160, min: 768 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 768, min: 0 },
-      items: 1
-    }
-  };
-
   const generateOfferTable = (tab: JSX.Element[]) => {
     const result: JSX.Element[] = [];
     tab.map((el) =>
