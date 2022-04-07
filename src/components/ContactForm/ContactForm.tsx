@@ -57,23 +57,32 @@ function ContactForm() {
                 label=''
                 placeholder='Imię i Nazwisko'
                 typeOfInput='INPUT'
+                className={styles.contactInput}
               />
               <Input
                 label=''
                 placeholder='Numer telefonu'
                 typeOfInput='INPUT'
+                className={styles.contactInput}
               />
-              <Input label='' placeholder='Adres e-mail' typeOfInput='INPUT' />
+              <Input
+                label=''
+                placeholder='Adres e-mail'
+                typeOfInput='INPUT'
+                className={styles.contactInput}
+              />
               <Input
                 label=''
                 placeholder='Adres e-mail'
                 typeOfInput='SELECT'
                 options={['opcja 1', 'opcja 2', 'opcja 3']}
+                className={styles.contactInput}
               />
               <Input
                 label=''
                 placeholder='Adres e-mail'
                 typeOfInput='TEXTAREA'
+                className={styles.contactInput}
               />
             </form>
             <div className={styles.submitBtnContainer}>

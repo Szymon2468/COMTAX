@@ -40,19 +40,43 @@
         display: flex;
         margin-bottom: 70px;
 
+        @include media('<=extra-mobile') {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        svg {
+          @include media('<=extra-mobile') {
+            margin-bottom: 10px;
+          }
+        }
+
         .contactInfo {
           margin-left: 50px;
           display: flex;
           justify-content: center;
           flex-direction: column;
 
+          @include media('<=extra-mobile') {
+            margin: 0;
+          }
+
           .text {
             margin-bottom: 15px;
             display: flex;
             flex-wrap: wrap;
+
+            @include media('<=extra-mobile') {
+              text-align: center;
+              justify-content: center;
+            }
           }
           .contact {
             color: $mainColor;
+
+            @include media('<=extra-mobile') {
+              text-align: center;
+            }
           }
         }
       }
@@ -67,6 +91,11 @@
       .submitBtnContainer {
         width: 400px;
         margin-top: 35px;
+
+        @include media('<=mobile') {
+          display: flex;
+          justify-content: center;
+        }
       }
     }
   }
@@ -77,5 +106,11 @@
   select,
   textarea {
     margin-top: 35px;
+  }
+
+  .contactInput {
+    @include media('<=extra-mobile') {
+      width: 250px;
+    }
   }
 }

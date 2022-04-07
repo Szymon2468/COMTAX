@@ -14,9 +14,41 @@ import about1 from '../src/assets/homepage/photos/about1.jpg';
 import about2 from '../src/assets/homepage/photos/about2.jpg';
 import about3 from '../src/assets/homepage/photos/about3.jpg';
 import OfferTileLeft from '../src/components/OfferTile/OfferTileLeft';
+import useWindowSize, { WindowSize } from '../src/hooks/useWindowSize';
 
 const Home = () => {
   let pageDescription = '';
+
+  const windowSize: WindowSize = useWindowSize();
+
+  interface SetHomepageImgSizeReturnedValues {
+    width: number;
+    height: number;
+  }
+
+  // const setHomepageImgSize = (): SetHomepageImgSizeReturnedValues => {
+  //   if (windowSize.width >= 1200) {
+  //     return {
+  //       width: 450,
+  //       height: 600
+  //     };
+  //   } else if (windowSize.width >= 1024 && windowSize.width < 1200) {
+  //     return {
+  //       width: 300,
+  //       height: 400
+  //     };
+  //   } else if (windowSize.width >= 768 && windowSize.width < 1024) {
+  //     return {
+  //       width: 240,
+  //       height: 320
+  //     };
+  //   } else {
+  //     return {
+  //       width: 0,
+  //       height: 0
+  //     };
+  //   }
+  // };
 
   return (
     <>
@@ -67,6 +99,7 @@ const Home = () => {
                       color='GREEN'
                       type='FULL'
                       btnWidth={300}
+                      className={styles.landingPageBtn}
                     ></Button>
                   </div>
                   <div className={styles.icon}>
@@ -77,15 +110,17 @@ const Home = () => {
                       color='GREEN'
                       type='OUTLINED'
                       btnWidth={300}
+                      className={styles.landingPageBtn}
                     ></Button>
                   </div>
                 </div>
               </div>
-              <Image
+              <img
                 src={img.src}
                 alt='photo lol idk what to write'
-                width='450px'
-                height='600px'
+                // width={setHomepageImgSize().width}
+                // height={setHomepageImgSize().height}
+                className={styles.homePageImg}
               />
             </div>
           </div>
