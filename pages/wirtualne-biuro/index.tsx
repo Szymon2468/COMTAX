@@ -3,8 +3,9 @@ import LeftArrowIcon from '../../src/assets/virtualofficepage/icons/LeftArrowIco
 import RightArrowIcon from '../../src/assets/virtualofficepage/icons/RightArrowIcon';
 import PackageTile from './PackageTile/PackageTile';
 import Input from '../../src/components/Input/Input';
-import { useState } from 'react';
-import Gallery from '../sale-konferencyjne/Gallery/Gallery';
+import { Fragment, useState } from 'react';
+import { ArrowProps } from 'react-multi-carousel/lib/types';
+import Carousel from 'react-multi-carousel';
 
 const offers: JSX.Element[] = [
   <p>adres do korespondencji</p>,
@@ -128,30 +129,19 @@ const comparisingTableSelectOptions: string[] = [
 function VirtualOffice() {
   const [start, setStart] = useState(0);
 
-  const generatePackagesTiles = (start: number) => {
-    let results: JSX.Element[] = [];
-    for (let i = start; i < start + 3; i++) {
-      console.log(packageTiles[i]);
-      if (i === start + 1) {
-        results.push(
-          <PackageTile
-            title={packageTiles[i].title}
-            content={packageTiles[i].content}
-            price={packageTiles[i].price}
-            className={styles.activePackageTile}
-          />
-        );
-      } else {
-        results.push(
-          <PackageTile
-            title={packageTiles[i].title}
-            content={packageTiles[i].content}
-            price={packageTiles[i].price}
-          />
-        );
-      }
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 5000, min: 1160 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1160, min: 768 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 768, min: 0 },
+      items: 1
     }
-    return results;
   };
 
   const generateOfferTable = (tab: JSX.Element[]) => {
@@ -202,7 +192,22 @@ function VirtualOffice() {
           <div onClick={handleLeftArrowClick}>
             <LeftArrowIcon />
           </div>
-          {generatePackagesTiles(start)}
+
+          <div className={styles.offerSlider}>
+            <div className={styles.offerSliderContent}>
+              {packageTiles.map((el) => (
+                <Fragment key={`carousel-item-${el.title}`}>
+                  <PackageTile
+                    title={el.title}
+                    content={el.content}
+                    price={el.price}
+                    className={styles.activePackageTile}
+                  />
+                </Fragment>
+              ))}
+            </div>
+          </div>
+
           <div onClick={handleRightArrowClick}>
             <RightArrowIcon />
           </div>
