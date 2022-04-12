@@ -46,12 +46,15 @@ function OfferTileLeft({
         </header>
         <main className={styles.tileLeft}>
           <p className={styles.textLeft}>{text}</p>
-          <Button
-            text={btnText}
-            onClick={() => btnOnClick()}
-            color={btnColor}
-            type={btnType}
-          ></Button>
+          <div className={styles.btnContainer}>
+            <Button
+              text={btnText}
+              onClick={() => btnOnClick()}
+              color={btnColor}
+              type={btnType}
+              className={styles.btn}
+            ></Button>
+          </div>
         </main>
       </div>
     </section>

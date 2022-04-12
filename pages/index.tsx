@@ -143,6 +143,13 @@ const Home = () => {
         </section>
 
         <div className='container'>
+          <div className={styles.beltLeftContainer}>
+            <div className={styles.offerTileBelt}></div>
+          </div>
+          <div className={styles.beltRightContainer}>
+            <div className={styles.offerTileBelt}></div>
+          </div>
+
           <OfferTileRight
             title='POZNAJ NAS LEPIEJ JUŻ DZISIAJ'
             text='Biuro Rachunkowe COMTAX istnieje nieprzerwanie od 2001 roku.
@@ -159,6 +166,13 @@ const Home = () => {
             btnText='Przeczytaj o Nas więcej'
             imgUrl={about1.src}
           ></OfferTileRight>
+
+          <div className={styles.beltLeftContainer}>
+            <div className={styles.offerTileBelt}></div>
+          </div>
+          <div className={styles.beltRightContainer}>
+            <div className={styles.offerTileBelt}></div>
+          </div>
 
           <OfferTileLeft
             title='KSIĘGOWOŚĆ, KTÓREJ MOŻESZ ZAUFAĆ'
@@ -177,6 +191,13 @@ const Home = () => {
             btnText='Poznaj naszą ofertę księgowości'
             imgUrl={about2.src}
           ></OfferTileLeft>
+
+          <div className={styles.beltLeftContainer}>
+            <div className={styles.offerTileBelt}></div>
+          </div>
+          <div className={styles.beltRightContainer}>
+            <div className={styles.offerTileBelt}></div>
+          </div>
 
           <OfferTileRight
             title='WIRTUALNE BIURO W KATOWICACH + SALA KONFERENCYJNA
