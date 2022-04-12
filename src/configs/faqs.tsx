@@ -1,7 +1,135 @@
 export const faqs = [
   {
-    title: 'KSIĘGOWOŚĆ',
-    description:
-      'Nie chcesz więcej tracić czasu na comiesięczne zajmowanie się dokumentami oraz deklaracjami? Skorzystaj z usług sprawdzonego biura rachunkowego. Prowadzimy obsługę księgową firm na terenie Katowic oraz całej aglomeracji śląskiej. > księgi rachunkowe > podatkowa księga przychodów i rozchodów > ewidencja przychodów (ryczałt ewidencjonowany) > ewidencja VAT > ewidencja środków trwałych i wyposażenia > sprawozdawczość finansowa i GUS'
+    question: 'KSIĘGOWOŚĆ',
+    answer: (
+      <>
+        <h3>
+          Nie chcesz więcej tracić czasu na comiesięczne zajmowanie się
+          dokumentami oraz deklaracjami? Skorzystaj z usług sprawdzonego biura
+          rachunkowego. Prowadzimy obsługę księgową firm na terenie Katowic oraz
+          całej aglomeracji śląskiej.
+        </h3>
+        <p>{'> księgi rachunkowe'}</p>
+        <p>{'> podatkowa księga przychodów i rozchodów'}</p>
+        <p>{'> ewidencja przychodów (ryczałt ewidencjonowany)'}</p>
+        <p>{'> ewidencja VAT'}</p>
+        <p>{'> ewidencja środków trwałych i wyposażenia'}</p>
+        <p>{'> sprawozdawczość finansowa i GUS'}</p>
+      </>
+    )
+  },
+  {
+    question: 'KSIĘGOWOŚĆ',
+    answer: (
+      <>
+        <h3>
+          Nie chcesz więcej tracić czasu na comiesięczne zajmowanie się
+          dokumentami oraz deklaracjami? Skorzystaj z usług sprawdzonego biura
+          rachunkowego. Prowadzimy obsługę księgową firm na terenie Katowic oraz
+          całej aglomeracji śląskiej.
+        </h3>
+        <p>{'> księgi rachunkowe'}</p>
+        <p>{'> podatkowa księga przychodów i rozchodów'}</p>
+        <p>{'> ewidencja przychodów (ryczałt ewidencjonowany)'}</p>
+        <p>{'> ewidencja VAT'}</p>
+        <p>{'> ewidencja środków trwałych i wyposażenia'}</p>
+        <p>{'> sprawozdawczość finansowa i GUS'}</p>
+      </>
+    )
+  },
+  {
+    question: 'KSIĘGOWOŚĆ',
+    answer: (
+      <>
+        <h3>
+          Nie chcesz więcej tracić czasu na comiesięczne zajmowanie się
+          dokumentami oraz deklaracjami? Skorzystaj z usług sprawdzonego biura
+          rachunkowego. Prowadzimy obsługę księgową firm na terenie Katowic oraz
+          całej aglomeracji śląskiej.
+        </h3>
+        <p>{'> księgi rachunkowe'}</p>
+        <p>{'> podatkowa księga przychodów i rozchodów'}</p>
+        <p>{'> ewidencja przychodów (ryczałt ewidencjonowany)'}</p>
+        <p>{'> ewidencja VAT'}</p>
+        <p>{'> ewidencja środków trwałych i wyposażenia'}</p>
+        <p>{'> sprawozdawczość finansowa i GUS'}</p>
+      </>
+    )
+  },
+  {
+    question: 'KSIĘGOWOŚĆ',
+    answer: (
+      <>
+        <h3>
+          Nie chcesz więcej tracić czasu na comiesięczne zajmowanie się
+          dokumentami oraz deklaracjami? Skorzystaj z usług sprawdzonego biura
+          rachunkowego. Prowadzimy obsługę księgową firm na terenie Katowic oraz
+          całej aglomeracji śląskiej.
+        </h3>
+        <p>{'> księgi rachunkowe'}</p>
+        <p>{'> podatkowa księga przychodów i rozchodów'}</p>
+        <p>{'> ewidencja przychodów (ryczałt ewidencjonowany)'}</p>
+        <p>{'> ewidencja VAT'}</p>
+        <p>{'> ewidencja środków trwałych i wyposażenia'}</p>
+        <p>{'> sprawozdawczość finansowa i GUS'}</p>
+      </>
+    )
+  },
+  {
+    question: 'KSIĘGOWOŚĆ',
+    answer: (
+      <>
+        <h3>
+          Nie chcesz więcej tracić czasu na comiesięczne zajmowanie się
+          dokumentami oraz deklaracjami? Skorzystaj z usług sprawdzonego biura
+          rachunkowego. Prowadzimy obsługę księgową firm na terenie Katowic oraz
+          całej aglomeracji śląskiej.
+        </h3>
+        <p>{'> księgi rachunkowe'}</p>
+        <p>{'> podatkowa księga przychodów i rozchodów'}</p>
+        <p>{'> ewidencja przychodów (ryczałt ewidencjonowany)'}</p>
+        <p>{'> ewidencja VAT'}</p>
+        <p>{'> ewidencja środków trwałych i wyposażenia'}</p>
+        <p>{'> sprawozdawczość finansowa i GUS'}</p>
+      </>
+    )
+  },
+  {
+    question: 'KSIĘGOWOŚĆ',
+    answer: (
+      <>
+        <h3>
+          Nie chcesz więcej tracić czasu na comiesięczne zajmowanie się
+          dokumentami oraz deklaracjami? Skorzystaj z usług sprawdzonego biura
+          rachunkowego. Prowadzimy obsługę księgową firm na terenie Katowic oraz
+          całej aglomeracji śląskiej.
+        </h3>
+        <p>{'> księgi rachunkowe'}</p>
+        <p>{'> podatkowa księga przychodów i rozchodów'}</p>
+        <p>{'> ewidencja przychodów (ryczałt ewidencjonowany)'}</p>
+        <p>{'> ewidencja VAT'}</p>
+        <p>{'> ewidencja środków trwałych i wyposażenia'}</p>
+        <p>{'> sprawozdawczość finansowa i GUS'}</p>
+      </>
+    )
+  },
+  {
+    question: 'KSIĘGOWOŚĆ',
+    answer: (
+      <>
+        <h3>
+          Nie chcesz więcej tracić czasu na comiesięczne zajmowanie się
+          dokumentami oraz deklaracjami? Skorzystaj z usług sprawdzonego biura
+          rachunkowego. Prowadzimy obsługę księgową firm na terenie Katowic oraz
+          całej aglomeracji śląskiej.
+        </h3>
+        <p>{'> księgi rachunkowe'}</p>
+        <p>{'> podatkowa księga przychodów i rozchodów'}</p>
+        <p>{'> ewidencja przychodów (ryczałt ewidencjonowany)'}</p>
+        <p>{'> ewidencja VAT'}</p>
+        <p>{'> ewidencja środków trwałych i wyposażenia'}</p>
+        <p>{'> sprawozdawczość finansowa i GUS'}</p>
+      </>
+    )
   }
 ];

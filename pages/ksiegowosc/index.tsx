@@ -27,8 +27,12 @@ function AccountsPage() {
         <h2 className={styles.offersTitle}>
           DOWIEDZ SIĘ WIĘCEJ O NASZEJ OFERCIE
         </h2>
-        <Accordion />
+
         <div className='container'>
+          <Accordion />
+        </div>
+
+        {/* <div className='container'>
           <Tile
             direction='LEFT'
             bgColor='BLUE'
@@ -125,8 +129,8 @@ function AccountsPage() {
               > sprawozdawczość finansowa i GUS'
             imgText='KSIĘGOWOŚĆ'
             imgUrl={photo7.src}
-          ></Tile>
-        </div>
+          ></Tile> */}
+        {/* </div> */}
       </section>
     </section>
   );
