@@ -118,6 +118,34 @@
     height: 70px;
     filter: none;
 
+    z-index: 1;
+    position: relative;
+    transition: all 400ms;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0;
+      border-radius: 5px;
+      background-color: $mainColor;
+      z-index: -1;
+      -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+      box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+      transition: all 250ms;
+    }
+
+    &:hover {
+      color: white;
+    }
+
+    &:hover::before {
+      width: 100%;
+    }
+
     @include media('<bigger-tablet-landscape') {
       width: 440px !important;
     }
@@ -130,6 +158,9 @@
     @include media('<extra-mobile') {
       width: 280px !important;
       font-size: 14px !important;
+    }
+
+    &:hover {
     }
   }
 }

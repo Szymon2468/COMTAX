@@ -100,8 +100,8 @@
           flex-direction: column;
           align-items: center;
           justify-content: space-around;
-          background-color: white;
           border-radius: 10px;
+          transition: all linear 0.2s;
 
           @include media('>=bigger-tablet-landscape', '<desktop') {
             width: 240px;
@@ -118,6 +118,11 @@
             height: 180px;
             margin-bottom: 50px;
             margin-top: 35px;
+          }
+
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
           }
 
           .landingPageBtn {
