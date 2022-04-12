@@ -7,6 +7,7 @@ import photo4 from '../../src/assets/accountspage/Photo4.jpg';
 import photo5 from '../../src/assets/accountspage/Photo5.jpg';
 import photo6 from '../../src/assets/accountspage/Photo6.jpg';
 import photo7 from '../../src/assets/accountspage/Photo7.jpg';
+import Accordion from '../../src/components/Accordion/Accordion';
 
 function AccountsPage() {
   return (
@@ -23,6 +24,10 @@ function AccountsPage() {
         </div>
       </div>
       <section>
+        <h2 className={styles.offersTitle}>
+          DOWIEDZ SIĘ WIĘCEJ O NASZEJ OFERCIE
+        </h2>
+        <Accordion />
         <div className='container'>
           <Tile
             direction='LEFT'

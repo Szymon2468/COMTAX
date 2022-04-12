@@ -1,0 +1,19 @@
+.answer_wrapper {
+  /* ... */
+  transition: height ease 0.2s;
+}
+
+.answer_wrapper.open {
+  height: 100px;
+}
+
+/*--------------------*/
+
+.accordion_item.active .button {
+  background-color: #105057;
+}
+
+.answer_wrapper {
+  height: 0;
+  overflow: hidden;
+}
