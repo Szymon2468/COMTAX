@@ -10,6 +10,10 @@
     height: auto;
   }
 
+  @include media('<mobile') {
+    padding-bottom: 0px;
+  }
+
   .homePageContainer {
     display: flex;
     justify-content: space-between;
@@ -47,6 +51,10 @@
           @include media('>=tablet-portrait', '<tablet-landscape') {
             font-size: 24px;
           }
+
+          @include media('<mobile') {
+            text-align: center;
+          }
         }
 
         .text {
@@ -54,12 +62,12 @@
           font-weight: 900;
           color: $textColor;
 
-          @include media('>=tablet-portrait', '<tablet-landscape') {
+          @include media('<tablet-landscape') {
             font-size: 20px;
           }
 
-          @include media('<=tablet-portrait') {
-            font-size: 18px;
+          @include media('<mobile') {
+            text-align: center;
           }
         }
       }
@@ -92,8 +100,8 @@
           flex-direction: column;
           align-items: center;
           justify-content: space-around;
-          background-color: white;
           border-radius: 10px;
+          transition: all linear 0.2s;
 
           @include media('>=bigger-tablet-landscape', '<desktop') {
             width: 240px;
@@ -108,8 +116,13 @@
           @include media('<mobile') {
             width: 240px;
             height: 180px;
-            margin-bottom: 70px;
+            margin-bottom: 50px;
             margin-top: 35px;
+          }
+
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
           }
 
           .landingPageBtn {
@@ -180,6 +193,11 @@
     @include media('<tablet-landscape') {
       padding-top: 300px;
     }
+
+    @include media('<=mobile') {
+      width: 100%;
+      text-align: center;
+    }
   }
 
   .trustTiles {
@@ -200,6 +218,7 @@
 
     @include media('<=mobile') {
       max-width: 300px;
+      background-color: transparent;
     }
 
     svg {
@@ -209,5 +228,37 @@
         margin: 20px;
       }
     }
+  }
+}
+
+.beltLeftContainer {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.beltRightContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.offerTileBelt {
+  width: 500px;
+  height: 5px;
+  border-radius: 10px;
+  background-color: $textColor;
+  margin-top: 50px;
+
+  @include media('>tablet-landscape') {
+    display: none;
+  }
+
+  @include media('<tablet-portrait') {
+    width: 400px;
+  }
+
+  @include media('<mobile') {
+    width: 300px;
   }
 }

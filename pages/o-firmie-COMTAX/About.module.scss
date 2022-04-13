@@ -11,6 +11,12 @@
   align-items: center;
   margin-bottom: 105px;
 
+  @include media('<tablet-portrait') {
+    height: 100%;
+    padding: 35px 0;
+    text-align: center;
+  }
+
   .title {
     color: white;
   }

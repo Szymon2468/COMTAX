@@ -96,6 +96,15 @@
           display: flex;
           justify-content: center;
         }
+
+        .submitBtn {
+          transition: all 0.2s linear;
+          &:hover {
+            cursor: pointer;
+            color: $mainColor;
+            background-color: white;
+          }
+        }
       }
     }
   }
