@@ -8,10 +8,10 @@ import Opinie from './Opinie';
 import QuotesIcon from './QuotesIcon';
 import ArrowsIcon from './ArrowsIcon';
 import ArrowIcon from '../Icons/ArrowIcon';
-import { useEffect, useRef } from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 
 function Opinions() {
-  const opinionsRef = useRef();
+  const opinionsRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   const logos = [logo1, logo2, logo3, logo4, logo5];
 

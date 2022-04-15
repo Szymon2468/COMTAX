@@ -114,7 +114,7 @@ function ConferenceOffice() {
     return result;
   };
 
-  const handleBtnClick = (path) => {
+  const handleBtnClick = (path: string) => {
     router.push(path);
   };
 

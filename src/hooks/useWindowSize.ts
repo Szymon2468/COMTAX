@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
 export interface WindowSize {
-  width: number | undefined;
-  height: number | undefined;
+  width: number;
+  height: number;
 }
 
 export default function useWindowSize(): WindowSize {
@@ -10,6 +10,7 @@ export default function useWindowSize(): WindowSize {
     width: 0,
     height: 0
   });
+
   useEffect(() => {
     function handleResize() {
       setWindowSize({
@@ -22,5 +23,5 @@ export default function useWindowSize(): WindowSize {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return windowSize;
+  return windowSize as WindowSize;
 }

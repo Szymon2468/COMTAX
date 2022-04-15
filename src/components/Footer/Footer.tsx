@@ -1,5 +1,4 @@
 import styles from './Footer.module.scss';
-import ArrowIcon from '../Icons/ArrowIcon';
 import AdminPanelIcon from '../Icons/AdminPanelIcon';
 import FacebookIcon from '../Icons/FacebookIcon';
 import Link from 'next/link';
@@ -58,6 +57,7 @@ function Footer() {
                   className={styles.navItem}
                   href='https://www.facebook.com/comtaxkatowice'
                   target='_blank'
+                  rel='noreferrer'
                 >
                   <FacebookIcon />
                 </a>

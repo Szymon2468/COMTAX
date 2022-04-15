@@ -1,4 +1,5 @@
 import styles from './Gallery.module.scss';
+// @ts-ignore
 import ModalImage from 'react-modal-image';
 
 export interface IImage {
