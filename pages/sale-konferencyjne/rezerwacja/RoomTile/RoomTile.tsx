@@ -22,7 +22,7 @@ function RoomTile({
   return (
     <div className={styles.RoomTile}>
       <img src={img} alt={alt} className={styles.img} />
-      <h3 className={styles.name}>{name.toUpperCase()}</h3>
+      <h3 className={styles.name}>{name?.toUpperCase()}</h3>
       <p className={styles.date}>
         Najbliszy wolny termin: {date} od {startHour} do {endHour}
       </p>

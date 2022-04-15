@@ -1,20 +1,26 @@
-import { useState } from 'react';
+import { MutableRefObject, useState } from 'react';
 import { useRef } from 'react';
 import styles from '../Accordion.module.scss';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
 
-const AccordionItem = ({ faq, img }) => {
+interface IAccordionItemProps {
+  faq: {
+    question: string;
+    answer: JSX.Element;
+  };
+  img: StaticImageData;
+}
+
+const AccordionItem = ({ faq, img }: IAccordionItemProps) => {
   const [clicked, setClicked] = useState(false);
-  const contentEl = useRef();
+  const contentEl = useRef() as MutableRefObject<HTMLInputElement>;
 
   const { question, answer } = faq;
 
   const handleToggle = () => {
     setClicked((prev) => !prev);
   };
-
-  console.log(img);
 
   return (
     <li className={`${styles.accordionItem} ${clicked ? styles.active : ''}`}>

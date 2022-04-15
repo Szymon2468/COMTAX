@@ -4,53 +4,51 @@ import RightArrowIcon from '../../src/assets/virtualofficepage/icons/RightArrowI
 import PackageTile from './PackageTile/PackageTile';
 import Input from '../../src/components/Input/Input';
 import { Fragment, useState } from 'react';
-import { ArrowProps } from 'react-multi-carousel/lib/types';
-import Carousel from 'react-multi-carousel';
 
 const offers: JSX.Element[] = [
-  <p>adres do korespondencji</p>,
-  <p>odbiór przesyłek listowych</p>,
-  <p>przechowywanie przesyłek listowych</p>,
-  <p>odbiór przesyłek kurierskich</p>,
-  <p>przechowywanie przesyłek kurierskich</p>,
-  <p>adres do rejestracji firmy</p>,
-  <p>możliwość umieszczenia adresu na materiałach reklamowych</p>,
-  <p>powiadamianie o odebranej korespondencji (e-mail)</p>,
-  <p>
+  <p key={'o-1'}>adres do korespondencji</p>,
+  <p key={'o-2'}>odbiór przesyłek listowych</p>,
+  <p key={'o-3'}>przechowywanie przesyłek listowych</p>,
+  <p key={'o-4'}>odbiór przesyłek kurierskich</p>,
+  <p key={'o-5'}>przechowywanie przesyłek kurierskich</p>,
+  <p key={'o-6'}>adres do rejestracji firmy</p>,
+  <p key={'o-7'}>możliwość umieszczenia adresu na materiałach reklamowych</p>,
+  <p key={'o-8'}>powiadamianie o odebranej korespondencji (e-mail)</p>,
+  <p key={'o-9'}>
     dostęp do sali konferencyjnej/pokoju spotkań biznesowych, stanowiska pracy
     wraz z miejscem parkingowym <sup>2</sup>
   </p>,
-  <p>
+  <p key={'o-10'}>
     skanowanie korespondencji i przesyłanie w formacie pdf na wskazany adres
     e-mail <sup>3</sup>
   </p>,
-  <p>dyżur telefoniczny do godz. 20:00</p>,
-  <p>obsługa poczty wychodzącej</p>
+  <p key={'o-11'}>dyżur telefoniczny do godz. 20:00</p>,
+  <p key={'o-12'}>obsługa poczty wychodzącej</p>
 ];
 
 const addedOffers: JSX.Element[] = [
-  <p>powiadamianie o odebranej korespondencji (e-mail)</p>,
-  <p>obsługa poczty wychodzącej</p>,
-  <p>fakturowanie</p>,
-  <p>
+  <p key={'ao-1'}>powiadamianie o odebranej korespondencji (e-mail)</p>,
+  <p key={'ao-2'}>obsługa poczty wychodzącej</p>,
+  <p key={'ao-3'}>fakturowanie</p>,
+  <p key={'ao-4'}>
     dostęp do sali konferencyjnej/pokoju spotkań biznesowych wraz z miejscem
     parkingowym
   </p>,
-  <p>dostęp do stanowiska pracy wraz z miejscem parkingowym</p>,
-  <p>
+  <p key={'ao-5'}>dostęp do stanowiska pracy wraz z miejscem parkingowym</p>,
+  <p key={'ao-6'}>
     skanowanie korespondencji i przesyłanie w formacie pdf na wskazany adres
     e-mail
   </p>,
-  <p>
+  <p key={'ao-7'}>
     przesyłanie odebranej korespondencji na wskazany adres w Polsce (raz w
     miesiącu)
   </p>
 ];
 
 const priceList: JSX.Element[] = [
-  <p>płatność za 1 miesiąc z góry</p>,
-  <p>płatność za 6 miesięcy z góry</p>,
-  <p>płatność za 12 miesięcy z góry</p>
+  <p key={'pl-1'}>płatność za 1 miesiąc z góry</p>,
+  <p key={'pl-2'}>płatność za 6 miesięcy z góry</p>,
+  <p key={'pl-3'}>płatność za 12 miesięcy z góry</p>
 ];
 
 interface PackageTileData {

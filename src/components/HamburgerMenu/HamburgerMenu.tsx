@@ -69,6 +69,7 @@ function HamburgerMenu({ logoClicked }: IHamburgerMenuProps) {
               className={styles.navItem}
               href='https://www.facebook.com/comtaxkatowice'
               target='_blank'
+              rel='noreferrer'
             >
               <FacebookIcon />
             </a>

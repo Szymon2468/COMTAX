@@ -25,7 +25,10 @@ function index() {
         </header>
         <div className={styles.roomTilesContainer}>
           {rooms.map((el) => (
-            <Link href={`/sale-konferencyjne-zarezerwuj/${'id'}`}>
+            <Link
+              key={`room-${el.id}`}
+              href={`/sale-konferencyjne-zarezerwuj/${'id'}`}
+            >
               <RoomTile
                 img={el.imgUrl}
                 alt={el.imgAlt}

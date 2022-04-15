@@ -33,10 +33,19 @@ const Input = ({
       </div>
     );
   } else if (typeOfInput === 'SELECT') {
+    let i = 0;
     return (
       <div className={styles.inputContainer}>
         <select className={className}>
-          {options && options.map((el) => <option value={el}>{el}</option>)}
+          {options &&
+            options.map((el) => {
+              i++;
+              return (
+                <option key={`o-${i}`} value={el}>
+                  {el}
+                </option>
+              );
+            })}
         </select>
       </div>
     );

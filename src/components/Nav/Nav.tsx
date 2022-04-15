@@ -4,7 +4,7 @@ import ArrowIcon from '../Icons/ArrowIcon';
 import AdminPanelIcon from '../Icons/AdminPanelIcon';
 import FacebookIcon from '../Icons/FacebookIcon';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Transition } from 'react-transition-group';
 import useWindowSize, { WindowSize } from '../../hooks/useWindowSize';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
@@ -65,6 +65,7 @@ function Nav() {
                   <div
                     style={{
                       ...defaultStyle,
+                      // @ts-ignore
                       ...transitionStyles[state]
                     }}
                   >
@@ -114,6 +115,7 @@ function Nav() {
                 className={styles.navItem}
                 href='https://www.facebook.com/comtaxkatowice'
                 target='_blank'
+                rel='noreferrer'
               >
                 <FacebookIcon />
               </a>
