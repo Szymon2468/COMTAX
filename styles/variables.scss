@@ -9,3 +9,10 @@ $mainColor: #79c05f;
 $turquoiseBgColor: #f8fff8;
 
 $btnBorderWidth: 5px;
+
+@mixin flexCenter($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}

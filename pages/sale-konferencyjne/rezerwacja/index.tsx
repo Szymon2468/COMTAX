@@ -1,8 +1,8 @@
 import styles from './index.module.scss';
 import RoomTile from './RoomTile/RoomTile';
 import img from './Background.jpg';
-import Link from 'next/link';
 import { rooms } from '../../../src/configs/rooms';
+import Link from 'next/link';
 
 function index() {
   return (
@@ -25,16 +25,14 @@ function index() {
         </header>
         <div className={styles.roomTilesContainer}>
           {rooms.map((el) => (
-            <Link href={`/sale-konferencyjne-zarezerwuj/${'id'}`}>
-              <RoomTile
-                img={el.imgUrl}
-                alt={el.imgAlt}
-                name={el.name}
-                price={40}
-                date={'04.05.2022'}
-                startHour='12.00'
-                endHour='14.00'
-              ></RoomTile>
+            <Link href={`rezerwacja/${el.id}`}>
+              <a>
+                <RoomTile
+                  img={el.imgUrl}
+                  alt={el.imgAlt}
+                  name={el.name}
+                ></RoomTile>
+              </a>
             </Link>
           ))}
         </div>

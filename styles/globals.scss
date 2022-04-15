@@ -145,3 +145,26 @@ h3,
     color: $textColor;
   }
 }
+
+.react-datepicker__triangle {
+  left: -120px !important;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container {
+  width: auto !important;
+
+  input {
+    width: 400px;
+    height: 44px;
+    border-radius: 5px;
+    filter: drop-shadow(-2px 2px 4px rgba(0, 0, 0, 0.25));
+    border: none;
+    box-sizing: border-box;
+    padding: 10px 0 10px 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

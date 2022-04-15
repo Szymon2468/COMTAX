@@ -4,29 +4,17 @@ interface IRoomTileType {
   img: string;
   alt: string;
   name: string;
-  price: number;
-  date: string;
-  startHour: string;
-  endHour: string;
 }
 
-function RoomTile({
-  img,
-  name,
-  price,
-  date,
-  alt,
-  startHour,
-  endHour
-}: IRoomTileType) {
+function RoomTile({ img, name, alt }: IRoomTileType) {
   return (
     <div className={styles.RoomTile}>
       <img src={img} alt={alt} className={styles.img} />
       <h3 className={styles.name}>{name.toUpperCase()}</h3>
-      <p className={styles.date}>
-        Najbliszy wolny termin: {date} od {startHour} do {endHour}
+      <p className={styles.info}>ul. Krasińskiego 29</p>
+      <p className={styles.more}>
+        Kliknij, aby dowiedzieć się więcej o tej salce
       </p>
-      <p className={styles.price}>{price}zł / godzinę</p>
     </div>
   );
 }

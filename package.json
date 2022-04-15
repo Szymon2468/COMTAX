@@ -15,6 +15,7 @@
     "next": "12.1.0",
     "react": "17.0.2",
     "react-collapsible": "^2.8.4",
+    "react-datepicker": "^4.7.0",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
     "react-modal-image": "^2.5.0",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/node": "17.0.23",
     "@types/react": "17.0.43",
+    "@types/react-datepicker": "^4.4.0",
     "@types/react-transition-group": "^4.4.4",
     "eslint": "8.11.0",
     "eslint-config-next": "12.1.0",

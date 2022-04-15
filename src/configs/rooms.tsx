@@ -6,73 +6,17 @@ export const rooms = [
     name: 'SALA KONFERENCYJNA',
     imgUrl: img.src,
     imgAlt: 'imgAlt',
-    reservations: [
+    reservationDays: [
       {
-        date: new Date(2022, 9, 3),
-        startHour: '12.00',
-        endHour: '14.00',
-        company: 'nwm o co chodzi',
-        price: 40
-      }
-    ]
-  },
-  {
-    id: 1,
-    name: 'SALA KONFERENCYJNA',
-    imgUrl: img.src,
-    imgAlt: 'imgAlt',
-    reservations: [
-      {
-        date: new Date(2022, 9, 3),
-        startHour: '12.00',
-        endHour: '14.00',
-        company: 'nwm o co chodzi',
-        price: 40
-      }
-    ]
-  },
-  {
-    id: 2,
-    name: 'SALA KONFERENCYJNA',
-    imgUrl: img.src,
-    imgAlt: 'imgAlt',
-    reservations: [
-      {
-        date: new Date(2022, 9, 3),
-        startHour: '12.00',
-        endHour: '14.00',
-        company: 'nwm o co chodzi',
-        price: 40
-      }
-    ]
-  },
-  {
-    id: 3,
-    name: 'SALA KONFERENCYJNA',
-    imgUrl: img.src,
-    imgAlt: 'imgAlt',
-    reservations: [
-      {
-        date: new Date(2022, 9, 3),
-        startHour: '12.00',
-        endHour: '14.00',
-        company: 'nwm o co chodzi',
-        price: 40
-      }
-    ]
-  },
-  {
-    id: 4,
-    name: 'SALA KONFERENCYJNA',
-    imgUrl: img.src,
-    imgAlt: 'imgAlt',
-    reservations: [
-      {
-        date: new Date(2022, 9, 3),
-        startHour: '12.00',
-        endHour: '14.00',
-        company: 'nwm o co chodzi',
-        price: 40
+        date: new Date(2022, 4, 17),
+        reservations: [
+          {
+            startHour: '12.00',
+            endHour: '14.00',
+            company: 'lol',
+            price: 40
+          }
+        ]
       }
     ]
   }
