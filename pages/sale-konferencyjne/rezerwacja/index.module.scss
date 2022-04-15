@@ -1,0 +1,60 @@
+@import '../../../styles/variables.scss';
+
+.landingPage {
+  height: calc(100vh - 80px);
+  width: 100vw;
+  background-image: url('./Background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  margin-bottom: 105px;
+
+  @include media('<tablet-portrait') {
+    height: 100%;
+    padding: 35px 0;
+    text-align: center;
+  }
+
+  .title {
+    color: white;
+  }
+
+  .about {
+    color: white;
+    margin-top: 70px;
+  }
+}
+
+.roomTilesContainerContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .roomTilesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1040px;
+
+    @include media('<bigger-tablet-landscape') {
+      width: 650px;
+    }
+
+    @include media('<tablet-portrait') {
+      width: 300px;
+    }
+  }
+
+  .header {
+    display: flex;
+    justify-content: center;
+
+    .title {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 105px;
+      color: $mainColor;
+    }
+  }
+}

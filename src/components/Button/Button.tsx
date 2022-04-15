@@ -5,7 +5,7 @@ type BUTTON_COLOR = 'GREEN' | 'BLUE' | 'TRANSPARENT';
 
 interface buttonProps {
   text: String;
-  onClick: Function;
+  onClick?: Function;
   type: BUTTON_TYPE;
   color: BUTTON_COLOR;
   className?: String;
@@ -35,7 +35,7 @@ function Button({
   return (
     <button
       className={`${styles.btn} ${cls} ${className ? className : ''}`}
-      onClick={() => onClick()}
+      onClick={onClick ? () => onClick() : undefined}
       style={{ width: btnWidth ? `${btnWidth}px` : 'auto' }}
     >
       {text}

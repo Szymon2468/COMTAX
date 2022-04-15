@@ -6,8 +6,10 @@ import InternetIcon from '../../src/assets/conferencerooms/icons/InternetIcon';
 import KalendarIcon from '../../src/assets/conferencerooms/icons/KalendarIcon';
 import WIFIIcon from '../../src/assets/conferencerooms/icons/WIFIIcon';
 import Button from '../../src/components/Button/Button';
-import Gallery, { IImage } from './Gallery/Gallery';
+import Gallery, { IImage } from '../../src/components/Gallery/Gallery';
 import BackgroundImage from './sala8.jpeg';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface Icon {
   icon: JSX.Element;
@@ -96,7 +98,9 @@ const images: IImage[] = [
   }
 ];
 
-function index() {
+function ConferenceOffice() {
+  const router = useRouter();
+
   const generateIcons = () => {
     let result: JSX.Element[] = [];
     icons.map((el) =>
@@ -109,6 +113,11 @@ function index() {
     );
     return result;
   };
+
+  const handleBtnClick = (path) => {
+    router.push(path);
+  };
+
   return (
     <main>
       <section>
@@ -156,11 +165,11 @@ function index() {
             </div>
             <Button
               text='ZAREZERWUJ SALĘ JUŻ TERAZ!'
-              onClick={() => {}}
               type='OUTLINED'
               color='GREEN'
               btnWidth={600}
               className={styles.priceBtn}
+              onClick={() => handleBtnClick('/sale-konferencyjne/rezerwacja')}
             />
           </div>
         </div>
@@ -184,4 +193,4 @@ function index() {
   );
 }
 
-export default index;
+export default ConferenceOffice;
