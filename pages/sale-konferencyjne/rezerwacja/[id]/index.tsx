@@ -93,7 +93,7 @@ function index() {
     endHour: string;
   }
 
-  const generateAvailableHoursArrayForChosenDay = (day) => {
+  const generateAvailableHoursArrayForChosenDay = (day: Date) => {
     let startHours = availableStartHours;
     let endHours = availableEndHours;
     let excludedHours: IReservationDateType[] = [];

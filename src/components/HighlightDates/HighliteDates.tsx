@@ -10,7 +10,7 @@ const HighliteDates = () => {
   return (
     <DatePicker
       selected={startDate}
-      onChange={(date) => setStartDate(date)}
+      onChange={(date) => setStartDate(date as Date)}
       excludeDates={[new Date()]}
       placeholderText='Select a date other than today or yesterday'
     />
