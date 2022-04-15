@@ -4,9 +4,13 @@ import BackgroundImage from '../../../sale-konferencyjne/Background.jpg';
 import HighliteDates from '../../../../src/components/HighlightDates/HighliteDates';
 import Input from '../../../../src/components/Input/Input';
 import { rooms } from '../../../../src/configs/rooms';
+import { MutableRefObject, useRef, useState } from 'react';
 
 function index() {
   const roomId = 0;
+  const [endHours, setEndHours] = useState([]);
+  const inputEndRef = useRef() as MutableRefObject<HTMLSelectElement>;
+  const inputStartRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const images: IImage[] = [
     {
       url: BackgroundImage.src,
@@ -44,48 +48,48 @@ function index() {
 
   const availableStartHours = [
     '8:00',
-    '8.30',
+    '8:30',
     '9:00',
-    '9.30',
+    '9:30',
     '10:00',
-    '10.30',
+    '10:30',
     '11:00',
-    '11.30',
+    '11:30',
     '12:00',
-    '12.30',
+    '12:30',
     '13:00',
-    '13.30',
+    '13:30',
     '14:00',
-    '14.30',
+    '14:30',
     '15:00',
-    '15.30',
+    '15:30',
     '16:00',
-    '16.30',
+    '16:30',
     '17:00',
-    '17.30'
+    '17:30'
   ];
 
   const availableEndHours = [
-    '8.30',
+    '8:30',
     '9:00',
-    '9.30',
+    '9:30',
     '10:00',
-    '10.30',
+    '10:30',
     '11:00',
-    '11.30',
+    '11:30',
     '12:00',
-    '12.30',
+    '12:30',
     '13:00',
-    '13.30',
+    '13:30',
     '14:00',
-    '14.30',
+    '14:30',
     '15:00',
-    '15.30',
+    '15:30',
     '16:00',
-    '16.30',
+    '16:30',
     '17:00',
-    '17.30',
-    '18.00'
+    '17:30',
+    '18:00'
   ];
 
   interface IReservationDateType {
@@ -93,20 +97,25 @@ function index() {
     endHour: string;
   }
 
-  const generateAvailableHoursArrayForChosenDay = (day: Date) => {
+  const generateAvailableStartHoursArrayForChosenDay = (day: Date) => {
     let startHours = availableStartHours;
-    let endHours = availableEndHours;
     let excludedHours: IReservationDateType[] = [];
 
-    rooms
-      .find((el) => roomId === el.id)
-      ?.reservationDays.find((el) => el.date === day)
-      ?.reservations.map((el) =>
-        excludedHours.push({
-          startHour: el.startHour,
-          endHour: el.endHour
-        })
-      );
+    const roomReservations = rooms.find((el) => roomId === el.id);
+    const reservationsForDay = roomReservations?.reservationDays.find((el) => {
+      el.date.setUTCHours(0, 0, 0, 0);
+      day.setUTCHours(0, 0, 0, 0);
+      return el.date.toString() === day.toString();
+    });
+
+    reservationsForDay?.reservations.map((el) =>
+      excludedHours.push({
+        startHour: el.startHour,
+        endHour: el.endHour
+      })
+    );
+
+    console.log(excludedHours);
 
     for (let i = 0; i < excludedHours.length; i++) {
       const startIndex = startHours.findIndex(
@@ -122,7 +131,50 @@ function index() {
       startHours.splice(startIndex - 1, nrOfRemovedHours);
     }
 
-    return;
+    return startHours;
+  };
+
+  const generateAvailableEndHoursArrayForChosenDay = (
+    day: Date,
+    startHour: string
+  ) => {
+    let endHours = availableEndHours;
+    let excludedHours: IReservationDateType[] = [];
+
+    rooms
+      .find((el) => roomId === el.id)
+      ?.reservationDays.find((el) => {
+        el.date.setUTCHours(0, 0, 0, 0);
+        day.setUTCHours(0, 0, 0, 0);
+        return el.date.toString() === day.toString();
+      })
+      ?.reservations.map((el) =>
+        excludedHours.push({
+          startHour: el.startHour,
+          endHour: el.endHour
+        })
+      );
+
+    const startIndex = availableEndHours.findIndex((el) => el === startHour);
+
+    endHours.splice(0, startIndex + 1);
+
+    if (excludedHours.length > 0) {
+      let minIndex: number = availableEndHours.length;
+      for (let i = 0; i < excludedHours.length; i++) {
+        if (
+          availableEndHours.findIndex((el) => startHour === el) <
+            availableEndHours.findIndex(
+              (el) => excludedHours[i].startHour === el
+            ) &&
+          i < minIndex
+        ) {
+          minIndex = i;
+        }
+      }
+      endHours.splice(minIndex - 1);
+    }
+    return endHours;
   };
 
   return (
@@ -157,8 +209,24 @@ function index() {
           </div>
           <div className={styles.choosingHours}>
             Zarezerwuj salę od{' '}
-            <Input typeOfInput='SELECT' options={availableStartHours} /> do{' '}
-            <Input typeOfInput='SELECT' options={availableEndHours} />
+            <Input
+              ref={inputStartRef}
+              typeOfInput='SELECT'
+              options={generateAvailableStartHoursArrayForChosenDay(new Date())}
+              onChange={(e) => {
+                console.log(e.target.value);
+                // @ts-ignore
+                setEndHours(
+                  // @ts-ignore
+                  generateAvailableEndHoursArrayForChosenDay(
+                    new Date(),
+                    e.target.value
+                  )
+                );
+              }}
+            />{' '}
+            do{' '}
+            <Input ref={inputEndRef} typeOfInput='SELECT' options={endHours} />
           </div>
         </section>
       </div>

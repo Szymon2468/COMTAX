@@ -1,4 +1,5 @@
 import { platform } from 'os';
+import { MutableRefObject } from 'react';
 import styles from './Input.module.scss';
 
 type TypeOfInput = 'INPUT' | 'TEXTAREA' | 'SELECT';
@@ -10,6 +11,8 @@ interface InputType {
   id?: string;
   typeOfInput: TypeOfInput;
   options?: string[];
+  ref?: MutableRefObject<HTMLSelectElement>;
+  onChange?: Function;
 }
 
 const Input = ({
@@ -18,7 +21,9 @@ const Input = ({
   placeholder,
   id,
   typeOfInput,
-  options
+  options,
+  ref,
+  onChange
 }: InputType) => {
   if (typeOfInput === 'INPUT') {
     return (
@@ -36,7 +41,11 @@ const Input = ({
     let i = 0;
     return (
       <div className={styles.inputContainer}>
-        <select className={className}>
+        <select
+          className={className}
+          ref={ref}
+          onChange={(e) => (onChange ? onChange(e) : undefined)}
+        >
           {options &&
             options.map((el) => {
               i++;
