@@ -26,6 +26,19 @@
     display: grid;
     grid-template-columns: 70px calc(100% - 335px - 70px) 335px;
     grid-template-areas: 'quotesIcon opinions google';
+
+    @include media('<=tablet-landscape') {
+      grid-template-columns: 70px calc(100% - 70px);
+      grid-template-areas:
+        'google google'
+        'quotesIcon opinions';
+
+      padding-bottom: 105px;
+    }
+
+    @include media('<=mobile') {
+      grid-gap: 15px;
+    }
   }
 
   .quotesIcon {
@@ -53,29 +66,6 @@
         font-weight: 500;
       }
     }
-
-    .author {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      margin-top: 10px;
-
-      p {
-        display: flex;
-        align-items: center;
-      }
-
-      @include media('<=mobile') {
-        p {
-          font-size: 16px;
-        }
-      }
-
-      .iconMargin {
-        margin-left: 10px;
-      }
-    }
   }
 
   .google {
@@ -84,6 +74,10 @@
       margin-bottom: 50px;
       display: flex;
       justify-content: center;
+    }
+
+    @include media('<=mobile') {
+      width: 95%;
     }
   }
 
@@ -133,17 +127,9 @@
 
   div {
     width: 100%;
-    height: 400px;
-    object-fit: cover;
-    position: absolute;
     top: 0;
     left: 0;
-
     transition: opacity 1s;
-
-    @include media('>=mobile') {
-      height: 600px;
-    }
   }
 
   .hidden {
@@ -155,6 +141,43 @@
   width: 100%;
   position: absolute;
   top: 0;
-  font-size: 18px;
-  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include media('<=mobile') {
+      text-align: left;
+      margin: 0 10px 10px 10px;
+    }
+  }
+
+  .author {
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+
+    p {
+      display: flex;
+      align-items: center;
+    }
+
+    @include media('<=mobile') {
+      p {
+        font-size: 16px;
+      }
+    }
+
+    .iconMargin {
+      margin-left: 10px;
+    }
+  }
 }

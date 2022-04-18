@@ -66,7 +66,7 @@ function Opinions() {
                       styles.opinionText
                     }`}
                   >
-                    {opinion.text}
+                    <p>{opinion.text}</p>
                     <div className={styles.author}>
                       <p>
                         ~ {opinion.author}, {opinion.date}
