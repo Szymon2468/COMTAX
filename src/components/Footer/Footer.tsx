@@ -2,6 +2,7 @@ import styles from './Footer.module.scss';
 import AdminPanelIcon from '../Icons/AdminPanelIcon';
 import FacebookIcon from '../Icons/FacebookIcon';
 import Link from 'next/link';
+import GancleLogo from '../../assets/gancle/GancleLogo';
 
 function Footer() {
   return (
@@ -74,11 +75,13 @@ function Footer() {
         <p className={styles.footerInfoItem}>
           © Copyright 2022, Biuro Rachunkowe COMTAX. All Rights Reserved.
         </p>
-
-        <a href='https://gancle-studio.pl'>
+        <br />
+        <a href='https://www.gancle-studio.pl'>
           <p className={styles.footerInfoItemCreator}>
-            Strona stworzona przez <span> Gancle Studio</span> | This site was
-            created by <span>Gancle Studio</span> .
+            Strona stworzona przez <span>|</span> This site was created by{' '}
+            <span className={styles.logo}>
+              <GancleLogo />
+            </span>
           </p>
         </a>
       </div>

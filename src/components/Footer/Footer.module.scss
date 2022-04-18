@@ -16,7 +16,7 @@
     color: $mainColor;
     transition: color 0.2s linear;
 
-    svg {
+    svg:not(.logo svg) {
       path {
         fill: $mainColor;
         transition: fill 0.2s linear;
@@ -185,14 +185,24 @@
   .footerInfoItemCreator {
     margin: 0;
 
-    span {
-      color: #5cb25d;
-    }
-
     &:hover {
       cursor: pointer;
-      color: #5cb25d;
+      color: #ed1e79;
       transition: color 0.2s linear;
+    }
+
+    span:not(.logo) {
+      margin: 0 10px;
+    }
+
+    svg {
+      height: 26px;
+      width: fit-content;
+      margin-left: 15px;
+
+      &:hover {
+        fill: none;
+      }
     }
   }
 
