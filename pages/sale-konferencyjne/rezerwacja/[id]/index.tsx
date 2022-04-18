@@ -6,7 +6,7 @@ import Input from '../../../../src/components/Input/Input';
 import { rooms } from '../../../../src/configs/rooms';
 import { MutableRefObject, useRef, useState } from 'react';
 
-function index() {
+function Index() {
   const roomId = 0;
   const [endHours, setEndHours] = useState([]);
   const inputEndRef = useRef() as MutableRefObject<HTMLSelectElement>;
@@ -213,7 +213,7 @@ function index() {
               ref={inputStartRef}
               typeOfInput='SELECT'
               options={generateAvailableStartHoursArrayForChosenDay(new Date())}
-              onChange={(e) => {
+              onChange={(e: any) => {
                 console.log(e.target.value);
                 // @ts-ignore
                 setEndHours(
@@ -234,4 +234,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

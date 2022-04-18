@@ -8,6 +8,7 @@
   padding-bottom: 105px;
 
   .title {
+    grid-area: title;
     width: 100%;
     text-align: center;
     padding: 105px 0;
@@ -22,77 +23,72 @@
   }
 
   .googleContainer {
-    display: flex;
-    margin-bottom: 70px;
+    display: grid;
+    grid-template-columns: 70px calc(100% - 335px - 70px) 335px;
+    grid-template-areas: 'quotesIcon opinions google';
+  }
 
-    @include media('<=tablet-landscape') {
-      flex-direction: column-reverse;
+  .quotesIcon {
+    grid-area: quotesIcon;
+  }
+
+  .opinion {
+    grid-area: opinions;
+    margin: 0 70px 0 35px;
+    // min-width: 600px;
+    word-wrap: break-word;
+
+    @include media('<=mobile') {
+      margin: 0;
     }
 
-    .quotesAndTextContainer {
+    .description {
+      margin-bottom: 35px;
+
+      @include media('<=mobile') {
+        text-align: center;
+      }
+
+      p {
+        font-weight: 500;
+      }
+    }
+
+    .author {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 10px;
 
-      .quotes {
-        @include media('<=mobile') {
-          display: none;
-        }
-      }
-
-      .opinion {
-        margin: 0 70px 0 35px;
-        min-width: 600px;
-
-        @include media('<=mobile') {
-          margin: 0;
-        }
-
-        .description {
-          margin-bottom: 35px;
-
-          @include media('<=mobile') {
-            text-align: center;
-          }
-
-          p {
-            font-weight: 500;
-          }
-        }
-
-        .author {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          margin-top: 10px;
-
-          p {
-            display: flex;
-            align-items: center;
-          }
-
-          @include media('<=mobile') {
-            p {
-              font-size: 16px;
-            }
-          }
-
-          .iconMargin {
-            margin-left: 10px;
-          }
-        }
-      }
-    }
-
-    .google {
-      @include media('<=tablet-landscape') {
-        margin-bottom: 50px;
+      p {
         display: flex;
-        justify-content: center;
+        align-items: center;
+      }
+
+      @include media('<=mobile') {
+        p {
+          font-size: 16px;
+        }
+      }
+
+      .iconMargin {
+        margin-left: 10px;
       }
     }
   }
 
+  .google {
+    grid-area: google;
+    @include media('<=tablet-landscape') {
+      margin-bottom: 50px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   .collabs {
+    grid-area: collabs;
     width: 100%;
     height: auto;
     display: flex;
@@ -135,7 +131,7 @@
   width: 100%;
   height: auto;
 
-  img {
+  div {
     width: 100%;
     height: 400px;
     object-fit: cover;
@@ -143,7 +139,7 @@
     top: 0;
     left: 0;
 
-    transition: opacity 0.5s;
+    transition: opacity 1s;
 
     @include media('>=mobile') {
       height: 600px;
