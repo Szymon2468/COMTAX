@@ -51,7 +51,7 @@ function Opinions() {
             TO <span>NASI KLIENCI</span> SĄ DLA NAS <span>NASI KLIENCI</span>
           </h2>
           <div className={styles.googleContainer}>
-            <div className={styles.quotes}>
+            <div className={styles.quotesIcon}>
               <QuotesIcon />
             </div>
             <div className={styles.opinion}>

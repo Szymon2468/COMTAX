@@ -37,12 +37,21 @@
     }
 
     @include media('<=mobile') {
+      grid-template-columns: 30px calc(100% - 45px);
       grid-gap: 15px;
     }
   }
 
   .quotesIcon {
     grid-area: quotesIcon;
+    @include media('<=mobile') {
+      width: 40px;
+
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
   }
 
   .opinion {

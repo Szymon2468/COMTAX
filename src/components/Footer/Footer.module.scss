@@ -40,6 +40,10 @@
       display: flex;
       flex-wrap: wrap;
 
+      @include media('<=extra-mobile') {
+        width: 250px;
+      }
+
       .greenColor {
         color: $mainColor;
         font-size: 22px;
