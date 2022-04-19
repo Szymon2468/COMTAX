@@ -186,6 +186,8 @@
 
 .swiper {
   height: 750px;
+  overflow-y: hidden;
+
   @include media('<=mobile') {
     height: 750px;
   }

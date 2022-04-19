@@ -233,30 +233,6 @@ function VirtualOffice() {
             ))}
           </Swiper>
         </main>
-        {/* <div className={`container ${styles.carouselleContainer}`}> */}
-        {/* <div onClick={handleLeftArrowClick}>
-            <LeftArrowIcon />
-          </div>
-
-          <div className={styles.offerSlider}>
-            <div className={styles.offerSliderContent}>
-              {packageTiles.map((el) => (
-                <Fragment key={`carousel-item-${el.title}`}>
-                  <PackageTile
-                    title={el.title}
-                    content={el.content}
-                    price={el.price}
-                    className={styles.activePackageTile}
-                  />
-                </Fragment>
-              ))}
-            </div>
-          </div>
-
-          <div onClick={handleRightArrowClick}>
-            <RightArrowIcon />
-          </div> */}
-        {/* </div> */}
       </section>
 
       <section>
@@ -269,10 +245,10 @@ function VirtualOffice() {
               <h2>PEŁNA LISTA USŁUG </h2>
               <h2>PAKIET FIRMA</h2>
               <h2>
-                <Input
+                {/* <Input
                   typeOfInput='SELECT'
                   options={comparisingTableSelectOptions}
-                />
+                /> */}
               </h2>
             </header>
 
