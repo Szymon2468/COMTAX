@@ -170,18 +170,6 @@
 
 .offerSection {
   margin-bottom: 105px;
-
-  h2 {
-    margin-bottom: 70px;
-
-    @include media('<=mobile') {
-      margin-bottom: 35px;
-    }
-
-    span {
-      color: $blueBgColor;
-    }
-  }
 }
 
 .swiper {
@@ -191,4 +179,8 @@
   @include media('<=mobile') {
     height: 550px;
   }
+}
+
+.offerInfo {
+  margin-top: 35px;
 }

@@ -103,7 +103,8 @@ export const packageTiles: PackageTileData[] = [
         </p>
         <p className='smaller'>
           {'>'} dostęp do sali konferencyjnej/pokoju spotkań biznesowych,
-          stanowiska pracy wraz z miejscem parkingowym (2h/miesiąc)<sup>2</sup>
+          stanowiska pracy wraz z miejscem parkingowym <br />
+          (2h/miesiąc) <sup>1</sup>
         </p>
       </>
     ),
@@ -118,11 +119,13 @@ export const packageTiles: PackageTileData[] = [
         </p>
         <p className='smaller'>
           {'>'} dostęp do sali konferencyjnej/pokoju spotkań biznesowych,
-          stanowiska pracy wraz z miejscem parkingowym (4h/miesiąc)<sup>2</sup>
+          stanowiska pracy wraz z miejscem parkingowym <br />
+          (4h/miesiąc) <sup>1</sup>
         </p>
         <p className='smaller'>
           {'>'} skanowanie korespondencji i przesyłanie w formacie pdf na
-          wskazany adres e-mail (100 stron/miesiąc)<sup>3</sup>
+          wskazany adres e-mail <br />
+          (100 stron/miesiąc) <sup>2</sup>
         </p>
         <p className='smaller'>{'>'} obsługa poczty wychodzącej</p>
       </>
@@ -138,11 +141,13 @@ export const packageTiles: PackageTileData[] = [
         </p>
         <p className='smaller'>
           {'>'} dostęp do sali konferencyjnej/pokoju spotkań biznesowych,
-          stanowiska pracy wraz z miejscem parkingowym (6h/miesiąc)<sup>2</sup>
+          stanowiska pracy wraz z miejscem parkingowym <br />
+          (6h/miesiąc) <sup>2</sup>
         </p>
         <p className='smaller'>
           {'>'} skanowanie korespondencji i przesyłanie w formacie pdf na
-          wskazany adres e-mail(150 stron/miesiąc)<sup>3</sup>
+          wskazany adres e-mail <br />
+          (150 stron/miesiąc) <sup>2</sup>
         </p>
         <p className='smaller'>{'>'} dyżur telefoniczny do godz. 20:00</p>
       </>

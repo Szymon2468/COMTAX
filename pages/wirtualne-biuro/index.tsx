@@ -101,6 +101,21 @@ function VirtualOffice() {
               </SwiperSlide>
             ))}
           </Swiper>
+
+          <p className={`smaller ${styles.offerInfo}`}>
+            Podane ceny są cenami netto i obowiązują przy współpracy podpisanej
+            na 12 miesięcy. Ceny przy krótszych współpracach podano poniżej{' '}
+            <br /> <br />
+            1) Sala konferencyjna/pokój spotkań biznesowych są dostępne 7 dni w
+            tygodniu po wcześniejszej rezerwacji. Wyposażenie sali
+            konferencyjnej: stół. 6 krzeseł, flipchart, dostęp do
+            bezprzewodowego Internetu, klimatyzacja, serwis kawowy. Stanowisko
+            pracy jest dostępne w godzinach pracy biura.
+            <br /> <br />
+            2) Skanowaniu nie podlegają książki, materiały reklamowe i pozostałe
+            w formacie innym niż pojedyncze kartki A4. Awers koperty liczony
+            jest jako jedna strona.
+          </p>
         </main>
       </section>
 
@@ -151,21 +166,6 @@ function VirtualOffice() {
               {generateOfferTable(addedOffers)}
             </div>
           </div>
-          <p>
-            Wszystkie podane ceny są cenami netto. <br /> <br />
-            1) Pakiet dostępny wyłącznie dla osób nieprowadzących działalności
-            gospodarczej
-            <br /> <br />
-            2) Sala konferencyjna/pokój spotkań biznesowych są dostępne 7 dni w
-            tygodniu po wcześniejszej rezerwacji. Wyposażenie sali
-            konferencyjnej: stół. 6 krzeseł, flipchart, dostęp do
-            bezprzewodowego Internetu, klimatyzacja, serwis kawowy. Stanowisko
-            pracy jest dostępne w godzinach pracy biura.
-            <br /> <br />
-            3) Skanowaniu nie podlegają książki, materiały reklamowe i pozostałe
-            w formacie innym niż pojedyncze kartki A4. Awers koperty liczony
-            jest jako jedna strona.
-          </p>
         </div>
       </section>
     </section>
