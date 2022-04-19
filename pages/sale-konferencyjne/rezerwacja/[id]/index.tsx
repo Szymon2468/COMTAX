@@ -8,7 +8,7 @@ import { MutableRefObject, useRef, useState } from 'react';
 
 function Index() {
   const roomId = 0;
-  const [endHours, setEndHours] = useState([]);
+  const [endHours, setEndHours] = useState<string[]>([]);
   const inputEndRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const inputStartRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const images: IImage[] = [
@@ -126,7 +126,7 @@ function Index() {
         (el) => excludedHours[i].endHour === el
       );
 
-      const nrOfRemovedHours = endIndex - startIndex + 2;
+      const nrOfRemovedHours = endIndex - startIndex + 1;
 
       startHours.splice(startIndex - 1, nrOfRemovedHours);
     }
@@ -160,7 +160,7 @@ function Index() {
     endHours.splice(0, startIndex + 1);
 
     if (excludedHours.length > 0) {
-      let minIndex: number = availableEndHours.length;
+      let minIndex: number = availableEndHours.length + 100;
       for (let i = 0; i < excludedHours.length; i++) {
         if (
           availableEndHours.findIndex((el) => startHour === el) <
@@ -172,7 +172,16 @@ function Index() {
           minIndex = i;
         }
       }
-      endHours.splice(minIndex - 1);
+      if (minIndex === availableEndHours.length + 100) {
+        return endHours;
+      } else {
+        const removeIndex = availableEndHours.findIndex(
+          (el) => el === excludedHours[minIndex].startHour
+        );
+        console.log('minIndex: ', removeIndex);
+        endHours.splice(removeIndex);
+        console.log(endHours);
+      }
     }
     return endHours;
   };
@@ -213,15 +222,11 @@ function Index() {
               ref={inputStartRef}
               typeOfInput='SELECT'
               options={generateAvailableStartHoursArrayForChosenDay(new Date())}
-              onChange={(e: any) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 console.log(e.target.value);
-                // @ts-ignore
+                const value: string = e.target.value;
                 setEndHours(
-                  // @ts-ignore
-                  generateAvailableEndHoursArrayForChosenDay(
-                    new Date(),
-                    e.target.value
-                  )
+                  generateAvailableEndHoursArrayForChosenDay(new Date(), value)
                 );
               }}
             />{' '}

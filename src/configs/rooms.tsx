@@ -8,7 +8,7 @@ export const rooms = [
     imgAlt: 'imgAlt',
     reservationDays: [
       {
-        date: new Date('2022-04-15'),
+        date: new Date('2022-04-19'),
         reservations: [
           {
             startHour: '12:00',
