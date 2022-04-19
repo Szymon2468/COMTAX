@@ -16,8 +16,8 @@
     box-sizing: border-box;
     padding: 10px 0 10px 20px;
 
-    @include media('<=mobile') {
-      width: 250px;
+    @include media('<=extra-mobile') {
+      width: 310px;
     }
   }
 
