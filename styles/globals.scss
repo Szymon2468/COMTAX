@@ -5,6 +5,11 @@
 @import './variables.scss';
 @import 'react-multi-carousel/lib/styles.css';
 
+// Import Swiper styles
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
 * {
   box-sizing: border-box;
 }
@@ -167,4 +172,37 @@ h3,
       cursor: pointer;
     }
   }
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  position: relative;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  transition: all 1s;
+}
+
+.swiper-slide-active {
+  transition: all 1s;
+}
+
+.swiper-slide-next {
+  transition: all 1s;
 }
