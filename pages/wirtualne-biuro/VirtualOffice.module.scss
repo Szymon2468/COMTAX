@@ -41,7 +41,7 @@
 }
 
 .offerSection {
-  margin-bottom: 105px;
+  margin-bottom: 70px;
 }
 
 .swiper {
@@ -60,6 +60,10 @@
 .tableSection {
   background-color: $turquoiseBgColor;
   padding: 70px 0 35px 0;
+
+  @include media('<=mobile') {
+    padding-bottom: 15px;
+  }
 }
 
 .table {
