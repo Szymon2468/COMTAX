@@ -192,7 +192,7 @@ function VirtualOffice() {
               }
             }}
             cssMode={true}
-            navigation={windowSize.width > 480 ? true : false}
+            navigation={windowSize.width > 580 ? true : false}
             pagination={{
               clickable: true
             }}

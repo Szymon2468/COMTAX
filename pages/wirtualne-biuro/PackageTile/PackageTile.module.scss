@@ -12,7 +12,7 @@
   flex-direction: column;
   margin: 0;
 
-  @include media('<=extra-mobile') {
+  @include media('<=mobile') {
     width: 90%;
   }
 
