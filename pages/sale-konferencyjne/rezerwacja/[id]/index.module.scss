@@ -64,3 +64,58 @@
   justify-content: center;
   align-items: center;
 }
+
+.formContainersContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+
+  .formContainer {
+    margin-top: 35px;
+    width: 100%;
+    max-width: 700px;
+
+    h3 {
+      padding: 35px 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    .input {
+      margin-bottom: 35px;
+    }
+  }
+
+  .btns {
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 15px;
+
+    .cancelBtn {
+      background-color: rgb(207, 8, 8);
+      border: 0;
+      transition: all linear 0.2s;
+      border: rgb(207, 8, 8) 3px solid;
+
+      &:hover {
+        color: rgb(207, 8, 8);
+        border: rgb(207, 8, 8) 3px solid;
+        background-color: white;
+      }
+    }
+
+    .resBtn {
+      transition: all linear 0.2s;
+      border: $mainColor 3px solid;
+
+      &:hover {
+        color: $mainColor;
+        border: $mainColor 3px solid;
+        background-color: white;
+      }
+    }
+  }
+}

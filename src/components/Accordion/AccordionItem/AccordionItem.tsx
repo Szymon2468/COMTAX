@@ -34,7 +34,7 @@ const AccordionItem = ({ faq, img }: IAccordionItemProps) => {
           backgroundSize: 'cover'
         }}
       >
-        {question}
+        <p>{question}</p>
         <span className={styles.control}>
           {clicked ? <IoIosArrowUp /> : <IoIosArrowDown />}{' '}
         </span>
