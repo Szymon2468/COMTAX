@@ -11,7 +11,7 @@ function PackageTile({ title, content, price, className }: PackageTile) {
   return (
     <div className={`${styles.packageTile} ${className}`}>
       <h2>{title}</h2>
-      {content}
+      <div>{content}</div>
       <div className={styles.price}>{price} zł / miesiąc</div>
     </div>
   );

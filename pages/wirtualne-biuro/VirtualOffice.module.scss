@@ -170,37 +170,23 @@
 
 .offerSection {
   margin-bottom: 105px;
+
+  h2 {
+    margin-bottom: 70px;
+
+    @include media('<=mobile') {
+      margin-bottom: 35px;
+    }
+
+    span {
+      color: $blueBgColor;
+    }
+  }
 }
 
 .swiper {
   height: 750px;
+  @include media('<=mobile') {
+    height: 750px;
+  }
 }
-
-// .offerSlider {
-//   width: 1030px;
-//   overflow: hidden;
-//   overflow-x: hidden;
-//   scroll-snap-type: x mandatory;
-//   overscroll-behavior-x: none;
-//   margin-left: -6px;
-//   margin-right: -6px;
-//   -webkit-overflow-scrolling: touch;
-//   -ms-scroll-snap-type: x mandatory;
-
-//   @include media('<=bigger-tablet-landscape') {
-//     width: 675px;
-//   }
-
-//   @include media('>=tablet-portrait', '<=tablet-landscape') {
-//     margin-left: 2px;
-//   }
-
-//   .offerSliderContent {
-//     display: flex;
-//     gap: 35px;
-
-//     @include media('>=tablet-portrait', '<=tablet-landscape') {
-//       gap: 26px;
-//     }
-//   }
-// }
