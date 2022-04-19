@@ -21,7 +21,8 @@
     "react-modal-image": "^2.5.0",
     "react-multi-carousel": "^2.8.0",
     "react-transition-group": "^4.4.2",
-    "sass": "^1.49.9"
+    "sass": "^1.49.9",
+    "swiper": "^8.1.1"
   },
   "devDependencies": {
     "@types/node": "17.0.23",

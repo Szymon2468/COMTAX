@@ -2,8 +2,11 @@ import styles from './VirtualOffice.module.scss';
 import LeftArrowIcon from '../../src/assets/virtualofficepage/icons/LeftArrowIcon';
 import RightArrowIcon from '../../src/assets/virtualofficepage/icons/RightArrowIcon';
 import PackageTile from './PackageTile/PackageTile';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation, Mousewheel, Keyboard } from 'swiper';
 import Input from '../../src/components/Input/Input';
 import { Fragment, useState } from 'react';
+import useWindowSize, { WindowSize } from '../../src/hooks/useWindowSize';
 
 const offers: JSX.Element[] = [
   <p key={'o-1'}>adres do korespondencji</p>,
@@ -126,6 +129,7 @@ const comparisingTableSelectOptions: string[] = [
 
 function VirtualOffice() {
   const [start, setStart] = useState(0);
+  const windowSize: WindowSize = useWindowSize();
 
   const generateOfferTable = (tab: JSX.Element[]) => {
     const result: JSX.Element[] = [];
@@ -170,9 +174,47 @@ function VirtualOffice() {
         </div>
       </div>
 
-      <section>
-        <div className={`container ${styles.carouselleContainer}`}>
-          <div onClick={handleLeftArrowClick}>
+      <section className={`${styles.offerSection}`}>
+        <header>
+          <h2 className={styles.comparisonTitle}>POZNAJ NASZĄ OFERTĘ</h2>
+        </header>
+        <main className='container'>
+          <Swiper
+            slidesPerView={1}
+            breakpoints={{
+              850: {
+                slidesPerView: 2,
+                spaceBetween: 0
+              },
+              1200: {
+                slidesPerView: 3,
+                spaceBetween: 0
+              }
+            }}
+            cssMode={true}
+            navigation={windowSize.width > 480 ? true : false}
+            pagination={{
+              clickable: true
+            }}
+            mousewheel={true}
+            keyboard={true}
+            modules={[Pagination, Navigation, Mousewheel, Keyboard]}
+            className={styles.swiper}
+          >
+            {packageTiles.map((el) => (
+              <SwiperSlide key={`carousel-item-${el.title}`}>
+                <PackageTile
+                  title={el.title}
+                  content={el.content}
+                  price={el.price}
+                  className={styles.activePackageTile}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </main>
+        {/* <div className={`container ${styles.carouselleContainer}`}> */}
+        {/* <div onClick={handleLeftArrowClick}>
             <LeftArrowIcon />
           </div>
 
@@ -193,8 +235,8 @@ function VirtualOffice() {
 
           <div onClick={handleRightArrowClick}>
             <RightArrowIcon />
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </section>
 
       <section>

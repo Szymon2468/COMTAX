@@ -1,16 +1,20 @@
 @import '../../../styles/variables.scss';
 
 .packageTile {
-  height: 700px;
-  max-height: 700px;
-  width: 320px;
-  min-width: 320px;
+  position: relative;
+  height: 650px;
+  max-height: 650px;
+  width: 75%;
   border-radius: 20px;
   border: 5px solid $blueBgColor;
-  position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin: 0;
+
+  @include media('<=extra-mobile') {
+    width: 90%;
+  }
 
   h2 {
     margin: 35px 0;
@@ -19,7 +23,8 @@
   }
 
   p {
-    margin: 0 35px;
+    text-align: left;
+    margin: 0 20px;
     font-size: 18px;
     line-height: 1.7;
   }
