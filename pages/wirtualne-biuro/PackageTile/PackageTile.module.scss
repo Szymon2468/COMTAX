@@ -2,8 +2,8 @@
 
 .packageTile {
   position: relative;
-  height: 650px;
-  max-height: 650px;
+  height: 700px;
+  // max-height: 650px;
   width: 75%;
   border-radius: 20px;
   border: 5px solid $blueBgColor;
@@ -14,19 +14,27 @@
 
   @include media('<=mobile') {
     width: 90%;
+    height: 700px;
   }
 
   h2 {
-    margin: 35px 0;
+    margin: 20px 0;
+
+    @include media('<=mobile') {
+      margin-bottom: 10px;
+    }
 
     color: $blueBgColor;
   }
 
-  p {
+  div {
     text-align: left;
     margin: 0 20px;
-    font-size: 18px;
-    line-height: 1.7;
+
+    p {
+      margin: 0;
+      margin-bottom: 5px;
+    }
   }
 
   .price {
@@ -34,6 +42,10 @@
     bottom: 35px;
     font-size: 28px;
     font-weight: 500;
+
+    @include media('<=mobile') {
+      bottom: 20px;
+    }
   }
 }
 

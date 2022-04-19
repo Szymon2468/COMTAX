@@ -64,47 +64,65 @@ const packageTiles: PackageTileData[] = [
   {
     title: 'POCZTA',
     content: (
-      <p>
-        Usługi w pakiecie: <br /> - adres do korespondencji <br />
-        - odbiór przesyłek listowych
-        <br />
-        - przechowywanie przesyłek listowych (30 dni)
-        <br />
-        - odbiór przesyłek kurierskich
-        <br />- przechowywanie przesyłek kurierskich (14 dni)
-      </p>
+      <>
+        <p className='smaller'>
+          <strong>Usługi w pakiecie: </strong>
+        </p>
+        <p className='smaller'>{'>'} adres do korespondencji</p>
+        <p className='smaller'>{'>'} odbiór przesyłek listowych</p>
+        <p className='smaller'>
+          {'>'} przechowywanie przesyłek listowych (30 dni)
+        </p>
+        <p className='smaller'>{'>'} odbiór przesyłek kurierskich</p>
+        <p className='smaller'>
+          {'>'} przechowywanie przesyłek kurierskich (14 dni)
+        </p>
+      </>
     ),
     price: 10
   },
   {
     title: 'ADRES',
     content: (
-      <p>
-        Usługi z pakietu ADRES plus: <br />
-        - adres do rejestracji firmy
-        <br />
-        - możliwość umieszczenia adresu na materiałach reklamowych
-        <br />
-        - powiadamianie o odebranej korespondencji (e-mail)
-        <br />
-        - dostęp do sali konferencyjnej/pokoju spotkań biznesowych, stanowiska
-        pracy wraz z miejscem parkingowym (2h/m-c)
-        <br />- powiadamianie o odebranej korespondencji (e-mail)
-      </p>
+      <>
+        <p className='smaller'>
+          <strong>Usługi z pakietu ADRES plus:</strong>
+        </p>
+        <p className='smaller'>{'>'} adres do rejestracji firmy</p>
+        <p className='smaller'>
+          {'>'} możliwość umieszczenia adresu na materiałach reklamowych
+        </p>
+        <p className='smaller'>
+          {'>'} powiadamianie o odebranej korespondencji (e-mail)
+        </p>
+        <p className='smaller'>
+          {'>'} dostęp do sali konferencyjnej/pokoju spotkań biznesowych,
+          stanowiska pracy wraz z miejscem parkingowym (2h/m-c)
+        </p>
+        <p className='smaller'>
+          {'>'} powiadamianie o odebranej korespondencji (e-mail)
+        </p>
+      </>
     ),
     price: 10
   },
   {
     title: 'ADRES+',
     content: (
-      <p>
-        Usługi z pakietu ADRES+ plus: <br />
-        - dostęp do sali konferencyjnej/pokoju spotkań biznesowych, stanowiska
-        pracy wraz z miejscem parkingowym (4h/m-c) <br />
-        - skanowanie korespondencji i przesyłanie w formacie pdf na wskazany
-        adres e-mail <br />
-        (100 stron/m-c) - obsługa poczty wychodzącej
-      </p>
+      <>
+        <p className='smaller'>
+          <strong>Usługi z pakietu ADRES+ plus:</strong>
+        </p>
+        <p className='smaller'>
+          {'>'} dostęp do sali konferencyjnej/pokoju spotkań biznesowych,
+          stanowiska pracy wraz z miejscem parkingowym (4h/m-c)
+        </p>
+        <p className='smaller'>
+          {'>'} skanowanie korespondencji i przesyłanie w formacie pdf na
+          wskazany adres e-mail (100 stron/m-c)
+        </p>
+        <p className='smaller'>{'>'} obsługa poczty wychodzącej</p>
+      </>
     ),
     price: 10
   },
@@ -176,13 +194,15 @@ function VirtualOffice() {
 
       <section className={`${styles.offerSection}`}>
         <header>
-          <h2 className={styles.comparisonTitle}>POZNAJ NASZĄ OFERTĘ</h2>
+          <h2 className={styles.comparisonTitle}>
+            POZNAJ NASZĄ <span>OFERTĘ</span>
+          </h2>
         </header>
         <main className='container'>
           <Swiper
             slidesPerView={1}
             breakpoints={{
-              850: {
+              1024: {
                 slidesPerView: 2,
                 spaceBetween: 0
               },
