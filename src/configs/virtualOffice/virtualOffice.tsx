@@ -142,7 +142,7 @@ export const packageTiles: PackageTileData[] = [
         <p className='smaller'>
           {'>'} dostęp do sali konferencyjnej/pokoju spotkań biznesowych,
           stanowiska pracy wraz z miejscem parkingowym <br />
-          (6h/miesiąc) <sup>2</sup>
+          (6h/miesiąc) <sup>1</sup>
         </p>
         <p className='smaller'>
           {'>'} skanowanie korespondencji i przesyłanie w formacie pdf na
