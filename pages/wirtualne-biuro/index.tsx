@@ -103,12 +103,15 @@ function VirtualOffice() {
           </Swiper>
 
           <p className={`smaller ${styles.offerInfo}`}>
-            Podane ceny są cenami netto i obowiązują przy współpracy podpisanej
-            na 12 miesięcy. Ceny przy krótszych współpracach podano poniżej{' '}
+            <strong>
+              Podane ceny są cenami netto i obowiązują przy współpracy
+              podpisanej na 12 miesięcy. Ceny przy krótszych współpracach podano
+              w porównaniu pakietów poniżej.
+            </strong>
             <br /> <br />
             1) Sala konferencyjna/pokój spotkań biznesowych są dostępne 7 dni w
             tygodniu po wcześniejszej rezerwacji. Wyposażenie sali
-            konferencyjnej: stół. 6 krzeseł, flipchart, dostęp do
+            konferencyjnej: stół, 6 krzeseł, flipchart, dostęp do
             bezprzewodowego Internetu, klimatyzacja, serwis kawowy. Stanowisko
             pracy jest dostępne w godzinach pracy biura.
             <br /> <br />
@@ -119,10 +122,12 @@ function VirtualOffice() {
         </main>
       </section>
 
-      <section>
+      <section className={styles.tableSection}>
         <div className='container'>
           <header>
-            <h2 className={styles.comparisonTitle}>PORÓWNAJ NASZE PAKIETY</h2>
+            <h2 className={styles.comparisonTitle}>
+              <span>PORÓWNAJ</span> NASZE PAKIETY
+            </h2>
           </header>
           <div className={styles.table}>
             <header className={styles.tableHeader}>
