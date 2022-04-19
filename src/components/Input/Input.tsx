@@ -41,6 +41,7 @@ const Input = ({
     let i = 0;
     return (
       <div className={styles.inputContainer}>
+        <p className={styles.info}>{label}</p>
         <select
           className={className}
           ref={ref}

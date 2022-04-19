@@ -12,7 +12,13 @@ export const rooms = [
         reservations: [
           {
             startHour: '12:00',
-            endHour: '14:00',
+            endHour: '13:00',
+            company: 'lol',
+            price: 40
+          },
+          {
+            startHour: '15:00',
+            endHour: '17:00',
             company: 'lol',
             price: 40
           }

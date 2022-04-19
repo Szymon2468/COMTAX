@@ -5,12 +5,19 @@ import HighliteDates from '../../../../src/components/HighlightDates/HighliteDat
 import Input from '../../../../src/components/Input/Input';
 import { rooms } from '../../../../src/configs/rooms';
 import { MutableRefObject, useRef, useState } from 'react';
+import Button from '../../../../src/components/Button/Button';
 
 function Index() {
   const roomId = 0;
-  const [endHours, setEndHours] = useState<string[]>([]);
+  const [endHours, setEndHours] = useState<string[]>();
+  const [startDate, setStartDate] = useState<Date>(new Date());
   const inputEndRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const inputStartRef = useRef() as MutableRefObject<HTMLSelectElement>;
+  const [
+    areReservationHoursForChosenDayShowed,
+    setAreReservationHoursForChosenDayShowed
+  ] = useState(false);
+
   const images: IImage[] = [
     {
       url: BackgroundImage.src,
@@ -126,7 +133,7 @@ function Index() {
         (el) => excludedHours[i].endHour === el
       );
 
-      const nrOfRemovedHours = endIndex - startIndex + 1;
+      const nrOfRemovedHours = endIndex - startIndex + 2;
 
       startHours.splice(startIndex - 1, nrOfRemovedHours);
     }
@@ -186,6 +193,38 @@ function Index() {
     return endHours;
   };
 
+  const generateReservatedHoursComponent = (day: Date) => {
+    let excludedHours: IReservationDateType[] = [];
+    let result: JSX.Element[] = [];
+
+    rooms
+      .find((el) => roomId === el.id)
+      ?.reservationDays.find((el) => {
+        el.date.setUTCHours(0, 0, 0, 0);
+        day.setUTCHours(0, 0, 0, 0);
+        return el.date.toString() === day.toString();
+      })
+      ?.reservations.map((el) =>
+        excludedHours.push({
+          startHour: el.startHour,
+          endHour: el.endHour
+        })
+      );
+
+    if (!excludedHours.length) {
+      return result;
+    }
+    result.push(<h3>Ta sala w tym dniu jest zarezerwowana w godzinach:</h3>);
+    excludedHours.map((el) =>
+      result.push(
+        <p>
+          {el.startHour} - {el.endHour}
+        </p>
+      )
+    );
+    return result;
+  };
+
   return (
     <>
       <div className='container'>
@@ -214,25 +253,66 @@ function Index() {
           </header>
           <div className={styles.calendarContainer}>
             <p>Wybierz datę rezerwacji: </p>
-            <HighliteDates />
+            <HighliteDates startDate={startDate} setStartDate={setStartDate} />
+          </div>
+          <div className={styles.reservatedHoursContainer}>
+            {generateReservatedHoursComponent(startDate)}
           </div>
           <div className={styles.choosingHours}>
             Zarezerwuj salę od{' '}
             <Input
               ref={inputStartRef}
               typeOfInput='SELECT'
-              options={generateAvailableStartHoursArrayForChosenDay(new Date())}
+              options={generateAvailableStartHoursArrayForChosenDay(startDate)}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 console.log(e.target.value);
                 const value: string = e.target.value;
                 setEndHours(
-                  generateAvailableEndHoursArrayForChosenDay(new Date(), value)
+                  generateAvailableEndHoursArrayForChosenDay(startDate, value)
                 );
               }}
             />{' '}
             do{' '}
-            <Input ref={inputEndRef} typeOfInput='SELECT' options={endHours} />
+            <Input
+              ref={inputEndRef}
+              typeOfInput='SELECT'
+              options={generateAvailableEndHoursArrayForChosenDay(
+                new Date(),
+                '8:00'
+              )}
+              onChange={() => setAreReservationHoursForChosenDayShowed(true)}
+            />
           </div>
+          {areReservationHoursForChosenDayShowed && (
+            <>
+              <div className={styles.formContainer}>
+                <h3>Osoba kontaktowa</h3>
+                <Input typeOfInput='INPUT' label='Imię*' />
+                <Input typeOfInput='INPUT' label='Nazwisko*' />
+                <Input typeOfInput='INPUT' label='E-mail*' />
+                <Input typeOfInput='INPUT' label='Telefon*' />
+                <Input typeOfInput='TEXTAREA' label='Uwagi' />
+              </div>
+
+              <div className={styles.formContainer}>
+                <h3>Osoba kontaktowa</h3>
+                <Input typeOfInput='INPUT' label='Firma' />
+                <Input typeOfInput='INPUT' label='Ulica' />
+                <Input typeOfInput='INPUT' label='Kod pocztowy' />
+                <Input typeOfInput='INPUT' label='Miasto' />
+                <Input typeOfInput='INPUT' label='NIP' />
+              </div>
+              <Input
+                typeOfInput='SELECT'
+                options={['1', '2', '3', '4', '5', '6']}
+                label='Liczba osób'
+              />
+              <div className={styles.btns}>
+                <Button text='Anuluj' type='FULL' color='BLUE' />
+                <Button text='Rezerwuj' type='FULL' color='GREEN' />
+              </div>
+            </>
+          )}
         </section>
       </div>
     </>
