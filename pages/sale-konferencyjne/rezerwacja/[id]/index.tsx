@@ -249,7 +249,7 @@ function Index() {
 
         <section>
           <header className={styles.header}>
-            <h2 className={styles.title}>ZAREZERWYJ SALĘ JUZ TERAZ</h2>
+            <h2 className={styles.title}>ZAREZERWUJ SALĘ JUZ TERAZ</h2>
           </header>
           <div className={styles.calendarContainer}>
             <p>Wybierz datę rezerwacji: </p>
@@ -283,36 +283,84 @@ function Index() {
               onChange={() => setAreReservationHoursForChosenDayShowed(true)}
             />
           </div>
-          {areReservationHoursForChosenDayShowed && (
-            <>
-              <div className={styles.formContainer}>
-                <h3>Osoba kontaktowa</h3>
-                <Input typeOfInput='INPUT' label='Imię*' />
-                <Input typeOfInput='INPUT' label='Nazwisko*' />
-                <Input typeOfInput='INPUT' label='E-mail*' />
-                <Input typeOfInput='INPUT' label='Telefon*' />
-                <Input typeOfInput='TEXTAREA' label='Uwagi' />
-              </div>
 
-              <div className={styles.formContainer}>
-                <h3>Osoba kontaktowa</h3>
-                <Input typeOfInput='INPUT' label='Firma' />
-                <Input typeOfInput='INPUT' label='Ulica' />
-                <Input typeOfInput='INPUT' label='Kod pocztowy' />
-                <Input typeOfInput='INPUT' label='Miasto' />
-                <Input typeOfInput='INPUT' label='NIP' />
-              </div>
+          <div className={styles.formContainersContainer}>
+            <div className={styles.formContainer}>
               <Input
                 typeOfInput='SELECT'
                 options={['1', '2', '3', '4', '5', '6']}
                 label='Liczba osób'
               />
-              <div className={styles.btns}>
-                <Button text='Anuluj' type='FULL' color='BLUE' />
-                <Button text='Rezerwuj' type='FULL' color='GREEN' />
-              </div>
-            </>
-          )}
+              <h3>Osoba kontaktowa</h3>
+              <Input
+                typeOfInput='INPUT'
+                label='Imię*'
+                className={styles.input}
+              />
+              <Input
+                typeOfInput='INPUT'
+                label='Nazwisko*'
+                className={styles.input}
+              />
+              <Input
+                typeOfInput='INPUT'
+                label='E-mail*'
+                className={styles.input}
+              />
+              <Input
+                typeOfInput='INPUT'
+                label='Telefon*'
+                className={styles.input}
+              />
+              <Input
+                typeOfInput='TEXTAREA'
+                label='Uwagi'
+                className={styles.input}
+              />
+            </div>
+
+            <div className={styles.formContainer}>
+              <h3>Osoba kontaktowa</h3>
+              <Input
+                typeOfInput='INPUT'
+                label='Firma'
+                className={styles.input}
+              />
+              <Input
+                typeOfInput='INPUT'
+                label='Ulica'
+                className={styles.input}
+              />
+              <Input
+                typeOfInput='INPUT'
+                label='Kod pocztowy'
+                className={styles.input}
+              />
+              <Input
+                typeOfInput='INPUT'
+                label='Miasto'
+                className={styles.input}
+              />
+              <Input typeOfInput='INPUT' label='NIP' className={styles.input} />
+            </div>
+
+            <div className={styles.btns}>
+              <Button
+                text='Anuluj'
+                type='FULL'
+                color='BLUE'
+                btnWidth={150}
+                className={styles.cancelBtn}
+              />
+              <Button
+                text='Rezerwuj'
+                type='FULL'
+                color='GREEN'
+                btnWidth={150}
+                className={styles.resBtn}
+              />
+            </div>
+          </div>
         </section>
       </div>
     </>
