@@ -2,8 +2,8 @@
 
 .packageTile {
   position: relative;
-  height: 700px;
-  // max-height: 650px;
+  height: 557px;
+  max-height: 570px;
   width: 75%;
   border-radius: 20px;
   border: 5px solid $blueBgColor;
@@ -11,14 +11,16 @@
   align-items: center;
   flex-direction: column;
   margin: 0;
+  box-shadow: -6px 6px 4px rgba(0, 0, 0, 0.25);
 
   @include media('<=mobile') {
     width: 90%;
-    height: 700px;
+    height: 500px;
+    max-height: 500px;
   }
 
   h2 {
-    margin: 20px 0;
+    margin: 35px 0;
 
     @include media('<=mobile') {
       margin-bottom: 10px;
