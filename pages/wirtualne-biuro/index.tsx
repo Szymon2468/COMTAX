@@ -9,13 +9,21 @@ import { Fragment, useState } from 'react';
 import useWindowSize, { WindowSize } from '../../src/hooks/useWindowSize';
 import {
   addedOffers,
+  IAdditionalFacilities,
+  IFacilities,
+  IPrices,
+  ITableOffers,
   offers,
   packageTiles,
-  priceList
+  priceList,
+  tableOffers,
+  tableRows,
+  tableSelectOptions
 } from '../../src/configs/virtualOffice/virtualOffice';
 
 function VirtualOffice() {
   const [start, setStart] = useState(0);
+  const [chosenPackage, setChosenPackage] = useState('poczta');
   const windowSize: WindowSize = useWindowSize();
 
   const generateOfferTable = (tab: JSX.Element[]) => {
@@ -32,19 +40,12 @@ function VirtualOffice() {
     return result;
   };
 
-  const handleLeftArrowClick = () => {
-    if (start > 0) {
-      setStart(start - 1);
+  const generateAdditionalFacility = (value: string | boolean | undefined) => {
+    if (typeof value === 'string') {
+      return value;
+    } else {
+      return value ? 'tak' : 'nie';
     }
-    return;
-  };
-
-  const handleRightArrowClick = () => {
-    console.log(start);
-    if (start < 2) {
-      setStart(start + 1);
-    }
-    return;
   };
 
   return (
@@ -124,7 +125,138 @@ function VirtualOffice() {
 
       <section className={styles.tableSection}>
         <div className='container'>
-          <header>
+          <div className={styles.offersTable}>
+            <table className={styles.facilitiesTable}>
+              <thead>
+                <tr>
+                  <th>
+                    <p>PEŁNA LISTA USŁUG</p>
+                  </th>
+                  <th className={styles.comparisionColumn}>
+                    <p>FIRMA</p>
+                  </th>
+                  <th>
+                    <p>
+                      {
+                        tableSelectOptions.find(
+                          (el) => el.value === chosenPackage
+                        )?.label
+                      }
+                    </p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {tableRows
+                  .filter((el) => el.type === 'facilities')
+                  .map((row) => (
+                    <tr>
+                      <td>
+                        <p className='smaller'>{row.name}</p>
+                      </td>
+                      <td>
+                        <p className='smaller'>
+                          {tableOffers.find((el) => el.package === 'firma')
+                            ?.facilities[row.label as keyof IFacilities]
+                            ? 'tak'
+                            : 'nie'}
+                        </p>
+                      </td>
+                      <td>
+                        <p className='smaller'>
+                          {tableOffers.find(
+                            (el) => el.package === chosenPackage
+                          )?.facilities[row.label as keyof IFacilities]
+                            ? 'tak'
+                            : 'nie'}
+                        </p>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+
+            <table className={styles.pricesTable}>
+              <thead>
+                <tr>
+                  <th colSpan={3}>
+                    <p>CENNIK</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {tableRows
+                  .filter((el) => el.type === 'prices')
+                  .map((row) => (
+                    <tr>
+                      <td>
+                        <p className='smaller'>{row.name}</p>
+                      </td>
+                      <td>
+                        <p className='smaller'>
+                          {
+                            tableOffers.find((el) => el.package === 'firma')
+                              ?.prices[row.label as keyof IPrices]
+                          }
+                        </p>
+                      </td>
+                      <td>
+                        <p className='smaller'>
+                          {
+                            tableOffers.find(
+                              (el) => el.package === chosenPackage
+                            )?.prices[row.label as keyof IPrices]
+                          }
+                        </p>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+
+            <table className={styles.pricesTable}>
+              <thead>
+                <tr>
+                  <th colSpan={3}>
+                    <p>USŁUGI DODATKOWE</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {tableRows
+                  .filter((el) => el.type === 'additionalFacilities')
+                  .map((row) => (
+                    <tr>
+                      <td>
+                        <p className='smaller'>{row.name}</p>
+                      </td>
+                      <td>
+                        <p className='smaller'>
+                          {generateAdditionalFacility(
+                            tableOffers.find((el) => el.package === 'firma')
+                              ?.additionalFacilities[
+                              row.label as keyof IAdditionalFacilities
+                            ]
+                          )}
+                        </p>
+                      </td>
+                      <td>
+                        <p className='smaller'>
+                          {generateAdditionalFacility(
+                            tableOffers.find(
+                              (el) => el.package === chosenPackage
+                            )?.additionalFacilities[
+                              row.label as keyof IAdditionalFacilities
+                            ]
+                          )}
+                        </p>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+          {/* <header>
             <h2 className={styles.comparisonTitle}>
               <span>PORÓWNAJ</span> NASZE PAKIETY
             </h2>
@@ -134,10 +266,10 @@ function VirtualOffice() {
               <h2>PEŁNA LISTA USŁUG </h2>
               <h2>PAKIET FIRMA</h2>
               <h2>
-                {/* <Input
+                <Input
                   typeOfInput='SELECT'
                   options={comparisingTableSelectOptions}
-                /> */}
+                /> 
               </h2>
             </header>
 
@@ -170,7 +302,7 @@ function VirtualOffice() {
             <div className={styles.tableContentAddedOffers}>
               {generateOfferTable(addedOffers)}
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </section>

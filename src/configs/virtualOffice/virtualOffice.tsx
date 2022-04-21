@@ -1,38 +1,66 @@
 export const offers: JSX.Element[] = [
-  <p key={'o-1'}>adres do korespondencji</p>,
-  <p key={'o-2'}>odbiór przesyłek listowych</p>,
-  <p key={'o-3'}>przechowywanie przesyłek listowych</p>,
-  <p key={'o-4'}>odbiór przesyłek kurierskich</p>,
-  <p key={'o-5'}>przechowywanie przesyłek kurierskich</p>,
-  <p key={'o-6'}>adres do rejestracji firmy</p>,
-  <p key={'o-7'}>możliwość umieszczenia adresu na materiałach reklamowych</p>,
-  <p key={'o-8'}>powiadamianie o odebranej korespondencji (e-mail)</p>,
-  <p key={'o-9'}>
+  <p className='smaller' key={'o-1'}>
+    adres do korespondencji
+  </p>,
+  <p className='smaller' key={'o-2'}>
+    odbiór przesyłek listowych
+  </p>,
+  <p className='smaller' key={'o-3'}>
+    przechowywanie przesyłek listowych
+  </p>,
+  <p className='smaller' key={'o-4'}>
+    odbiór przesyłek kurierskich
+  </p>,
+  <p className='smaller' key={'o-5'}>
+    przechowywanie przesyłek kurierskich
+  </p>,
+  <p className='smaller' key={'o-6'}>
+    adres do rejestracji firmy
+  </p>,
+  <p className='smaller' key={'o-7'}>
+    możliwość umieszczenia adresu na materiałach reklamowych
+  </p>,
+  <p className='smaller' key={'o-8'}>
+    powiadamianie o odebranej korespondencji (e-mail)
+  </p>,
+  <p className='smaller' key={'o-9'}>
     dostęp do sali konferencyjnej/pokoju spotkań biznesowych, stanowiska pracy
     wraz z miejscem parkingowym <sup>2</sup>
   </p>,
-  <p key={'o-10'}>
+  <p className='smaller' key={'o-10'}>
     skanowanie korespondencji i przesyłanie w formacie pdf na wskazany adres
     e-mail <sup>3</sup>
   </p>,
-  <p key={'o-11'}>dyżur telefoniczny do godz. 20:00</p>,
-  <p key={'o-12'}>obsługa poczty wychodzącej</p>
+  <p className='smaller' key={'o-11'}>
+    dyżur telefoniczny do godz. 20:00
+  </p>,
+  <p className='smaller' key={'o-12'}>
+    obsługa poczty wychodzącej
+  </p>
 ];
 
 export const addedOffers: JSX.Element[] = [
-  <p key={'ao-1'}>powiadamianie o odebranej korespondencji (e-mail)</p>,
-  <p key={'ao-2'}>obsługa poczty wychodzącej</p>,
-  <p key={'ao-3'}>fakturowanie</p>,
-  <p key={'ao-4'}>
+  <p className='smaller' key={'ao-1'}>
+    powiadamianie o odebranej korespondencji (e-mail)
+  </p>,
+  <p className='smaller' key={'ao-2'}>
+    obsługa poczty wychodzącej
+  </p>,
+  <p className='smaller' key={'ao-3'}>
+    fakturowanie
+  </p>,
+  <p className='smaller' key={'ao-4'}>
     dostęp do sali konferencyjnej/pokoju spotkań biznesowych wraz z miejscem
     parkingowym
   </p>,
-  <p key={'ao-5'}>dostęp do stanowiska pracy wraz z miejscem parkingowym</p>,
-  <p key={'ao-6'}>
+  <p className='smaller' key={'ao-5'}>
+    dostęp do stanowiska pracy wraz z miejscem parkingowym
+  </p>,
+  <p className='smaller' key={'ao-6'}>
     skanowanie korespondencji i przesyłanie w formacie pdf na wskazany adres
     e-mail
   </p>,
-  <p key={'ao-7'}>
+  <p className='smaller' key={'ao-7'}>
     przesyłanie odebranej korespondencji na wskazany adres w Polsce (raz w
     miesiącu)
   </p>
@@ -156,9 +184,330 @@ export const packageTiles: PackageTileData[] = [
   }
 ];
 
-export const comparisingTableSelectOptions: string[] = [
-  'POCZTA',
-  'ADRES',
-  'ADRES+',
-  'FIRMA+'
+interface ITableSelectOptions {
+  label: string;
+  value: string;
+}
+
+export const tableSelectOptions: ITableSelectOptions[] = [
+  { label: 'POCZTA', value: 'poczta' },
+  { label: 'ADRES', value: 'adres' },
+  { label: 'ADRES+', value: 'adresPlus' },
+  { label: 'FIRMA', value: 'firma' },
+  { label: 'FIRMA+', value: 'firmaPlus' }
+];
+
+export interface IFacilities {
+  adresKorespondencji: boolean;
+  odbiorList: boolean;
+  przechowywaniePrzesylek: string;
+  odbiorKurier: boolean;
+  przechowywanieKurier: string;
+  adresFirmy: boolean;
+  materialyReklamowe: boolean;
+  odebranaKorespondencja: boolean;
+  salaKonferencyjna: boolean | string;
+  skanowanie: boolean | string;
+  dyzur: boolean;
+  obslugaPoczty: boolean;
+}
+
+export interface IPrices {
+  oneMonth: string;
+  sixMonths: string;
+  year: string;
+}
+
+export interface IAdditionalFacilities {
+  odebranaKorespondencja: string | boolean;
+  obslugaPoczty: string | boolean;
+  fakturowanie: string;
+  salaKonferencyjna: string;
+  stanowiskoPracy: string;
+  skanPDF: string;
+  przesylanieNaAdres: string;
+}
+
+export interface ITableOffers {
+  package: string;
+  facilities: IFacilities;
+  prices: IPrices;
+  additionalFacilities: IAdditionalFacilities;
+}
+
+export const tableOffers: ITableOffers[] = [
+  {
+    package: 'poczta',
+    facilities: {
+      adresKorespondencji: true,
+      odbiorList: true,
+      przechowywaniePrzesylek: '30 dni',
+      odbiorKurier: true,
+      przechowywanieKurier: '14 dni',
+      adresFirmy: false,
+      materialyReklamowe: false,
+      odebranaKorespondencja: false,
+      salaKonferencyjna: false,
+      skanowanie: false,
+      dyzur: false,
+      obslugaPoczty: false
+    },
+    prices: {
+      oneMonth: '30 zł / miesiąc',
+      sixMonths: '150 zł (25 zł / miesiąc)',
+      year: '240 zł (20 zł / miesiąc)'
+    },
+    additionalFacilities: {
+      odebranaKorespondencja: '1 zł / przesyłka',
+      obslugaPoczty: '5 zł + opłata pocztowa / kurierska',
+      fakturowanie: '20 zł do 15 dokumentów + 2 zł za każdy kolejny dokument',
+      salaKonferencyjna: 'zgodnie z cennikiem sali konferencyjnej',
+      stanowiskoPracy: '10 zł / 1h',
+      skanPDF: '0,50 zł / strona',
+      przesylanieNaAdres: '10 zł + opłata pocztowa / kurierska'
+    }
+  },
+  {
+    package: 'adres',
+    facilities: {
+      adresKorespondencji: true,
+      odbiorList: true,
+      przechowywaniePrzesylek: '30 dni',
+      odbiorKurier: true,
+      przechowywanieKurier: '14 dni',
+      adresFirmy: true,
+      materialyReklamowe: true,
+      odebranaKorespondencja: false,
+      salaKonferencyjna: false,
+      skanowanie: false,
+      dyzur: false,
+      obslugaPoczty: false
+    },
+    prices: {
+      oneMonth: '50 zł / miesiąc',
+      sixMonths: '270 zł (45 zł / miesiąc)',
+      year: '480 zł (40 zł / miesiąc)'
+    },
+    additionalFacilities: {
+      odebranaKorespondencja: '1 zł / przesyłka',
+      obslugaPoczty: '5 zł + opłata pocztowa / kurierska',
+      fakturowanie: '20 zł do 15 dokumentów + 2 zł za każdy kolejny dokument',
+      salaKonferencyjna: 'zgodnie z cennikiem sali konferencyjnej',
+      stanowiskoPracy: '10 zł / 1h',
+      skanPDF: '0,50 zł / strona',
+      przesylanieNaAdres: '10 zł + opłata pocztowa / kurierska'
+    }
+  },
+  {
+    package: 'adresPlus',
+    facilities: {
+      adresKorespondencji: true,
+      odbiorList: true,
+      przechowywaniePrzesylek: '30 dni',
+      odbiorKurier: true,
+      przechowywanieKurier: '14 dni',
+      adresFirmy: true,
+      materialyReklamowe: true,
+      odebranaKorespondencja: true,
+      salaKonferencyjna: '2h / miesiąc',
+      skanowanie: false,
+      dyzur: false,
+      obslugaPoczty: false
+    },
+    prices: {
+      oneMonth: '70 zł / miesiąc',
+      sixMonths: '390 zł (65 zł / miesiąc)',
+      year: '720 zł (60 zł / miesiąc)'
+    },
+    additionalFacilities: {
+      odebranaKorespondencja: true,
+      obslugaPoczty: '5 zł + opłata pocztowa / kurierska',
+      fakturowanie: '20 zł do 15 dokumentów + 2 zł za każdy kolejny dokument',
+      salaKonferencyjna: 'zgodnie z cennikiem sali konferencyjnej',
+      stanowiskoPracy: '10 zł / 1h',
+      skanPDF: '0,50 zł / strona',
+      przesylanieNaAdres: '10 zł + opłata pocztowa / kurierska'
+    }
+  },
+  {
+    package: 'firma',
+    facilities: {
+      adresKorespondencji: true,
+      odbiorList: true,
+      przechowywaniePrzesylek: '30 dni',
+      odbiorKurier: true,
+      przechowywanieKurier: '14 dni',
+      adresFirmy: true,
+      materialyReklamowe: true,
+      odebranaKorespondencja: true,
+      salaKonferencyjna: '4h / miesiąc',
+      skanowanie: '100 stron / miesiąc',
+      dyzur: false,
+      obslugaPoczty: true
+    },
+    prices: {
+      oneMonth: '110 zł / miesiąc',
+      sixMonths: '630 zł (105 zł / miesiąc)',
+      year: '1200 zł (100 zł / miesiąc)'
+    },
+    additionalFacilities: {
+      odebranaKorespondencja: true,
+      obslugaPoczty: '5 zł + opłata pocztowa / kurierska',
+      fakturowanie: '20 zł do 15 dokumentów + 2 zł za każdy kolejny dokument',
+      salaKonferencyjna: 'zgodnie z cennikiem sali konferencyjnej',
+      stanowiskoPracy: '10 zł / 1h',
+      skanPDF: '0,50 zł / strona',
+      przesylanieNaAdres: '10 zł + opłata pocztowa / kurierska'
+    }
+  },
+  {
+    package: 'firmaPlus',
+    facilities: {
+      adresKorespondencji: true,
+      odbiorList: true,
+      przechowywaniePrzesylek: '30 dni',
+      odbiorKurier: true,
+      przechowywanieKurier: '14 dni',
+      adresFirmy: true,
+      materialyReklamowe: true,
+      odebranaKorespondencja: true,
+      salaKonferencyjna: '6h / miesiąc',
+      skanowanie: '150 stron / miesiąc',
+      dyzur: true,
+      obslugaPoczty: true
+    },
+    prices: {
+      oneMonth: '150 zł / miesiąc',
+      sixMonths: '750 zł (145 zł / miesiąc)',
+      year: '1680 zł (140 zł / miesiąc)'
+    },
+    additionalFacilities: {
+      odebranaKorespondencja: true,
+      obslugaPoczty: true,
+      fakturowanie: '20 zł do 15 dokumentów + 2 zł za każdy kolejny dokument',
+      salaKonferencyjna: 'zgodnie z cennikiem sali konferencyjnej',
+      stanowiskoPracy: '10 zł / 1h',
+      skanPDF: '0,50 zł / strona',
+      przesylanieNaAdres: '10 zł + opłata pocztowa / kurierska'
+    }
+  }
+];
+
+interface ITableRows {
+  name: string;
+  label: keyof IFacilities | keyof IPrices | keyof IAdditionalFacilities;
+  type: string;
+}
+
+export const tableRows: ITableRows[] = [
+  {
+    name: 'Adres do korespondencji',
+    label: 'adresKorespondencji',
+    type: 'facilities'
+  },
+  {
+    name: 'Odbiór przesyłek listowych',
+    label: 'odbiorList',
+    type: 'facilities'
+  },
+  {
+    name: 'Przechowywanie przesyłek listowych',
+    label: 'przechowywaniePrzesylek',
+    type: 'facilities'
+  },
+  {
+    name: 'Odbiór przesyłek kurierskich',
+    label: 'odbiorKurier',
+    type: 'facilities'
+  },
+  {
+    name: 'Przechowywanie przesyłek kurierskich',
+    label: 'przechowywanieKurier',
+    type: 'facilities'
+  },
+  {
+    name: 'Adres do rejestracji firmy',
+    label: 'adresFirmy',
+    type: 'facilities'
+  },
+  {
+    name: 'Możliwość umieszczenia adresu na materiałach reklamowych',
+    label: 'materialyReklamowe',
+    type: 'facilities'
+  },
+  {
+    name: 'Powiadamianie o odebranej korespondencji (e-mail)',
+    label: 'odebranaKorespondencja',
+    type: 'facilities'
+  },
+  {
+    name: 'Dostęp do sali konferencyjnej/pokoju spotkań biznesowych, stanowiska pracy wraz z miejscem parkingowym',
+    label: 'salaKonferencyjna',
+    type: 'facilities'
+  },
+  {
+    name: 'Skanowanie korespondencji i przesyłanie w formacie pdf na wskazany adres e-mail',
+    label: 'skanowanie',
+    type: 'facilities'
+  },
+  {
+    name: 'Dyżur telefoniczny do godz. 20:00',
+    label: 'dyzur',
+    type: 'facilities'
+  },
+  {
+    name: 'Obsługa poczty wychodzącej',
+    label: 'obslugaPoczty',
+    type: 'facilities'
+  },
+  {
+    name: 'Płatność za 1 miesiąc z góry',
+    label: 'oneMonth',
+    type: 'prices'
+  },
+  {
+    name: 'Płatność za 6 miesięcy z góry',
+    label: 'sixMonths',
+    type: 'prices'
+  },
+  {
+    name: 'Płatność za 12 miesięcy z góry',
+    label: 'year',
+    type: 'prices'
+  },
+  {
+    name: 'Powiadamianie o odebranej korespondencji (e-mail)',
+    label: 'odebranaKorespondencja',
+    type: 'additionalFacilities'
+  },
+  {
+    name: 'Obsługa poczty wychodzącej',
+    label: 'obslugaPoczty',
+    type: 'additionalFacilities'
+  },
+  {
+    name: 'Fakturowanie',
+    label: 'fakturowanie',
+    type: 'additionalFacilities'
+  },
+  {
+    name: 'Dostęp do sali konferencyjnej/pokoju spotkań biznesowych wraz z miejscem parkingowym',
+    label: 'salaKonferencyjna',
+    type: 'additionalFacilities'
+  },
+  {
+    name: 'Dostęp do stanowiska pracy wraz z miejscem parkingowym',
+    label: 'stanowiskoPracy',
+    type: 'additionalFacilities'
+  },
+  {
+    name: 'Skanowanie korespondencji i przesyłanie w formacie pdf na wskazany adres e-mail',
+    label: 'skanPDF',
+    type: 'additionalFacilities'
+  },
+  {
+    name: 'Przesyłanie odebranej korespondencji na wskazany adres w Polsce (raz w miesiącu)',
+    label: 'przesylanieNaAdres',
+    type: 'additionalFacilities'
+  }
 ];
