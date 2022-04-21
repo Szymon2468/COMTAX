@@ -6,8 +6,7 @@ import logo4 from '../../assets/opinions/Logo4.jpg';
 import logo5 from '../../assets/opinions/Logo5.jpg';
 import Opinie from './Opinie';
 import QuotesIcon from './QuotesIcon';
-import ArrowsIcon from './ArrowsIcon';
-import ArrowIcon from '../Icons/ArrowIcon';
+import { v4 as uuidv4 } from 'uuid';
 import { MutableRefObject, useEffect, useRef } from 'react';
 import { opinions } from '../../configs/opinions';
 
@@ -38,7 +37,7 @@ function Opinions() {
   const generateLogos = () => {
     let result: JSX.Element[] = [];
     logos.map((el) => {
-      result.push(<img src={el.src} className={styles.logo} />);
+      result.push(<img src={el.src} className={styles.logo} key={uuidv4()} />);
     });
     return result;
   };
@@ -61,7 +60,7 @@ function Opinions() {
               >
                 {opinions.map((opinion, index) => (
                   <div
-                    key={index}
+                    key={uuidv4()}
                     className={`${index !== 0 ? styles.hidden : ''} ${
                       styles.opinionText
                     }`}

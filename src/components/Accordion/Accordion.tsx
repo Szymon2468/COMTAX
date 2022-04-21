@@ -1,4 +1,5 @@
 import { faqs } from '../../configs/faqs';
+import { v4 as uuidv4 } from 'uuid';
 import AccordionItem from './AccordionItem/AccordionItem';
 import styles from './Accordion.module.scss';
 import photo1 from '../../assets/accountspage/Photo1.jpg';
@@ -14,7 +15,7 @@ const Accordion = () => {
   return (
     <ul className={styles.accordion}>
       {faqs.map((faq, index) => (
-        <AccordionItem key={index} faq={faq} img={images[index]} />
+        <AccordionItem key={uuidv4()} faq={faq} img={images[index]} />
       ))}
     </ul>
   );

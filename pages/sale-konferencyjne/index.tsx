@@ -8,7 +8,7 @@ import WIFIIcon from '../../src/assets/conferencerooms/icons/WIFIIcon';
 import Button from '../../src/components/Button/Button';
 import Gallery, { IImage } from '../../src/components/Gallery/Gallery';
 import BackgroundImage from './sala8.jpeg';
-import Link from 'next/link';
+import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 
 interface Icon {
@@ -105,7 +105,7 @@ function ConferenceOffice() {
     let result: JSX.Element[] = [];
     icons.map((el) =>
       result.push(
-        <div className={styles.icon}>
+        <div key={uuidv4()} className={styles.icon}>
           {el.icon}
           <div className={styles.iconText}>{el.text}</div>
         </div>

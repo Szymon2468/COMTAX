@@ -1,4 +1,4 @@
-import { platform } from 'os';
+import { v4 as uuidv4 } from 'uuid';
 import { MutableRefObject } from 'react';
 import styles from './Input.module.scss';
 
@@ -51,7 +51,7 @@ const Input = ({
             options.map((el) => {
               i++;
               return (
-                <option key={`o-${i}`} value={el}>
+                <option key={uuidv4()} value={el}>
                   {el}
                 </option>
               );

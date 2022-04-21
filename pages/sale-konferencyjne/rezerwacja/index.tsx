@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 import RoomTile from './RoomTile/RoomTile';
-import img from './Background.jpg';
+import { v4 as uuidv4 } from 'uuid';
 import { rooms } from '../../../src/configs/rooms';
 import Link from 'next/link';
 
@@ -25,7 +25,7 @@ function index() {
         </header>
         <div className={styles.roomTilesContainer}>
           {rooms.map((el) => (
-            <Link key={el.id} href={`rezerwacja/${el.id}`}>
+            <Link key={uuidv4()} href={`rezerwacja/${el.id}`}>
               <a>
                 <RoomTile
                   img={el.imgUrl}

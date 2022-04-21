@@ -1,44 +1,23 @@
 import styles from './VirtualOffice.module.scss';
-import LeftArrowIcon from '../../src/assets/virtualofficepage/icons/LeftArrowIcon';
-import RightArrowIcon from '../../src/assets/virtualofficepage/icons/RightArrowIcon';
 import PackageTile from './PackageTile/PackageTile';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Mousewheel, Keyboard } from 'swiper';
-import Input from '../../src/components/Input/Input';
 import { Fragment, useState } from 'react';
 import useWindowSize, { WindowSize } from '../../src/hooks/useWindowSize';
+import { v4 as uuidv4 } from 'uuid';
 import {
-  addedOffers,
   IAdditionalFacilities,
   IFacilities,
   IPrices,
-  ITableOffers,
-  offers,
   packageTiles,
-  priceList,
   tableOffers,
   tableRows,
   tableSelectOptions
 } from '../../src/configs/virtualOffice/virtualOffice';
 
 function VirtualOffice() {
-  const [start, setStart] = useState(0);
   const [chosenPackage, setChosenPackage] = useState('poczta');
   const windowSize: WindowSize = useWindowSize();
-
-  const generateOfferTable = (tab: JSX.Element[]) => {
-    const result: JSX.Element[] = [];
-    tab.map((el) =>
-      result.push(
-        <>
-          <div>{el}</div>
-          <div></div>
-          <div></div>
-        </>
-      )
-    );
-    return result;
-  };
 
   const generateAdditionalFacility = (value: string | boolean | undefined) => {
     if (typeof value === 'string') {
@@ -91,15 +70,17 @@ function VirtualOffice() {
             modules={[Pagination, Navigation, Mousewheel, Keyboard]}
             className={styles.swiper}
           >
-            {packageTiles.map((el) => (
-              <SwiperSlide key={`carousel-item-${el.title}`}>
-                <PackageTile
-                  title={el.title}
-                  content={el.content}
-                  price={el.price}
-                  className={styles.activePackageTile}
-                />
-              </SwiperSlide>
+            {packageTiles.map((el, index) => (
+              <Fragment key={uuidv4()}>
+                <SwiperSlide key={`carousel-item-${el.title}`}>
+                  <PackageTile
+                    title={el.title}
+                    content={el.content}
+                    price={el.price}
+                    className={styles.activePackageTile}
+                  />
+                </SwiperSlide>
+              </Fragment>
             ))}
           </Swiper>
 
@@ -150,7 +131,7 @@ function VirtualOffice() {
                 {tableRows
                   .filter((el) => el.type === 'facilities')
                   .map((row) => (
-                    <tr>
+                    <tr key={uuidv4()}>
                       <td>
                         <p className='smaller'>{row.name}</p>
                       </td>
@@ -188,7 +169,7 @@ function VirtualOffice() {
                 {tableRows
                   .filter((el) => el.type === 'prices')
                   .map((row) => (
-                    <tr>
+                    <tr key={uuidv4()}>
                       <td>
                         <p className='smaller'>{row.name}</p>
                       </td>
@@ -226,7 +207,7 @@ function VirtualOffice() {
                 {tableRows
                   .filter((el) => el.type === 'additionalFacilities')
                   .map((row) => (
-                    <tr>
+                    <tr key={uuidv4()}>
                       <td>
                         <p className='smaller'>{row.name}</p>
                       </td>
