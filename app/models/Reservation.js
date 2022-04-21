@@ -28,7 +28,7 @@ const ReservationSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Proszę podać swoje imię']
   },
-  Surname: {
+  surname: {
     type: String,
     required: [true, 'Proszę podać swoje nazwisko']
   },

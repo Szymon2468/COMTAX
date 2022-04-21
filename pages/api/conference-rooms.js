@@ -19,7 +19,6 @@ export default async function handler(req, res) {
 }
 
 const handleGet = async (req, res) => {
-  console.log(req);
   try {
     let conferenceRooms;
     if (req.query.id) {
