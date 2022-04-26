@@ -14,6 +14,7 @@ import {
   tableRows,
   tableSelectOptions
 } from '../../src/configs/virtualOffice/virtualOffice';
+import classNames from 'classnames';
 
 function VirtualOffice() {
   const [chosenPackage, setChosenPackage] = useState('poczta');
@@ -113,10 +114,15 @@ function VirtualOffice() {
                   <th>
                     <p>PEŁNA LISTA USŁUG</p>
                   </th>
-                  <th className={styles.comparisionColumn}>
+                  <th
+                    className={classNames(
+                      styles.comparisionColumn,
+                      styles.offerColumn
+                    )}
+                  >
                     <p>FIRMA</p>
                   </th>
-                  <th>
+                  <th className={classNames(styles.offerColumn)}>
                     <p>
                       {
                         tableSelectOptions.find(
@@ -135,7 +141,7 @@ function VirtualOffice() {
                       <td>
                         <p className='smaller'>{row.name}</p>
                       </td>
-                      <td>
+                      <td className={styles.comparisionColumn}>
                         <p className='smaller'>
                           {tableOffers.find((el) => el.package === 'firma')
                             ?.facilities[row.label as keyof IFacilities]
@@ -160,8 +166,25 @@ function VirtualOffice() {
             <table className={styles.pricesTable}>
               <thead>
                 <tr>
-                  <th colSpan={3}>
+                  <th>
                     <p>CENNIK</p>
+                  </th>
+                  <th
+                    className={classNames(
+                      styles.comparisionColumn,
+                      styles.offerColumn
+                    )}
+                  >
+                    <p>FIRMA</p>
+                  </th>
+                  <th className={classNames(styles.offerColumn)}>
+                    <p>
+                      {
+                        tableSelectOptions.find(
+                          (el) => el.value === chosenPackage
+                        )?.label
+                      }
+                    </p>
                   </th>
                 </tr>
               </thead>
@@ -173,7 +196,7 @@ function VirtualOffice() {
                       <td>
                         <p className='smaller'>{row.name}</p>
                       </td>
-                      <td>
+                      <td className={styles.comparisionColumn}>
                         <p className='smaller'>
                           {
                             tableOffers.find((el) => el.package === 'firma')
@@ -198,8 +221,25 @@ function VirtualOffice() {
             <table className={styles.pricesTable}>
               <thead>
                 <tr>
-                  <th colSpan={3}>
+                  <th>
                     <p>USŁUGI DODATKOWE</p>
+                  </th>
+                  <th
+                    className={classNames(
+                      styles.comparisionColumn,
+                      styles.offerColumn
+                    )}
+                  >
+                    <p>FIRMA</p>
+                  </th>
+                  <th className={classNames(styles.offerColumn)}>
+                    <p>
+                      {
+                        tableSelectOptions.find(
+                          (el) => el.value === chosenPackage
+                        )?.label
+                      }
+                    </p>
                   </th>
                 </tr>
               </thead>
@@ -211,7 +251,7 @@ function VirtualOffice() {
                       <td>
                         <p className='smaller'>{row.name}</p>
                       </td>
-                      <td>
+                      <td className={styles.comparisionColumn}>
                         <p className='smaller'>
                           {generateAdditionalFacility(
                             tableOffers.find((el) => el.package === 'firma')
