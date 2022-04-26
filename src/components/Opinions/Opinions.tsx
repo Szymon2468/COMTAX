@@ -47,7 +47,7 @@ function Opinions() {
       <div className={styles.landingPage}>
         <div className={`container`}>
           <h2 className={styles.title}>
-            TO <span>NASI KLIENCI</span> SĄ DLA NAS <span>NASI KLIENCI</span>
+            TO <span>NASI KLIENCI</span> SĄ DLA NAS <span>NAJWAŻNIEJSI</span>
           </h2>
           <div className={styles.googleContainer}>
             <div className={styles.quotesIcon}>

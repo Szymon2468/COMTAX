@@ -12,7 +12,7 @@ function ContactForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [contact, setContact] = useState('');
+  const [contact, setContact] = useState('e-mail');
   const [msg, setMsg] = useState('');
 
   const [isNameEmptyErrorVisible, setisNameEmptyErrorVisible] = useState(false);
@@ -196,7 +196,7 @@ function ContactForm() {
               <Input
                 label=''
                 typeOfInput='SELECT'
-                options={['opcja 1', 'opcja 2', 'opcja 3']}
+                options={['telefon', 'e-mail']}
                 className={styles.contactInput}
                 onChange={(e: any) => {
                   setContact(e.target.value);
@@ -233,7 +233,7 @@ function ContactForm() {
               )}
               {isMsgSendigError && (
                 <p className={styles.sendError}>
-                  Nie udało się wysłać wiadomości. Spróbuj poowine za pięć
+                  Nie udało się wysłać wiadomości. Spróbuj ponownie za pięć
                   minut.
                 </p>
               )}

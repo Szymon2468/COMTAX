@@ -34,7 +34,7 @@ export default async function handler(req, res) {
         console.error(error);
         res.status(400).json({ success: false, message: error });
       } else {
-        console.log('Message sent: %s', info.messageId);
+        console.log('Message sent: %s', info);
         res.status(200).json({ success: true });
       }
     });
