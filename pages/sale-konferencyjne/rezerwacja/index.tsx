@@ -3,8 +3,28 @@ import RoomTile from './RoomTile/RoomTile';
 import img from './Background.jpg';
 import { rooms } from '../../../src/configs/rooms';
 import Link from 'next/link';
+import { HTTPRequest } from '../../../src/lib/httpRequest';
 
-function index() {
+interface IPhoto {
+  url: string;
+  alt: string;
+}
+
+export interface IRoom {
+  _id: string;
+  name: string;
+  address: string;
+  city: string;
+  facilities: string[];
+  photos: IPhoto[];
+}
+
+export interface IRoomTile {
+  rooms: IRoom[];
+}
+
+function index({ rooms }: IRoomTile) {
+  // console.log(rooms);
   return (
     <>
       <section>
@@ -25,11 +45,11 @@ function index() {
         </header>
         <div className={styles.roomTilesContainer}>
           {rooms.map((el) => (
-            <Link key={el.id} href={`rezerwacja/${el.id}`}>
+            <Link key={el._id} href={`rezerwacja/${el._id}`}>
               <a>
                 <RoomTile
-                  img={el.imgUrl}
-                  alt={el.imgAlt}
+                  img={el.photos[0]?.url}
+                  alt={el.photos[0]?.alt}
                   name={el.name}
                 ></RoomTile>
               </a>
@@ -39,6 +59,15 @@ function index() {
       </div>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const response = await HTTPRequest('GET', '/conference-rooms');
+
+  return {
+    props: { rooms: response.data || {} },
+    revalidate: 3600
+  };
 }
 
 export default index;
