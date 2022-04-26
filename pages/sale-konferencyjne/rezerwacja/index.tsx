@@ -2,7 +2,8 @@ import styles from './index.module.scss';
 import RoomTile from './RoomTile/RoomTile';
 import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
-import { HTTPRequest } from '../../../src/lib/httpRequest';
+import dbConnect from '../../../app/lib/dbConnect';
+const ConferenceRoom = require('../../../app/models/ConferenceRoom');
 
 interface IPhoto {
   url: string;
@@ -61,10 +62,11 @@ function index({ rooms }: IRoomTile) {
 }
 
 export async function getStaticProps() {
-  const response = await HTTPRequest('GET', '/conference-rooms');
+  await dbConnect();
+  const response = await ConferenceRoom.find({});
 
   return {
-    props: { rooms: response.data || {} },
+    props: { rooms: JSON.parse(JSON.stringify(response)) || {} },
     revalidate: 3600
   };
 }
