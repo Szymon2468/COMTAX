@@ -8,6 +8,9 @@ import Button from '../../../../src/components/Button/Button';
 import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import { IRoom } from '..';
 import { v4 as uuidv4 } from 'uuid';
+import dbConnect from '../../../../app/lib/dbConnect';
+const ConferenceRoom = require('../../../../app/models/ConferenceRoom');
+const Reservation = require('../../../../app/models/Reservation');
 
 interface IShortenReservation {
   _id: string;
@@ -399,12 +402,14 @@ interface IParams {
 }
 
 export async function getStaticPaths() {
-  const data = await HTTPRequest('GET', '/conference-rooms');
+  await dbConnect();
+  const data = await ConferenceRoom.find({});
+
   const params: IParams[] = [];
-  data.data.forEach((el: IRoom) => {
+  data.forEach((el: IRoom) => {
     params.push({
       params: {
-        id: el._id
+        id: el._id.toString()
       }
     });
   });
@@ -416,27 +421,29 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { id } }: IParams) {
-  const reservationResponse = await HTTPRequest(
-    'GET',
-    `/reservations?conferenceRoom=${id}&date=${new Date().getTime()}`
-  );
+  await dbConnect();
 
-  const conferenceRoomResponse = await HTTPRequest(
-    'GET',
-    `/conference-rooms?id=${id}`
-  );
+  const date = new Date();
+  date.setUTCHours(2, 0, 0, 0);
+
+  const reservationResponse = await Reservation.find({
+    conferenceRoom: id,
+    date: date.getTime()
+  });
+
+  const conferenceRoomResponse = await ConferenceRoom.findById(id);
 
   const conferenceRoom: IConferenceRoomResponse = {
-    id: conferenceRoomResponse.data._id,
-    name: conferenceRoomResponse.data.name,
-    photos: conferenceRoomResponse.data.photos,
-    facilities: conferenceRoomResponse.data.facilities
+    id: conferenceRoomResponse._id.toString(),
+    name: conferenceRoomResponse.name,
+    photos: conferenceRoomResponse.photos,
+    facilities: conferenceRoomResponse.facilities
   };
 
-  const reservations: IShortenReservation[] = reservationResponse.data.map(
+  const reservations: IShortenReservation[] = reservationResponse.map(
     (el: IShortenReservation) => {
       return {
-        _id: el._id,
+        _id: el._id.toString(),
         conferenceRoom: el.conferenceRoom,
         date: el.date,
         startHour: el.startHour,
