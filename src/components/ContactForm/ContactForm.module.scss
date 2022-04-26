@@ -124,3 +124,24 @@
     }
   }
 }
+
+.error {
+  margin-top: 10px;
+  font-size: 16px;
+  color: rgb(182, 16, 16);
+  margin-bottom: 0;
+}
+
+.sendSuccess {
+  font-size: 20px;
+  color: rgb(124, 123, 123);
+  text-align: center;
+  width: 100%;
+}
+
+.sendError {
+  font-size: 20px;
+  color: rgb(182, 16, 16);
+  text-align: center;
+  width: 100%;
+}

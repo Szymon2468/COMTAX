@@ -49,7 +49,6 @@ function index({ rooms }: IRoomTile) {
                 <RoomTile
                   img={el.photos[0]?.url}
                   alt={el.photos[0]?.alt}
-                  s
                   name={el.name}
                 ></RoomTile>
               </a>

@@ -11,7 +11,10 @@ interface InputType {
   id?: string;
   typeOfInput: TypeOfInput;
   options?: string[];
-  ref?: MutableRefObject<HTMLSelectElement>;
+  ref?:
+    | MutableRefObject<HTMLSelectElement>
+    | MutableRefObject<HTMLInputElement>
+    | MutableRefObject<HTMLTextAreaElement>;
   onChange?: Function;
 }
 
@@ -34,6 +37,8 @@ const Input = ({
           className={className}
           placeholder={placeholder}
           id={id}
+          ref={ref as MutableRefObject<HTMLInputElement>}
+          onChange={(e) => (onChange ? onChange(e) : undefined)}
         />
       </div>
     );
@@ -44,7 +49,7 @@ const Input = ({
         <p className={styles.info}>{label}</p>
         <select
           className={className}
-          ref={ref}
+          ref={ref as MutableRefObject<HTMLSelectElement>}
           onChange={(e) => (onChange ? onChange(e) : undefined)}
         >
           {options &&
@@ -63,7 +68,12 @@ const Input = ({
     return (
       <div className={`${styles.inputContainer} ${className}`}>
         <p className={styles.info}>{label}</p>
-        <textarea placeholder={placeholder} id={id} />
+        <textarea
+          placeholder={placeholder}
+          id={id}
+          ref={ref as MutableRefObject<HTMLTextAreaElement>}
+          onChange={(e) => (onChange ? onChange(e) : undefined)}
+        />
       </div>
     );
   } else {
