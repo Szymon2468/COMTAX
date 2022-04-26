@@ -1,4 +1,3 @@
-export const API_URL = 'https://comtax.netlify.app/api';
 import axios from 'axios';
 
 export const HTTPRequest = async (
@@ -9,16 +8,16 @@ export const HTTPRequest = async (
   let response;
   switch (method) {
     case 'GET':
-      response = await axios.get(`${API_URL}/${url}`);
+      response = await axios.get(`${process.env.API_URL}/${url}`);
       return response.data;
     case 'POST':
-      response = await axios.post(`${API_URL}/${url}`, data);
+      response = await axios.post(`${process.env.API_URL}/${url}`, data);
       return response.data;
     case 'PUT':
-      response = await axios.put(`${API_URL}/${url}`, data);
+      response = await axios.put(`${process.env.API_URL}/${url}`, data);
       return response.data;
     case 'DELETE':
-      response = await axios.delete(`${API_URL}/${url}`);
+      response = await axios.delete(`${process.env.API_URL}/${url}`);
       return response.data;
     default:
       return null;
