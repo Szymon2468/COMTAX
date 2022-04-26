@@ -67,8 +67,8 @@ function GancleLogo() {
           y2='221.462'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#662D91' />
-          <stop offset='1' stop-color='#ED1E79' />
+          <stop stopColor='#662D91' />
+          <stop offset='1' stopColor='#ED1E79' />
         </linearGradient>
       </defs>
     </svg>
