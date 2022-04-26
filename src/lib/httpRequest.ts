@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/';
+let API_URL = 'http://localhost:3000/api/';
 
 export const HTTPRequest = async (
   method: 'GET' | 'POST' | 'PUT' | 'DELETE',
@@ -8,7 +8,9 @@ export const HTTPRequest = async (
   data?: object
 ) => {
   let response;
-  console.log(API_URL);
+  if (process.env.environment === 'PRODUCION') {
+    API_URL = 'https://comtax.netlify.app/api/';
+  }
   switch (method) {
     case 'GET':
       response = await axios.get(`${API_URL}/${url}`);
