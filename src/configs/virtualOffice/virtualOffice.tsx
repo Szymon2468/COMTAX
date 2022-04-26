@@ -139,9 +139,9 @@ export interface IFacilities {
 }
 
 export interface IPrices {
-  oneMonth: string;
-  sixMonths: string;
-  year: string;
+  oneMonth: JSX.Element;
+  sixMonths: JSX.Element;
+  year: JSX.Element;
 }
 
 export interface IAdditionalFacilities {
@@ -179,9 +179,17 @@ export const tableOffers: ITableOffers[] = [
       obslugaPoczty: false
     },
     prices: {
-      oneMonth: '30 zł / miesiąc',
-      sixMonths: '150 zł (25 zł / miesiąc)',
-      year: '240 zł (20 zł / miesiąc)'
+      oneMonth: <>30 zł / miesiąc</>,
+      sixMonths: (
+        <>
+          150 zł <br /> (25 zł / miesiąc)
+        </>
+      ),
+      year: (
+        <>
+          240 zł <br /> (20 zł / miesiąc)
+        </>
+      )
     },
     additionalFacilities: {
       odebranaKorespondencja: '1 zł / przesyłka',
@@ -210,9 +218,17 @@ export const tableOffers: ITableOffers[] = [
       obslugaPoczty: false
     },
     prices: {
-      oneMonth: '50 zł / miesiąc',
-      sixMonths: '270 zł (45 zł / miesiąc)',
-      year: '480 zł (40 zł / miesiąc)'
+      oneMonth: <>50 zł / miesiąc</>,
+      sixMonths: (
+        <>
+          270 zł <br /> (45 zł / miesiąc)
+        </>
+      ),
+      year: (
+        <>
+          480 zł <br /> (40 zł / miesiąc)
+        </>
+      )
     },
     additionalFacilities: {
       odebranaKorespondencja: '1 zł / przesyłka',
@@ -241,9 +257,17 @@ export const tableOffers: ITableOffers[] = [
       obslugaPoczty: false
     },
     prices: {
-      oneMonth: '70 zł / miesiąc',
-      sixMonths: '390 zł (65 zł / miesiąc)',
-      year: '720 zł (60 zł / miesiąc)'
+      oneMonth: <>70 zł / miesiąc</>,
+      sixMonths: (
+        <>
+          390 zł <br /> (65 zł / miesiąc)
+        </>
+      ),
+      year: (
+        <>
+          720 zł <br /> (60 zł / miesiąc)
+        </>
+      )
     },
     additionalFacilities: {
       odebranaKorespondencja: true,
@@ -272,9 +296,17 @@ export const tableOffers: ITableOffers[] = [
       obslugaPoczty: true
     },
     prices: {
-      oneMonth: '110 zł / miesiąc',
-      sixMonths: '630 zł (105 zł / miesiąc)',
-      year: '1200 zł (100 zł / miesiąc)'
+      oneMonth: <>110 zł / miesiąc</>,
+      sixMonths: (
+        <>
+          630 zł <br /> (105 zł / miesiąc)
+        </>
+      ),
+      year: (
+        <>
+          1200 zł <br /> (100 zł / miesiąc)
+        </>
+      )
     },
     additionalFacilities: {
       odebranaKorespondencja: true,
@@ -303,9 +335,17 @@ export const tableOffers: ITableOffers[] = [
       obslugaPoczty: true
     },
     prices: {
-      oneMonth: '150 zł / miesiąc',
-      sixMonths: '750 zł (145 zł / miesiąc)',
-      year: '1680 zł (140 zł / miesiąc)'
+      oneMonth: <>150 zł / miesiąc</>,
+      sixMonths: (
+        <>
+          750 zł <br /> (145 zł / miesiąc)
+        </>
+      ),
+      year: (
+        <>
+          1680 zł <br /> (140 zł / miesiąc)
+        </>
+      )
     },
     additionalFacilities: {
       odebranaKorespondencja: true,

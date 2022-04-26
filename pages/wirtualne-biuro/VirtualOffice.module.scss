@@ -168,3 +168,130 @@
     }
   }
 }
+
+.offersTable {
+  width: fit-content;
+  box-shadow: -6px 6px 4px rgba(0, 0, 0, 0.25);
+  margin: 0 auto;
+
+  table {
+    border: 0.5px solid $textColor;
+    width: 100%;
+    @include media('<=extra-mobile') {
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    thead {
+      position: sticky;
+      top: 80px;
+
+      tr {
+        background-color: #5c9ad8;
+
+        th {
+          width: 200px;
+          border: 0.5px solid $textColor;
+          padding: 10px 0;
+
+          @include media('<=tablet-landscape') {
+            width: 150px;
+          }
+          @include media('<=tablet-portrait') {
+            width: 50%;
+          }
+          @include media('<=extra-mobile') {
+            width: 130px;
+            min-width: 130px;
+            max-width: 130px;
+          }
+
+          p {
+            padding: 10px;
+            margin: 0 auto;
+          }
+        }
+        th:first-child {
+          width: auto;
+          @include media('<=tablet-portrait') {
+            width: 50%;
+          }
+          @include media('<=extra-mobile') {
+            width: 170px;
+            min-width: 170px;
+            max-width: 170px;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        height: 80px;
+
+        @include media('<=tablet-landscape') {
+          height: 100px;
+        }
+
+        @include media('<=extra-mobile') {
+          height: fit-content;
+        }
+
+        td {
+          width: 200px;
+          background-color: $turquoiseBgColor;
+          border: 0.5px solid $textColor;
+
+          @include media('<=tablet-landscape') {
+            width: 150px;
+          }
+          @include media('<=tablet-portrait') {
+            width: 50%;
+          }
+          @include media('<=extra-mobile') {
+            width: 130px;
+            min-width: 130px;
+            max-width: 130px;
+          }
+
+          p {
+            padding: 0 10px;
+            margin: auto 0 0 0;
+
+            @include media('<=tablet-landscape') {
+              padding: 10px;
+            }
+          }
+        }
+        td:first-child {
+          width: auto;
+          @include media('<=tablet-portrait') {
+            width: 50%;
+          }
+          @include media('<=extra-mobile') {
+            width: 170px;
+            min-width: 170px;
+            max-width: 170px;
+          }
+        }
+      }
+      tr:nth-child(even) {
+        td {
+          background-color: $grayBgColor;
+        }
+      }
+    }
+  }
+}
+
+.offerColumn {
+  p {
+    width: fit-content;
+  }
+}
+
+.comparisionColumn {
+  @include media('<=tablet-portrait') {
+    display: none;
+  }
+}
