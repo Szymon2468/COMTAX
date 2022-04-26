@@ -5,8 +5,102 @@ import MapPinIcon from '../../assets/contactform/icons/MapPinIcon';
 import PhoneIcon from '../../assets/contactform/icons/PhoneIcon';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+import { useState } from 'react';
+import { HTTPRequest } from '../../lib/httpRequest';
 
 function ContactForm() {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [contact, setContact] = useState('');
+  const [msg, setMsg] = useState('');
+
+  const [isNameEmptyErrorVisible, setisNameEmptyErrorVisible] = useState(false);
+  const [isPhoneEmptyErrorVisible, setisPhoneEmptyErrorVisible] =
+    useState(false);
+  const [isEmailEmptyErrorVisible, setisEmailEmptyErrorVisible] =
+    useState(false);
+  const [isMsgEmptyErrorVisible, setisMsgEmptyErrorVisible] = useState(false);
+
+  const [isPhoeIncorrect, setIsPhoneIncorrect] = useState(false);
+  const [isEmailIncorrect, setIsEmailIncorrect] = useState(false);
+
+  const [isMsgSent, setIsMsgSent] = useState(false);
+
+  const [isMsgSendigError, setIsMsgSendigError] = useState(false);
+
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/;
+
+  const sendEmail = async () => {
+    if (
+      name === '' ||
+      phone === '' ||
+      email === '' ||
+      msg === '' ||
+      phoneRegex.test(phone) === false ||
+      emailRegex.test(email) === false
+    ) {
+      if (name === '') {
+        setisNameEmptyErrorVisible(true);
+      } else {
+        setisNameEmptyErrorVisible(false);
+      }
+
+      if (phone === '') {
+        setisPhoneEmptyErrorVisible(true);
+      } else {
+        setisPhoneEmptyErrorVisible(false);
+      }
+
+      if (email === '') {
+        setisEmailEmptyErrorVisible(true);
+      } else {
+        setisEmailEmptyErrorVisible(false);
+      }
+
+      if (msg === '') {
+        setisMsgEmptyErrorVisible(true);
+      } else {
+        setisMsgEmptyErrorVisible(false);
+      }
+
+      if (phoneRegex.test(phone) === false && phone !== '') {
+        setIsPhoneIncorrect(true);
+      } else {
+        setIsPhoneIncorrect(false);
+      }
+
+      if (emailRegex.test(email) === false && email !== '') {
+        setIsEmailIncorrect(true);
+      } else {
+        setIsEmailIncorrect(false);
+      }
+    } else {
+      setisNameEmptyErrorVisible(false);
+      setisPhoneEmptyErrorVisible(false);
+      setisEmailEmptyErrorVisible(false);
+      setisMsgEmptyErrorVisible(false);
+      setIsEmailIncorrect(false);
+      setIsPhoneIncorrect(false);
+
+      const data = {
+        name: name,
+        phone: phone,
+        email: email,
+        contact: contact,
+        msg: msg
+      };
+
+      const response = await HTTPRequest('POST', '/email', data);
+      if (response.success) {
+        setIsMsgSent(true);
+      } else {
+        setIsMsgSendigError(true);
+      }
+    }
+  };
+
   return (
     <div className='container'>
       <section className={styles.contacFormContainer}>
@@ -58,42 +152,91 @@ function ContactForm() {
                 placeholder='Imię i Nazwisko'
                 typeOfInput='INPUT'
                 className={styles.contactInput}
+                onChange={(e: any) => {
+                  setName(e.target.value);
+                }}
               />
+              {isNameEmptyErrorVisible && (
+                <p className={styles.error}>Proszę podać imię i nazwisko.</p>
+              )}
               <Input
                 label=''
                 placeholder='Numer telefonu'
                 typeOfInput='INPUT'
                 className={styles.contactInput}
+                onChange={(e: any) => {
+                  setPhone(e.target.value);
+                }}
               />
+              {isPhoneEmptyErrorVisible && (
+                <p className={styles.error}>Proszę podać numer telefonu.</p>
+              )}
+              {isPhoeIncorrect && (
+                <p className={styles.error}>
+                  Proszę podać poprawny numer telefonu.
+                </p>
+              )}
               <Input
                 label=''
                 placeholder='Adres e-mail'
                 typeOfInput='INPUT'
                 className={styles.contactInput}
+                onChange={(e: any) => {
+                  setEmail(e.target.value);
+                }}
               />
+              {isEmailEmptyErrorVisible && (
+                <p className={styles.error}>Proszę podać adres e-mail.</p>
+              )}
+              {isEmailIncorrect && (
+                <p className={styles.error}>
+                  Proszę podać poprawny adres e-mail.
+                </p>
+              )}
               <Input
                 label=''
-                placeholder='Adres e-mail'
                 typeOfInput='SELECT'
                 options={['opcja 1', 'opcja 2', 'opcja 3']}
                 className={styles.contactInput}
+                onChange={(e: any) => {
+                  setContact(e.target.value);
+                }}
               />
               <Input
                 label=''
-                placeholder='Adres e-mail'
+                placeholder='Wiadomość'
                 typeOfInput='TEXTAREA'
                 className={styles.contactInput}
+                onChange={(e: any) => {
+                  setMsg(e.target.value);
+                }}
               />
+              {isMsgEmptyErrorVisible && (
+                <p className={styles.error}>
+                  Proszę napisać niepustą wiadomość.
+                </p>
+              )}
             </form>
             <div className={styles.submitBtnContainer}>
-              <Button
-                text='Wyślij'
-                onClick={() => {}}
-                type='FULL'
-                color='GREEN'
-                btnWidth={200}
-                className={styles.submitBtn}
-              />
+              {!isMsgSent && (
+                <Button
+                  text='Wyślij'
+                  onClick={() => sendEmail()}
+                  type='FULL'
+                  color='GREEN'
+                  btnWidth={200}
+                  className={styles.submitBtn}
+                />
+              )}
+              {isMsgSent && (
+                <p className={styles.sendSuccess}>Wiadomość została wysłana.</p>
+              )}
+              {isMsgSendigError && (
+                <p className={styles.sendError}>
+                  Nie udało się wysłać wiadomości. Spróbuj poowine za pięć
+                  minut.
+                </p>
+              )}
             </div>
           </div>
         </div>
