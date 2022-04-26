@@ -3,14 +3,45 @@ import Gallery, { IImage } from '../../../../src/components/Gallery/Gallery';
 import BackgroundImage from '../../../sale-konferencyjne/Background.jpg';
 import HighliteDates from '../../../../src/components/HighlightDates/HighliteDates';
 import Input from '../../../../src/components/Input/Input';
-import { rooms } from '../../../../src/configs/rooms';
-import { MutableRefObject, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import Button from '../../../../src/components/Button/Button';
+import { HTTPRequest } from '../../../../src/lib/httpRequest';
+import { IRoom } from '..';
 
-function Index() {
+interface IShortenReservation {
+  _id: string;
+  conferenceRoom: string;
+  date: Date;
+  startHour: string;
+  endHour: string;
+}
+
+interface IPhoto {
+  url: string;
+  alt: string;
+}
+
+interface IConferenceRoomResponse {
+  id: string;
+  name: string;
+  photos: IPhoto[];
+  facilities: string[];
+}
+
+function Index({
+  reservations,
+  conferenceRoom
+}: {
+  reservations: IShortenReservation[];
+  conferenceRoom: IConferenceRoomResponse;
+}) {
+  console.log(reservations);
+  console.log(conferenceRoom);
   const roomId = 0;
   const [endHours, setEndHours] = useState<string[]>();
   const [startDate, setStartDate] = useState<Date>(new Date());
+  const [currentReservations, setCurrentReservations] =
+    useState<IShortenReservation[]>(reservations);
   const inputEndRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const inputStartRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const [
@@ -108,14 +139,7 @@ function Index() {
     let startHours = availableStartHours;
     let excludedHours: IReservationDateType[] = [];
 
-    const roomReservations = rooms.find((el) => roomId === el.id);
-    const reservationsForDay = roomReservations?.reservationDays.find((el) => {
-      el.date.setUTCHours(0, 0, 0, 0);
-      day.setUTCHours(0, 0, 0, 0);
-      return el.date.toString() === day.toString();
-    });
-
-    reservationsForDay?.reservations.map((el) =>
+    currentReservations.map((el) =>
       excludedHours.push({
         startHour: el.startHour,
         endHour: el.endHour
@@ -148,19 +172,12 @@ function Index() {
     let endHours = availableEndHours;
     let excludedHours: IReservationDateType[] = [];
 
-    rooms
-      .find((el) => roomId === el.id)
-      ?.reservationDays.find((el) => {
-        el.date.setUTCHours(0, 0, 0, 0);
-        day.setUTCHours(0, 0, 0, 0);
-        return el.date.toString() === day.toString();
+    currentReservations.map((el) =>
+      excludedHours.push({
+        startHour: el.startHour,
+        endHour: el.endHour
       })
-      ?.reservations.map((el) =>
-        excludedHours.push({
-          startHour: el.startHour,
-          endHour: el.endHour
-        })
-      );
+    );
 
     const startIndex = availableEndHours.findIndex((el) => el === startHour);
 
@@ -197,19 +214,12 @@ function Index() {
     let excludedHours: IReservationDateType[] = [];
     let result: JSX.Element[] = [];
 
-    rooms
-      .find((el) => roomId === el.id)
-      ?.reservationDays.find((el) => {
-        el.date.setUTCHours(0, 0, 0, 0);
-        day.setUTCHours(0, 0, 0, 0);
-        return el.date.toString() === day.toString();
+    currentReservations.map((el) =>
+      excludedHours.push({
+        startHour: el.startHour,
+        endHour: el.endHour
       })
-      ?.reservations.map((el) =>
-        excludedHours.push({
-          startHour: el.startHour,
-          endHour: el.endHour
-        })
-      );
+    );
 
     if (!excludedHours.length) {
       return result;
@@ -225,18 +235,29 @@ function Index() {
     return result;
   };
 
+  useEffect(() => {
+    const request = async () => {
+      const date = new Date(startDate).getTime();
+      const reservationResponse = await HTTPRequest(
+        'GET',
+        `/reservations?conferenceRoom=${conferenceRoom.id}&date=${date}`
+      );
+    };
+    request();
+  }, [startDate]);
+
   return (
     <>
       <div className='container'>
-        <h1 className={styles.title}>SALA KONFERENCYJNA NR 1</h1>
+        <h1 className={styles.title}>
+          SALA KONFERENCYJNA {conferenceRoom.name}
+        </h1>
         <h2 className={styles.listTitle}>Informacje o sali: </h2>
         <div className={styles.infoContainer}>
           <ul className={styles.infoList}>
-            <li className={styles.info}>Sala posiada klimatyzację</li>
-            <li className={styles.info}>Sala posiada klimatyzację</li>
-            <li className={styles.info}>Sala posiada klimatyzację</li>
-            <li className={styles.info}>Sala posiada klimatyzację</li>
-            <li className={styles.info}>Sala posiada klimatyzację</li>
+            {conferenceRoom.facilities.map((el) => (
+              <li className={styles.info}>{el}</li>
+            ))}
           </ul>
         </div>
 
@@ -365,6 +386,66 @@ function Index() {
       </div>
     </>
   );
+}
+
+interface IParams {
+  params: { id: string };
+}
+
+export async function getStaticPaths() {
+  const data = await HTTPRequest('GET', '/conference-rooms');
+  const params: IParams[] = [];
+  data.data.forEach((el: IRoom) => {
+    params.push({
+      params: {
+        id: el._id
+      }
+    });
+  });
+
+  return {
+    paths: params,
+    fallback: true // false or 'blocking'
+  };
+}
+
+export async function getStaticProps({ params: { id } }: IParams) {
+  const reservationResponse = await HTTPRequest(
+    'GET',
+    `/reservations?conferenceRoom=${id}&date=${new Date().getTime()}`
+  );
+
+  const conferenceRoomResponse = await HTTPRequest(
+    'GET',
+    `/conference-rooms?id=${id}`
+  );
+
+  const conferenceRoom: IConferenceRoomResponse = {
+    id: conferenceRoomResponse.data._id,
+    name: conferenceRoomResponse.data.name,
+    photos: conferenceRoomResponse.data.photos,
+    facilities: conferenceRoomResponse.data.facilities
+  };
+
+  const reservations: IShortenReservation[] = reservationResponse.data.map(
+    (el: IShortenReservation) => {
+      return {
+        _id: el._id,
+        conferenceRoom: el.conferenceRoom,
+        date: el.date,
+        startHour: el.startHour,
+        endHour: el.endHour
+      };
+    }
+  );
+
+  return {
+    props: {
+      reservations: reservations || {},
+      conferenceRoom: conferenceRoom || {}
+    },
+    revalidate: 3600
+  };
 }
 
 export default Index;

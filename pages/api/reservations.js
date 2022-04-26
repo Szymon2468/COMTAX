@@ -15,6 +15,9 @@ export default async function handler(req, res) {
     case 'DELETE':
       await handleDelete(req, res);
       break;
+    case 'POST':
+      await handlePost(req, res);
+      break;
     default:
       res.status(400).json({ success: false });
   }
@@ -25,19 +28,32 @@ const handleGet = async (req, res) => {
     let reservation;
     if (req.query.id) {
       reservation = await Reservation.findById(req.query.id);
+    } else if (req.query.conferenceRoom && req.query.date) {
+      const date = new Date(parseInt(req.query.date));
+      date.setUTCHours(2, 0, 0, 0);
+
+      reservation = await Reservation.find({
+        conferenceRoom: req.query.conferenceRoom,
+        date: date.getTime()
+      });
     } else {
       reservation = await Reservation.find({});
     }
     res.status(200).json({ success: true, data: reservation });
   } catch (error) {
+    console.error(error);
     res.status(400).json({ success: false, msg: error });
   }
 };
 
 const handlePut = async (req, res) => {
   try {
+    const date = new Date(parseInt(req.body.date));
+    date.setUTCHours(2, 0, 0, 0);
+    req.body.date = date.getTime();
+
     const reservation = await Reservation.find({
-      date: req.body.date,
+      date: date.getTime(),
       startHour: req.body.startHour,
       endHour: req.body.endHour
     });
@@ -47,6 +63,7 @@ const handlePut = async (req, res) => {
         .json({ success: false, msg: 'Nie mona utworzyć rezerwacji' });
       return;
     }
+
     const newReservation = await Reservation.create(req.body);
     res.status(200).json({ success: true, data: newReservation });
   } catch (error) {
@@ -60,6 +77,19 @@ const handleDelete = async (req, res) => {
     const reservation = await Reservation.deleteOne({ _id: req.query.id });
     res.status(200).json({ success: true, data: reservation });
   } catch (error) {
+    res.status(400).json({ success: false, msg: error });
+  }
+};
+
+const handlePost = async (req, res) => {
+  try {
+    const reservation = await Reservation.findByIdAndUpdate(
+      req.query.id,
+      req.body
+    );
+    res.status(200).json({ success: true, data: reservation });
+  } catch (error) {
+    console.error(error);
     res.status(400).json({ success: false, msg: error });
   }
 };

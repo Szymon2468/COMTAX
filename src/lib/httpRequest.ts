@@ -4,7 +4,7 @@ import axios from 'axios';
 export const HTTPRequest = async (
   method: 'GET' | 'POST' | 'PUT' | 'DELETE',
   url: string,
-  data: object
+  data?: object
 ) => {
   let response;
   switch (method) {
