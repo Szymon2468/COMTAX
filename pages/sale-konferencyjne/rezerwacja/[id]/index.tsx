@@ -7,6 +7,7 @@ import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import Button from '../../../../src/components/Button/Button';
 import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import { IRoom } from '..';
+import { v4 as uuidv4 } from 'uuid';
 
 interface IShortenReservation {
   _id: string;
@@ -48,6 +49,17 @@ function Index({
     areReservationHoursForChosenDayShowed,
     setAreReservationHoursForChosenDayShowed
   ] = useState(false);
+
+  useEffect(() => {
+    const request = async () => {
+      const date = new Date(startDate).getTime();
+      const reservationResponse = await HTTPRequest(
+        'GET',
+        `/reservations?conferenceRoom=${conferenceRoom.id}&date=${date}`
+      );
+    };
+    request();
+  }, [startDate]);
 
   const images: IImage[] = [
     {
@@ -129,6 +141,9 @@ function Index({
     '17:30',
     '18:00'
   ];
+  if (!conferenceRoom || !reservations) {
+    return null;
+  }
 
   interface IReservationDateType {
     startHour: string;
@@ -235,17 +250,6 @@ function Index({
     return result;
   };
 
-  useEffect(() => {
-    const request = async () => {
-      const date = new Date(startDate).getTime();
-      const reservationResponse = await HTTPRequest(
-        'GET',
-        `/reservations?conferenceRoom=${conferenceRoom.id}&date=${date}`
-      );
-    };
-    request();
-  }, [startDate]);
-
   return (
     <>
       <div className='container'>
@@ -256,7 +260,9 @@ function Index({
         <div className={styles.infoContainer}>
           <ul className={styles.infoList}>
             {conferenceRoom.facilities.map((el) => (
-              <li className={styles.info}>{el}</li>
+              <li key={uuidv4()} className={styles.info}>
+                {el}
+              </li>
             ))}
           </ul>
         </div>

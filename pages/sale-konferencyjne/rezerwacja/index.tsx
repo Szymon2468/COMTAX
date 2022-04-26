@@ -49,7 +49,6 @@ function index({ rooms }: IRoomTile) {
                 <RoomTile
                   img={el.photos[0]?.url}
                   alt={el.photos[0]?.alt}
-                  s
                   name={el.name}
                 ></RoomTile>
               </a>
@@ -62,7 +61,7 @@ function index({ rooms }: IRoomTile) {
 }
 
 export async function getStaticProps() {
-  const response = await HTTPRequest('GET', '/conference-rooms');
+  const response = await HTTPRequest('GET', 'conference-rooms');
 
   return {
     props: { rooms: response.data || {} },
