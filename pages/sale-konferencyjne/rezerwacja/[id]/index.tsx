@@ -334,6 +334,105 @@ function Index({
     return;
   }, [windowSize.width]);
 
+  const [name, setName] = useState('');
+  const [surrname, setSurrname] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [msg, setMsg] = useState('');
+  const [company, setCompany] = useState('');
+  const [street, setStreet] = useState('');
+  const [ZIPCode, setZIPCode] = useState('');
+  const [city, setCity] = useState('');
+  const [NIP, setNIP] = useState('');
+
+  const [isNameEmptyErrorVisible, setisNameEmptyErrorVisible] = useState(false);
+  const [isSurrnameEmptyErrorVisible, setisSurrnameEmptyErrorVisible] =
+    useState(false);
+  const [isPhoneEmptyErrorVisible, setisPhoneEmptyErrorVisible] =
+    useState(false);
+  const [isEmailEmptyErrorVisible, setisEmailEmptyErrorVisible] =
+    useState(false);
+
+  const [isPhoeIncorrect, setIsPhoneIncorrect] = useState(false);
+  const [isEmailIncorrect, setIsEmailIncorrect] = useState(false);
+
+  const [isMsgSent, setIsMsgSent] = useState(false);
+
+  const [isMsgSendigError, setIsMsgSendigError] = useState(false);
+
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/;
+
+  const sendEmail = async () => {
+    if (
+      name === '' ||
+      phone === '' ||
+      email === '' ||
+      phoneRegex.test(phone) === false ||
+      emailRegex.test(email) === false
+    ) {
+      if (name === '') {
+        setisNameEmptyErrorVisible(true);
+      } else {
+        setisNameEmptyErrorVisible(false);
+      }
+
+      if (phone === '') {
+        setisPhoneEmptyErrorVisible(true);
+      } else {
+        setisPhoneEmptyErrorVisible(false);
+      }
+
+      if (email === '') {
+        setisEmailEmptyErrorVisible(true);
+      } else {
+        setisEmailEmptyErrorVisible(false);
+      }
+
+      if (phoneRegex.test(phone) === false && phone !== '') {
+        setIsPhoneIncorrect(true);
+      } else {
+        setIsPhoneIncorrect(false);
+      }
+
+      if (emailRegex.test(email) === false && email !== '') {
+        setIsEmailIncorrect(true);
+      } else {
+        setIsEmailIncorrect(false);
+      }
+    } else {
+      setisNameEmptyErrorVisible(false);
+      setisPhoneEmptyErrorVisible(false);
+      setisEmailEmptyErrorVisible(false);
+      setIsEmailIncorrect(false);
+      setIsPhoneIncorrect(false);
+
+      console.log(city);
+
+      const data = {
+        name: name,
+        surrname: surrname,
+        phone: phone,
+        email: email,
+        msg: msg || 'nie podano',
+        company: company || 'nie podano',
+        street: street || 'nie podano',
+        ZIPCode: ZIPCode || 'nie podano',
+        city: city || 'nie podano',
+        NIP: NIP || 'nie podano'
+      };
+
+      console.log(data);
+
+      const response = await HTTPRequest('POST', '/reservation-email', data);
+      if (response.success) {
+        setIsMsgSent(true);
+      } else {
+        setIsMsgSendigError(true);
+      }
+    }
+  };
+
   return (
     <>
       <div className={styles.landingPage}>
@@ -347,14 +446,14 @@ function Index({
       </div>
       <div className='container'>
         <div className={styles.infoContainer}>
-          <ul className={styles.infoList}>
+          <div className={styles.infoList}>
             <h2>Udogodnienia: </h2>
             {conferenceRoom.facilities.map((el) => (
-              <li key={uuidv4()} className={styles.info}>
+              <p key={uuidv4()} className={`smaller ${styles.info}`}>
                 {el}
-              </li>
+              </p>
             ))}
-          </ul>
+          </div>
         </div>
 
         <div className='section'>
@@ -428,34 +527,71 @@ function Index({
                 className={styles.input}
                 placeholder={namePlaceholder}
                 center={center}
+                onChange={(e: any) => {
+                  setName(e.target.value);
+                }}
               />
+              {isNameEmptyErrorVisible && (
+                <p className={styles.error}>Proszę podać imię.</p>
+              )}
               <Input
                 typeOfInput='INPUT'
                 label={surrnameLabel}
                 className={styles.input}
                 placeholder={surrnamePlaceholder}
                 center={center}
+                onChange={(e: any) => {
+                  setSurrname(e.target.value);
+                }}
               />
+              {isSurrnameEmptyErrorVisible && (
+                <p className={styles.error}>Proszę podać nazwisko.</p>
+              )}
               <Input
                 typeOfInput='INPUT'
                 label={emailLabel}
                 className={styles.input}
                 placeholder={emailPlaceholder}
                 center={center}
+                onChange={(e: any) => {
+                  setEmail(e.target.value);
+                }}
               />
+              {isEmailEmptyErrorVisible && (
+                <p className={styles.error}>Proszę podać adres e-mail.</p>
+              )}
+              {isEmailIncorrect && (
+                <p className={styles.error}>
+                  Proszę podać poprawny adres e-mail.
+                </p>
+              )}
               <Input
                 typeOfInput='INPUT'
                 label={phoneLabel}
                 className={styles.input}
                 placeholder={phonePlaceholder}
                 center={center}
+                onChange={(e: any) => {
+                  setPhone(e.target.value);
+                }}
               />
+              {isPhoneEmptyErrorVisible && (
+                <p className={styles.error}>Proszę podać numer telefonu.</p>
+              )}
+              {isPhoeIncorrect && (
+                <p className={styles.error}>
+                  Proszę podać poprawny numer telefonu.
+                </p>
+              )}
               <Input
                 typeOfInput='TEXTAREA'
                 label={msgLabel}
                 className={styles.input}
                 placeholder={msgPlaceholder}
                 center={center}
+                onChange={(e: any) => {
+                  setMsg(e.target.value);
+                }}
               />
             </div>
 
@@ -467,6 +603,9 @@ function Index({
                 className={styles.input}
                 placeholder={companyPlaceholder}
                 center={center}
+                onChange={(e: any) => {
+                  setCompany(e.target.value);
+                }}
               />
               <Input
                 typeOfInput='INPUT'
@@ -474,6 +613,9 @@ function Index({
                 className={styles.input}
                 placeholder={streetPlaceholder}
                 center={center}
+                onChange={(e: any) => {
+                  setStreet(e.target.value);
+                }}
               />
               <Input
                 typeOfInput='INPUT'
@@ -481,6 +623,9 @@ function Index({
                 className={styles.input}
                 placeholder={ZIPcodePlaceholder}
                 center={center}
+                onChange={(e: any) => {
+                  setZIPCode(e.target.value);
+                }}
               />
               <Input
                 typeOfInput='INPUT'
@@ -488,6 +633,9 @@ function Index({
                 className={styles.input}
                 placeholder={cityPlaceholder}
                 center={center}
+                onChange={(e: any) => {
+                  setCity(e.target.value);
+                }}
               />
               <Input
                 typeOfInput='INPUT'
@@ -495,6 +643,9 @@ function Index({
                 className={styles.input}
                 placeholder={NIPPlaceholder}
                 center={center}
+                onChange={(e: any) => {
+                  setNIP(e.target.value);
+                }}
               />
             </div>
 
@@ -512,6 +663,7 @@ function Index({
                 color='GREEN'
                 btnWidth={150}
                 className={styles.resBtn}
+                onClick={() => sendEmail()}
               />
             </div>
           </div>

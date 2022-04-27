@@ -81,17 +81,19 @@ const Home = () => {
                       ></Button>
                     </div>
                   </Link>
-                  <div className={styles.icon}>
-                    <ContactIcon />
-                    <Button
-                      text='Nasza Oferta'
-                      onClick={() => {}}
-                      color='GREEN'
-                      type='OUTLINED'
-                      btnWidth={300}
-                      className={styles.landingPageBtn}
-                    ></Button>
-                  </div>
+                  <Link href='/ksiegowosc'>
+                    <div className={styles.icon}>
+                      <ContactIcon />
+                      <Button
+                        text='Nasza Oferta'
+                        onClick={() => {}}
+                        color='GREEN'
+                        type='OUTLINED'
+                        btnWidth={300}
+                        className={styles.landingPageBtn}
+                      ></Button>
+                    </div>
+                  </Link>
                 </div>
               </div>
               <img

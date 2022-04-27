@@ -12,14 +12,19 @@ export default async function handler(req, res) {
     });
 
     const mailBody = `
-        <p>Imię i nazwisko: ${req.body.name}</p>
+        <p>Imię: ${req.body.name}</p>
+        <p>Nazwisko: ${req.body.surrname}</p>
         <p>Numer telefonu: ${req.body.phone}</p>
         <p>Adres e-mail: ${req.body.email}</p>
-        <p>Preferowany sposób kontaktu: ${req.body.contact}</p>
         <p>
-          Wiadomość: <br />
+          Uwagi: <br />
           ${req.body.msg}
         </p>
+        <p>Firma: ${req.body.company}</p>
+        <p>Ulica: ${req.body.street}</p>
+        <p>Kod pocztowy: ${req.body.ZIPCode}</p>
+        <p>Miasto: ${req.body.city}</p>
+        <p>NIP: ${req.body.NIP}</p>
         `;
 
     const msg = {

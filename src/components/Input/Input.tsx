@@ -17,6 +17,7 @@ interface InputType {
     | MutableRefObject<HTMLTextAreaElement>;
   onChange?: Function;
   center?: boolean;
+  defaultValue?: string;
 }
 
 const Input = ({
@@ -28,7 +29,8 @@ const Input = ({
   options,
   ref,
   onChange,
-  center
+  center,
+  defaultValue
 }: InputType) => {
   if (typeOfInput === 'INPUT') {
     return (
@@ -59,6 +61,7 @@ const Input = ({
           className={className}
           ref={ref as MutableRefObject<HTMLSelectElement>}
           onChange={(e) => (onChange ? onChange(e) : undefined)}
+          value={defaultValue}
         >
           {options &&
             options.map((el) => {
