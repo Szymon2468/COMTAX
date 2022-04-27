@@ -16,7 +16,7 @@ import {
 } from '../../src/configs/virtualOffice/virtualOffice';
 import classNames from 'classnames';
 import XIcon from '../../src/components/Icons/XIcon';
-import OKIcon from '../../src/components/Icons/OkIcon';
+import OkayIcon from '../../src/components/Icons/OkayIcon';
 
 function VirtualOffice() {
   const [chosenPackage, setChosenPackage] = useState('poczta');
@@ -26,7 +26,7 @@ function VirtualOffice() {
     if (typeof value === 'string') {
       return value;
     } else {
-      return value ? <OKIcon /> : <XIcon />;
+      return value ? <OkayIcon /> : <XIcon />;
     }
   };
 
@@ -158,7 +158,7 @@ function VirtualOffice() {
                         <p className={classNames('smaller', styles.iconCell)}>
                           {tableOffers.find((el) => el.package === 'firma')
                             ?.facilities[row.label as keyof IFacilities] ? (
-                            <OKIcon />
+                            <OkayIcon />
                           ) : (
                             <XIcon />
                           )}
@@ -169,7 +169,7 @@ function VirtualOffice() {
                           {tableOffers.find(
                             (el) => el.package === chosenPackage
                           )?.facilities[row.label as keyof IFacilities] ? (
-                            <OKIcon />
+                            <OkayIcon />
                           ) : (
                             <XIcon />
                           )}

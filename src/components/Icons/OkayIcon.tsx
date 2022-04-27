@@ -1,4 +1,4 @@
-function OKIcon() {
+function OkayIcon() {
   return (
     <svg
       width='40'
@@ -15,4 +15,4 @@ function OKIcon() {
   );
 }
 
-export default OKIcon;
+export default OkayIcon;
