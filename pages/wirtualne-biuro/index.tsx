@@ -15,6 +15,9 @@ import {
   tableSelectOptions
 } from '../../src/configs/virtualOffice/virtualOffice';
 import classNames from 'classnames';
+import Input from '../../src/components/Input/Input';
+import OKIcon from '../../src/components/Icons/OkIcon';
+import XIcon from '../../src/components/Icons/XIcon';
 
 function VirtualOffice() {
   const [chosenPackage, setChosenPackage] = useState('poczta');
@@ -24,7 +27,7 @@ function VirtualOffice() {
     if (typeof value === 'string') {
       return value;
     } else {
-      return value ? 'tak' : 'nie';
+      return value ? <OKIcon /> : <XIcon />;
     }
   };
 
@@ -122,14 +125,25 @@ function VirtualOffice() {
                   >
                     <p>FIRMA</p>
                   </th>
-                  <th className={classNames(styles.offerColumn)}>
-                    <p>
-                      {
-                        tableSelectOptions.find(
-                          (el) => el.value === chosenPackage
-                        )?.label
-                      }
-                    </p>
+                  <th
+                    className={classNames(
+                      styles.offerColumn,
+                      styles.selectColumn
+                    )}
+                  >
+                    <select
+                      className={classNames(styles.offerSelect, 'p-smaller')}
+                      onChange={(e) => setChosenPackage(e.target.value)}
+                      value={chosenPackage}
+                    >
+                      {tableSelectOptions.map((el) => {
+                        return (
+                          <option key={uuidv4()} value={el.value}>
+                            {el.label}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </th>
                 </tr>
               </thead>
@@ -142,20 +156,24 @@ function VirtualOffice() {
                         <p className='smaller'>{row.name}</p>
                       </td>
                       <td className={styles.comparisionColumn}>
-                        <p className='smaller'>
+                        <p className={classNames('smaller', styles.iconCell)}>
                           {tableOffers.find((el) => el.package === 'firma')
-                            ?.facilities[row.label as keyof IFacilities]
-                            ? 'tak'
-                            : 'nie'}
+                            ?.facilities[row.label as keyof IFacilities] ? (
+                            <OKIcon />
+                          ) : (
+                            <XIcon />
+                          )}
                         </p>
                       </td>
                       <td>
-                        <p className='smaller'>
+                        <p className={classNames('smaller', styles.iconCell)}>
                           {tableOffers.find(
                             (el) => el.package === chosenPackage
-                          )?.facilities[row.label as keyof IFacilities]
-                            ? 'tak'
-                            : 'nie'}
+                          )?.facilities[row.label as keyof IFacilities] ? (
+                            <OKIcon />
+                          ) : (
+                            <XIcon />
+                          )}
                         </p>
                       </td>
                     </tr>
@@ -177,14 +195,29 @@ function VirtualOffice() {
                   >
                     <p>FIRMA</p>
                   </th>
-                  <th className={classNames(styles.offerColumn)}>
-                    <p>
-                      {
-                        tableSelectOptions.find(
-                          (el) => el.value === chosenPackage
-                        )?.label
-                      }
-                    </p>
+                  <th
+                    className={classNames(
+                      styles.offerColumn,
+                      styles.selectColumn
+                    )}
+                  >
+                    <select
+                      className={classNames(styles.offerSelect, 'p-smaller')}
+                      onChange={(e) => setChosenPackage(e.target.value)}
+                      value={chosenPackage}
+                    >
+                      {tableSelectOptions.map((el) => {
+                        return (
+                          <option
+                            key={uuidv4()}
+                            value={el.value}
+                            className='p-smaller'
+                          >
+                            {el.label}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </th>
                 </tr>
               </thead>
@@ -232,14 +265,29 @@ function VirtualOffice() {
                   >
                     <p>FIRMA</p>
                   </th>
-                  <th className={classNames(styles.offerColumn)}>
-                    <p>
-                      {
-                        tableSelectOptions.find(
-                          (el) => el.value === chosenPackage
-                        )?.label
-                      }
-                    </p>
+                  <th
+                    className={classNames(
+                      styles.offerColumn,
+                      styles.selectColumn
+                    )}
+                  >
+                    <select
+                      className={classNames(styles.offerSelect, 'p-smaller')}
+                      onChange={(e) => setChosenPackage(e.target.value)}
+                      value={chosenPackage}
+                    >
+                      {tableSelectOptions.map((el) => {
+                        return (
+                          <option
+                            key={uuidv4()}
+                            value={el.value}
+                            className='p-smaller'
+                          >
+                            {el.label}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </th>
                 </tr>
               </thead>
@@ -252,7 +300,7 @@ function VirtualOffice() {
                         <p className='smaller'>{row.name}</p>
                       </td>
                       <td className={styles.comparisionColumn}>
-                        <p className='smaller'>
+                        <p className={classNames('smaller', styles.iconCell)}>
                           {generateAdditionalFacility(
                             tableOffers.find((el) => el.package === 'firma')
                               ?.additionalFacilities[
@@ -262,7 +310,7 @@ function VirtualOffice() {
                         </p>
                       </td>
                       <td>
-                        <p className='smaller'>
+                        <p className={classNames('smaller', styles.iconCell)}>
                           {generateAdditionalFacility(
                             tableOffers.find(
                               (el) => el.package === chosenPackage
@@ -277,53 +325,6 @@ function VirtualOffice() {
               </tbody>
             </table>
           </div>
-          {/* <header>
-            <h2 className={styles.comparisonTitle}>
-              <span>PORÓWNAJ</span> NASZE PAKIETY
-            </h2>
-          </header>
-          <div className={styles.table}>
-            <header className={styles.tableHeader}>
-              <h2>PEŁNA LISTA USŁUG </h2>
-              <h2>PAKIET FIRMA</h2>
-              <h2>
-                <Input
-                  typeOfInput='SELECT'
-                  options={comparisingTableSelectOptions}
-                /> 
-              </h2>
-            </header>
-
-            <div className={styles.priceListTitleContainer}>
-              <div className={styles.belt}></div>
-              <h3 className={styles.priceListTitle}>USŁUGI</h3>
-              <div className={styles.belt}></div>
-            </div>
-
-            <div className={styles.tableContentOffers}>
-              {generateOfferTable(offers)}
-            </div>
-
-            <div className={styles.priceListTitleContainer}>
-              <div className={styles.belt}></div>
-              <h3 className={styles.priceListTitle}>CENNIK</h3>
-              <div className={styles.belt}></div>
-            </div>
-
-            <div className={styles.tableContentPriceList}>
-              {generateOfferTable(priceList)}
-            </div>
-
-            <div className={styles.priceListTitleContainer}>
-              <div className={styles.belt}></div>
-              <h3 className={styles.priceListTitle}>USŁUGI DODATKOWE</h3>
-              <div className={styles.belt}></div>
-            </div>
-
-            <div className={styles.tableContentAddedOffers}>
-              {generateOfferTable(addedOffers)}
-            </div>
-          </div> */}
         </div>
       </section>
     </section>

@@ -134,6 +134,12 @@ h3,
     font-weight: 500;
     color: $textColor;
   }
+
+  .p-smaller {
+    font-size: 16px;
+    font-weight: 500;
+    color: $textColor;
+  }
 }
 
 @include media('>=mobile') {
@@ -145,6 +151,12 @@ h3,
   }
 
   p.smaller {
+    font-size: 18px;
+    font-weight: 500;
+    color: $textColor;
+  }
+
+  .p-smaller {
     font-size: 18px;
     font-weight: 500;
     color: $textColor;

@@ -295,3 +295,22 @@
     display: none;
   }
 }
+
+.offerSelect {
+  width: 100px !important;
+}
+
+.selectColumn {
+  text-align-last: center;
+}
+
+.iconCell {
+  text-align: center;
+
+  @include media('<=mobile') {
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}

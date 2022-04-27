@@ -110,7 +110,7 @@ export const packageTiles: PackageTileData[] = [
   }
 ];
 
-interface ITableSelectOptions {
+export interface ITableSelectOptions {
   label: string;
   value: string;
 }
@@ -407,7 +407,7 @@ export const tableRows: ITableRows[] = [
     type: 'facilities'
   },
   {
-    name: 'Dostęp do sali konferencyjnej/pokoju spotkań biznesowych, stanowiska pracy wraz z miejscem parkingowym',
+    name: 'Dostęp do sali konferencyjnej / pokoju spotkań biznesowych, stanowiska pracy wraz z miejscem parkingowym',
     label: 'salaKonferencyjna',
     type: 'facilities'
   },
@@ -457,7 +457,7 @@ export const tableRows: ITableRows[] = [
     type: 'additionalFacilities'
   },
   {
-    name: 'Dostęp do sali konferencyjnej/pokoju spotkań biznesowych wraz z miejscem parkingowym',
+    name: 'Dostęp do sali konferencyjnej / pokoju spotkań biznesowych wraz z miejscem parkingowym',
     label: 'salaKonferencyjna',
     type: 'additionalFacilities'
   },
