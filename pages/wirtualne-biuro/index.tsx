@@ -15,9 +15,8 @@ import {
   tableSelectOptions
 } from '../../src/configs/virtualOffice/virtualOffice';
 import classNames from 'classnames';
-import Input from '../../src/components/Input/Input';
-import OKIcon from '../../src/components/Icons/OkIcon';
 import XIcon from '../../src/components/Icons/XIcon';
+import OKIcon from '../../src/components/Icons/OkIcon';
 
 function VirtualOffice() {
   const [chosenPackage, setChosenPackage] = useState('poczta');
