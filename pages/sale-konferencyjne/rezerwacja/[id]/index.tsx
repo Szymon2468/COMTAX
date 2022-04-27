@@ -147,9 +147,6 @@ function Index({
     '17:30',
     '18:00'
   ];
-  if (!conferenceRoom || !reservations) {
-    return null;
-  }
 
   interface IReservationDateType {
     startHour: string;
@@ -452,13 +449,17 @@ function Index({
     }
   };
 
+  if (!conferenceRoom || !reservations) {
+    return null;
+  }
+
   return (
     <>
       <div className={styles.landingPage}>
         <div className={`container ${styles.accountsContainer}`}>
           <header>
             <h1 className={styles.landingTitle}>
-              SALA KONFERENCYJNA '{conferenceRoom.name}'
+              SALA KONFERENCYJNA {`'${conferenceRoom.name}'`}
             </h1>
           </header>
         </div>
