@@ -282,7 +282,7 @@ function Index({
   const windowSize: WindowSize = useWindowSize();
 
   useEffect(() => {
-    if (windowSize.width < 576) {
+    if (windowSize.width < 768) {
       setNamePlaceholder('Imię*');
       setSurrnamePlaceholder('Nazwisko*');
       setEmailPlaceholder('E-mail*');
@@ -365,50 +365,62 @@ function Index({
         </div>
 
         <section>
-          <header className={styles.header}>
-            <h2 className={styles.title}>ZAREZERWUJ SALĘ JUZ TERAZ</h2>
-          </header>
-          <div className={styles.calendarContainer}>
-            <p>Wybierz datę rezerwacji: </p>
-            <HighliteDates startDate={startDate} setStartDate={setStartDate} />
-          </div>
-          <div className={styles.reservatedHoursContainer}>
-            {generateReservatedHoursComponent(startDate)}
-          </div>
-          <div className={styles.choosingHours}>
-            Zarezerwuj salę od{' '}
-            <Input
-              ref={inputStartRef}
-              typeOfInput='SELECT'
-              options={generateAvailableStartHoursArrayForChosenDay(startDate)}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                console.log(e.target.value);
-                const value: string = e.target.value;
-                setEndHours(
-                  generateAvailableEndHoursArrayForChosenDay(startDate, value)
-                );
-              }}
-            />{' '}
-            do{' '}
-            <Input
-              ref={inputEndRef}
-              typeOfInput='SELECT'
-              options={generateAvailableEndHoursArrayForChosenDay(
-                new Date(),
-                '8:00'
-              )}
-              onChange={() => setAreReservationHoursForChosenDayShowed(true)}
-            />
+          <div className='container'>
+            <header className={styles.header}>
+              <h2 className={styles.title}>ZAREZERWUJ SALĘ JUZ TERAZ</h2>
+            </header>
+            <div className={styles.calendarContainer}>
+              <p>Wybierz datę rezerwacji: </p>
+              <HighliteDates
+                startDate={startDate}
+                setStartDate={setStartDate}
+              />
+            </div>
+            <div className={styles.reservatedHoursContainer}>
+              {generateReservatedHoursComponent(startDate)}
+            </div>
           </div>
 
           <div className={styles.formContainersContainer}>
             <div className={styles.formContainer}>
               <Input
+                ref={inputStartRef}
+                typeOfInput='SELECT'
+                label='Zarezerwuj salę od'
+                className={styles.dateInput}
+                options={generateAvailableStartHoursArrayForChosenDay(
+                  startDate
+                )}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  console.log(e.target.value);
+                  const value: string = e.target.value;
+                  setEndHours(
+                    generateAvailableEndHoursArrayForChosenDay(startDate, value)
+                  );
+                }}
+              />
+              <Input
+                ref={inputEndRef}
+                typeOfInput='SELECT'
+                label='do'
+                className={styles.dateInput}
+                options={generateAvailableEndHoursArrayForChosenDay(
+                  new Date(),
+                  '8:00'
+                )}
+                onChange={() => setAreReservationHoursForChosenDayShowed(true)}
+              />
+              <Input
                 typeOfInput='SELECT'
                 options={['1', '2', '3', '4', '5', '6']}
                 label='Liczba osób'
-                center={center}
+                className={styles.dateInput}
               />
+            </div>
+          </div>
+
+          <div className={styles.formContainersContainer}>
+            <div className={styles.formContainer}>
               <h3>Osoba kontaktowa</h3>
               <Input
                 typeOfInput='INPUT'
