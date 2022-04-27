@@ -8,7 +8,7 @@ export const HTTPRequest = async (
   data?: object
 ) => {
   let response;
-  if (process.env.environment === 'PRODUCION') {
+  if (process.env.environment === 'PRODUCTION') {
     API_URL = 'https://comtax.netlify.app/api/';
   }
   switch (method) {
