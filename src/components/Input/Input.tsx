@@ -16,6 +16,7 @@ interface InputType {
     | MutableRefObject<HTMLInputElement>
     | MutableRefObject<HTMLTextAreaElement>;
   onChange?: Function;
+  center?: boolean;
 }
 
 const Input = ({
@@ -26,11 +27,15 @@ const Input = ({
   typeOfInput,
   options,
   ref,
-  onChange
+  onChange,
+  center
 }: InputType) => {
   if (typeOfInput === 'INPUT') {
     return (
-      <div className={styles.inputContainer}>
+      <div
+        className={styles.inputContainer}
+        style={{ justifyContent: center ? 'center' : 'space-between' }}
+      >
         <p className={styles.info}>{label}</p>
         <input
           type='text'
@@ -45,7 +50,10 @@ const Input = ({
   } else if (typeOfInput === 'SELECT') {
     let i = 0;
     return (
-      <div className={styles.inputContainer}>
+      <div
+        className={styles.inputContainer}
+        style={{ justifyContent: center ? 'center' : 'space-between' }}
+      >
         <p className={styles.info}>{label}</p>
         <select
           className={className}
@@ -66,7 +74,10 @@ const Input = ({
     );
   } else if (typeOfInput === 'TEXTAREA') {
     return (
-      <div className={`${styles.inputContainer} ${className}`}>
+      <div
+        className={`${styles.inputContainer} ${className}`}
+        style={{ justifyContent: center ? 'center' : 'space-between' }}
+      >
         <p className={styles.info}>{label}</p>
         <textarea
           placeholder={placeholder}

@@ -5,14 +5,16 @@ import MapPinIcon from '../../assets/contactform/icons/MapPinIcon';
 import PhoneIcon from '../../assets/contactform/icons/PhoneIcon';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { HTTPRequest } from '../../lib/httpRequest';
 
 function ContactForm() {
+  const contactRef = useRef() as MutableRefObject<HTMLSelectElement>;
+
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [contact, setContact] = useState('e-mail');
+  const [contact, setContact] = useState('');
   const [msg, setMsg] = useState('');
 
   const [isNameEmptyErrorVisible, setisNameEmptyErrorVisible] = useState(false);
@@ -198,6 +200,7 @@ function ContactForm() {
                 typeOfInput='SELECT'
                 options={['telefon', 'e-mail']}
                 className={styles.contactInput}
+                ref={contactRef}
                 onChange={(e: any) => {
                   setContact(e.target.value);
                 }}

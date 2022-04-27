@@ -1,5 +1,6 @@
 import styles from './OfferTile.module.scss';
 import Button from '../Button/Button';
+import Link from 'next/link';
 
 type BUTTON_TYPE = 'FULL' | 'OUTLINED';
 type BUTTON_COLOR = 'GREEN' | 'BLUE' | 'TRANSPARENT';

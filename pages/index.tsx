@@ -15,6 +15,7 @@ import about2 from '../src/assets/homepage/photos/about2.jpg';
 import about3 from '../src/assets/homepage/photos/about3.jpg';
 import OfferTileLeft from '../src/components/OfferTile/OfferTileLeft';
 import useWindowSize, { WindowSize } from '../src/hooks/useWindowSize';
+import Link from 'next/link';
 
 const Home = () => {
   let pageDescription = '';
@@ -25,30 +26,6 @@ const Home = () => {
     width: number;
     height: number;
   }
-
-  // const setHomepageImgSize = (): SetHomepageImgSizeReturnedValues => {
-  //   if (windowSize.width >= 1200) {
-  //     return {
-  //       width: 450,
-  //       height: 600
-  //     };
-  //   } else if (windowSize.width >= 1024 && windowSize.width < 1200) {
-  //     return {
-  //       width: 300,
-  //       height: 400
-  //     };
-  //   } else if (windowSize.width >= 768 && windowSize.width < 1024) {
-  //     return {
-  //       width: 240,
-  //       height: 320
-  //     };
-  //   } else {
-  //     return {
-  //       width: 0,
-  //       height: 0
-  //     };
-  //   }
-  // };
 
   return (
     <>
@@ -91,19 +68,21 @@ const Home = () => {
                   </p>
                 </div>
                 <div className={styles.icons}>
+                  <Link href='/kontakt'>
+                    <div className={styles.icon}>
+                      <OfferIcon />
+                      <Button
+                        text='Skontaktuj się z nami'
+                        onClick={() => {}}
+                        color='GREEN'
+                        type='FULL'
+                        btnWidth={300}
+                        className={styles.landingPageBtn}
+                      ></Button>
+                    </div>
+                  </Link>
                   <div className={styles.icon}>
                     <ContactIcon />
-                    <Button
-                      text='Skontaktuj się z nami'
-                      onClick={() => {}}
-                      color='GREEN'
-                      type='FULL'
-                      btnWidth={300}
-                      className={styles.landingPageBtn}
-                    ></Button>
-                  </div>
-                  <div className={styles.icon}>
-                    <OfferIcon />
                     <Button
                       text='Nasza Oferta'
                       onClick={() => {}}
@@ -162,7 +141,9 @@ const Home = () => {
             bgColor='BLUE'
             btnColor='TRANSPARENT'
             btnType='OUTLINED'
-            btnOnClick={() => {}}
+            btnOnClick={() => {
+              window.location.href = '/o-firmie-COMTAX';
+            }}
             btnText='Przeczytaj o Nas więcej'
             imgUrl={about1.src}
           ></OfferTileRight>
@@ -187,7 +168,9 @@ const Home = () => {
             bgColor='GREEN'
             btnColor='TRANSPARENT'
             btnType='OUTLINED'
-            btnOnClick={() => {}}
+            btnOnClick={() => {
+              window.location.href = '/ksiegowosc';
+            }}
             btnText='Poznaj naszą ofertę księgowości'
             imgUrl={about2.src}
           ></OfferTileLeft>
@@ -210,7 +193,9 @@ const Home = () => {
             bgColor='BLUE'
             btnColor='TRANSPARENT'
             btnType='OUTLINED'
-            btnOnClick={() => {}}
+            btnOnClick={() => {
+              window.location.href = '/wirtualne-biuro';
+            }}
             btnText='Przeczytaj o Nas więcej'
             imgUrl={about3.src}
           ></OfferTileRight>

@@ -9,6 +9,8 @@ import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import { IRoom } from '..';
 import { v4 as uuidv4 } from 'uuid';
 import dbConnect from '../../../../app/lib/dbConnect';
+import useWindowSize, { WindowSize } from '../../../../src/hooks/useWindowSize';
+
 const ConferenceRoom = require('../../../../app/models/ConferenceRoom');
 const Reservation = require('../../../../app/models/Reservation');
 
@@ -253,15 +255,100 @@ function Index({
     return result;
   };
 
+  const [namePlaceholder, setNamePlaceholder] = useState('');
+  const [surrnamePlaceholder, setSurrnamePlaceholder] = useState('');
+  const [emailPlaceholder, setEmailPlaceholder] = useState('');
+  const [phonePlaceholder, setPhonePlaceholder] = useState('');
+  const [msgPlaceholder, setMsgPlaceholder] = useState('');
+  const [companyPlaceholder, setCompanyPlaceholder] = useState('');
+  const [streetPlaceholder, setStreetPlaceholder] = useState('');
+  const [ZIPcodePlaceholder, setZIPcodePlaceholder] = useState('');
+  const [cityPlaceholder, setCityPlaceholder] = useState('');
+  const [NIPPlaceholder, setNIPPlaceholder] = useState('');
+
+  const [nameLabel, setNameLabel] = useState('');
+  const [surrnameLabel, setSurrnameLabel] = useState('');
+  const [emailLabel, setEmailLabel] = useState('');
+  const [phoneLabel, setPhoneLabel] = useState('');
+  const [msgLabel, setMsgLabel] = useState('');
+  const [companyLabel, setCompanyLabel] = useState('');
+  const [streetLabel, setStreetLabel] = useState('');
+  const [ZIPcodeLabel, setZIPcodeLabel] = useState('');
+  const [cityLabel, setCityLabel] = useState('');
+  const [NIPLabel, setNIPLabel] = useState('');
+
+  const [center, setCenter] = useState(false);
+
+  const windowSize: WindowSize = useWindowSize();
+
+  useEffect(() => {
+    if (windowSize.width < 576) {
+      setNamePlaceholder('Imię*');
+      setSurrnamePlaceholder('Nazwisko*');
+      setEmailPlaceholder('E-mail*');
+      setPhonePlaceholder('Numer telefonu*');
+      setMsgPlaceholder('Uwagi');
+      setCompanyPlaceholder('Firma');
+      setStreetPlaceholder('Ulica');
+      setZIPcodePlaceholder('Kod pocztowy');
+      setCityPlaceholder('Miasto');
+      setNIPPlaceholder('NIP');
+
+      setNameLabel('');
+      setSurrnameLabel('');
+      setEmailLabel('');
+      setPhoneLabel('');
+      setMsgLabel('');
+      setCompanyLabel('');
+      setStreetLabel('');
+      setZIPcodeLabel('');
+      setCityLabel('');
+      setNIPLabel('');
+
+      setCenter(true);
+    } else {
+      setNamePlaceholder('');
+      setSurrnamePlaceholder('');
+      setEmailPlaceholder('');
+      setPhonePlaceholder('');
+      setMsgPlaceholder('');
+      setCompanyPlaceholder('');
+      setStreetPlaceholder('');
+      setZIPcodePlaceholder('');
+      setCityPlaceholder('');
+      setNIPPlaceholder('');
+
+      setNameLabel('Imię*');
+      setSurrnameLabel('Nazwisko*');
+      setEmailLabel('E-mail*');
+      setPhoneLabel('Numer telefonu*');
+      setMsgLabel('Uwagi');
+      setCompanyLabel('Firma');
+      setStreetLabel('Ulica');
+      setZIPcodeLabel('Kod pocztowy');
+      setCityLabel('Miasto');
+      setNIPLabel('NIP');
+
+      setCenter(false);
+    }
+    return;
+  }, [windowSize.width]);
+
   return (
     <>
+      <div className={styles.landingPage}>
+        <div className={`container ${styles.accountsContainer}`}>
+          <header>
+            <h1 className={styles.landingTitle}>
+              SALA KONFERENCYJNA '{conferenceRoom.name}'
+            </h1>
+          </header>
+        </div>
+      </div>
       <div className='container'>
-        <h1 className={styles.title}>
-          SALA KONFERENCYJNA {conferenceRoom.name}
-        </h1>
-        <h2 className={styles.listTitle}>Informacje o sali: </h2>
         <div className={styles.infoContainer}>
           <ul className={styles.infoList}>
+            <h2>Udogodnienia: </h2>
             {conferenceRoom.facilities.map((el) => (
               <li key={uuidv4()} className={styles.info}>
                 {el}
@@ -320,32 +407,43 @@ function Index({
                 typeOfInput='SELECT'
                 options={['1', '2', '3', '4', '5', '6']}
                 label='Liczba osób'
+                center={center}
               />
               <h3>Osoba kontaktowa</h3>
               <Input
                 typeOfInput='INPUT'
-                label='Imię*'
+                label={nameLabel}
                 className={styles.input}
+                placeholder={namePlaceholder}
+                center={center}
               />
               <Input
                 typeOfInput='INPUT'
-                label='Nazwisko*'
+                label={surrnameLabel}
                 className={styles.input}
+                placeholder={surrnamePlaceholder}
+                center={center}
               />
               <Input
                 typeOfInput='INPUT'
-                label='E-mail*'
+                label={emailLabel}
                 className={styles.input}
+                placeholder={emailPlaceholder}
+                center={center}
               />
               <Input
                 typeOfInput='INPUT'
-                label='Telefon*'
+                label={phoneLabel}
                 className={styles.input}
+                placeholder={phonePlaceholder}
+                center={center}
               />
               <Input
                 typeOfInput='TEXTAREA'
-                label='Uwagi'
+                label={msgLabel}
                 className={styles.input}
+                placeholder={msgPlaceholder}
+                center={center}
               />
             </div>
 
@@ -353,25 +451,39 @@ function Index({
               <h3>Osoba kontaktowa</h3>
               <Input
                 typeOfInput='INPUT'
-                label='Firma'
+                label={companyLabel}
                 className={styles.input}
+                placeholder={companyPlaceholder}
+                center={center}
               />
               <Input
                 typeOfInput='INPUT'
-                label='Ulica'
+                label={streetLabel}
                 className={styles.input}
+                placeholder={streetPlaceholder}
+                center={center}
               />
               <Input
                 typeOfInput='INPUT'
-                label='Kod pocztowy'
+                label={ZIPcodeLabel}
                 className={styles.input}
+                placeholder={ZIPcodePlaceholder}
+                center={center}
               />
               <Input
                 typeOfInput='INPUT'
-                label='Miasto'
+                label={cityLabel}
                 className={styles.input}
+                placeholder={cityPlaceholder}
+                center={center}
               />
-              <Input typeOfInput='INPUT' label='NIP' className={styles.input} />
+              <Input
+                typeOfInput='INPUT'
+                label={NIPLabel}
+                className={styles.input}
+                placeholder={NIPPlaceholder}
+                center={center}
+              />
             </div>
 
             <div className={styles.btns}>
