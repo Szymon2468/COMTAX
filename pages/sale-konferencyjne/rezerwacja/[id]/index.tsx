@@ -50,6 +50,7 @@ function Index({
     useState<IShortenReservation[]>(reservations);
   const inputEndRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const inputStartRef = useRef() as MutableRefObject<HTMLSelectElement>;
+  const inputNrOfPeopleRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const [
     areReservationHoursForChosenDayShowed,
     setAreReservationHoursForChosenDayShowed
@@ -344,6 +345,10 @@ function Index({
   const [ZIPCode, setZIPCode] = useState('');
   const [city, setCity] = useState('');
   const [NIP, setNIP] = useState('');
+  const [date, setDate] = useState('');
+  const [startHour, setStartHour] = useState('8:00');
+  const [endHour, setEndHour] = useState('8:30');
+  const [nrOfPeople, setNrOfPeople] = useState('');
 
   const [isNameEmptyErrorVisible, setisNameEmptyErrorVisible] = useState(false);
   const [isSurrnameEmptyErrorVisible, setisSurrnameEmptyErrorVisible] =
@@ -359,6 +364,7 @@ function Index({
   const [isMsgSent, setIsMsgSent] = useState(false);
 
   const [isMsgSendigError, setIsMsgSendigError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/;
@@ -371,10 +377,18 @@ function Index({
       phoneRegex.test(phone) === false ||
       emailRegex.test(email) === false
     ) {
+      setIsError(true);
+
       if (name === '') {
         setisNameEmptyErrorVisible(true);
       } else {
         setisNameEmptyErrorVisible(false);
+      }
+
+      if (surrname === '') {
+        setisSurrnameEmptyErrorVisible(true);
+      } else {
+        setisSurrnameEmptyErrorVisible(false);
       }
 
       if (phone === '') {
@@ -401,6 +415,7 @@ function Index({
         setIsEmailIncorrect(false);
       }
     } else {
+      setIsError(false);
       setisNameEmptyErrorVisible(false);
       setisPhoneEmptyErrorVisible(false);
       setisEmailEmptyErrorVisible(false);
@@ -419,7 +434,11 @@ function Index({
         street: street || 'nie podano',
         ZIPCode: ZIPCode || 'nie podano',
         city: city || 'nie podano',
-        NIP: NIP || 'nie podano'
+        NIP: NIP || 'nie podano',
+        date: date,
+        nrOfPeople: nrOfPeople,
+        startHour: startHour,
+        endHour: endHour
       };
 
       console.log(data);
@@ -484,8 +503,10 @@ function Index({
             <div className={styles.formContainer}>
               <Input
                 ref={inputStartRef}
+                containerClassname={styles.containerInput}
                 typeOfInput='SELECT'
                 label='Zarezerwuj salę od'
+                defaultValue={startHour}
                 className={styles.dateInput}
                 options={generateAvailableStartHoursArrayForChosenDay(
                   startDate
@@ -496,24 +517,38 @@ function Index({
                   setEndHours(
                     generateAvailableEndHoursArrayForChosenDay(startDate, value)
                   );
+                  setStartHour(value);
                 }}
               />
               <Input
                 ref={inputEndRef}
+                containerClassname={styles.containerInput}
                 typeOfInput='SELECT'
                 label='do'
+                defaultValue={endHour}
                 className={styles.dateInput}
                 options={generateAvailableEndHoursArrayForChosenDay(
                   new Date(),
-                  '8:00'
+                  startHour
                 )}
-                onChange={() => setAreReservationHoursForChosenDayShowed(true)}
+                onChange={(e: any) => {
+                  const value: string = e.target.value;
+                  setAreReservationHoursForChosenDayShowed(true);
+                  setEndHour(value);
+                }}
               />
               <Input
+                ref={inputNrOfPeopleRef}
+                containerClassname={styles.containerInput}
                 typeOfInput='SELECT'
                 options={['1', '2', '3', '4', '5', '6']}
                 label='Liczba osób'
                 className={styles.dateInput}
+                defaultValue={nrOfPeople}
+                onChange={(e: any) => {
+                  const value: string = e.target.value;
+                  setNrOfPeople(value);
+                }}
               />
             </div>
           </div>
@@ -527,6 +562,7 @@ function Index({
                 className={styles.input}
                 placeholder={namePlaceholder}
                 center={center}
+                containerClassname={styles.inputContaineruniqe}
                 onChange={(e: any) => {
                   setName(e.target.value);
                 }}
@@ -539,6 +575,7 @@ function Index({
                 label={surrnameLabel}
                 className={styles.input}
                 placeholder={surrnamePlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setSurrname(e.target.value);
@@ -552,6 +589,7 @@ function Index({
                 label={emailLabel}
                 className={styles.input}
                 placeholder={emailPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setEmail(e.target.value);
@@ -570,6 +608,7 @@ function Index({
                 label={phoneLabel}
                 className={styles.input}
                 placeholder={phonePlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setPhone(e.target.value);
@@ -588,6 +627,7 @@ function Index({
                 label={msgLabel}
                 className={styles.input}
                 placeholder={msgPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setMsg(e.target.value);
@@ -602,6 +642,7 @@ function Index({
                 label={companyLabel}
                 className={styles.input}
                 placeholder={companyPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setCompany(e.target.value);
@@ -612,6 +653,7 @@ function Index({
                 label={streetLabel}
                 className={styles.input}
                 placeholder={streetPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setStreet(e.target.value);
@@ -622,6 +664,7 @@ function Index({
                 label={ZIPcodeLabel}
                 className={styles.input}
                 placeholder={ZIPcodePlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setZIPCode(e.target.value);
@@ -632,6 +675,7 @@ function Index({
                 label={cityLabel}
                 className={styles.input}
                 placeholder={cityPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setCity(e.target.value);
@@ -642,31 +686,54 @@ function Index({
                 label={NIPLabel}
                 className={styles.input}
                 placeholder={NIPPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setNIP(e.target.value);
                 }}
               />
+              {isError && (
+                <p className={styles.error}>
+                  Proszę poprawić zaznaczone powyżej błędy w formularzu.
+                </p>
+              )}
             </div>
 
             <div className={styles.btns}>
-              <Button
-                text='Anuluj'
-                type='FULL'
-                color='BLUE'
-                btnWidth={150}
-                className={styles.cancelBtn}
-              />
-              <Button
-                text='Rezerwuj'
-                type='FULL'
-                color='GREEN'
-                btnWidth={150}
-                className={styles.resBtn}
-                onClick={() => sendEmail()}
-              />
+              {!isMsgSent && (
+                <Button
+                  text='Anuluj'
+                  type='FULL'
+                  color='BLUE'
+                  btnWidth={150}
+                  className={styles.cancelBtn}
+                />
+              )}
+              {!isMsgSent && (
+                <Button
+                  text='Rezerwuj'
+                  type='FULL'
+                  color='GREEN'
+                  btnWidth={150}
+                  className={styles.resBtn}
+                  onClick={() => sendEmail()}
+                />
+              )}
             </div>
           </div>
+          {isMsgSent && (
+            <p className={styles.sendSuccess}>Dokonano rezerwacji.</p>
+          )}
+          {isMsgSendigError && (
+            <p className={styles.sendError}>
+              Nie udało się dokonać rezerwacji.
+            </p>
+          )}
+          {isMsgSent && (
+            <p className={`smaller ${styles.sendSuccess}`}>
+              W celu ewentualnego odwołania rezerwacji prosimy o kontakt.
+            </p>
+          )}
         </section>
       </div>
     </>

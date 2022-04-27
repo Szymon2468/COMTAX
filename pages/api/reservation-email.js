@@ -25,6 +25,10 @@ export default async function handler(req, res) {
         <p>Kod pocztowy: ${req.body.ZIPCode}</p>
         <p>Miasto: ${req.body.city}</p>
         <p>NIP: ${req.body.NIP}</p>
+        <p>Data rezerwacji: ${req.body.date}</p>
+        <p>Godzina rozpoczęcia: ${req.body.startHour}</p>
+        <p>Godzine zakończenia: ${req.body.endHour}</p>
+        <p>Liczba osób: ${req.body.nrOfPeople}</p>
         `;
 
     const msg = {

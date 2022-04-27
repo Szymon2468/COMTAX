@@ -18,6 +18,7 @@ interface InputType {
   onChange?: Function;
   center?: boolean;
   defaultValue?: string;
+  containerClassname?: string;
 }
 
 const Input = ({
@@ -30,12 +31,13 @@ const Input = ({
   ref,
   onChange,
   center,
-  defaultValue
+  defaultValue,
+  containerClassname
 }: InputType) => {
   if (typeOfInput === 'INPUT') {
     return (
       <div
-        className={styles.inputContainer}
+        className={`${styles.inputContainer} ${containerClassname}`}
         style={{ justifyContent: center ? 'center' : 'space-between' }}
       >
         <p className={styles.info}>{label}</p>
@@ -53,7 +55,7 @@ const Input = ({
     let i = 0;
     return (
       <div
-        className={styles.inputContainer}
+        className={`${styles.inputContainer} ${containerClassname}`}
         style={{ justifyContent: center ? 'center' : 'space-between' }}
       >
         <p className={styles.info}>{label}</p>
@@ -78,11 +80,12 @@ const Input = ({
   } else if (typeOfInput === 'TEXTAREA') {
     return (
       <div
-        className={`${styles.inputContainer} ${className}`}
+        className={`${styles.inputContainer} ${containerClassname}`}
         style={{ justifyContent: center ? 'center' : 'space-between' }}
       >
         <p className={styles.info}>{label}</p>
         <textarea
+          className={className}
           placeholder={placeholder}
           id={id}
           ref={ref as MutableRefObject<HTMLTextAreaElement>}
