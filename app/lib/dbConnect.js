@@ -8,8 +8,12 @@ if (!MONGODB_URI) {
   );
 }
 
+let conn;
+
 async function dbConnect() {
-  const conn = await mongoose.connect(MONGODB_URI);
+  if (!conn || !conn.connection || !conn.connection.host) {
+    conn = await mongoose.connect(MONGODB_URI);
+  }
 
   console.log(`MongoDB Connected: ${conn.connection.host}`);
 }
