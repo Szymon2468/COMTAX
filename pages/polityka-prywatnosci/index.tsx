@@ -89,7 +89,7 @@ function Policy() {
                   <a
                     href='https://www.support.mozilla.org/pl/kb/ciasteczka'
                     target={'_blank'}
-                    referrerPolicy='no-referrer'
+                    rel='noreferrer'
                   >
                     support.mozilla.org/pl/kb/ciasteczka
                   </a>
@@ -99,7 +99,7 @@ function Policy() {
                   <a
                     href='https://www.support.microsoft.com/kb/278835/pl'
                     target={'_blank'}
-                    referrerPolicy='no-referrer'
+                    rel='noreferrer'
                   >
                     support.microsoft.com/kb/278835/pl
                   </a>
@@ -109,7 +109,7 @@ function Policy() {
                   <a
                     href='https://www.support.google.com/chrome/bin/answer.py?hl=pl&answer=95647'
                     target={'_blank'}
-                    referrerPolicy='no-referrer'
+                    rel='noreferrer'
                   >
                     support.google.com/chrome/bin/answer.py?hl=pl&answer=95647
                   </a>
@@ -119,7 +119,7 @@ function Policy() {
                   <a
                     href='http://www.safari.helpmax.net/pl/oszczedzanie-czasu/blokowanie-zawartosci/'
                     target={'_blank'}
-                    referrerPolicy='no-referrer'
+                    rel='noreferrer'
                   >
                     safari.helpmax.net/pl/oszczedzanie-czasu/blokowanie-zawartosci/
                   </a>
