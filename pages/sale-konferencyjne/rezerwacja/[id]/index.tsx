@@ -10,6 +10,8 @@ import { IRoom } from '..';
 import { v4 as uuidv4 } from 'uuid';
 import dbConnect from '../../../../app/lib/dbConnect';
 import useWindowSize, { WindowSize } from '../../../../src/hooks/useWindowSize';
+import Link from 'next/link';
+import MasterLayout from '../../../../src/components/MasterLayout/MasterLayout';
 
 const ConferenceRoom = require('../../../../app/models/ConferenceRoom');
 const Reservation = require('../../../../app/models/Reservation');
@@ -471,7 +473,7 @@ function Index({
   }
 
   return (
-    <>
+    <MasterLayout>
       <div className={styles.landingPage}>
         <div className={`container ${styles.accountsContainer}`}>
           <header>
@@ -725,6 +727,9 @@ function Index({
                   type='FULL'
                   color='BLUE'
                   btnWidth={150}
+                  onClick={() => {
+                    window.location.href = '/sale-konferencyjne/rezerwacja';
+                  }}
                   className={styles.cancelBtn}
                 />
               )}
@@ -755,7 +760,7 @@ function Index({
           )}
         </section>
       </div>
-    </>
+    </MasterLayout>
   );
 }
 

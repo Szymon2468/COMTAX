@@ -1,31 +1,34 @@
+import MasterLayout from '../../src/components/MasterLayout/MasterLayout';
 import styles from './About.module.scss';
 
 function index() {
   return (
-    <section>
-      <div className={styles.landingPage}>
-        <div className={`container ${styles.accountsContainer}`}>
-          <header>
-            <h1 className={styles.title}>
-              POZNAJ COMTAX - KSIĘGOWOŚĆ, WIRTUALNE BIURO, SALE KONFERENCYJNE
-            </h1>
-            <h2 className={styles.about}>
-              Biuro Rachunkowe Comtax istnieje nieprzerwanie od 2001 roku.
-              Wieloletnie doświadczenie oraz zdobyta wiedza pozwalają nam
-              zaoferować kompleksową i rzetelną obsługę księgową podmiotów
-              gospodarczych. Posiadamy uprawnienia nadane przez Ministerstwo
-              Finansów do usługowego prowadzenia ksiąg rachunkowych o numerze
-              22789/01. <br /> <br />
-              Wychodząc naprzeciw oczekiwaniom rynku w roku 2017 poszerzyliśmy
-              zakres naszej działalności o usługi wirtualnego biura. To idealne
-              rozwiązanie nie tylko dla osób zakładających działalność
-              gospodarczą ale także dla tych, którzy pragną ograniczyć koszty i
-              zaoszczędzić swój czas. Zapraszamy do współpracy.
-            </h2>
-          </header>
+    <MasterLayout>
+      <section>
+        <div className={styles.landingPage}>
+          <div className={`container ${styles.accountsContainer}`}>
+            <header>
+              <h1 className={styles.title}>
+                POZNAJ COMTAX - KSIĘGOWOŚĆ, WIRTUALNE BIURO, SALE KONFERENCYJNE
+              </h1>
+              <h2 className={styles.about}>
+                Biuro Rachunkowe Comtax istnieje nieprzerwanie od 2001 roku.
+                Wieloletnie doświadczenie oraz zdobyta wiedza pozwalają nam
+                zaoferować kompleksową i rzetelną obsługę księgową podmiotów
+                gospodarczych. Posiadamy uprawnienia nadane przez Ministerstwo
+                Finansów do usługowego prowadzenia ksiąg rachunkowych o numerze
+                22789/01. <br /> <br />
+                Wychodząc naprzeciw oczekiwaniom rynku w roku 2017 poszerzyliśmy
+                zakres naszej działalności o usługi wirtualnego biura. To
+                idealne rozwiązanie nie tylko dla osób zakładających działalność
+                gospodarczą ale także dla tych, którzy pragną ograniczyć koszty
+                i zaoszczędzić swój czas. Zapraszamy do współpracy.
+              </h2>
+            </header>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </MasterLayout>
   );
 }
 

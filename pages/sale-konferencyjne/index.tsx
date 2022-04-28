@@ -10,6 +10,7 @@ import Gallery, { IImage } from '../../src/components/Gallery/Gallery';
 import BackgroundImage from './sala8.jpeg';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
+import MasterLayout from '../../src/components/MasterLayout/MasterLayout';
 
 interface Icon {
   icon: JSX.Element;
@@ -115,77 +116,79 @@ function ConferenceOffice() {
   };
 
   return (
-    <main>
-      <section>
-        <div className={styles.landingPage}>
-          <div className={`container ${styles.virtualOfficeContainer}`}>
-            <header>
-              <h1 className={styles.title}>
-                WYNAJEM SALI KONFERENCYJNEJ W KATOWICACH
-              </h1>
-              <h3 className={styles.titleDesc}>
-                Skorzystaj z naszej sali konferencyjnej w centrum Katowic.
-                Możesz dokonać rezerwacji korzystając z naszego panelu. Sala
-                konferencyjna to miejsce w którym możesz zorganizować spotkanie
-                ze swoim Klientem lub partnerem biznesowym. Zapewniamy miejsce
-                parkingowe.
-              </h3>
-            </header>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div className={`container ${styles.iconsContainer}`}>
-          {generateIcons()}
-        </div>
-      </section>
-
-      <section>
-        <div className='container'>
-          <h3 className={styles.priceTitle}>NASZ CENNIK:</h3>
-          <div className={styles.pricesContainer}>
-            <div className={styles.prices}>
-              <h3>1 godzina</h3>
-              <h3> - 20 zł</h3>
-              <h3>netto</h3>
-              <h3>3 godziny</h3>
-              <h3> - 50 zł</h3>
-              <h3>netto</h3>
-              <h3>8 godzin</h3>
-              <h3> - 130 zł</h3>
-              <h3>netto</h3>
-              <h3>Cały dzień</h3>
-              <h3> - 180 zł</h3>
-              <h3>netto</h3>
+    <MasterLayout>
+      <main>
+        <section>
+          <div className={styles.landingPage}>
+            <div className={`container ${styles.virtualOfficeContainer}`}>
+              <header>
+                <h1 className={styles.title}>
+                  WYNAJEM SALI KONFERENCYJNEJ W KATOWICACH
+                </h1>
+                <h3 className={styles.titleDesc}>
+                  Skorzystaj z naszej sali konferencyjnej w centrum Katowic.
+                  Możesz dokonać rezerwacji korzystając z naszego panelu. Sala
+                  konferencyjna to miejsce w którym możesz zorganizować
+                  spotkanie ze swoim Klientem lub partnerem biznesowym.
+                  Zapewniamy miejsce parkingowe.
+                </h3>
+              </header>
             </div>
-            <Button
-              text='ZAREZERWUJ SALĘ JUŻ TERAZ!'
-              type='OUTLINED'
-              color='GREEN'
-              btnWidth={600}
-              className={styles.priceBtn}
-              onClick={() => handleBtnClick('/sale-konferencyjne/rezerwacja')}
-            />
           </div>
-        </div>
-      </section>
-
-      <div className='section'>
-        <section className={styles.gallery}>
-          <Gallery images={images} />
         </section>
-      </div>
 
-      <section>
-        <div className='container'>
-          <h2 className={styles.galleryTitle}>
-            POZNAJ LEPIEJ NASZĄ SALĘ KONFERENCYJNĄ
-          </h2>
-          <div className={styles.galleryContainer}></div>
+        <section>
+          <div className={`container ${styles.iconsContainer}`}>
+            {generateIcons()}
+          </div>
+        </section>
+
+        <section>
+          <div className='container'>
+            <h3 className={styles.priceTitle}>NASZ CENNIK:</h3>
+            <div className={styles.pricesContainer}>
+              <div className={styles.prices}>
+                <h3>1 godzina</h3>
+                <h3> - 20 zł</h3>
+                <h3>netto</h3>
+                <h3>3 godziny</h3>
+                <h3> - 50 zł</h3>
+                <h3>netto</h3>
+                <h3>8 godzin</h3>
+                <h3> - 130 zł</h3>
+                <h3>netto</h3>
+                <h3>Cały dzień</h3>
+                <h3> - 180 zł</h3>
+                <h3>netto</h3>
+              </div>
+              <Button
+                text='ZAREZERWUJ SALĘ JUŻ TERAZ!'
+                type='OUTLINED'
+                color='GREEN'
+                btnWidth={600}
+                className={styles.priceBtn}
+                onClick={() => handleBtnClick('/sale-konferencyjne/rezerwacja')}
+              />
+            </div>
+          </div>
+        </section>
+
+        <div className='section'>
+          <section className={styles.gallery}>
+            <Gallery images={images} />
+          </section>
         </div>
-      </section>
-    </main>
+
+        <section>
+          <div className='container'>
+            <h2 className={styles.galleryTitle}>
+              POZNAJ LEPIEJ NASZĄ SALĘ KONFERENCYJNĄ
+            </h2>
+            <div className={styles.galleryContainer}></div>
+          </div>
+        </section>
+      </main>
+    </MasterLayout>
   );
 }
 

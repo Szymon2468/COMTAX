@@ -8,11 +8,7 @@ import Opinions from '../src/components/Opinions/Opinions';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Nav />
       <Component {...pageProps} />
-      <ContactForm />
-      <Opinions />
-      <Footer />
     </>
   );
 }

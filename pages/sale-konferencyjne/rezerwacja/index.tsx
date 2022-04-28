@@ -3,6 +3,7 @@ import RoomTile from './RoomTile/RoomTile';
 import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
 import dbConnect from '../../../app/lib/dbConnect';
+import MasterLayout from '../../../src/components/MasterLayout/MasterLayout';
 const ConferenceRoom = require('../../../app/models/ConferenceRoom');
 
 interface IPhoto {
@@ -26,7 +27,7 @@ export interface IRoomTile {
 function index({ rooms }: IRoomTile) {
   // console.log(rooms);
   return (
-    <>
+    <MasterLayout>
       <section>
         <div className={styles.landingPage}>
           <div className={`container ${styles.accountsContainer}`}>
@@ -57,7 +58,7 @@ function index({ rooms }: IRoomTile) {
           ))}
         </div>
       </div>
-    </>
+    </MasterLayout>
   );
 }
 

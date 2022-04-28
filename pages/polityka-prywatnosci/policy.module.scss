@@ -1,0 +1,35 @@
+@import '../../styles/variables.scss';
+
+.landingPage {
+  height: calc(40vh - 80px);
+  width: 100vw;
+  background-image: url('./Background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  margin-bottom: 105px;
+
+  @include media('<tablet-portrait') {
+    height: 100%;
+    padding: 35px 0;
+    text-align: center;
+  }
+
+  .title {
+    color: white;
+  }
+}
+
+.policy {
+  a {
+    color: $mainColor;
+    text-decoration: underline;
+
+    &:hover {
+      color: $blueBgColor;
+      transition: color 0.3s linear;
+    }
+  }
+}
