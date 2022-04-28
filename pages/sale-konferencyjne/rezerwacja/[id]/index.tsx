@@ -41,7 +41,7 @@ function Index({
   reservations: IShortenReservation[];
   conferenceRoom: IConferenceRoomResponse;
 }) {
-  console.log(reservations);
+  console.log('reservations', reservations);
   console.log(conferenceRoom);
   const roomId = 0;
   const [endHours, setEndHours] = useState<string[]>();
@@ -63,6 +63,7 @@ function Index({
         'GET',
         `/reservations?conferenceRoom=${conferenceRoom.id}&date=${date}`
       );
+      setCurrentReservations(reservationResponse.data);
     };
     request();
   }, [startDate]);
@@ -102,6 +103,20 @@ function Index({
     }
   ];
 
+  const getStartHour = () => {
+    for (const el of currentReservations) {
+      if (
+        el.startHour === availableStartHours[0] ||
+        el.startHour === availableStartHours[1]
+      ) {
+        return availableStartHours[
+          availableStartHours.findIndex((avHour) => avHour === el.endHour) + 1
+        ];
+      }
+    }
+    return '8:00';
+  };
+
   const availableStartHours = [
     '8:00',
     '8:30',
@@ -124,6 +139,11 @@ function Index({
     '17:00',
     '17:30'
   ];
+
+  availableStartHours.splice(
+    0,
+    availableStartHours.findIndex((el) => el === getStartHour())
+  );
 
   const availableEndHours = [
     '8:30',
@@ -157,6 +177,8 @@ function Index({
     let startHours = availableStartHours;
     let excludedHours: IReservationDateType[] = [];
 
+    console.log('godz startu na poczatku', startHours);
+
     currentReservations.map((el) =>
       excludedHours.push({
         startHour: el.startHour,
@@ -164,21 +186,31 @@ function Index({
       })
     );
 
-    console.log(excludedHours);
+    console.log('excludedHours', excludedHours);
 
     for (let i = 0; i < excludedHours.length; i++) {
       const startIndex = startHours.findIndex(
         (el) => excludedHours[i].startHour === el
       );
 
+      console.log('godziny startu', startHours);
+      console.log('wyciete godziny od i', excludedHours[i].startHour);
+
       const endIndex = startHours.findIndex(
         (el) => excludedHours[i].endHour === el
       );
 
+      console.log('start', startIndex);
+      console.log('koniec', endIndex);
+
       const nrOfRemovedHours = endIndex - startIndex + 2;
+
+      console.log('nrOfRemovedHours', nrOfRemovedHours);
 
       startHours.splice(startIndex - 1, nrOfRemovedHours);
     }
+
+    console.log('start godzs', startHours);
 
     return startHours;
   };
@@ -342,10 +374,11 @@ function Index({
   const [ZIPCode, setZIPCode] = useState('');
   const [city, setCity] = useState('');
   const [NIP, setNIP] = useState('');
-  const [date, setDate] = useState('');
-  const [startHour, setStartHour] = useState('8:00');
+  const [date, setDate] = useState(new Date());
+  const [startHour, setStartHour] = useState(getStartHour());
+  // console.log('1 godzina', generateAvailableStartHoursArrayForChosenDay(date));
   const [endHour, setEndHour] = useState('8:30');
-  const [nrOfPeople, setNrOfPeople] = useState('');
+  const [nrOfPeople, setNrOfPeople] = useState('1');
 
   const [isNameEmptyErrorVisible, setisNameEmptyErrorVisible] = useState(false);
   const [isSurrnameEmptyErrorVisible, setisSurrnameEmptyErrorVisible] =
@@ -422,27 +455,29 @@ function Index({
       console.log(city);
 
       const data = {
+        conferenceRoom: conferenceRoom.id,
         name: name,
-        surrname: surrname,
+        surname: surrname,
         phone: phone,
         email: email,
-        msg: msg || 'nie podano',
+        message: msg || 'nie podano',
         company: company || 'nie podano',
         street: street || 'nie podano',
-        ZIPCode: ZIPCode || 'nie podano',
+        zipCode: ZIPCode || 'nie podano',
         city: city || 'nie podano',
         NIP: NIP || 'nie podano',
-        date: date,
-        nrOfPeople: nrOfPeople,
+        date: date.getTime(),
+        numberOfPeople: nrOfPeople,
         startHour: startHour,
         endHour: endHour
       };
 
-      console.log(data);
+      console.log('data', data);
 
       const response = await HTTPRequest('POST', '/reservation-email', data);
       if (response.success) {
         setIsMsgSent(true);
+        await HTTPRequest('PUT', '/reservations', data);
       } else {
         setIsMsgSendigError(true);
       }
@@ -484,10 +519,10 @@ function Index({
         </div>
 
         <section>
-          <div className='container'>
-            <header className={styles.header}>
-              <h2 className={styles.title}>ZAREZERWUJ SALĘ JUZ TERAZ</h2>
-            </header>
+          <header className={styles.header}>
+            <h2 className={styles.title}>ZAREZERWUJ SALĘ JUZ TERAZ</h2>
+          </header>
+          <div className={styles.formContainersContainer}>
             <div className={styles.calendarContainer}>
               <p>Wybierz datę rezerwacji: </p>
               <HighliteDates
@@ -495,9 +530,9 @@ function Index({
                 setStartDate={setStartDate}
               />
             </div>
-            <div className={styles.reservatedHoursContainer}>
-              {generateReservatedHoursComponent(startDate)}
-            </div>
+          </div>
+          <div className={styles.reservatedHoursContainer}>
+            {generateReservatedHoursComponent(startDate)}
           </div>
 
           <div className={styles.formContainersContainer}>
@@ -798,7 +833,7 @@ export async function getStaticProps({ params: { id } }: IParams) {
 
   return {
     props: {
-      reservations: reservations || {},
+      reservations: JSON.parse(JSON.stringify(reservations)) || {},
       conferenceRoom: conferenceRoom || {}
     },
     revalidate: 3600
