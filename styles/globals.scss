@@ -19,6 +19,15 @@ body {
   width: 100%;
 }
 
+.__react_modal_image__modal_container {
+  height: calc(100% - 80px) !important;
+  top: 80px !important;
+}
+
+.__react_modal_image__header {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
 .container {
   width: 100%;
   padding-right: 8px;
