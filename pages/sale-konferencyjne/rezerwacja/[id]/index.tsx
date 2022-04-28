@@ -41,13 +41,12 @@ function Index({
   reservations: IShortenReservation[];
   conferenceRoom: IConferenceRoomResponse;
 }) {
-  console.log('reservations', reservations);
-  console.log(conferenceRoom);
   const roomId = 0;
   const [endHours, setEndHours] = useState<string[]>();
   const [startDate, setStartDate] = useState<Date>(new Date());
-  const [currentReservations, setCurrentReservations] =
-    useState<IShortenReservation[]>(reservations);
+  const [currentReservations, setCurrentReservations] = useState<
+    IShortenReservation[]
+  >(reservations || []);
   const inputEndRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const inputStartRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const inputNrOfPeopleRef = useRef() as MutableRefObject<HTMLSelectElement>;
@@ -179,8 +178,6 @@ function Index({
     let startHours = availableStartHours;
     let excludedHours: IReservationDateType[] = [];
 
-    console.log('godz startu na poczatku', startHours);
-
     currentReservations.map((el) =>
       excludedHours.push({
         startHour: el.startHour,
@@ -188,31 +185,19 @@ function Index({
       })
     );
 
-    console.log('excludedHours', excludedHours);
-
     for (let i = 0; i < excludedHours.length; i++) {
       const startIndex = startHours.findIndex(
         (el) => excludedHours[i].startHour === el
       );
 
-      console.log('godziny startu', startHours);
-      console.log('wyciete godziny od i', excludedHours[i].startHour);
-
       const endIndex = startHours.findIndex(
         (el) => excludedHours[i].endHour === el
       );
 
-      console.log('start', startIndex);
-      console.log('koniec', endIndex);
-
       const nrOfRemovedHours = endIndex - startIndex + 2;
-
-      console.log('nrOfRemovedHours', nrOfRemovedHours);
 
       startHours.splice(startIndex - 1, nrOfRemovedHours);
     }
-
-    console.log('start godzs', startHours);
 
     return startHours;
   };
@@ -254,9 +239,7 @@ function Index({
         const removeIndex = availableEndHours.findIndex(
           (el) => el === excludedHours[minIndex].startHour
         );
-        console.log('minIndex: ', removeIndex);
         endHours.splice(removeIndex);
-        console.log(endHours);
       }
     }
     return endHours;
@@ -380,7 +363,6 @@ function Index({
   const [NIP, setNIP] = useState('');
   const [date, setDate] = useState(new Date());
   const [startHour, setStartHour] = useState(getStartHour());
-  // console.log('1 godzina', generateAvailableStartHoursArrayForChosenDay(date));
   const [endHour, setEndHour] = useState('8:30');
   const [nrOfPeople, setNrOfPeople] = useState('1');
 
@@ -456,8 +438,6 @@ function Index({
       setIsEmailIncorrect(false);
       setIsPhoneIncorrect(false);
 
-      console.log(city);
-
       const data = {
         conferenceRoom: conferenceRoom.id,
         name: name,
@@ -475,8 +455,6 @@ function Index({
         startHour: startHour,
         endHour: endHour
       };
-
-      console.log('data', data);
 
       const response = await HTTPRequest('POST', '/reservation-email', data);
       if (response.success) {
@@ -554,7 +532,6 @@ function Index({
                   startDate
                 )}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  console.log(e.target.value);
                   const value: string = e.target.value;
                   setEndHours(
                     generateAvailableEndHoursArrayForChosenDay(startDate, value)
@@ -825,7 +802,7 @@ export async function getStaticProps({ params: { id } }: IParams) {
     facilities: conferenceRoomResponse.facilities
   };
 
-  const reservations: IShortenReservation[] = reservationResponse.map(
+  let reservations: IShortenReservation[] = reservationResponse.map(
     (el: IShortenReservation) => {
       return {
         _id: el._id.toString(),
@@ -839,7 +816,7 @@ export async function getStaticProps({ params: { id } }: IParams) {
 
   return {
     props: {
-      reservations: JSON.parse(JSON.stringify(reservations)) || {},
+      reservations: JSON.parse(JSON.stringify(reservations)) || [],
       conferenceRoom: conferenceRoom || {}
     },
     revalidate: 3600
