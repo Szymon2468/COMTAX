@@ -484,7 +484,7 @@ function Index({
         </div>
       </div>
       <div className='container'>
-        <div className={styles.infoContainer}>
+        {/* <div className={styles.infoContainer}>
           <div className={styles.infoList}>
             <h2>Udogodnienia: </h2>
             {conferenceRoom.facilities.map((el) => (
@@ -493,20 +493,11 @@ function Index({
               </p>
             ))}
           </div>
-        </div>
-
-        <div className='section'>
-          <section className={styles.gallery}>
-            <h2>Przeglądaj zdjęcia z tej sali</h2>
-            <div className={styles.galleryContainer}>
-              <Gallery images={images} />
-            </div>
-          </section>
-        </div>
+        </div> */}
 
         <section>
           <header className={styles.header}>
-            <h2 className={styles.title}>ZAREZERWUJ SALĘ JUZ TERAZ</h2>
+            <h2 className={styles.title}>ZAREZERWUJ SALĘ</h2>
           </header>
           <div className={styles.formContainersContainer}>
             <div className={styles.calendarContainer}>
@@ -723,6 +714,16 @@ function Index({
             <div className={styles.btns}>
               {!isMsgSent && (
                 <Button
+                  text='Rezerwuj'
+                  type='FULL'
+                  color='GREEN'
+                  btnWidth={150}
+                  className={styles.resBtn}
+                  onClick={() => sendEmail()}
+                />
+              )}
+              {!isMsgSent && (
+                <Button
                   text='Anuluj'
                   type='FULL'
                   color='BLUE'
@@ -731,16 +732,6 @@ function Index({
                     window.location.href = '/sale-konferencyjne/rezerwacja';
                   }}
                   className={styles.cancelBtn}
-                />
-              )}
-              {!isMsgSent && (
-                <Button
-                  text='Rezerwuj'
-                  type='FULL'
-                  color='GREEN'
-                  btnWidth={150}
-                  className={styles.resBtn}
-                  onClick={() => sendEmail()}
                 />
               )}
             </div>
@@ -759,6 +750,16 @@ function Index({
             </p>
           )}
         </section>
+
+        <div className='section'>
+          <section className={styles.gallery}>
+            <h2>ZOBACZ NASZĄ SALĘ</h2>
+          </section>
+
+          <div className={styles.galleryContainer}>
+            <Gallery images={images} />
+          </div>
+        </div>
       </div>
     </MasterLayout>
   );

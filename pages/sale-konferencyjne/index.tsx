@@ -173,18 +173,17 @@ function ConferenceOffice() {
           </div>
         </section>
 
-        <div className='section'>
-          <section className={styles.gallery}>
-            <Gallery images={images} />
-          </section>
-        </div>
-
         <section>
           <div className='container'>
             <h2 className={styles.galleryTitle}>
-              POZNAJ LEPIEJ NASZĄ SALĘ KONFERENCYJNĄ
+              POZNAJ LEPIEJ NASZE SALE KONFERENCYJNE
             </h2>
             <div className={styles.galleryContainer}></div>
+          </div>
+          <div className='section'>
+            <section className={styles.gallery}>
+              <Gallery images={images} />
+            </section>
           </div>
         </section>
       </main>
