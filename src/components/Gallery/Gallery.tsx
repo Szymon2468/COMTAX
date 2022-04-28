@@ -28,7 +28,7 @@ const Gallery = ({ images }: IGalleryProps) => {
     );
   });
 
-  return <>{result}</>;
+  return <div className={styles.galleryContainer}>{result}</div>;
 };
 
 export default Gallery;

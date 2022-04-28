@@ -91,10 +91,6 @@ const images: IImage[] = [
   {
     url: BackgroundImage.src,
     title: 'ac'
-  },
-  {
-    url: BackgroundImage.src,
-    title: 'ad'
   }
 ];
 

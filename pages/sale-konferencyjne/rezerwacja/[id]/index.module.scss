@@ -60,16 +60,26 @@
 }
 
 .gallery {
-  max-width: 1500px;
-  display: flex;
-  flex-wrap: wrap;
+  width: 1005px;
   justify-content: center;
   margin: 0 auto;
+
+  @include media('<bigger-tablet-landscape') {
+    width: 670px;
+  }
+
+  @include media('<bigger-tablet-landscape') {
+    width: 335px;
+  }
 
   h2 {
     width: 100%;
     text-align: center;
     margin: 35px 0;
+  }
+
+  div {
+    width: fit-content;
   }
 }
 

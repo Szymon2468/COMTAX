@@ -63,7 +63,9 @@ function Index({
         'GET',
         `/reservations?conferenceRoom=${conferenceRoom.id}&date=${date}`
       );
-      setCurrentReservations(reservationResponse.data);
+      setCurrentReservations(
+        JSON.parse(JSON.stringify(reservationResponse.data))
+      );
     };
     request();
   }, [startDate]);
@@ -264,12 +266,14 @@ function Index({
     let excludedHours: IReservationDateType[] = [];
     let result: JSX.Element[] = [];
 
-    currentReservations.map((el) =>
+    console.log('currentReservations', currentReservations);
+
+    for (let reservation of currentReservations) {
       excludedHours.push({
-        startHour: el.startHour,
-        endHour: el.endHour
-      })
-    );
+        startHour: reservation.startHour,
+        endHour: reservation.endHour
+      });
+    }
 
     if (!excludedHours.length) {
       return result;
@@ -494,7 +498,7 @@ function Index({
         <div className={`container ${styles.accountsContainer}`}>
           <header>
             <h1 className={styles.landingTitle}>
-              SALA KONFERENCYJNA {`'${conferenceRoom.name}'`}
+              <span>SALA KONFERENCYJNA</span> <span>{conferenceRoom.name}</span>
             </h1>
           </header>
         </div>
@@ -514,7 +518,9 @@ function Index({
         <div className='section'>
           <section className={styles.gallery}>
             <h2>Przeglądaj zdjęcia z tej sali</h2>
-            <Gallery images={images} />
+            <div className={styles.galleryContainer}>
+              <Gallery images={images} />
+            </div>
           </section>
         </div>
 
