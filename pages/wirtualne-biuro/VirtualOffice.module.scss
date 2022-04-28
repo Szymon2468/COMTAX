@@ -297,10 +297,26 @@
 }
 
 .offerSelect {
+  box-shadow: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-image: url('http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png');
+  background-repeat: no-repeat;
+  background-size: 12px;
+  background-position-x: 77px;
+  background-position-y: 50%;
+  background-color: white;
+  text-indent: 6px;
+  padding-right: 20px;
+  padding-left: 0;
   width: 100px !important;
+  font-size: 16px;
 }
 
 .selectColumn {
+  text-align: -webkit-center;
   text-align-last: center;
 }
 
