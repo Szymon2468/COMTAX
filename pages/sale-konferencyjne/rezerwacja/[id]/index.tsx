@@ -41,7 +41,7 @@ function Index({
   reservations: IShortenReservation[];
   conferenceRoom: IConferenceRoomResponse;
 }) {
-  console.log(reservations);
+  console.log('reservations', reservations);
   console.log(conferenceRoom);
   const roomId = 0;
   const [endHours, setEndHours] = useState<string[]>();
@@ -50,6 +50,7 @@ function Index({
     useState<IShortenReservation[]>(reservations);
   const inputEndRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const inputStartRef = useRef() as MutableRefObject<HTMLSelectElement>;
+  const inputNrOfPeopleRef = useRef() as MutableRefObject<HTMLSelectElement>;
   const [
     areReservationHoursForChosenDayShowed,
     setAreReservationHoursForChosenDayShowed
@@ -62,6 +63,7 @@ function Index({
         'GET',
         `/reservations?conferenceRoom=${conferenceRoom.id}&date=${date}`
       );
+      setCurrentReservations(reservationResponse.data);
     };
     request();
   }, [startDate]);
@@ -101,6 +103,20 @@ function Index({
     }
   ];
 
+  const getStartHour = () => {
+    for (const el of currentReservations) {
+      if (
+        el.startHour === availableStartHours[0] ||
+        el.startHour === availableStartHours[1]
+      ) {
+        return availableStartHours[
+          availableStartHours.findIndex((avHour) => avHour === el.endHour) + 1
+        ];
+      }
+    }
+    return '8:00';
+  };
+
   const availableStartHours = [
     '8:00',
     '8:30',
@@ -123,6 +139,11 @@ function Index({
     '17:00',
     '17:30'
   ];
+
+  availableStartHours.splice(
+    0,
+    availableStartHours.findIndex((el) => el === getStartHour())
+  );
 
   const availableEndHours = [
     '8:30',
@@ -156,6 +177,8 @@ function Index({
     let startHours = availableStartHours;
     let excludedHours: IReservationDateType[] = [];
 
+    console.log('godz startu na poczatku', startHours);
+
     currentReservations.map((el) =>
       excludedHours.push({
         startHour: el.startHour,
@@ -163,21 +186,31 @@ function Index({
       })
     );
 
-    console.log(excludedHours);
+    console.log('excludedHours', excludedHours);
 
     for (let i = 0; i < excludedHours.length; i++) {
       const startIndex = startHours.findIndex(
         (el) => excludedHours[i].startHour === el
       );
 
+      console.log('godziny startu', startHours);
+      console.log('wyciete godziny od i', excludedHours[i].startHour);
+
       const endIndex = startHours.findIndex(
         (el) => excludedHours[i].endHour === el
       );
 
+      console.log('start', startIndex);
+      console.log('koniec', endIndex);
+
       const nrOfRemovedHours = endIndex - startIndex + 2;
+
+      console.log('nrOfRemovedHours', nrOfRemovedHours);
 
       startHours.splice(startIndex - 1, nrOfRemovedHours);
     }
+
+    console.log('start godzs', startHours);
 
     return startHours;
   };
@@ -341,6 +374,11 @@ function Index({
   const [ZIPCode, setZIPCode] = useState('');
   const [city, setCity] = useState('');
   const [NIP, setNIP] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [startHour, setStartHour] = useState(getStartHour());
+  // console.log('1 godzina', generateAvailableStartHoursArrayForChosenDay(date));
+  const [endHour, setEndHour] = useState('8:30');
+  const [nrOfPeople, setNrOfPeople] = useState('1');
 
   const [isNameEmptyErrorVisible, setisNameEmptyErrorVisible] = useState(false);
   const [isSurrnameEmptyErrorVisible, setisSurrnameEmptyErrorVisible] =
@@ -356,6 +394,7 @@ function Index({
   const [isMsgSent, setIsMsgSent] = useState(false);
 
   const [isMsgSendigError, setIsMsgSendigError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/;
@@ -368,10 +407,18 @@ function Index({
       phoneRegex.test(phone) === false ||
       emailRegex.test(email) === false
     ) {
+      setIsError(true);
+
       if (name === '') {
         setisNameEmptyErrorVisible(true);
       } else {
         setisNameEmptyErrorVisible(false);
+      }
+
+      if (surrname === '') {
+        setisSurrnameEmptyErrorVisible(true);
+      } else {
+        setisSurrnameEmptyErrorVisible(false);
       }
 
       if (phone === '') {
@@ -398,6 +445,7 @@ function Index({
         setIsEmailIncorrect(false);
       }
     } else {
+      setIsError(false);
       setisNameEmptyErrorVisible(false);
       setisPhoneEmptyErrorVisible(false);
       setisEmailEmptyErrorVisible(false);
@@ -407,23 +455,29 @@ function Index({
       console.log(city);
 
       const data = {
+        conferenceRoom: conferenceRoom.id,
         name: name,
-        surrname: surrname,
+        surname: surrname,
         phone: phone,
         email: email,
-        msg: msg || 'nie podano',
+        message: msg || 'nie podano',
         company: company || 'nie podano',
         street: street || 'nie podano',
-        ZIPCode: ZIPCode || 'nie podano',
+        zipCode: ZIPCode || 'nie podano',
         city: city || 'nie podano',
-        NIP: NIP || 'nie podano'
+        NIP: NIP || 'nie podano',
+        date: date.getTime(),
+        numberOfPeople: nrOfPeople,
+        startHour: startHour,
+        endHour: endHour
       };
 
-      console.log(data);
+      console.log('data', data);
 
       const response = await HTTPRequest('POST', '/reservation-email', data);
       if (response.success) {
         setIsMsgSent(true);
+        await HTTPRequest('PUT', '/reservations', data);
       } else {
         setIsMsgSendigError(true);
       }
@@ -465,10 +519,10 @@ function Index({
         </div>
 
         <section>
-          <div className='container'>
-            <header className={styles.header}>
-              <h2 className={styles.title}>ZAREZERWUJ SALĘ JUZ TERAZ</h2>
-            </header>
+          <header className={styles.header}>
+            <h2 className={styles.title}>ZAREZERWUJ SALĘ JUZ TERAZ</h2>
+          </header>
+          <div className={styles.formContainersContainer}>
             <div className={styles.calendarContainer}>
               <p>Wybierz datę rezerwacji: </p>
               <HighliteDates
@@ -476,17 +530,19 @@ function Index({
                 setStartDate={setStartDate}
               />
             </div>
-            <div className={styles.reservatedHoursContainer}>
-              {generateReservatedHoursComponent(startDate)}
-            </div>
+          </div>
+          <div className={styles.reservatedHoursContainer}>
+            {generateReservatedHoursComponent(startDate)}
           </div>
 
           <div className={styles.formContainersContainer}>
             <div className={styles.formContainer}>
               <Input
                 ref={inputStartRef}
+                containerClassname={styles.containerInput}
                 typeOfInput='SELECT'
                 label='Zarezerwuj salę od'
+                defaultValue={startHour}
                 className={styles.dateInput}
                 options={generateAvailableStartHoursArrayForChosenDay(
                   startDate
@@ -497,24 +553,38 @@ function Index({
                   setEndHours(
                     generateAvailableEndHoursArrayForChosenDay(startDate, value)
                   );
+                  setStartHour(value);
                 }}
               />
               <Input
                 ref={inputEndRef}
+                containerClassname={styles.containerInput}
                 typeOfInput='SELECT'
                 label='do'
+                defaultValue={endHour}
                 className={styles.dateInput}
                 options={generateAvailableEndHoursArrayForChosenDay(
                   new Date(),
-                  '8:00'
+                  startHour
                 )}
-                onChange={() => setAreReservationHoursForChosenDayShowed(true)}
+                onChange={(e: any) => {
+                  const value: string = e.target.value;
+                  setAreReservationHoursForChosenDayShowed(true);
+                  setEndHour(value);
+                }}
               />
               <Input
+                ref={inputNrOfPeopleRef}
+                containerClassname={styles.containerInput}
                 typeOfInput='SELECT'
                 options={['1', '2', '3', '4', '5', '6']}
                 label='Liczba osób'
                 className={styles.dateInput}
+                defaultValue={nrOfPeople}
+                onChange={(e: any) => {
+                  const value: string = e.target.value;
+                  setNrOfPeople(value);
+                }}
               />
             </div>
           </div>
@@ -528,6 +598,7 @@ function Index({
                 className={styles.input}
                 placeholder={namePlaceholder}
                 center={center}
+                containerClassname={styles.inputContaineruniqe}
                 onChange={(e: any) => {
                   setName(e.target.value);
                 }}
@@ -540,6 +611,7 @@ function Index({
                 label={surrnameLabel}
                 className={styles.input}
                 placeholder={surrnamePlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setSurrname(e.target.value);
@@ -553,6 +625,7 @@ function Index({
                 label={emailLabel}
                 className={styles.input}
                 placeholder={emailPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setEmail(e.target.value);
@@ -571,6 +644,7 @@ function Index({
                 label={phoneLabel}
                 className={styles.input}
                 placeholder={phonePlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setPhone(e.target.value);
@@ -589,6 +663,7 @@ function Index({
                 label={msgLabel}
                 className={styles.input}
                 placeholder={msgPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setMsg(e.target.value);
@@ -603,6 +678,7 @@ function Index({
                 label={companyLabel}
                 className={styles.input}
                 placeholder={companyPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setCompany(e.target.value);
@@ -613,6 +689,7 @@ function Index({
                 label={streetLabel}
                 className={styles.input}
                 placeholder={streetPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setStreet(e.target.value);
@@ -623,6 +700,7 @@ function Index({
                 label={ZIPcodeLabel}
                 className={styles.input}
                 placeholder={ZIPcodePlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setZIPCode(e.target.value);
@@ -633,6 +711,7 @@ function Index({
                 label={cityLabel}
                 className={styles.input}
                 placeholder={cityPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setCity(e.target.value);
@@ -643,31 +722,54 @@ function Index({
                 label={NIPLabel}
                 className={styles.input}
                 placeholder={NIPPlaceholder}
+                containerClassname={styles.inputContaineruniqe}
                 center={center}
                 onChange={(e: any) => {
                   setNIP(e.target.value);
                 }}
               />
+              {isError && (
+                <p className={styles.error}>
+                  Proszę poprawić zaznaczone powyżej błędy w formularzu.
+                </p>
+              )}
             </div>
 
             <div className={styles.btns}>
-              <Button
-                text='Anuluj'
-                type='FULL'
-                color='BLUE'
-                btnWidth={150}
-                className={styles.cancelBtn}
-              />
-              <Button
-                text='Rezerwuj'
-                type='FULL'
-                color='GREEN'
-                btnWidth={150}
-                className={styles.resBtn}
-                onClick={() => sendEmail()}
-              />
+              {!isMsgSent && (
+                <Button
+                  text='Anuluj'
+                  type='FULL'
+                  color='BLUE'
+                  btnWidth={150}
+                  className={styles.cancelBtn}
+                />
+              )}
+              {!isMsgSent && (
+                <Button
+                  text='Rezerwuj'
+                  type='FULL'
+                  color='GREEN'
+                  btnWidth={150}
+                  className={styles.resBtn}
+                  onClick={() => sendEmail()}
+                />
+              )}
             </div>
           </div>
+          {isMsgSent && (
+            <p className={styles.sendSuccess}>Dokonano rezerwacji.</p>
+          )}
+          {isMsgSendigError && (
+            <p className={styles.sendError}>
+              Nie udało się dokonać rezerwacji.
+            </p>
+          )}
+          {isMsgSent && (
+            <p className={`smaller ${styles.sendSuccess}`}>
+              W celu ewentualnego odwołania rezerwacji prosimy o kontakt.
+            </p>
+          )}
         </section>
       </div>
     </>
@@ -731,7 +833,7 @@ export async function getStaticProps({ params: { id } }: IParams) {
 
   return {
     props: {
-      reservations: reservations || {},
+      reservations: JSON.parse(JSON.stringify(reservations)) || {},
       conferenceRoom: conferenceRoom || {}
     },
     revalidate: 3600

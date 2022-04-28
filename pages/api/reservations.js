@@ -47,10 +47,12 @@ const handleGet = async (req, res) => {
 };
 
 const handlePut = async (req, res) => {
+  console.log(req.body);
   try {
     const date = new Date(parseInt(req.body.date));
     date.setUTCHours(2, 0, 0, 0);
     req.body.date = date.getTime();
+    req.body.numberOfPeople = parseInt(req.body.numberOfPeople);
 
     const reservation = await Reservation.find({
       date: date.getTime(),

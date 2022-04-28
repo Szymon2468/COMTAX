@@ -53,26 +53,19 @@ const ReservationSchema = new mongoose.Schema({
     maxlength: [500, 'Uwagi nie mogą zawierać więcej niż 500 znaków']
   },
   company: {
-    type: String,
-    required: [true, 'Proszę podać nazwę firmy']
+    type: String
   },
   street: {
-    type: String,
-    required: [true, 'Proszę podać nazwę firmy']
+    type: String
   },
   zipCode: {
-    type: String,
-    required: [true, 'Proszę podać nazwę firmy'],
-    match: [/[0-9]{2}-[0-9]{3}/, 'Proszę podać poprawny kod pocztowy']
+    type: String
   },
   city: {
-    type: String,
-    required: [true, 'Proszę podać miasto']
+    type: String
   },
   NIP: {
-    type: String,
-    required: [true, 'Proszę podać NIP'],
-    match: [/^[0-9]{10}$/, 'Proszę podać poprawny NIP']
+    type: String
   },
   createdAt: {
     type: Date,
