@@ -13,9 +13,10 @@ let conn;
 async function dbConnect() {
   if (!conn || !conn.connection || !conn.connection.host) {
     conn = await mongoose.connect(MONGODB_URI);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
   }
 
-  console.log(`MongoDB Connected: ${conn.connection.host}`);
+  console.log(`MongoDB already connected: ${conn.connection.host}`);
 }
 
 export default dbConnect;
