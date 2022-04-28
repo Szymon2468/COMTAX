@@ -46,6 +46,9 @@
         }
 
         svg {
+          width: 60px;
+          height: 60px;
+
           @include media('<=extra-mobile') {
             margin-bottom: 10px;
           }
