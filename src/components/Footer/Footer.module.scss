@@ -201,6 +201,10 @@
       width: fit-content;
       margin-left: 15px;
 
+      @include media('<=mobile') {
+        height: 20px;
+      }
+
       &:hover {
         fill: none;
       }
