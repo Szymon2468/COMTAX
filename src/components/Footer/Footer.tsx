@@ -75,7 +75,6 @@ function Footer() {
         <p className={styles.footerInfoItem}>
           © Copyright 2022, Biuro Rachunkowe COMTAX. All Rights Reserved.
         </p>
-        <br />
         <a href='https://www.gancle-studio.pl'>
           <p className={styles.footerInfoItemCreator}>
             Strona stworzona przez <span>|</span> This site was created by{' '}

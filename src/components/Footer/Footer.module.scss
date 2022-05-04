@@ -25,7 +25,6 @@
   }
 
   .footerItemsContainer {
-    // width: 100%;
     display: flex;
     justify-content: space-between;
     margin: 70px 0 0 50px;
@@ -179,11 +178,13 @@
   margin-bottom: 70px;
 
   .footerInfoItem {
+    font-size: 14px;
     margin: 0;
   }
 
   .footerInfoItemCreator {
     margin: 0;
+    font-size: 14px;
 
     &:hover {
       cursor: pointer;
@@ -196,7 +197,7 @@
     }
 
     svg {
-      height: 26px;
+      height: 14px;
       width: fit-content;
       margin-left: 15px;
 

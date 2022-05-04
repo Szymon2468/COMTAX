@@ -227,3 +227,15 @@ h3,
 .swiper-slide-next {
   transition: all 1s;
 }
+
+.CookieConsent {
+  a {
+    text-decoration: underline;
+    color: $mainColor;
+
+    &:hover {
+      transition: color 0.3s linear;
+      color: white;
+    }
+  }
+}

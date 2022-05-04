@@ -198,7 +198,11 @@ function ContactForm() {
               <Input
                 label=''
                 typeOfInput='SELECT'
-                options={['telefon', 'e-mail']}
+                options={[
+                  'Preferowany sposób kontaktu',
+                  'Kontakt przez telefon',
+                  'Kontakt przez e-mail'
+                ]}
                 className={styles.contactInput}
                 ref={contactRef}
                 defaultValue={contact}
@@ -237,8 +241,7 @@ function ContactForm() {
               )}
               {isMsgSendigError && (
                 <p className={styles.sendError}>
-                  Nie udało się wysłać wiadomości. Spróbuj ponownie za pięć
-                  minut.
+                  Nie udało się wysłać wiadomości. Spróbuj ponownie później.
                 </p>
               )}
             </div>
