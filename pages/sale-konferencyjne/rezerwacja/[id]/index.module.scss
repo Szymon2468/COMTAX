@@ -137,6 +137,10 @@
       width: 100%;
       text-align: center;
     }
+
+    form {
+      width: 100%;
+    }
   }
 
   .dateInput {
@@ -206,19 +210,19 @@
 }
 
 .containerInput {
-  width: 700px;
+  width: 700px !important;
 
   @include media('<tablet-portrait') {
-    width: 400px;
+    width: 400px !important;
   }
 
   @include media('<extra-mobile') {
-    width: 310px;
+    width: 310px !important;
   }
 }
 
 .error {
-  margin-top: 10px;
+  margin-top: 0;
   font-size: 16px;
   color: rgb(182, 16, 16);
   margin-bottom: 0;
@@ -251,7 +255,59 @@
   margin: 0 auto;
   margin-top: 35px;
 
+  div {
+    display: flex;
+    flex-wrap: wrap;
+
+    p {
+      width: fit-content;
+      padding: 5px 15px;
+      margin: 10px;
+      background-color: $mainColor;
+      border-radius: 4px;
+      filter: drop-shadow(-2px 2px 4px rgba(0, 0, 0, 0.25));
+    }
+  }
+
   @include media('<tablet-portrait') {
     width: auto;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 35px;
+
+  input,
+  textarea,
+  select {
+    width: 400px;
+    height: 44px;
+    border-radius: 5px;
+    filter: drop-shadow(-2px 2px 4px rgba(0, 0, 0, 0.25));
+    border: none;
+    box-sizing: border-box;
+    padding: 10px 20px 10px 20px;
+
+    @include media('<=extra-mobile') {
+      width: 310px;
+    }
+  }
+
+  select {
+    color: rgb(114, 114, 114);
+    opacity: 1;
+  }
+
+  textarea {
+    min-height: 150px;
+  }
+
+  .info {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
   }
 }

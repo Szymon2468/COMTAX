@@ -10,6 +10,7 @@ interface buttonProps {
   color: BUTTON_COLOR;
   className?: String;
   btnWidth?: Number;
+  btnType?: 'button' | 'submit' | 'reset';
 }
 
 function Button({
@@ -18,7 +19,8 @@ function Button({
   type,
   color,
   className,
-  btnWidth
+  btnWidth,
+  btnType
 }: buttonProps) {
   let cls = '';
   if (type === 'FULL' && color === 'GREEN') {
@@ -37,6 +39,7 @@ function Button({
       className={`${styles.btn} ${cls} ${className ? className : ''}`}
       onClick={onClick ? () => onClick() : undefined}
       style={{ width: btnWidth ? `${btnWidth}px` : 'auto' }}
+      type={btnType || 'button'}
     >
       {text}
     </button>

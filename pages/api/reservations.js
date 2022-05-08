@@ -36,8 +36,35 @@ const handleGet = async (req, res) => {
         conferenceRoom: req.query.conferenceRoom,
         date: date.getTime()
       });
+
+      reservation.sort((a, b) => {
+        const aStart =
+          a.startHour.length === 4 ? `0${a.startHour}` : a.startHour;
+        const bStart =
+          b.startHour.length === 4 ? `0${b.startHour}` : b.startHour;
+        if (aStart < bStart) {
+          return -1;
+        }
+        if (aStart > bStart) {
+          return 1;
+        }
+        return 0;
+      });
     } else {
       reservation = await Reservation.find({});
+      reservation.sort((a, b) => {
+        const aStart =
+          a.startHour.length === 4 ? `0${a.startHour}` : a.startHour;
+        const bStart =
+          b.startHour.length === 4 ? `0${b.startHour}` : b.startHour;
+        if (aStart < bStart) {
+          return -1;
+        }
+        if (aStart > bStart) {
+          return 1;
+        }
+        return 0;
+      });
     }
     res.status(200).json({ success: true, data: reservation });
   } catch (error) {
@@ -47,7 +74,6 @@ const handleGet = async (req, res) => {
 };
 
 const handlePut = async (req, res) => {
-  console.log(req.body);
   try {
     const date = new Date(parseInt(req.body.date));
     date.setUTCHours(2, 0, 0, 0);

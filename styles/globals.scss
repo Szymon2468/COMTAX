@@ -239,3 +239,7 @@ h3,
     }
   }
 }
+
+.react-datepicker__navigation-icon::before {
+  top: 12px !important;
+}

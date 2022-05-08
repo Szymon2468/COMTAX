@@ -94,7 +94,7 @@ const Input = ({
       </div>
     );
   } else {
-    return <div>lol</div>;
+    return <></>;
   }
 };
 
