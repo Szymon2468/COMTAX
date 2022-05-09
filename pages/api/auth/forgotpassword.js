@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
   if (!user) {
     res
-      .status(404)
+      .status(200)
       .json({ success: false, msg: 'There is no user with that email' });
     return;
   }
