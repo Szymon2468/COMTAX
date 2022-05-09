@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import Button from '../../../src/components/Button/Button';
-import styles from './ResetPassword.module.scss';
+import styles from './ForgotPassword.module.scss';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { HTTPRequest } from '../../../src/lib/httpRequest';
@@ -16,7 +16,7 @@ interface IResetPasswordFormValues {
   email: string;
 }
 
-const LoginPage = () => {
+const ForgotPasswordPage = () => {
   const [emailSent, setEmailSent] = useState(false);
   const [invalidCredentials, setInvalidCredentials] = useState(false);
   const [serverError, setServerError] = useState(false);
@@ -128,4 +128,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ForgotPasswordPage;

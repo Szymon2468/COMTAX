@@ -66,7 +66,6 @@ export default async function handler(req, res) {
       <p style="margin:0;line-height:1.1em;color:black">NIP: <b>${
         req.body.NIP !== '' ? req.body.NIP : 'nie podano'
       }</b></p>
-      </div>
     `;
 
     const msg = {

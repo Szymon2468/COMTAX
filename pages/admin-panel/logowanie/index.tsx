@@ -95,7 +95,7 @@ const LoginPage = () => {
                   />
                 </div>
                 <div className={styles.forgottenPassword}>
-                  <Link href='/admin-panel/reset-hasla'>
+                  <Link href='/admin-panel/zapomniane-haslo'>
                     <a className='p-smaller'>Zapomniałem/am hasła</a>
                   </Link>
                 </div>

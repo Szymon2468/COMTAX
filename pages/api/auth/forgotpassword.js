@@ -27,9 +27,18 @@ export default async function handler(req, res) {
   await user.save({ validateBeforeSave: false });
 
   // Create reset url
-  const resetUrl = `${req.protocol}://${req.host}/api/v1/auth/resetpassword/${resetToken}`;
+  const resetUrl = `${process.env.SITE_URL}/admin-panel/reset-hasla/${resetToken}`;
 
-  const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`;
+  const message = `
+    <h3 style="margin:0;color:black">Została zgłoszona prośba o reset hasła w serwisie COMTAX na koncie przypisanym do tego adresu e-mail.</h3>
+    <p style="margin:0;line-height:1.1em;color:black">W celu zresetowania hasła prosimy o odwiedzenie poniższej strony: </p>
+    <p style="margin:0;line-height:1.1em;color:black"><a href='${resetUrl}'>RESET HASŁA</a> </p>
+    <br/>
+    <p style="margin:0;line-height:1.1em;color:black">Jeśli to nie Ty poprosiłeś/aś o zmianę hasła, prosimy o zignorowanie tej wiadomości.</p>
+    <br/>
+    <p style="margin:0;line-height:1.1em;color:black">Pozdrawiamy</p>
+    <p style="margin:0;line-height:1.1em;color:black">Zespół COMTAX</p>
+  `;
 
   try {
     const transporter = nodemailer.createTransport({

@@ -12,6 +12,7 @@ export default async function handler(req, res) {
 
   await dbConnect();
   const token = req.query.resettoken;
+  console.log(token);
 
   // Get hashed token
   const resetPasswordToken = crypto
@@ -25,7 +26,7 @@ export default async function handler(req, res) {
   });
 
   if (!user) {
-    res.status(400).json({ success: false, msg: 'Invalid token' });
+    res.status(200).json({ success: false, msg: 'Invalid token' });
     return;
   }
 
@@ -35,5 +36,5 @@ export default async function handler(req, res) {
   user.resetPasswordExpire = undefined;
   await user.save();
 
-  sendTokenResponse(user, 200, res);
+  res.status(200).json({ success: true });
 }
