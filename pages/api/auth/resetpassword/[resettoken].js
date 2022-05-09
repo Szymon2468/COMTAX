@@ -1,5 +1,7 @@
-import dbConnect from '../../../app/lib/dbConnect';
-import User from '../../../app/models/User';
+import dbConnect from '../../../../app/lib/dbConnect';
+import User from '../../../../app/models/User';
+import crypto from 'crypto';
+import sendTokenResponse from '../../../../app/lib/sendTokenResponse';
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -9,11 +11,12 @@ export default async function handler(req, res) {
   }
 
   await dbConnect();
+  const token = req.query.resettoken;
 
   // Get hashed token
   const resetPasswordToken = crypto
     .createHash('sha256')
-    .update(req.params.resettoken)
+    .update(token)
     .digest('hex');
 
   const user = await User.findOne({
@@ -23,6 +26,7 @@ export default async function handler(req, res) {
 
   if (!user) {
     res.status(400).json({ success: false, msg: 'Invalid token' });
+    return;
   }
 
   // Set new password

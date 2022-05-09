@@ -1,4 +1,5 @@
 import dbConnect from '../../../app/lib/dbConnect';
+import { setCookie } from '../../../app/lib/sendTokenResponse';
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -10,13 +11,10 @@ export default async function handler(req, res) {
   await dbConnect();
 
   //logout
-  res.cookie('comtaxLoginToken', 'none', {
+  setCookie(res, 'comtaxLoginToken', 'none', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true
   });
 
-  res.status(200).json({
-    success: true,
-    data: {}
-  });
+  res.end(res.getHeader('Set-Cookie'));
 }

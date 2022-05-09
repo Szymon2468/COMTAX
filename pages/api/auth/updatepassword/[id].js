@@ -1,6 +1,6 @@
-import dbConnect from '../../../app/lib/dbConnect';
-import sendTokenResponse from '../../../app/lib/sendTokenResponse';
-import User from '../../../app/models/User';
+import dbConnect from '../../../../app/lib/dbConnect';
+import sendTokenResponse from '../../../../app/lib/sendTokenResponse';
+import User from '../../../../app/models/User';
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -11,7 +11,9 @@ export default async function handler(req, res) {
 
   await dbConnect();
 
-  const user = await User.findById(req.user.id).select('+password');
+  const id = req.query.id;
+
+  const user = await User.findById(id).select('+password');
 
   // Check current password
   if (!(await user.matchPassword(req.body.currentPassword))) {

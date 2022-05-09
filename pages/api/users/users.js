@@ -18,6 +18,7 @@ export default async function handler(req, res) {
       break;
     case 'POST':
       try {
+        req.body.email = req.body.email.toLowerCase();
         const { name, surname, email, password, role } = req.body;
         const user = await User.create({
           name,

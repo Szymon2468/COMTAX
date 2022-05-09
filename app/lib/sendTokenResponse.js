@@ -1,3 +1,16 @@
+import { serialize } from 'cookie';
+
+export const setCookie = (res, name, value, options = {}) => {
+  const stringValue =
+    typeof value === 'object' ? 'j:' + JSON.stringify(value) : String(value);
+
+  if ('expires' in options) {
+    options.expires = options.expires;
+  }
+
+  res.setHeader('Set-Cookie', serialize(name, stringValue, options));
+};
+
 // Get token from model, create cookie and send response
 const sendTokenResponse = (user, statusCode, res) => {
   // Create token
@@ -14,10 +27,15 @@ const sendTokenResponse = (user, statusCode, res) => {
     options.secure = true;
   }
 
-  res.status(statusCode).cookie('comtaxLoginToken', token, options).json({
-    success: true,
-    token
-  });
+  // Calling our pure function using the `res` object, it will add the `set-cookie` header
+  setCookie(res, 'comtaxLoginToken', token, options);
+  // Return the `set-cookie` header so we can display it in the browser and show that it works!
+  res.end(res.getHeader('Set-Cookie'));
+
+  // res.status(statusCode).cookie('comtaxLoginToken', token, options).json({
+  //   success: true,
+  //   token
+  // });
 };
 
 export default sendTokenResponse;

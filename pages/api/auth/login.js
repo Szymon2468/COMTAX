@@ -11,6 +11,7 @@ export default async function handler(req, res) {
 
   await dbConnect();
 
+  req.body.email = req.body.email.toLowerCase();
   const { email, password } = req.body;
 
   // Validate email & password
