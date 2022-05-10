@@ -30,7 +30,15 @@ const sendTokenResponse = (user, statusCode, res) => {
   // Calling our pure function using the `res` object, it will add the `set-cookie` header
   setCookie(res, 'comtaxLoginToken', token, options);
   // Return the `set-cookie` header so we can display it in the browser and show that it works!
-  res.status(200).json({ success: true }).end(res.getHeader('Set-Cookie'));
+  res
+    .status(200)
+    .json({
+      success: true,
+      token: token,
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+      )
+    });
 };
 
 export default sendTokenResponse;

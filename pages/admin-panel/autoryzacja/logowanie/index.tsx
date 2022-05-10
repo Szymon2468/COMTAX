@@ -1,9 +1,12 @@
 import classNames from 'classnames';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
-import Button from '../../../src/components/Button/Button';
+import Button from '../../../../src/components/Button/Button';
 import styles from './LoginPage.module.scss';
 import * as Yup from 'yup';
 import Link from 'next/link';
+import { HTTPRequest } from '../../../../src/lib/httpRequest';
+import { useState } from 'react';
+import Cookies from 'universal-cookie';
 
 const FormValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -18,9 +21,8 @@ interface ILoginFormValues {
 }
 
 const LoginPage = () => {
-  const handleLogin = async () => {
-    return;
-  };
+  const [invalidCredentials, setInvalidCredentials] = useState(false);
+  const [serverError, setServerError] = useState(false);
 
   return (
     <div className={styles.landingPage}>
@@ -37,23 +39,24 @@ const LoginPage = () => {
               values: ILoginFormValues,
               { setSubmitting }: FormikHelpers<ILoginFormValues>
             ) => {
-              console.log('first');
-              alert(JSON.stringify(values, null, 2));
+              const response = await HTTPRequest('POST', 'auth/login', values);
 
-              // const data = JSON.parse(JSON.stringify(values, null, 2));
-              // data.conferenceRoom = conferenceRoom.id;
-              // data.date = date.getTime();
+              if (response.serverError) {
+                setServerError(true);
+                return;
+              }
 
-              // const response = await HTTPRequest('POST', '/reservation-email', {
-              //   ...data,
-              //   room: conferenceRoom
-              // });
-              // if (response.success) {
-              //   setIsMsgSent(true);
-              //   await HTTPRequest('PUT', '/reservations', data);
-              // } else {
-              //   setIsMsgSendigError(true);
-              // }
+              if (response.success) {
+                const cookies = new Cookies();
+                cookies.set('comtaxLoginToken', response.token, {
+                  path: '/',
+                  expires: new Date(response.expires)
+                });
+
+                window.location.href = '/admin-panel';
+              } else {
+                setInvalidCredentials(true);
+              }
               setSubmitting(false);
             }}
           >
@@ -85,17 +88,31 @@ const LoginPage = () => {
                     <ErrorMessage name='password' />
                   </p>
 
+                  {invalidCredentials && (
+                    <p className={classNames(styles.error, 'p-smaller')}>
+                      Podano nieprawidłowe dane logowania.
+                    </p>
+                  )}
+
                   <Button
-                    onClick={handleLogin}
                     text='Zaloguj się'
                     type='FULL'
                     color='GREEN'
                     btnWidth={250}
                     btnType='submit'
                   />
+
+                  {serverError && (
+                    <div className={styles.loginInputContainer}>
+                      <p className='smaller'>
+                        Niestety wystąpiły problemy z serwerem. Proszę spróbować
+                        za parę minut.
+                      </p>
+                    </div>
+                  )}
                 </div>
                 <div className={styles.forgottenPassword}>
-                  <Link href='/admin-panel/zapomniane-haslo'>
+                  <Link href='/admin-panel/autoryzacja/zapomniane-haslo'>
                     <a className='p-smaller'>Zapomniałem/am hasła</a>
                   </Link>
                 </div>

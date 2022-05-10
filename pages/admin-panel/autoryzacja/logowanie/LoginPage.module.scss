@@ -1,4 +1,4 @@
-@import '../../../styles/variables.scss';
+@import '../../../../styles/variables.scss';
 
 .landingPage {
   @include flexCenter(row);
@@ -88,8 +88,10 @@
         button {
           width: 300px;
           height: 44px;
+          border: none;
           border-radius: 5px;
           filter: drop-shadow(-2px 2px 4px rgba(0, 0, 0, 0.25));
+          color: white;
           margin-top: 30px;
           transition: 0.2s all linear;
           box-sizing: border-box;
@@ -149,7 +151,20 @@
   text-align: right;
 }
 
-.backBtn:hover {
-  color: $blueBgColor !important;
-  cursor: pointer;
+.forgottenPassword {
+  margin: 0 50px;
+  margin-top: 15px;
+  width: auto;
+  text-align: left;
+
+  a {
+    text-decoration: underline;
+    color: $mainColor;
+    font-size: 15px;
+
+    &:hover {
+      color: $textColor;
+      transition: color 0.3s linear;
+    }
+  }
 }

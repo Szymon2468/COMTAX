@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+.adminPanel {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 200px calc(100% - 200px);
+  gap: 0;
+  p,
+  .p {
+    font-size: 16px;
+  }
+
+  p.smaller {
+    font-size: 14px;
+  }
+
+  .p-smaller {
+    font-size: 14px;
+  }
+}
+
+.pageContent {
+  height: 100%;
+}

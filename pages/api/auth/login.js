@@ -26,7 +26,7 @@ export default async function handler(req, res) {
   const user = await User.findOne({ email }).select('+password');
 
   if (!user) {
-    res.status(401).json({ success: false, msg: 'Invalid credentials' });
+    res.status(200).json({ success: false, msg: 'Invalid credentials' });
     return;
   }
 
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
   const isMatch = await user.matchPassword(password);
 
   if (!isMatch) {
-    res.status(401).json({ success: false, msg: 'Invalid credentials' });
+    res.status(200).json({ success: false, msg: 'Invalid credentials' });
     return;
   }
 

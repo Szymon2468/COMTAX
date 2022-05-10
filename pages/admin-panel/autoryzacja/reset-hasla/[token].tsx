@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
-import Button from '../../../src/components/Button/Button';
+import Button from '../../../../src/components/Button/Button';
 import styles from './PasswordReset.module.scss';
 import Link from 'next/link';
-import dbConnect from '../../../app/lib/dbConnect';
-import { HTTPRequest } from '../../../src/lib/httpRequest';
+import dbConnect from '../../../../app/lib/dbConnect';
+import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import { useState } from 'react';
 
 const User = require('../../../app/models/User');
@@ -21,6 +21,7 @@ interface IPasswordResetPageProps {
 const PasswordResetPage = ({ id }: IPasswordResetPageProps) => {
   const [passwordChanged, setPasswordChanged] = useState(false);
   const [invalidToken, setInvalidToken] = useState(false);
+  const [serverError, setServerError] = useState(false);
 
   return (
     <div className={styles.landingPage}>
@@ -33,9 +34,19 @@ const PasswordResetPage = ({ id }: IPasswordResetPageProps) => {
               passwordRep: ''
             }}
             validate={(values) => {
-              let error: { passwordRep: string } | undefined;
+              let error:
+                | {
+                    password?: string;
+                    passwordRep?: string;
+                  }
+                | undefined;
               if (values.password !== values.passwordRep) {
                 error = { passwordRep: 'Podane hasła muszą być takie same.' };
+              }
+              if (values.password.length < 6) {
+                error = {
+                  password: 'Podane hasło musi zawierać przynajmniej 6 znaków.'
+                };
               }
               return error;
             }}
@@ -49,9 +60,14 @@ const PasswordResetPage = ({ id }: IPasswordResetPageProps) => {
 
               const response = await HTTPRequest(
                 'PUT',
-                `/auth/resetpassword/${id}`,
+                `auth/resetpassword/${id}`,
                 data
               );
+
+              if (response.serverError) {
+                setServerError(true);
+                return;
+              }
 
               if (response.success) {
                 setPasswordChanged(true);
@@ -73,6 +89,9 @@ const PasswordResetPage = ({ id }: IPasswordResetPageProps) => {
                       className={styles.input}
                     />
                   </div>
+                  <p className={classNames(styles.error, 'p-smaller')}>
+                    <ErrorMessage name='password' />
+                  </p>
 
                   <div className={styles.loginInputContainer}>
                     <Field
@@ -87,7 +106,7 @@ const PasswordResetPage = ({ id }: IPasswordResetPageProps) => {
                     <ErrorMessage name='passwordRep' />
                   </p>
 
-                  {!invalidToken && !passwordChanged && (
+                  {!invalidToken && !passwordChanged && !serverError && (
                     <Button
                       text='Zresetuj hasło'
                       type='FULL'
@@ -95,6 +114,15 @@ const PasswordResetPage = ({ id }: IPasswordResetPageProps) => {
                       btnWidth={250}
                       btnType='submit'
                     />
+                  )}
+
+                  {serverError && (
+                    <div className={styles.loginInputContainer}>
+                      <p className='smaller'>
+                        Niestety wystąpiły problemy z serwerem. Proszę spróbować
+                        za parę minut.
+                      </p>
+                    </div>
                   )}
 
                   {invalidToken && (
@@ -113,7 +141,8 @@ const PasswordResetPage = ({ id }: IPasswordResetPageProps) => {
                         btnWidth={250}
                         className={styles.backBtn}
                         onClick={() =>
-                          (window.location.href = '/admin-panel/logowanie')
+                          (window.location.href =
+                            '/admin-panel/autoryzacja/logowanie')
                         }
                       />
                     </>
@@ -133,7 +162,7 @@ const PasswordResetPage = ({ id }: IPasswordResetPageProps) => {
                         btnWidth={250}
                         className={styles.backBtn}
                         onClick={() =>
-                          (window.location.href = '/admin-panel/logowanie')
+                          (window.location.href = '/autoryzacja/logowanie')
                         }
                       />
                     </>

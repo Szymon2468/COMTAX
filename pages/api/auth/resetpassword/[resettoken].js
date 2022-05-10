@@ -1,7 +1,6 @@
 import dbConnect from '../../../../app/lib/dbConnect';
 import User from '../../../../app/models/User';
 import crypto from 'crypto';
-import sendTokenResponse from '../../../../app/lib/sendTokenResponse';
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -12,7 +11,6 @@ export default async function handler(req, res) {
 
   await dbConnect();
   const token = req.query.resettoken;
-  console.log(token);
 
   // Get hashed token
   const resetPasswordToken = crypto

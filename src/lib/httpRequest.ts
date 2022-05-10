@@ -10,6 +10,8 @@ export const HTTPRequest = async (
 ) => {
   let response;
   try {
+    axios.defaults.withCredentials = true;
+
     switch (method) {
       case 'GET':
         response = await axios.get(`${API_URL}/${url}`);

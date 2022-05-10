@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
-import Button from '../../../src/components/Button/Button';
+import Button from '../../../../src/components/Button/Button';
 import styles from './ForgotPassword.module.scss';
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { HTTPRequest } from '../../../src/lib/httpRequest';
+import { HTTPRequest } from '../../../../src/lib/httpRequest';
 
 const FormValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -37,7 +37,7 @@ const ForgotPasswordPage = () => {
             ) => {
               const response = await HTTPRequest(
                 'POST',
-                '/auth/forgotpassword',
+                'auth/forgotpassword',
                 values
               );
 
@@ -114,7 +114,8 @@ const ForgotPasswordPage = () => {
                     <div className={styles.loginInputContainer}>
                       <p className='smaller'>
                         Wysłano Wiadomość E-mail. Proszę sprawdzić swoją
-                        skrzynkę mailową.
+                        skrzynkę mailową (wiadomość może znajdować się w
+                        spamie).
                       </p>
                     </div>
                   )}
