@@ -1,4 +1,4 @@
-import AdminPanelTemplate from '../subComponents/AdminPanelTemplate/adminPanelTemplate';
+import AdminPanelTemplate from '../subComponents/AdminPanelTemplate/AdminPanelTemplate';
 
 const AdminPanelPage = () => {
   return (

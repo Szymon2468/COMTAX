@@ -23,6 +23,10 @@ const Aside = ({ user, active }: IAsideProps) => {
     window.location.href = '/admin-panel/autoryzacja/logowanie';
   };
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <aside className={styles.leftPanel}>
       <div className={styles.account}>

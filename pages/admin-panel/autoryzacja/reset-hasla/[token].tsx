@@ -2,12 +2,11 @@ import classNames from 'classnames';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import Button from '../../../../src/components/Button/Button';
 import styles from './PasswordReset.module.scss';
-import Link from 'next/link';
 import dbConnect from '../../../../app/lib/dbConnect';
 import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import { useState } from 'react';
 
-const User = require('../../../app/models/User');
+const User = require('../../../../app/models/User');
 
 interface IResetPasswordFormValues {
   password: string;

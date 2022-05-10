@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { authorize, IUser } from '../../../../src/lib/authorize';
-import Aside from '../Aside/aside';
+import Aside from '../Aside/Aside';
 import styles from './AdminPanelTemplate.module.scss';
 
 interface IAdminPanelTemplate {
