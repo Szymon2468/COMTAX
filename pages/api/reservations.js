@@ -1,4 +1,5 @@
 import dbConnect from '../../app/lib/dbConnect';
+import { paginate } from '../../app/lib/paginate';
 import Reservation from '../../app/models/Reservation';
 
 export default async function handler(req, res) {
@@ -27,46 +28,49 @@ const handleGet = async (req, res) => {
   try {
     let reservation;
     if (req.query.id) {
-      reservation = await Reservation.findById(req.query.id);
+      reservation = Reservation.findById(req.query.id);
     } else if (req.query.conferenceRoom && req.query.date) {
       const date = new Date(parseInt(req.query.date));
       date.setUTCHours(2, 0, 0, 0);
 
-      reservation = await Reservation.find({
+      reservation = Reservation.find({
         conferenceRoom: req.query.conferenceRoom,
         date: date.getTime()
       });
-
-      reservation.sort((a, b) => {
-        const aStart =
-          a.startHour.length === 4 ? `0${a.startHour}` : a.startHour;
-        const bStart =
-          b.startHour.length === 4 ? `0${b.startHour}` : b.startHour;
-        if (aStart < bStart) {
-          return -1;
-        }
-        if (aStart > bStart) {
-          return 1;
-        }
-        return 0;
-      });
     } else {
-      reservation = await Reservation.find({});
-      reservation.sort((a, b) => {
-        const aStart =
-          a.startHour.length === 4 ? `0${a.startHour}` : a.startHour;
-        const bStart =
-          b.startHour.length === 4 ? `0${b.startHour}` : b.startHour;
-        if (aStart < bStart) {
-          return -1;
-        }
-        if (aStart > bStart) {
-          return 1;
-        }
-        return 0;
-      });
+      reservation = Reservation.find({});
     }
-    res.status(200).json({ success: true, data: reservation });
+
+    let result;
+
+    let pagination;
+    if (req.query.page && req.query.limit) {
+      pagination = await paginate(reservation, Reservation, req);
+      result = pagination.results;
+    } else {
+      result = await reservation;
+    }
+
+    result.sort((a, b) => {
+      const aStart = a.startHour.length === 4 ? `0${a.startHour}` : a.startHour;
+      const bStart = b.startHour.length === 4 ? `0${b.startHour}` : b.startHour;
+      if (aStart < bStart) {
+        return -1;
+      }
+      if (aStart > bStart) {
+        return 1;
+      }
+      return 0;
+    });
+
+    res
+      .status(200)
+      .json({
+        success: true,
+        count: result.length,
+        pagination: pagination ? pagination.pagination : null,
+        data: result
+      });
   } catch (error) {
     console.error(error);
     res.status(400).json({ success: false, msg: error });

@@ -104,7 +104,8 @@ const ForgotPasswordPage = () => {
                         btnWidth={250}
                         className={styles.backBtn}
                         onClick={() =>
-                          (window.location.href = '/admin-panel/logowanie')
+                          (window.location.href =
+                            '/admin-panel/autoryzacja/logowanie')
                         }
                       />
                     </>

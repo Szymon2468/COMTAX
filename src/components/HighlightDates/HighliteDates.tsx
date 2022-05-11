@@ -12,6 +12,7 @@ const HighliteDates = ({ startDate, setStartDate }: IHighliteDate) => {
   return (
     <DatePicker
       selected={startDate}
+      dateFormat='dd.MM.yyyy'
       onChange={(date) => setStartDate(date as Date)}
       excludeDates={[]}
       minDate={new Date()}

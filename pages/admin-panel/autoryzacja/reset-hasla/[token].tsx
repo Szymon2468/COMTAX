@@ -161,7 +161,8 @@ const PasswordResetPage = ({ id }: IPasswordResetPageProps) => {
                         btnWidth={250}
                         className={styles.backBtn}
                         onClick={() =>
-                          (window.location.href = '/autoryzacja/logowanie')
+                          (window.location.href =
+                            'admin-panel/autoryzacja/logowanie')
                         }
                       />
                     </>

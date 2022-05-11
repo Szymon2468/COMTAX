@@ -27,7 +27,7 @@ export default async function handler(req, res) {
   await user.save({ validateBeforeSave: false });
 
   // Create reset url
-  const resetUrl = `${process.env.SITE_URL}/admin-panel/reset-hasla/${resetToken}`;
+  const resetUrl = `${process.env.SITE_URL}/admin-panel/autoryzacja/reset-hasla/${resetToken}`;
 
   const message = `
     <h3 style="margin:0;color:black">Została zgłoszona prośba o reset hasła w serwisie COMTAX na koncie przypisanym do tego adresu e-mail.</h3>

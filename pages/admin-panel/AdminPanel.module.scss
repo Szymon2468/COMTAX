@@ -1,1 +1,191 @@
 @import '../../styles/variables.scss';
+
+.siteInfo {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  background-color: $turquoiseBgColor;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+
+  h3 {
+    padding-left: 50px;
+    font-weight: 600;
+  }
+}
+
+.content {
+  padding: 20px;
+}
+
+.filterReservations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  p {
+    margin: 0;
+  }
+
+  label {
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  select {
+    box-shadow: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png);
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position-x: calc(100% - 10px);
+    background-position-y: 50%;
+    background-color: white;
+    text-indent: 6px;
+    padding-right: 20px;
+    padding-left: 0;
+    width: 300px !important;
+    font-size: 16px;
+  }
+}
+
+.datePicker {
+  input {
+    box-shadow: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    padding: 0;
+    font-size: 16px;
+    filter: none;
+    border: 1px solid $textColor;
+    border-radius: 0;
+    width: 120px;
+    height: fit-content;
+    text-align: center;
+  }
+}
+
+.reservationsTable {
+  margin-top: 30px;
+
+  table {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    -webkit-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+
+    th:first-child {
+      border-top-left-radius: 10px;
+    }
+
+    th:last-child {
+      border-top-right-radius: 10px;
+    }
+
+    thead {
+      padding: 10px 0;
+      background: $mainColor;
+      height: 50px;
+
+      th {
+        padding: 0 10px;
+      }
+    }
+
+    tbody {
+      tr {
+        height: 50px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #a3e38c;
+      }
+
+      td {
+        width: 100px;
+        max-width: 100px;
+        padding: 0 10px;
+        text-align: left;
+        white-space: nowrap;
+
+        svg {
+          width: 20px;
+          height: 20px;
+          margin: 2px;
+        }
+      }
+
+      td::last-of-type {
+        padding: 0;
+      }
+
+      .scrollable {
+        overflow: hidden;
+        overflow-x: scroll;
+
+        /* height */
+        &::-webkit-scrollbar {
+          height: 3px;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          background: $textColor;
+          border-radius: 5px;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+          background: black;
+        }
+      }
+    }
+  }
+}
+
+.pagination {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+  padding-right: 20px;
+
+  p {
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  .paginationTile {
+    background-color: #79c05f55;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $mainColor;
+      transition: background-color 0.3s linear;
+    }
+  }
+
+  .activePagination {
+    background-color: $mainColor;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+}
