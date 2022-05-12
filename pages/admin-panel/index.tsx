@@ -6,10 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
 import DatePicker from 'react-datepicker';
 import pl from 'date-fns/locale/pl';
-import { MdPreview } from 'react-icons/md';
-import { AiFillEdit } from 'react-icons/ai';
-import { TiDeleteOutline } from 'react-icons/ti';
+
 import 'react-datepicker/dist/react-datepicker.css';
+import ReservationsTable from './subComponents/ReservationsTable/ReservationsTable';
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 
 interface IConferenceRoom {
   _id: string;
@@ -18,7 +18,7 @@ interface IConferenceRoom {
   name: string;
 }
 
-interface IReservation {
+export interface IReservation {
   _id: string;
   startHour: string;
   endHour: string;
@@ -35,11 +35,13 @@ const AdminPanelPage = () => {
   >(false);
   const [date, setDate] = useState(new Date());
   const [chosenConferenceRoom, setChosenConferenceRoom] = useState('');
+  const [chosenReservation, setChosenReservation] = useState('');
   const [reservations, setReservations] = useState<IReservation[]>();
   const [pagination, setPagination] = useState({
     currentPage: 1,
     pagesNumber: 1
   });
+  const [action, setAction] = useState<'ADD' | 'PREVIEW' | 'EDIT'>('ADD');
 
   useEffect(() => {
     const getConferenceRooms = async () => {
@@ -131,54 +133,7 @@ const AdminPanelPage = () => {
             </div>
             <div className={styles.reservationsTable}>
               {reservations && reservations.length > 0 && (
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Początek</th>
-                      <th>Koniec</th>
-                      <th>Na osobę</th>
-                      <th>E-mail</th>
-                      <th>Telefon</th>
-                      <th>Firma</th>
-                      <th>Akcje</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {reservations.map((reservation) => (
-                      <tr>
-                        <td>{reservation.startHour}</td>
-                        <td>{reservation.endHour}</td>
-                        <td>
-                          <div className={styles.scrollable}>
-                            {reservation.name} {reservation.surname}
-                          </div>
-                        </td>
-                        <td>
-                          <div className={styles.scrollable}>
-                            {reservation.email}
-                          </div>
-                        </td>
-                        <td>
-                          <div className={styles.scrollable}>
-                            {reservation.phone}
-                          </div>
-                        </td>
-                        <td>
-                          <div className={styles.scrollable}>
-                            {reservation.company !== ''
-                              ? reservation.company
-                              : 'nie podano'}
-                          </div>
-                        </td>
-                        <td className={styles.actions}>
-                          <MdPreview />
-                          <AiFillEdit />
-                          <TiDeleteOutline />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <ReservationsTable reservations={reservations} />
               )}
               {reservations && pagination.pagesNumber > 1 && (
                 <div className={styles.pagination}>
@@ -186,6 +141,7 @@ const AdminPanelPage = () => {
                   {Array.from({ length: pagination.pagesNumber }).map(
                     (val, i) => (
                       <div
+                        key={uuidv4()}
                         className={classNames(
                           styles.paginationTile,
                           i + 1 === pagination.currentPage &&
@@ -212,6 +168,160 @@ const AdminPanelPage = () => {
                 (reservations.length === 0 && (
                   <p>Nie znaleziono rezerwacji dla podanych sali oraz daty.</p>
                 ))}
+            </div>
+            <div className={styles.reservationForm}>
+              <h4>
+                {action === 'ADD' && 'Dodaj nową rezerwację'}
+                {action === 'PREVIEW' && 'Podgląd rezerwacji'}
+                {action === 'EDIT' && 'Edytuj rezerwację'}
+              </h4>
+              <div className={styles.form}>
+                <Formik
+                  initialValues={{
+                    email: '',
+                    password: ''
+                  }}
+                  // validationSchema={FormValidationSchema}
+                  onSubmit={async () =>
+                    // values: ILoginFormValues,
+                    // { setSubmitting }: FormikHelpers<>
+                    {
+                      // setSubmitting(false);
+                    }
+                  }
+                >
+                  {({ errors }) => (
+                    <Form>
+                      <div className={styles.formContainer}>
+                        <h5>Osoba Kontaktowa</h5>
+                        <div className={styles.formInputs}>
+                          <div className={styles.formInput}>
+                            <div>
+                              <label htmlFor='name'>Imię*</label>
+                              <Field
+                                id='name'
+                                name='name'
+                                placeholder={'Imię*'}
+                              />
+                            </div>
+                            <ErrorMessage name='name' />
+                          </div>
+
+                          <div className={styles.formInput}>
+                            <div>
+                              <label htmlFor='surname'>Nazwisko*</label>
+                              <Field
+                                id='surname'
+                                name='surname'
+                                placeholder={'Nazwisko*'}
+                              />
+                            </div>
+                            <ErrorMessage name='surname' />
+                          </div>
+
+                          <div className={styles.formInput}>
+                            <div>
+                              <label htmlFor='email'>E-mail*</label>
+                              <Field
+                                id='email'
+                                name='email'
+                                placeholder={'E-mail*'}
+                              />
+                            </div>
+                            <ErrorMessage name='email' />
+                          </div>
+
+                          <div className={styles.formInput}>
+                            <div>
+                              <label htmlFor='phone'>Numer telefonu*</label>
+                              <Field
+                                id='phone'
+                                name='phone'
+                                placeholder={'Numer telefonu*'}
+                              />
+                            </div>
+                            <ErrorMessage name='phone' />
+                          </div>
+
+                          <div className={styles.formInput}>
+                            <div>
+                              <label htmlFor='message'>Uwagi</label>
+                              <Field
+                                as='textarea'
+                                id='message'
+                                name='message'
+                                placeholder={'Uwagi'}
+                              />
+                            </div>
+                            <ErrorMessage name='message' />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className={styles.formContainer}>
+                        <h5>Dane do faktury</h5>
+                        <div className={styles.formInputs}>
+                          <div className={styles.formInput}>
+                            <div>
+                              <label htmlFor='company'>Firma</label>
+                              <Field
+                                id='company'
+                                name='company'
+                                placeholder={'Firma'}
+                              />
+                            </div>
+                            <ErrorMessage name='company' />
+                          </div>
+
+                          <div className={styles.formInput}>
+                            <div>
+                              <label htmlFor='street'>Ulica</label>
+                              <Field
+                                id='street'
+                                name='street'
+                                placeholder={'Ulica'}
+                              />
+                            </div>
+                            <ErrorMessage name='street' />
+                          </div>
+
+                          <div className={styles.formInput}>
+                            <div>
+                              <label htmlFor='zipCode'>Kod pocztowy</label>
+                              <Field
+                                id='zipCode'
+                                name='zipCode'
+                                placeholder={'Kod pocztowy'}
+                              />
+                            </div>
+                            <ErrorMessage name='zipCode' />
+                          </div>
+
+                          <div className={styles.formInput}>
+                            <div>
+                              <label htmlFor='city'>Miasto</label>
+                              <Field
+                                id='city'
+                                name='city'
+                                placeholder={'Miasto'}
+                              />
+                            </div>
+                            <ErrorMessage name='city' />
+                          </div>
+
+                          <div className={styles.formInput}>
+                            <div>
+                              <label htmlFor='NIP'>NIP</label>
+                              <Field id='NIP' name='NIP' placeholder={'NIP'} />
+                            </div>
+                            <ErrorMessage name='NIP' />
+                          </div>
+                        </div>
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
             </div>
           </div>
         )}

@@ -31,120 +31,39 @@
   }
 
   select {
-    box-shadow: none;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: transparent;
-    background-image: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png);
-    background-repeat: no-repeat;
-    background-size: 12px;
-    background-position-x: calc(100% - 10px);
-    background-position-y: 50%;
-    background-color: white;
-    text-indent: 6px;
-    padding-right: 20px;
-    padding-left: 0;
     width: 300px !important;
-    font-size: 16px;
   }
 }
 
 .datePicker {
   input {
-    box-shadow: none;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-color: white;
-    padding: 0;
-    font-size: 16px;
-    filter: none;
-    border: 1px solid $textColor;
-    border-radius: 0;
     width: 120px;
-    height: fit-content;
     text-align: center;
+    padding: 0;
   }
 }
 
 .reservationsTable {
   margin-top: 30px;
 
-  table {
-    width: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  .scrollable {
+    overflow: hidden;
+    overflow-x: scroll;
 
-    -webkit-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
-    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
-
-    th:first-child {
-      border-top-left-radius: 10px;
+    /* height */
+    &::-webkit-scrollbar {
+      height: 3px;
     }
 
-    th:last-child {
-      border-top-right-radius: 10px;
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: $textColor;
+      border-radius: 5px;
     }
 
-    thead {
-      padding: 10px 0;
-      background: $mainColor;
-      height: 50px;
-
-      th {
-        padding: 0 10px;
-      }
-    }
-
-    tbody {
-      tr {
-        height: 50px;
-      }
-
-      tr:nth-child(even) {
-        background-color: #a3e38c;
-      }
-
-      td {
-        width: 100px;
-        max-width: 100px;
-        padding: 0 10px;
-        text-align: left;
-        white-space: nowrap;
-
-        svg {
-          width: 20px;
-          height: 20px;
-          margin: 2px;
-        }
-      }
-
-      td::last-of-type {
-        padding: 0;
-      }
-
-      .scrollable {
-        overflow: hidden;
-        overflow-x: scroll;
-
-        /* height */
-        &::-webkit-scrollbar {
-          height: 3px;
-        }
-
-        /* Handle */
-        &::-webkit-scrollbar-thumb {
-          background: $textColor;
-          border-radius: 5px;
-        }
-
-        /* Handle on hover */
-        &::-webkit-scrollbar-thumb:hover {
-          background: black;
-        }
-      }
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: black;
     }
   }
 }
@@ -186,6 +105,69 @@
 
     &:hover {
       cursor: default;
+    }
+  }
+}
+
+.reservationForm {
+  margin: 0 auto;
+  margin-top: 50px;
+  width: fit-content;
+  border-radius: 5px;
+  // border: 1px solid $mainColor;
+
+  h4 {
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  form {
+    margin-top: 40px;
+    display: flex;
+    gap: 50px;
+
+    .formContainer {
+      padding: 20px;
+      border: 2px solid $mainColor;
+      border-radius: 5px;
+      -webkit-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+      -moz-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+      box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+
+      h5 {
+        margin: 0;
+        margin-top: -32px;
+        margin-bottom: 20px;
+        background-color: $turquoiseBgColor;
+        width: fit-content;
+        padding: 0 20px 0 5px;
+      }
+
+      .formInputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: flex-start;
+        align-items: space-between;
+
+        .formInput {
+          div {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+
+            input {
+              height: 30px;
+              min-width: 200px;
+            }
+
+            textarea {
+              min-width: 200px;
+              min-height: 100px;
+            }
+          }
+        }
+      }
     }
   }
 }

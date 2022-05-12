@@ -23,4 +23,108 @@
 .pageContent {
   height: 100%;
   background-color: $turquoiseBgColor;
+
+  h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: $textColor;
+  }
+
+  h5 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $textColor;
+  }
+
+  table {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    -webkit-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+
+    th:first-child {
+      border-top-left-radius: 10px;
+    }
+
+    th:last-child {
+      border-top-right-radius: 10px;
+    }
+
+    thead {
+      padding: 10px 0;
+      background: $mainColor;
+      height: 50px;
+
+      th {
+        padding: 0 10px;
+      }
+    }
+
+    tbody {
+      tr {
+        height: 50px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #a3e38c;
+      }
+
+      td {
+        width: 100px;
+        max-width: 100px;
+        padding: 0 10px;
+        text-align: left;
+        white-space: nowrap;
+
+        svg {
+          width: 20px;
+          height: 20px;
+          margin: 2px;
+        }
+      }
+
+      td::last-of-type {
+        padding: 0;
+      }
+    }
+  }
+
+  input {
+    box-shadow: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    padding: 0;
+    font-size: 16px;
+    filter: none;
+    border: 1px solid $textColor;
+    border-radius: 0;
+    width: 120px;
+    height: fit-content;
+    text-align: left;
+    padding-left: 5px;
+  }
+
+  select {
+    box-shadow: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png);
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position-x: calc(100% - 10px);
+    background-position-y: 50%;
+    background-color: white;
+    text-indent: 6px;
+    padding-right: 20px;
+    padding-left: 0;
+    width: 300px !important;
+    font-size: 16px;
+  }
 }
