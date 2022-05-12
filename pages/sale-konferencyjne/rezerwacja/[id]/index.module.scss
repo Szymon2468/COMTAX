@@ -278,7 +278,6 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  margin-bottom: 35px;
 
   input,
   textarea,
@@ -309,5 +308,23 @@
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
+  }
+}
+
+.inputsContainer {
+  .inputContainer {
+    @include media('<=tablet-portrait') {
+      justify-content: center;
+
+      label {
+        display: none;
+      }
+    }
+  }
+}
+
+.containerInput {
+  @include media('<=tablet-portrait') {
+    margin: 0 auto;
   }
 }

@@ -4,7 +4,16 @@ import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
 import dbConnect from '../../../app/lib/dbConnect';
 import MasterLayout from '../../../src/components/MasterLayout/MasterLayout';
+import { useState } from 'react';
+
 const ConferenceRoom = require('../../../app/models/ConferenceRoom');
+
+interface IImageObject {
+  blurDataURL: string;
+  src: string;
+  width: number;
+  height: number;
+}
 
 interface IPhoto {
   url: string;
@@ -18,6 +27,7 @@ export interface IRoom {
   city: string;
   facilities: string[];
   photos: IPhoto[];
+  roomImg: IImageObject;
 }
 
 export interface IRoomTile {
@@ -25,7 +35,8 @@ export interface IRoomTile {
 }
 
 function index({ rooms }: IRoomTile) {
-  // console.log(rooms);
+  console.log(rooms);
+
   return (
     <MasterLayout>
       <section>
@@ -49,7 +60,7 @@ function index({ rooms }: IRoomTile) {
             <Link key={uuidv4()} href={`rezerwacja/${el._id}`}>
               <a>
                 <RoomTile
-                  img={el.photos[0]?.url}
+                  img={el.roomImg.src}
                   alt={el.photos[0]?.alt}
                   name={el.name}
                 ></RoomTile>
@@ -66,8 +77,17 @@ export async function getStaticProps() {
   await dbConnect();
   const response = await ConferenceRoom.find({});
 
+  const data = JSON.parse(JSON.stringify(response));
+  await data.map(async (el: any) => {
+    el.roomImg = (
+      await import(
+        `../../../src/assets/conferencerooms/rooms/${el.name.toUpperCase()}/photo1.jpeg`
+      )
+    ).default;
+  });
+
   return {
-    props: { rooms: JSON.parse(JSON.stringify(response)) || {} },
+    props: { rooms: data || {} },
     revalidate: 3600
   };
 }

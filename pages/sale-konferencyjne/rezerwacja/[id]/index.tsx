@@ -7,12 +7,12 @@ import MasterLayout from '../../../../src/components/MasterLayout/MasterLayout';
 import {
   generateReservatedHoursComponent,
   IConferenceRoomResponse,
-  images,
   IShortenReservation
 } from '../../../../src/configs/roomReservation/roomReservation';
 import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import styles from './index.module.scss';
 import ReservationForm from './subComponents/ReservationForm';
+import { lazy } from 'react';
 
 const ConferenceRoom = require('../../../../app/models/ConferenceRoom');
 const Reservation = require('../../../../app/models/Reservation');
@@ -20,6 +20,13 @@ const Reservation = require('../../../../app/models/Reservation');
 interface IRoomReservationProps {
   reservations: IShortenReservation[];
   conferenceRoom: IConferenceRoomResponse;
+}
+
+interface IImageObject {
+  blurDataURL: string;
+  src: string;
+  width: number;
+  height: number;
 }
 
 function RoomReservation({
@@ -91,7 +98,7 @@ function RoomReservation({
           </section>
 
           <div className={styles.galleryContainer}>
-            <Gallery images={images} />
+            <Gallery images={conferenceRoom.photos} />
           </div>
         </div>
       </div>
@@ -135,10 +142,27 @@ export async function getStaticProps({ params: { id } }: IParams) {
 
   const conferenceRoomResponse = await ConferenceRoom.findById(id);
 
+  let images: IImageObject[] = [];
+
+  for (let i = 1; i <= 6; i++) {
+    const source = `${
+      process.env.SITE_URL
+    }/rooms/${conferenceRoomResponse.name.toUpperCase()}/photo${i}.jpeg`;
+    // const source = await import(
+    //   `../../../../public/rooms/${conferenceRoomResponse.name.toUpperCase()}/photo${i}.jpeg`
+    // );
+    images.push({
+      src: source,
+      blurDataURL: '',
+      height: 200,
+      width: 200
+    });
+  }
+
   const conferenceRoom: IConferenceRoomResponse = {
     id: conferenceRoomResponse._id.toString(),
     name: conferenceRoomResponse.name,
-    photos: conferenceRoomResponse.photos,
+    photos: images,
     facilities: conferenceRoomResponse.facilities,
     address: conferenceRoomResponse.address,
     city: conferenceRoomResponse.city
@@ -171,7 +195,7 @@ export async function getStaticProps({ params: { id } }: IParams) {
   return {
     props: {
       reservations: JSON.parse(JSON.stringify(reservations)) || [],
-      conferenceRoom: conferenceRoom || {}
+      conferenceRoom: JSON.parse(JSON.stringify(conferenceRoom)) || {}
     },
     revalidate: 3600
   };

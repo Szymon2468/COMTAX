@@ -184,144 +184,191 @@ const ReservationForm = ({
               </div>
 
               <h3>Osoba kontaktowa</h3>
+              <span className={styles.inputsContainer}>
+                <div
+                  className={classNames(
+                    styles.inputContainer,
+                    styles.inputContaineruniqe
+                  )}
+                >
+                  <label className='p' htmlFor='name'>
+                    Imię*
+                  </label>
+                  <Field
+                    id='name'
+                    name='name'
+                    className={styles.input}
+                    placeholder={'Imię'}
+                  />
+                </div>
+                <p className={classNames(styles.error, 'p-smaller')}>
+                  <ErrorMessage name='name' />
+                </p>
 
-              <div
-                className={classNames(
-                  styles.inputContainer,
-                  styles.inputContaineruniqe
-                )}
-              >
-                <label className='p' htmlFor='name'>
-                  Imię*
-                </label>
-                <Field id='name' name='name' className={styles.input} />
-              </div>
-              <p className={classNames(styles.error, 'p-smaller')}>
-                <ErrorMessage name='name' />
-              </p>
+                <div
+                  className={classNames(
+                    styles.inputContainer,
+                    styles.inputContaineruniqe
+                  )}
+                >
+                  <label className='p' htmlFor='surname'>
+                    Nazwisko*
+                  </label>
+                  <Field
+                    id='surname'
+                    name='surname'
+                    className={styles.input}
+                    placeholder={'Nazwisko'}
+                  />
+                </div>
+                <p className={classNames(styles.error, 'p-smaller')}>
+                  <ErrorMessage name='surname' />
+                </p>
 
-              <div
-                className={classNames(
-                  styles.inputContainer,
-                  styles.inputContaineruniqe
-                )}
-              >
-                <label className='p' htmlFor='surname'>
-                  Nazwisko*
-                </label>
-                <Field id='surname' name='surname' className={styles.input} />
-              </div>
-              <p className={classNames(styles.error, 'p-smaller')}>
-                <ErrorMessage name='surname' />
-              </p>
+                <div
+                  className={classNames(
+                    styles.inputContainer,
+                    styles.inputContaineruniqe
+                  )}
+                >
+                  <label className='p' htmlFor='email'>
+                    E-mail*
+                  </label>
+                  <Field
+                    id='email'
+                    name='email'
+                    className={styles.input}
+                    placeholder={'E-mail'}
+                  />
+                </div>
+                <p className={classNames(styles.error, 'p-smaller')}>
+                  <ErrorMessage name='email' />
+                </p>
 
-              <div
-                className={classNames(
-                  styles.inputContainer,
-                  styles.inputContaineruniqe
-                )}
-              >
-                <label className='p' htmlFor='email'>
-                  E-mail*
-                </label>
-                <Field id='email' name='email' className={styles.input} />
-              </div>
-              <p className={classNames(styles.error, 'p-smaller')}>
-                <ErrorMessage name='email' />
-              </p>
+                <div
+                  className={classNames(
+                    styles.inputContainer,
+                    styles.inputContaineruniqe
+                  )}
+                >
+                  <label className='p' htmlFor='phone'>
+                    Numer telefonu*
+                  </label>
+                  <Field
+                    id='phone'
+                    name='phone'
+                    className={styles.input}
+                    placeholder={'Numer telefonu'}
+                  />
+                </div>
+                <p className={classNames(styles.error, 'p-smaller')}>
+                  <ErrorMessage name='phone' />
+                </p>
+                <div
+                  className={classNames(
+                    styles.inputContainer,
+                    styles.inputContaineruniqe
+                  )}
+                >
+                  <label className='p' htmlFor='message'>
+                    Uwagi
+                  </label>
+                  <Field
+                    as='textarea'
+                    id='message'
+                    name='message'
+                    className={styles.input}
+                    placeholder={'Uwagi'}
+                  />
+                </div>
 
-              <div
-                className={classNames(
-                  styles.inputContainer,
-                  styles.inputContaineruniqe
-                )}
-              >
-                <label className='p' htmlFor='phone'>
-                  Numer telefonu*
-                </label>
-                <Field id='phone' name='phone' className={styles.input} />
-              </div>
-              <p className={classNames(styles.error, 'p-smaller')}>
-                <ErrorMessage name='phone' />
-              </p>
-              <div
-                className={classNames(
-                  styles.inputContainer,
-                  styles.inputContaineruniqe
-                )}
-              >
-                <label className='p' htmlFor='message'>
-                  Uwagi
-                </label>
-                <Field
-                  as='textarea'
-                  id='message'
-                  name='message'
-                  className={styles.input}
-                />
-              </div>
+                <h3>Dane do faktury</h3>
 
-              <h3>Dane do faktury</h3>
+                <div
+                  className={classNames(
+                    styles.inputContainer,
+                    styles.inputContaineruniqe
+                  )}
+                >
+                  <label className='p' htmlFor='company'>
+                    Firma
+                  </label>
+                  <Field
+                    id='company'
+                    name='company'
+                    className={styles.input}
+                    placeholder={'Firma'}
+                  />
+                </div>
 
-              <div
-                className={classNames(
-                  styles.inputContainer,
-                  styles.inputContaineruniqe
-                )}
-              >
-                <label className='p' htmlFor='company'>
-                  Firma
-                </label>
-                <Field id='company' name='company' className={styles.input} />
-              </div>
+                <div
+                  className={classNames(
+                    styles.inputContainer,
+                    styles.inputContaineruniqe
+                  )}
+                >
+                  <label className='p' htmlFor='street'>
+                    Ulica
+                  </label>
+                  <Field
+                    id='street'
+                    name='street'
+                    className={styles.input}
+                    placeholder={'Ulica'}
+                  />
+                </div>
 
-              <div
-                className={classNames(
-                  styles.inputContainer,
-                  styles.inputContaineruniqe
-                )}
-              >
-                <label className='p' htmlFor='street'>
-                  Ulica
-                </label>
-                <Field id='street' name='street' className={styles.input} />
-              </div>
+                <div
+                  className={classNames(
+                    styles.inputContainer,
+                    styles.inputContaineruniqe
+                  )}
+                >
+                  <label className='p' htmlFor='zipCode'>
+                    Kod pocztowy
+                  </label>
+                  <Field
+                    id='zipCode'
+                    name='zipCode'
+                    className={styles.input}
+                    placeholder={'Kod pocztowy'}
+                  />
+                </div>
 
-              <div
-                className={classNames(
-                  styles.inputContainer,
-                  styles.inputContaineruniqe
-                )}
-              >
-                <label className='p' htmlFor='zipCode'>
-                  Kod pocztowy
-                </label>
-                <Field id='zipCode' name='zipCode' className={styles.input} />
-              </div>
+                <div
+                  className={classNames(
+                    styles.inputContainer,
+                    styles.inputContaineruniqe
+                  )}
+                >
+                  <label className='p' htmlFor='city'>
+                    Miasto
+                  </label>
+                  <Field
+                    id='city'
+                    name='city'
+                    className={styles.input}
+                    placeholder={'Miasto'}
+                  />
+                </div>
 
-              <div
-                className={classNames(
-                  styles.inputContainer,
-                  styles.inputContaineruniqe
-                )}
-              >
-                <label className='p' htmlFor='city'>
-                  Miasto
-                </label>
-                <Field id='city' name='city' className={styles.input} />
-              </div>
-
-              <div
-                className={classNames(
-                  styles.inputContainer,
-                  styles.inputContaineruniqe
-                )}
-              >
-                <label className='p' htmlFor='NIP'>
-                  NIP
-                </label>
-                <Field id='NIP' name='NIP' className={styles.input} />
-              </div>
+                <div
+                  className={classNames(
+                    styles.inputContainer,
+                    styles.inputContaineruniqe
+                  )}
+                >
+                  <label className='p' htmlFor='NIP'>
+                    NIP
+                  </label>
+                  <Field
+                    id='NIP'
+                    name='NIP'
+                    className={styles.input}
+                    placeholder={'NIP'}
+                  />
+                </div>
+              </span>
 
               <div className={styles.btns}>
                 {!isMsgSent && (

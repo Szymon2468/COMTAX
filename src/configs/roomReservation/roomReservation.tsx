@@ -1,6 +1,3 @@
-import BackgroundImage from '../../../pages/sale-konferencyjne/Background.jpg';
-import { IImage } from '../../components/Gallery/Gallery';
-
 export interface IShortenReservation {
   _id: string;
   conferenceRoom: string;
@@ -9,15 +6,17 @@ export interface IShortenReservation {
   endHour: string;
 }
 
-export interface IPhoto {
-  url: string;
-  alt: string;
+export interface IImageObject {
+  blurDataURL: string;
+  src: string;
+  width: number;
+  height: number;
 }
 
 export interface IConferenceRoomResponse {
   id: string;
   name: string;
-  photos: IPhoto[];
+  photos: IImageObject[];
   facilities: string[];
   address: string;
   city: string;
@@ -44,40 +43,40 @@ export interface IReservationFormValues {
   NIP: string;
 }
 
-export const images: IImage[] = [
-  {
-    url: BackgroundImage.src,
-    title: 'a'
-  },
-  {
-    url: BackgroundImage.src,
-    title: 'ab'
-  },
-  {
-    url: BackgroundImage.src,
-    title: 'ac'
-  },
-  {
-    url: BackgroundImage.src,
-    title: 'ad'
-  },
-  {
-    url: BackgroundImage.src,
-    title: 'a'
-  },
-  {
-    url: BackgroundImage.src,
-    title: 'ab'
-  },
-  {
-    url: BackgroundImage.src,
-    title: 'ac'
-  },
-  {
-    url: BackgroundImage.src,
-    title: 'ad'
-  }
-];
+// export const images: IImage[] = [
+//   {
+//     url: BackgroundImage.src,
+//     title: 'a'
+//   },
+//   {
+//     url: BackgroundImage.src,
+//     title: 'ab'
+//   },
+//   {
+//     url: BackgroundImage.src,
+//     title: 'ac'
+//   },
+//   {
+//     url: BackgroundImage.src,
+//     title: 'ad'
+//   },
+//   {
+//     url: BackgroundImage.src,
+//     title: 'a'
+//   },
+//   {
+//     url: BackgroundImage.src,
+//     title: 'ab'
+//   },
+//   {
+//     url: BackgroundImage.src,
+//     title: 'ac'
+//   },
+//   {
+//     url: BackgroundImage.src,
+//     title: 'ad'
+//   }
+// ];
 
 export const availableStartHours = [
   '8:00',
