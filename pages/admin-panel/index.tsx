@@ -1,15 +1,16 @@
-import AdminPanelTemplate from './subComponents/AdminPanelTemplate/AdminPanelTemplate';
-import styles from './AdminPanel.module.scss';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { HTTPRequest } from '../../src/lib/httpRequest';
-import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
-import DatePicker from 'react-datepicker';
 import pl from 'date-fns/locale/pl';
-
+import { ChangeEvent, useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { v4 as uuidv4 } from 'uuid';
+import { HTTPRequest } from '../../src/lib/httpRequest';
+import styles from './AdminPanel.module.scss';
+import AdminPanelTemplate from './subComponents/AdminPanelTemplate/AdminPanelTemplate';
+import AdminReservationsForm, {
+  IReservationFormAction
+} from './subComponents/AdminReservationsForm/AdminReservationsForm';
 import ReservationsTable from './subComponents/ReservationsTable/ReservationsTable';
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 
 interface IConferenceRoom {
   _id: string;
@@ -26,7 +27,13 @@ export interface IReservation {
   surname: string;
   email: string;
   phone: string;
+  message: string;
   company: string;
+  numberOfPeople: string;
+  street: string;
+  city: string;
+  zipCode: string;
+  NIP: string;
 }
 
 const AdminPanelPage = () => {
@@ -35,13 +42,14 @@ const AdminPanelPage = () => {
   >(false);
   const [date, setDate] = useState(new Date());
   const [chosenConferenceRoom, setChosenConferenceRoom] = useState('');
-  const [chosenReservation, setChosenReservation] = useState('');
+  const [chosenReservation, setChosenReservation] =
+    useState<IReservation | null>(null);
   const [reservations, setReservations] = useState<IReservation[]>();
   const [pagination, setPagination] = useState({
     currentPage: 1,
     pagesNumber: 1
   });
-  const [action, setAction] = useState<'ADD' | 'PREVIEW' | 'EDIT'>('ADD');
+  const [action, setAction] = useState<IReservationFormAction>('ADD');
 
   useEffect(() => {
     const getConferenceRooms = async () => {
@@ -94,9 +102,8 @@ const AdminPanelPage = () => {
       <>
         <div className={styles.siteInfo}>
           <h3>Zarządzaj Rezerwacjami</h3>
-        </div>
-        {conferenceRooms && (
-          <div className={styles.content}>
+
+          {conferenceRooms && (
             <div className={styles.filterReservations}>
               <div>
                 <label htmlFor='selectConferenceRoom'>
@@ -131,9 +138,21 @@ const AdminPanelPage = () => {
                 />
               </div>
             </div>
+          )}
+        </div>
+        {conferenceRooms && (
+          <div className={styles.content}>
             <div className={styles.reservationsTable}>
               {reservations && reservations.length > 0 && (
-                <ReservationsTable reservations={reservations} />
+                <ReservationsTable
+                  reservations={reservations}
+                  setAction={(value: IReservationFormAction) => {
+                    setAction(value);
+                  }}
+                  setChosenReservation={(value: IReservation) => {
+                    setChosenReservation(value);
+                  }}
+                />
               )}
               {reservations && pagination.pagesNumber > 1 && (
                 <div className={styles.pagination}>
@@ -166,163 +185,15 @@ const AdminPanelPage = () => {
               )}
               {!reservations ||
                 (reservations.length === 0 && (
-                  <p>Nie znaleziono rezerwacji dla podanych sali oraz daty.</p>
+                  <p>Nie znaleziono rezerwacji dla podanej sali oraz daty.</p>
                 ))}
             </div>
-            <div className={styles.reservationForm}>
-              <h4>
-                {action === 'ADD' && 'Dodaj nową rezerwację'}
-                {action === 'PREVIEW' && 'Podgląd rezerwacji'}
-                {action === 'EDIT' && 'Edytuj rezerwację'}
-              </h4>
-              <div className={styles.form}>
-                <Formik
-                  initialValues={{
-                    email: '',
-                    password: ''
-                  }}
-                  // validationSchema={FormValidationSchema}
-                  onSubmit={async () =>
-                    // values: ILoginFormValues,
-                    // { setSubmitting }: FormikHelpers<>
-                    {
-                      // setSubmitting(false);
-                    }
-                  }
-                >
-                  {({ errors }) => (
-                    <Form>
-                      <div className={styles.formContainer}>
-                        <h5>Osoba Kontaktowa</h5>
-                        <div className={styles.formInputs}>
-                          <div className={styles.formInput}>
-                            <div>
-                              <label htmlFor='name'>Imię*</label>
-                              <Field
-                                id='name'
-                                name='name'
-                                placeholder={'Imię*'}
-                              />
-                            </div>
-                            <ErrorMessage name='name' />
-                          </div>
 
-                          <div className={styles.formInput}>
-                            <div>
-                              <label htmlFor='surname'>Nazwisko*</label>
-                              <Field
-                                id='surname'
-                                name='surname'
-                                placeholder={'Nazwisko*'}
-                              />
-                            </div>
-                            <ErrorMessage name='surname' />
-                          </div>
-
-                          <div className={styles.formInput}>
-                            <div>
-                              <label htmlFor='email'>E-mail*</label>
-                              <Field
-                                id='email'
-                                name='email'
-                                placeholder={'E-mail*'}
-                              />
-                            </div>
-                            <ErrorMessage name='email' />
-                          </div>
-
-                          <div className={styles.formInput}>
-                            <div>
-                              <label htmlFor='phone'>Numer telefonu*</label>
-                              <Field
-                                id='phone'
-                                name='phone'
-                                placeholder={'Numer telefonu*'}
-                              />
-                            </div>
-                            <ErrorMessage name='phone' />
-                          </div>
-
-                          <div className={styles.formInput}>
-                            <div>
-                              <label htmlFor='message'>Uwagi</label>
-                              <Field
-                                as='textarea'
-                                id='message'
-                                name='message'
-                                placeholder={'Uwagi'}
-                              />
-                            </div>
-                            <ErrorMessage name='message' />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className={styles.formContainer}>
-                        <h5>Dane do faktury</h5>
-                        <div className={styles.formInputs}>
-                          <div className={styles.formInput}>
-                            <div>
-                              <label htmlFor='company'>Firma</label>
-                              <Field
-                                id='company'
-                                name='company'
-                                placeholder={'Firma'}
-                              />
-                            </div>
-                            <ErrorMessage name='company' />
-                          </div>
-
-                          <div className={styles.formInput}>
-                            <div>
-                              <label htmlFor='street'>Ulica</label>
-                              <Field
-                                id='street'
-                                name='street'
-                                placeholder={'Ulica'}
-                              />
-                            </div>
-                            <ErrorMessage name='street' />
-                          </div>
-
-                          <div className={styles.formInput}>
-                            <div>
-                              <label htmlFor='zipCode'>Kod pocztowy</label>
-                              <Field
-                                id='zipCode'
-                                name='zipCode'
-                                placeholder={'Kod pocztowy'}
-                              />
-                            </div>
-                            <ErrorMessage name='zipCode' />
-                          </div>
-
-                          <div className={styles.formInput}>
-                            <div>
-                              <label htmlFor='city'>Miasto</label>
-                              <Field
-                                id='city'
-                                name='city'
-                                placeholder={'Miasto'}
-                              />
-                            </div>
-                            <ErrorMessage name='city' />
-                          </div>
-
-                          <div className={styles.formInput}>
-                            <div>
-                              <label htmlFor='NIP'>NIP</label>
-                              <Field id='NIP' name='NIP' placeholder={'NIP'} />
-                            </div>
-                            <ErrorMessage name='NIP' />
-                          </div>
-                        </div>
-                      </div>
-                    </Form>
-                  )}
-                </Formik>
-              </div>
-            </div>
+            <AdminReservationsForm
+              reservation={chosenReservation}
+              action={action}
+              setAction={(value: IReservationFormAction) => setAction(value)}
+            />
           </div>
         )}
       </>

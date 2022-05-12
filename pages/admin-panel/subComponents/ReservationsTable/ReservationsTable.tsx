@@ -6,9 +6,15 @@ import styles from '../../AdminPanel.module.scss';
 
 interface IReservationsTableProps {
   reservations: IReservation[];
+  setAction: Function;
+  setChosenReservation: Function;
 }
 
-const ReservationsTable = ({ reservations }: IReservationsTableProps) => {
+const ReservationsTable = ({
+  reservations,
+  setAction,
+  setChosenReservation
+}: IReservationsTableProps) => {
   return (
     <table>
       <thead>
@@ -46,7 +52,12 @@ const ReservationsTable = ({ reservations }: IReservationsTableProps) => {
               </div>
             </td>
             <td className={styles.actions}>
-              <MdPreview />
+              <MdPreview
+                onClick={() => {
+                  setChosenReservation(reservation);
+                  setAction('PREVIEW');
+                }}
+              />
               <AiFillEdit />
               <TiDeleteOutline />
             </td>
