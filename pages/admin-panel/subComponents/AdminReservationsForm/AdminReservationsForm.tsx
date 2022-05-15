@@ -15,19 +15,45 @@ import {
 import { v4 as uuidv4, v4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import { IReservation } from '../..';
+import { HTTPRequest } from '../../../../src/lib/httpRequest';
+import classNames from 'classnames';
 
 export type IReservationFormAction = 'ADD' | 'PREVIEW' | 'EDIT';
+
+interface INewReservation {
+  date: number;
+  conferenceRoom: string;
+  startHour: string;
+  endHour: string;
+  numberOfPeople: string;
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+  message: string;
+  company: string;
+  street: string;
+  zipCode: string;
+  city: string;
+  NIP: string;
+}
 
 interface IReservationsFormProps {
   reservation: IReservation | null;
   action: IReservationFormAction;
   setAction: Function;
+  setReservation: Function;
+  conferenceRoomId: string;
+  chosenDate: Date;
 }
 
 const AdminReservationsForm = ({
   reservation,
+  setReservation,
   action,
-  setAction
+  setAction,
+  chosenDate,
+  conferenceRoomId
 }: IReservationsFormProps) => {
   const [initailValues, setInitialvalues] = useState<IReservation>({
     _id: '',
@@ -68,7 +94,35 @@ const AdminReservationsForm = ({
             values: IReservation,
             { setSubmitting }: FormikHelpers<IReservation>
           ) => {
-            setInitialvalues(values);
+            if (action === 'EDIT') {
+              const response = await HTTPRequest(
+                'POST',
+                `reservations?id=${values._id}`,
+                values
+              );
+              setReservation(response.data);
+            } else if (action === 'ADD') {
+              const data: INewReservation = {
+                date: chosenDate.getTime(),
+                conferenceRoom: conferenceRoomId,
+                startHour: values.startHour,
+                endHour: values.endHour,
+                numberOfPeople: values.numberOfPeople,
+                name: values.name,
+                surname: values.surname,
+                email: values.email,
+                phone: values.phone,
+                message: values.message,
+                company: values.company,
+                street: values.street,
+                zipCode: values.zipCode,
+                city: values.city,
+                NIP: values.NIP
+              };
+              const response = await HTTPRequest('PUT', 'reservations', data);
+              setReservation(response.data);
+              setAction('PREVIEW');
+            }
             setSubmitting(false);
           }}
         >
@@ -109,23 +163,25 @@ const AdminReservationsForm = ({
               </div>
 
               <div className={styles.formSelects}>
-                <label className='p' htmlFor='numberOfPeople'>
-                  Liczba osób
-                </label>
-                <Field
-                  as='select'
-                  id='numberOfPeople'
-                  name='numberOfPeople'
-                  disabled={action === 'PREVIEW'}
-                >
-                  {possibleNumberOfPeople.map((el) => {
-                    return (
-                      <option key={uuidv4()} value={el}>
-                        {el}
-                      </option>
-                    );
-                  })}
-                </Field>
+                <div>
+                  <label className='p' htmlFor='numberOfPeople'>
+                    Liczba osób
+                  </label>
+                  <Field
+                    as='select'
+                    id='numberOfPeople'
+                    name='numberOfPeople'
+                    disabled={action === 'PREVIEW'}
+                  >
+                    {possibleNumberOfPeople.map((el) => {
+                      return (
+                        <option key={uuidv4()} value={el}>
+                          {el}
+                        </option>
+                      );
+                    })}
+                  </Field>
+                </div>
               </div>
 
               <div className={styles.forms}>
@@ -270,7 +326,14 @@ const AdminReservationsForm = ({
                   </div>
                 </div>
               </div>
-              <button type='submit'>ZAPISZ</button>
+              <div className={styles.submitButtonContainer}>
+                {action !== 'PREVIEW' && (
+                  <button type='submit' className={styles.submitButton}>
+                    {(action === 'EDIT' && 'Zapisz zmiany') ||
+                      (action === 'ADD' && 'Dodaj rezerwację')}
+                  </button>
+                )}
+              </div>
             </Form>
           )}
         </Formik>

@@ -41,7 +41,9 @@ const AdminPanelPage = () => {
     IConferenceRoom[] | [] | false
   >(false);
   const [date, setDate] = useState(new Date());
-  const [chosenConferenceRoom, setChosenConferenceRoom] = useState('');
+  const [chosenConferenceRoom, setChosenConferenceRoom] = useState<
+    IConferenceRoom | string
+  >('');
   const [chosenReservation, setChosenReservation] =
     useState<IReservation | null>(null);
   const [reservations, setReservations] = useState<IReservation[]>();
@@ -72,7 +74,7 @@ const AdminPanelPage = () => {
 
   useEffect(() => {
     getReservations(1);
-  }, [chosenConferenceRoom, date]);
+  }, [chosenConferenceRoom, date, chosenReservation]);
 
   const getReservations = async (page: number) => {
     const response = await HTTPRequest(
@@ -112,7 +114,11 @@ const AdminPanelPage = () => {
 
                 <select
                   id='selectConferenceRoom'
-                  defaultValue={chosenConferenceRoom}
+                  defaultValue={
+                    typeof chosenConferenceRoom === 'string'
+                      ? chosenConferenceRoom
+                      : chosenConferenceRoom._id
+                  }
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     setChosenConferenceRoom(e.currentTarget.value);
                   }}
@@ -191,8 +197,17 @@ const AdminPanelPage = () => {
 
             <AdminReservationsForm
               reservation={chosenReservation}
+              setReservation={(reservation: IReservation) =>
+                setChosenReservation(reservation)
+              }
+              conferenceRoomId={
+                typeof chosenConferenceRoom === 'string'
+                  ? chosenConferenceRoom
+                  : chosenConferenceRoom._id
+              }
               action={action}
               setAction={(value: IReservationFormAction) => setAction(value)}
+              chosenDate={date}
             />
           </div>
         )}

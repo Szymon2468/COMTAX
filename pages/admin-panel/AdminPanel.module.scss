@@ -130,6 +130,7 @@
     display: flex;
     justify-content: center;
     gap: 50px;
+    margin-bottom: 10px;
 
     div {
       label {
@@ -137,6 +138,33 @@
       }
       select {
         width: 150px !important;
+      }
+    }
+  }
+
+  .submitButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 30px;
+
+    .submitButton {
+      box-shadow: -2px 2px 4px rgb(0 0 0 / 25%);
+      background-color: $mainColor;
+      border: none;
+      color: #f8fff8;
+      width: fit-content;
+      padding: 5px 30px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      font-size: 20px;
+      border: 2px $mainColor solid;
+      transition: linear all 0.2s;
+
+      &:hover {
+        color: $mainColor;
+        background-color: #f8fff8;
+        border: 2px $mainColor solid;
       }
     }
   }
