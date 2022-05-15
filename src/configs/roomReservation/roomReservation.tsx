@@ -124,6 +124,8 @@ export const availableEndHours = [
   '18:00'
 ];
 
+export const possibleNumberOfPeople = ['1', '2', '3', '4', '5', '6'];
+
 export const getStartHour = (currentReservations: IShortenReservation[]) => {
   for (const el of currentReservations) {
     if (

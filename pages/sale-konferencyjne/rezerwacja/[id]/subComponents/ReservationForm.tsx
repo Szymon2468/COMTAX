@@ -7,7 +7,8 @@ import {
   getStartHour,
   IConferenceRoomResponse,
   IReservationFormValues,
-  IShortenReservation
+  IShortenReservation,
+  possibleNumberOfPeople
 } from '../../../../../src/configs/roomReservation/roomReservation';
 import styles from '../index.module.scss';
 import { v4 as uuidv4 } from 'uuid';
@@ -175,7 +176,7 @@ const ReservationForm = ({
                   name='numberOfPeople'
                   className={styles.dateInput}
                 >
-                  {['1', '2', '3', '4', '5', '6'].map((el) => (
+                  {possibleNumberOfPeople.map((el) => (
                     <option key={uuidv4()} value={el}>
                       {el}
                     </option>

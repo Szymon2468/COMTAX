@@ -58,7 +58,12 @@ const ReservationsTable = ({
                   setAction('PREVIEW');
                 }}
               />
-              <AiFillEdit />
+              <AiFillEdit
+                onClick={() => {
+                  setChosenReservation(reservation);
+                  setAction('EDIT');
+                }}
+              />
               <TiDeleteOutline />
             </td>
           </tr>

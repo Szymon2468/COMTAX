@@ -1,11 +1,19 @@
 import styles from '../../AdminPanel.module.scss';
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
+import {
+  ErrorMessage,
+  Field,
+  Form,
+  Formik,
+  FormikHelpers,
+  setIn
+} from 'formik';
 import {
   availableEndHours,
-  availableStartHours
+  availableStartHours,
+  possibleNumberOfPeople
 } from '../../../../src/configs/roomReservation/roomReservation';
 import { v4 as uuidv4, v4 } from 'uuid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IReservation } from '../..';
 
 export type IReservationFormAction = 'ADD' | 'PREVIEW' | 'EDIT';
@@ -15,11 +23,35 @@ interface IReservationsFormProps {
   action: IReservationFormAction;
   setAction: Function;
 }
+
 const AdminReservationsForm = ({
   reservation,
   action,
   setAction
 }: IReservationsFormProps) => {
+  const [initailValues, setInitialvalues] = useState<IReservation>({
+    _id: '',
+    startHour: '8:00',
+    endHour: '8:30',
+    numberOfPeople: '1',
+    name: '',
+    surname: '',
+    email: '',
+    phone: '',
+    message: '',
+    company: '',
+    street: '',
+    zipCode: '',
+    city: '',
+    NIP: ''
+  });
+
+  useEffect(() => {
+    if (reservation) {
+      setInitialvalues(reservation);
+    }
+  }, [reservation]);
+
   return (
     <div className={styles.reservationForm}>
       <h4>
@@ -29,29 +61,16 @@ const AdminReservationsForm = ({
       </h4>
       <div className={styles.form}>
         <Formik
-          initialValues={{
-            startHour: '8:00',
-            endHour: '8:30',
-            numberOfPeople: '1',
-            name: '',
-            surname: '',
-            email: '',
-            phone: '',
-            message: '',
-            company: '',
-            street: '',
-            zipCode: '',
-            city: '',
-            NIP: ''
-          }}
+          enableReinitialize={true}
+          initialValues={initailValues}
           // validationSchema={FormValidationSchema}
-          onSubmit={async () =>
-            // values: ILoginFormValues,
-            // { setSubmitting }: FormikHelpers<>
-            {
-              // setSubmitting(false);
-            }
-          }
+          onSubmit={async (
+            values: IReservation,
+            { setSubmitting }: FormikHelpers<IReservation>
+          ) => {
+            setInitialvalues(values);
+            setSubmitting(false);
+          }}
         >
           {({ errors }) => (
             <Form>
@@ -87,6 +106,26 @@ const AdminReservationsForm = ({
                     ))}
                   </Field>
                 </div>
+              </div>
+
+              <div className={styles.formSelects}>
+                <label className='p' htmlFor='numberOfPeople'>
+                  Liczba osób
+                </label>
+                <Field
+                  as='select'
+                  id='numberOfPeople'
+                  name='numberOfPeople'
+                  disabled={action === 'PREVIEW'}
+                >
+                  {possibleNumberOfPeople.map((el) => {
+                    return (
+                      <option key={uuidv4()} value={el}>
+                        {el}
+                      </option>
+                    );
+                  })}
+                </Field>
               </div>
 
               <div className={styles.forms}>
@@ -231,6 +270,7 @@ const AdminReservationsForm = ({
                   </div>
                 </div>
               </div>
+              <button type='submit'>ZAPISZ</button>
             </Form>
           )}
         </Formik>
