@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { IRoom } from '..';
 import dbConnect from '../../../../app/lib/dbConnect';
-import Gallery from '../../../../src/components/Gallery/Gallery';
+import Gallery, { IImage } from '../../../../src/components/Gallery/Gallery';
 import HighliteDates from '../../../../src/components/HighlightDates/HighliteDates';
 import MasterLayout from '../../../../src/components/MasterLayout/MasterLayout';
 import {
@@ -20,13 +20,6 @@ const Reservation = require('../../../../app/models/Reservation');
 interface IRoomReservationProps {
   reservations: IShortenReservation[];
   conferenceRoom: IConferenceRoomResponse;
-}
-
-interface IImageObject {
-  blurDataURL: string;
-  src: string;
-  width: number;
-  height: number;
 }
 
 function RoomReservation({
@@ -142,7 +135,7 @@ export async function getStaticProps({ params: { id } }: IParams) {
 
   const conferenceRoomResponse = await ConferenceRoom.findById(id);
 
-  let images: IImageObject[] = [];
+  let images: IImage[] = [];
 
   for (let i = 1; i <= 6; i++) {
     const source = `${
@@ -152,10 +145,8 @@ export async function getStaticProps({ params: { id } }: IParams) {
     //   `../../../../public/rooms/${conferenceRoomResponse.name.toUpperCase()}/photo${i}.jpeg`
     // );
     images.push({
-      src: source,
-      blurDataURL: '',
-      height: 200,
-      width: 200
+      url: source,
+      title: ''
     });
   }
 
