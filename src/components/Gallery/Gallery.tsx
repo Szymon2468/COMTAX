@@ -2,29 +2,24 @@ import styles from './Gallery.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 // @ts-ignore
 import ModalImage from 'react-modal-image';
-import Image from 'next/image';
 
-interface IImageObject {
-  blurDataURL: string;
-  src: string;
-  width: number;
-  height: number;
+export interface IImage {
+  url: string;
+  title: string;
 }
 
 interface IGalleryProps {
-  images: IImageObject[];
+  images: IImage[];
 }
 
 const Gallery = ({ images }: IGalleryProps) => {
   const result: JSX.Element[] = [];
   images.map((el) => {
-    console.log(el.src);
     result.push(
       <div key={uuidv4()} className={styles.galleryImg}>
-        {/* <Image alt='lol' width={200} height={200} src={el.src} /> */}
         <ModalImage
-          small={el.src}
-          large={el.src}
+          small={el.url}
+          large={el.url}
           alt=''
           imageBackgroundColor={'transparent'}
           hideDownload={true}

@@ -3,6 +3,7 @@ import { MdPreview } from 'react-icons/md';
 import { AiFillEdit } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import styles from '../../AdminPanel.module.scss';
+import { v4 as uuidv4 } from 'uuid';
 
 interface IReservationsTableProps {
   reservations: IReservation[];
@@ -15,6 +16,10 @@ const ReservationsTable = ({
   setAction,
   setChosenReservation
 }: IReservationsTableProps) => {
+  if (!reservations) {
+    return null;
+  }
+
   return (
     <table>
       <thead>
@@ -30,7 +35,7 @@ const ReservationsTable = ({
       </thead>
       <tbody>
         {reservations.map((reservation) => (
-          <tr>
+          <tr key={uuidv4()}>
             <td>{reservation.startHour}</td>
             <td>{reservation.endHour}</td>
             <td>

@@ -1,3 +1,5 @@
+import { IImage } from '../../components/Gallery/Gallery';
+
 export interface IShortenReservation {
   _id: string;
   conferenceRoom: string;
@@ -6,17 +8,10 @@ export interface IShortenReservation {
   endHour: string;
 }
 
-export interface IImageObject {
-  blurDataURL: string;
-  src: string;
-  width: number;
-  height: number;
-}
-
 export interface IConferenceRoomResponse {
   id: string;
   name: string;
-  photos: IImageObject[];
+  photos: IImage[];
   facilities: string[];
   address: string;
   city: string;
