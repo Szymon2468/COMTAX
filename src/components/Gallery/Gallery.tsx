@@ -1,7 +1,7 @@
 import styles from './Gallery.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 // @ts-ignore
-import ModalImage from 'react-modal-image';
+// import ModalImage from 'react-modal-image';
 
 export interface IImage {
   url: string;
@@ -17,13 +17,13 @@ const Gallery = ({ images }: IGalleryProps) => {
   images.map((el) => {
     result.push(
       <div key={uuidv4()} className={styles.galleryImg}>
-        <ModalImage
+        {/* <ModalImage
           small={el.url}
           large={el.url}
           alt=''
           imageBackgroundColor={'transparent'}
           hideDownload={true}
-        />
+        /> */}
       </div>
     );
   });
