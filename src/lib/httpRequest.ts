@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 // let API_URL = 'https://comtax.netlify.app/api';
-let API_URL = process.env.API_URL;
 
 export const HTTPRequest = async (
   method: 'GET' | 'POST' | 'PUT' | 'DELETE',
@@ -9,6 +8,7 @@ export const HTTPRequest = async (
   data?: object
 ) => {
   let response;
+  const API_URL = process.env.API_URL;
   try {
     axios.defaults.withCredentials = true;
 
