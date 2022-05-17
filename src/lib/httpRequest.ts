@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // let API_URL = 'https://comtax.netlify.app/api';
-let API_URL = 'http://localhost:3000/api';
+let API_URL = process.env.API_URL;
 
 export const HTTPRequest = async (
   method: 'GET' | 'POST' | 'PUT' | 'DELETE',
