@@ -3,8 +3,6 @@ import styles from './contact.module.scss';
 import { NextSeo } from 'next-seo';
 
 function index() {
-  let pageDescription = '';
-
   return (
     <>
       <NextSeo
