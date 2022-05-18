@@ -1,6 +1,7 @@
 import dbConnect from '../../../app/lib/dbConnect';
 import User from '../../../app/models/User';
 import nodemailer from 'nodemailer';
+import config from '../../../EVN_CONFIG.json';
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -27,7 +28,7 @@ export default async function handler(req, res) {
   await user.save({ validateBeforeSave: false });
 
   // Create reset url
-  const resetUrl = `${process.env.SITE_URL}/admin-panel/autoryzacja/reset-hasla/${resetToken}`;
+  const resetUrl = `${config.SITE_URL}/admin-panel/autoryzacja/reset-hasla/${resetToken}`;
 
   const message = `
     <h3 style="margin:0;color:black">Została zgłoszona prośba o reset hasła w serwisie COMTAX na koncie przypisanym do tego adresu e-mail.</h3>

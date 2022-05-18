@@ -1,6 +1,13 @@
 import axios from 'axios';
+import config from '../../EVN_CONFIG.json';
 
-// let API_URL = 'https://comtax.netlify.app/api';
+const API_URL = config.API_URL;
+
+if (!API_URL) {
+  throw new Error(
+    'Please define the API_URL environment variable inside ENV_CONFIG.json'
+  );
+}
 
 export const HTTPRequest = async (
   method: 'GET' | 'POST' | 'PUT' | 'DELETE',
@@ -8,7 +15,6 @@ export const HTTPRequest = async (
   data?: object
 ) => {
   let response;
-  const API_URL = process.env.API_URL;
   try {
     axios.defaults.withCredentials = true;
 

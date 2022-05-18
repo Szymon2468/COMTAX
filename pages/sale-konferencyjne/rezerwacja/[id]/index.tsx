@@ -12,7 +12,7 @@ import {
 import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import styles from './index.module.scss';
 import ReservationForm from './subComponents/ReservationForm';
-import { lazy } from 'react';
+import config from '../../../../EVN_CONFIG.json';
 
 const ConferenceRoom = require('../../../../app/models/ConferenceRoom');
 const Reservation = require('../../../../app/models/Reservation');
@@ -139,7 +139,7 @@ export async function getStaticProps({ params: { id } }: IParams) {
 
   for (let i = 1; i <= 6; i++) {
     const source = `${
-      process.env.SITE_URL
+      config.SITE_URL
     }/rooms/${conferenceRoomResponse.name.toUpperCase()}/photo${i}.jpeg`;
     // const source = await import(
     //   `../../../../public/rooms/${conferenceRoomResponse.name.toUpperCase()}/photo${i}.jpeg`
