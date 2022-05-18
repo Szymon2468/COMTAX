@@ -30,28 +30,6 @@ const Home = () => {
 
   return (
     <>
-      <Head>
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <title>
-          Oyama Karate Katowice - Ligota - Panewniki - Piotrowice - Podlesie,
-          oraz Gliwice - Oyama-karate.eu - Nasze sekcje - oyama-karate.eu
-        </title>
-        <meta
-          property='og:title'
-          content={`Oyama Karate Katowice - Ligota - Panewniki - Piotrowice - Podlesie,
-          oraz Gliwice - Oyama-karate.eu - Nasze sekcje - oyama-karate.eu`}
-          key='ogtitle'
-        />
-        <meta key='robots' name='robots' content='index,follow' />
-        <meta key='googlebot' name='googlebot' content='index,follow' />
-        <meta name='description' content={pageDescription} />
-        <meta
-          property='og:description'
-          content={pageDescription}
-          key='ogdesc'
-        />
-      </Head>
-
       <MasterLayout>
         <main>
           <section>

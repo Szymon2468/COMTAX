@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link';
 import dbConnect from '../../../app/lib/dbConnect';
 import MasterLayout from '../../../src/components/MasterLayout/MasterLayout';
-import { useState } from 'react';
+import { NextSeo } from 'next-seo';
 
 const ConferenceRoom = require('../../../app/models/ConferenceRoom');
 
@@ -38,38 +38,46 @@ function index({ rooms }: IRoomTile) {
   console.log(rooms);
 
   return (
-    <MasterLayout>
-      <section>
-        <div className={styles.landingPage}>
-          <div className={`container ${styles.accountsContainer}`}>
-            <header>
-              <h1 className={styles.title}>ZAREZERWUJ SALĘ KONFERENCYJNĄ</h1>
-            </header>
+    <>
+      <NextSeo
+        title='Sala Konferencyjna w Katowicach - rezerwacja'
+        description='Szukasz w Katowicach miejsca na spotkanie z Klientem lub partnerem biznesowym? Zarezerwuj jedną z naszych sal - krasińskiego 29, Katowice'
+        canonical='https://krasinskiego29.pl/sale-konferencyjne/rezerwacja'
+      />
+
+      <MasterLayout>
+        <section>
+          <div className={styles.landingPage}>
+            <div className={`container ${styles.accountsContainer}`}>
+              <header>
+                <h1 className={styles.title}>ZAREZERWUJ SALĘ KONFERENCYJNĄ</h1>
+              </header>
+            </div>
+          </div>
+        </section>
+
+        <div className={`container ${styles.roomTilesContainerContainer}`}>
+          <header className={styles.header}>
+            <h2 className={styles.title}>
+              PRZEGLĄDAJ SALE KONFERENCYJCE, JAKIE MAMY W OFERCIE
+            </h2>
+          </header>
+          <div className={styles.roomTilesContainer}>
+            {rooms.map((el) => (
+              <Link key={uuidv4()} href={`rezerwacja/${el._id}`}>
+                <a>
+                  <RoomTile
+                    img={el.roomImg.src}
+                    alt={el.photos[0]?.alt}
+                    name={el.name}
+                  ></RoomTile>
+                </a>
+              </Link>
+            ))}
           </div>
         </div>
-      </section>
-
-      <div className={`container ${styles.roomTilesContainerContainer}`}>
-        <header className={styles.header}>
-          <h2 className={styles.title}>
-            PRZEGLĄDAJ SALE KONFERENCYJCE, JAKIE MAMY W OFERCIE
-          </h2>
-        </header>
-        <div className={styles.roomTilesContainer}>
-          {rooms.map((el) => (
-            <Link key={uuidv4()} href={`rezerwacja/${el._id}`}>
-              <a>
-                <RoomTile
-                  img={el.roomImg.src}
-                  alt={el.photos[0]?.alt}
-                  name={el.name}
-                ></RoomTile>
-              </a>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </MasterLayout>
+      </MasterLayout>
+    </>
   );
 }
 

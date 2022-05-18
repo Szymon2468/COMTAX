@@ -13,6 +13,7 @@ import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import styles from './index.module.scss';
 import ReservationForm from './subComponents/ReservationForm';
 import config from '../../../../ENV_CONFIG.json';
+import { NextSeo } from 'next-seo';
 
 const ConferenceRoom = require('../../../../app/models/ConferenceRoom');
 const Reservation = require('../../../../app/models/Reservation');
@@ -50,52 +51,57 @@ function RoomReservation({
   }
 
   return (
-    <MasterLayout>
-      <div className={styles.landingPage}>
-        <div className={`container ${styles.accountsContainer}`}>
-          <header>
-            <h1 className={styles.landingTitle}>
-              <span>SALA KONFERENCYJNA</span> <span>{conferenceRoom.name}</span>
-            </h1>
-          </header>
+    <>
+      <NextSeo nofollow={true} noindex={true} />
+
+      <MasterLayout>
+        <div className={styles.landingPage}>
+          <div className={`container ${styles.accountsContainer}`}>
+            <header>
+              <h1 className={styles.landingTitle}>
+                <span>SALA KONFERENCYJNA</span>{' '}
+                <span>{conferenceRoom.name}</span>
+              </h1>
+            </header>
+          </div>
         </div>
-      </div>
-      <div className='container'>
-        <section>
-          <header className={styles.header}>
-            <h2 className={styles.title}>ZAREZERWUJ SALĘ</h2>
-          </header>
-          <div className={styles.formContainersContainer}>
-            <div className={styles.calendarContainer}>
-              <p>Wybierz datę rezerwacji: </p>
-              <HighliteDates
-                startDate={startDate}
-                setStartDate={setStartDate}
-              />
+        <div className='container'>
+          <section>
+            <header className={styles.header}>
+              <h2 className={styles.title}>ZAREZERWUJ SALĘ</h2>
+            </header>
+            <div className={styles.formContainersContainer}>
+              <div className={styles.calendarContainer}>
+                <p>Wybierz datę rezerwacji: </p>
+                <HighliteDates
+                  startDate={startDate}
+                  setStartDate={setStartDate}
+                />
+              </div>
             </div>
-          </div>
-          <div className={styles.reservatedHoursContainer}>
-            {generateReservatedHoursComponent(currentReservations)}
-          </div>
+            <div className={styles.reservatedHoursContainer}>
+              {generateReservatedHoursComponent(currentReservations)}
+            </div>
 
-          <ReservationForm
-            currentReservations={currentReservations}
-            conferenceRoom={conferenceRoom}
-            date={startDate}
-          />
-        </section>
-
-        <div className='section'>
-          <section className={styles.gallery}>
-            <h2>ZOBACZ NASZĄ SALĘ</h2>
+            <ReservationForm
+              currentReservations={currentReservations}
+              conferenceRoom={conferenceRoom}
+              date={startDate}
+            />
           </section>
 
-          <div className={styles.galleryContainer}>
-            <Gallery images={conferenceRoom.photos} />
+          <div className='section'>
+            <section className={styles.gallery}>
+              <h2>ZOBACZ NASZĄ SALĘ</h2>
+            </section>
+
+            <div className={styles.galleryContainer}>
+              <Gallery images={conferenceRoom.photos} />
+            </div>
           </div>
         </div>
-      </div>
-    </MasterLayout>
+      </MasterLayout>
+    </>
   );
 }
 
