@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../../EVN_CONFIG.json';
+import config from '../../ENV_CONFIG.json';
 
 const API_URL = config.API_URL;
 

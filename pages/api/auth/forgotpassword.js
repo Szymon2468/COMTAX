@@ -1,7 +1,7 @@
 import dbConnect from '../../../app/lib/dbConnect';
 import User from '../../../app/models/User';
 import nodemailer from 'nodemailer';
-import config from '../../../EVN_CONFIG.json';
+import config from '../../../ENV_CONFIG.json';
 
 export default async function handler(req, res) {
   const { method } = req;

@@ -12,7 +12,7 @@ import {
 import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import styles from './index.module.scss';
 import ReservationForm from './subComponents/ReservationForm';
-import config from '../../../../EVN_CONFIG.json';
+import config from '../../../../ENV_CONFIG.json';
 
 const ConferenceRoom = require('../../../../app/models/ConferenceRoom');
 const Reservation = require('../../../../app/models/Reservation');
