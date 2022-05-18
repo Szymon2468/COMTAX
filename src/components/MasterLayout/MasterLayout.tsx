@@ -9,7 +9,7 @@ function MasterLayout({ children }: any) {
       <Nav />
       {children}
       <ContactForm />
-      <Opinions />
+      {/* <Opinions /> */}
       <Footer />
     </>
   );
