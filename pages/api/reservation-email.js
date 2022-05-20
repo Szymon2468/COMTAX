@@ -75,12 +75,12 @@ export default async function handler(req, res) {
       text: mailBody
     };
 
-    // await transporter.sendMail(msg, function (error, info) {
-    //   if (error) {
-    //     console.error(error);
-    //     res.status(400).json({ success: false, message: error });
-    //   }
-    // });
+    await transporter.sendMail(msg, function (error, info) {
+      if (error) {
+        console.error(error);
+        res.status(400).json({ success: false, message: error });
+      }
+    });
     res.status(200).json({ success: true });
   } catch (error) {
     console.error(error);
