@@ -5,25 +5,43 @@ import { TiDeleteOutline } from 'react-icons/ti';
 import styles from '../../AdminPanel.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 import { HTTPRequest } from '../../../../src/lib/httpRequest';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AcceptationModal, {
   IAcceptationModal
 } from '../../../../src/components/AcceptationModal/AcceptationModal';
+import { IMessagePopUp } from '../AdminReservationsForm/AdminReservationsForm';
+import classNames from 'classnames';
 
 interface IReservationsTableProps {
   reservations: IReservation[];
   setAction: Function;
   setChosenReservation: Function;
+  chosenReservation: IReservation | null;
 }
 
 const ReservationsTable = ({
   reservations,
   setAction,
-  setChosenReservation
+  setChosenReservation,
+  chosenReservation
 }: IReservationsTableProps) => {
-  const [acceptationModal, setAcceptationModal] = useState<IAcceptationModal>({
+  const [acceptationModal, setAcceptationModal] = useState<IAcceptationModal>();
+  const [acceptationModalVisible, setAcceptationModalVisible] =
+    useState<boolean>(false);
+  const [messagePopUp, setMessagePopUp] = useState<IMessagePopUp>({
     visible: false
   });
+
+  useEffect(() => {
+    if (messagePopUp.visible) {
+      setTimeout(
+        () => {
+          setMessagePopUp({ visible: false });
+        },
+        messagePopUp.type === 'ERROR' ? 6000 : 3000
+      );
+    }
+  }, [messagePopUp]);
 
   if (!reservations) {
     return null;
@@ -34,13 +52,44 @@ const ReservationsTable = ({
       'DELETE',
       `reservations?id=${reservation._id}`
     );
-    setChosenReservation(emptyReservation);
-    setAction('ADD');
+    if (response.success) {
+      chosenReservation === null
+        ? setChosenReservation(emptyReservation)
+        : setChosenReservation(null);
+      setAction('ADD');
+
+      setMessagePopUp({
+        visible: true,
+        type: 'SUCCESS',
+        message: 'Pomyślnie zapisano zmiany.'
+      });
+    } else {
+      setMessagePopUp({
+        visible: true,
+        type: 'ERROR',
+        message:
+          'Nie udało się zapisać zmian. Spróbuj ponownie lub skontaktuj się z administratorem.'
+      });
+    }
   };
 
   return (
     <>
-      {acceptationModal.visible && <AcceptationModal {...acceptationModal} />}
+      {messagePopUp.visible && (
+        <div
+          className={classNames(
+            styles.messagePopUp,
+            messagePopUp.type === 'ERROR' && styles.messagePopUpError
+          )}
+        >
+          <p>{messagePopUp.message}</p>
+        </div>
+      )}
+      {acceptationModalVisible && (
+        <div className={styles.acceptationModal}>
+          <AcceptationModal {...acceptationModal} />
+        </div>
+      )}
       <table>
         <thead>
           <tr>
@@ -91,11 +140,32 @@ const ReservationsTable = ({
                 />
                 <TiDeleteOutline
                   onClick={async () => {
-                    // await handleDelete(reservation);
                     setAcceptationModal({
-                      visible: true,
-                      buttons: { close: true }
+                      message: (
+                        <>
+                          <h3>Czy na pewno chcesz usunąć tą rezerwację?</h3>
+                          <p>
+                            Rezerwacja od {reservation.startHour} do{' '}
+                            {reservation.endHour} na osobę {reservation.name}{' '}
+                            {reservation.surname}.
+                          </p>
+                        </>
+                      ),
+                      buttons: {
+                        close: true,
+                        closeAction: () => {
+                          setAcceptationModalVisible(false);
+                        },
+                        yes: true,
+                        yesAction: async () => {
+                          setAcceptationModalVisible(false);
+                          await handleDelete(reservation);
+                        },
+                        no: true,
+                        noAction: () => setAcceptationModalVisible(false)
+                      }
                     });
+                    setAcceptationModalVisible(true);
                   }}
                 />
               </td>

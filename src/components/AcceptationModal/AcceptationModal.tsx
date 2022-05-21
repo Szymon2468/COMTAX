@@ -13,21 +13,41 @@ interface IAcceptationModalButtons {
 }
 
 export interface IAcceptationModal {
-  visible: boolean;
-  message?: string;
+  message?: JSX.Element;
   buttons?: IAcceptationModalButtons;
 }
 
-const AcceptationModal = ({ visible, message, buttons }: IAcceptationModal) => {
+const AcceptationModal = ({ message, buttons }: IAcceptationModal) => {
   return (
     <div className={styles.modal}>
       {buttons?.close && (
         <i
           className={styles.closeBtn}
-          onClick={() => (buttons?.closeAction ? buttons?.closeAction : null)}
+          onClick={() => (buttons?.closeAction ? buttons?.closeAction() : null)}
         >
           <AiOutlineClose />
         </i>
+      )}
+      {message && <div className={styles.modalMessage}>{message}</div>}
+      {(buttons?.yes || buttons?.no) && (
+        <div className={styles.acceptButtons}>
+          {buttons.yes && (
+            <button
+              className={styles.yesBtn}
+              onClick={() => (buttons.yesAction ? buttons.yesAction() : null)}
+            >
+              Tak
+            </button>
+          )}
+          {buttons.no && (
+            <button
+              className={styles.noBtn}
+              onClick={() => (buttons.noAction ? buttons.noAction() : null)}
+            >
+              Nie
+            </button>
+          )}
+        </div>
       )}
     </div>
   );

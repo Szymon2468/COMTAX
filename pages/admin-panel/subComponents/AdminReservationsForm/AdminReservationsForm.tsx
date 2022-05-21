@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 export type IReservationFormAction = 'ADD' | 'PREVIEW' | 'EDIT';
 
-interface IMessagePopUp {
+export interface IMessagePopUp {
   visible: boolean;
   message?: string;
   type?: 'ERROR' | 'SUCCESS';
@@ -151,7 +151,7 @@ const AdminReservationsForm = ({
                 setMessagePopUp({
                   visible: true,
                   type: 'SUCCESS',
-                  message: 'Pomyślnie zapisano zmiany'
+                  message: 'Pomyślnie zapisano zmiany.'
                 });
                 setReservation(response.data);
                 setAction('PREVIEW');

@@ -277,3 +277,12 @@
     color: $turquoiseBgColor;
   }
 }
+
+.acceptationModal {
+  position: fixed;
+  top: 200px;
+  left: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
