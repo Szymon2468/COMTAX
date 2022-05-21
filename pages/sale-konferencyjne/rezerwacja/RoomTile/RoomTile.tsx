@@ -10,7 +10,13 @@ interface IRoomTileType {
 function RoomTile({ img, name, alt }: IRoomTileType) {
   return (
     <div className={styles.RoomTile}>
-      <Image src={img} className={styles.img} width={300} height={200} />
+      <img
+        src={img}
+        className={styles.img}
+        width={300}
+        height={200}
+        alt={alt}
+      />
       <h3 className={styles.name}>{name?.toUpperCase()}</h3>
       <p className={styles.info}>ul. Krasińskiego 29</p>
       <p className={styles.more}>
