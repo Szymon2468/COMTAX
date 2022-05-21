@@ -82,7 +82,14 @@
         svg {
           width: 20px;
           height: 20px;
-          margin: 2px;
+          margin-right: 10px;
+
+          &:hover {
+            cursor: pointer;
+            color: $mainColor;
+            transform: scale(1.2);
+            transition: all 0.3s linear;
+          }
         }
       }
 

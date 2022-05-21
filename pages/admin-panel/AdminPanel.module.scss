@@ -48,6 +48,11 @@
   }
 }
 
+.notFoundReservations {
+  margin: 0;
+  padding-left: 20px;
+}
+
 .reservationsTable {
   margin-top: 30px;
 
@@ -73,9 +78,36 @@
   }
 }
 
+.lastRow {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.newReservaion {
+  margin-top: 10px;
+  padding-left: 20px;
+
+  p {
+    margin: 0;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $mainColor;
+      transform: scale(1.05);
+      transition: all 0.3s linear;
+    }
+  }
+}
+
 .pagination {
   margin-top: 10px;
-  width: 100%;
+  width: 80%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -217,5 +249,31 @@
         }
       }
     }
+  }
+}
+
+.messagePopUp {
+  position: fixed;
+  top: 110px;
+  right: 20px;
+  background-color: #a3e38cde;
+  box-shadow: -4px 4px 8px rgb(0 0 0 / 25%);
+  border: 1px solid $mainColor;
+  border-radius: 5px;
+  width: 320px;
+
+  p {
+    margin: 0;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.messagePopUpError {
+  background-color: #f85d74de;
+
+  p {
+    color: $turquoiseBgColor;
   }
 }
