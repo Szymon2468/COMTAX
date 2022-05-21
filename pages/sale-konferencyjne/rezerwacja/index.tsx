@@ -88,9 +88,7 @@ export async function getStaticProps() {
   const data = JSON.parse(JSON.stringify(response));
   await data.map(async (el: any) => {
     el.roomImg = (
-      await import(
-        `../../../src/assets/conferencerooms/rooms/${el.name.toUpperCase()}/photo1.jpeg`
-      )
+      await import(`../../../public/rooms/${el.name.toUpperCase()}/photo1.jpeg`)
     ).default;
   });
 

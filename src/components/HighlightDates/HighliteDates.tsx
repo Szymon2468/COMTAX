@@ -15,7 +15,7 @@ const HighliteDates = ({ startDate, setStartDate }: IHighliteDate) => {
       dateFormat='dd.MM.yyyy'
       onChange={(date) => setStartDate(date as Date)}
       excludeDates={[]}
-      // minDate={new Date()}
+      minDate={new Date()}
       locale={pl}
       placeholderText='Select a date other than today or yesterday'
     />
