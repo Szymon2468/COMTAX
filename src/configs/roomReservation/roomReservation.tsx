@@ -154,11 +154,21 @@ export const generateStartHours = (
     const endIndex = hours.findIndex((el) => excludedHour.endHour === el);
 
     if (startIndex.toString() !== '-1' && endIndex.toString() !== '-1') {
-      const nrOfRemovedHours = endIndex - startIndex + 2;
-      hours.splice(startIndex - 1, nrOfRemovedHours);
+      if (endIndex === hours.length - 1) {
+        console.log(endIndex, '===', hours.length - 1);
+        console.log('wyeszlo');
+        hours.splice(startIndex - 1);
+      } else if (startIndex === 0) {
+        const nrOfRemovedHours = endIndex - startIndex + 1;
+        hours.splice(startIndex, nrOfRemovedHours);
+      } else {
+        const nrOfRemovedHours = endIndex - startIndex + 2;
+        hours.splice(startIndex - 1, nrOfRemovedHours);
+      }
     }
   }
-
+  console.log(excludedHours);
+  console.log(hours);
   return hours;
 };
 
