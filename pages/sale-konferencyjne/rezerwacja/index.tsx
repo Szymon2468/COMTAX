@@ -5,6 +5,7 @@ import Link from 'next/link';
 import dbConnect from '../../../app/lib/dbConnect';
 import MasterLayout from '../../../src/components/MasterLayout/MasterLayout';
 import { NextSeo } from 'next-seo';
+import config from '../../../ENV_CONFIG.json';
 
 const ConferenceRoom = require('../../../app/models/ConferenceRoom');
 
@@ -27,7 +28,7 @@ export interface IRoom {
   city: string;
   facilities: string[];
   photos: IPhoto[];
-  roomImg: IImageObject;
+  roomImg: string;
 }
 
 export interface IRoomTile {
@@ -35,8 +36,6 @@ export interface IRoomTile {
 }
 
 function index({ rooms }: IRoomTile) {
-  console.log(rooms);
-
   return (
     <>
       <NextSeo
@@ -67,7 +66,7 @@ function index({ rooms }: IRoomTile) {
               <Link key={uuidv4()} href={`rezerwacja/${el._id}`}>
                 <a>
                   <RoomTile
-                    img={el.roomImg.src}
+                    img={el.roomImg}
                     alt={el.photos[0]?.alt}
                     name={el.name}
                   ></RoomTile>
@@ -87,9 +86,9 @@ export async function getStaticProps() {
 
   const data = JSON.parse(JSON.stringify(response));
   await data.map(async (el: any) => {
-    el.roomImg = (
-      await import(`../../../public/rooms/${el.name.toUpperCase()}/photo1.jpeg`)
-    ).default;
+    el.roomImg = `${
+      config.SITE_URL
+    }/rooms/${el.name.toUpperCase()}/photo1.jpeg`;
   });
 
   return {
