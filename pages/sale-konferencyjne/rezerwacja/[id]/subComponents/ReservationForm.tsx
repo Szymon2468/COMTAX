@@ -51,9 +51,11 @@ const ReservationForm = ({
   const [startHour, setStartHour] = useState(
     generateStartHours(startHours, currentReservations || [])[0]
   );
+
   const [endHours, setEndHours] = useState(
     generateEndHours(startHour, currentReservations || [])
   );
+
   const [isMsgSent, setIsMsgSent] = useState(false);
   const [isMsgSendigError, setIsMsgSendigError] = useState(false);
 
@@ -69,6 +71,7 @@ const ReservationForm = ({
     <div className={styles.formContainersContainer}>
       <div className={styles.formContainer}>
         <Formik
+          enableReinitialize={true}
           initialValues={{
             startHour: startHour,
             endHour: endHours[0],

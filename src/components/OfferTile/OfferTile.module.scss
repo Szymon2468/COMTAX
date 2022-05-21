@@ -9,11 +9,12 @@
   position: relative;
 
   @include media('>tablet-landscape') {
-    margin-top: 70px;
+    margin-top: 100px;
   }
 
   @include media('<tablet-landscape') {
     justify-content: center;
+    margin-top: 70px;
   }
 
   .tileLeft {
@@ -42,7 +43,6 @@
     width: 1005px;
     height: 660px;
     border-radius: 10px;
-    margin-top: 50px;
 
     @include media('<desktop') {
       width: 782.5px;
