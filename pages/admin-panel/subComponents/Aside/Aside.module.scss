@@ -8,6 +8,16 @@
   padding-top: 50px;
   position: relative;
 
+  @include media('<=tablet-portrait') {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99998;
+    overflow: hidden;
+    overflow-y: hidden;
+  }
+
   p {
     color: $textColor;
     letter-spacing: 0.2px;

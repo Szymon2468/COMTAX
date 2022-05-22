@@ -124,7 +124,7 @@ function Nav() {
         </>
       )}
 
-      {windowSize.width < 1024 && (
+      {windowSize.width <= 1024 && (
         <div className={styles.hamburgerMenu}>
           <HamburgerMenu logoClicked={logoClicked} />
         </div>

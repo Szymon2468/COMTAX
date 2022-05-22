@@ -18,6 +18,24 @@
   .p-smaller {
     font-size: 14px;
   }
+
+  @include media('<=tablet-portrait') {
+    display: initial;
+    // position: relative;
+  }
+}
+
+.hamburgerMenuIcon {
+  position: fixed;
+  z-index: 99999;
+
+  top: 0;
+  right: 0;
+  padding: 5px 5px 10px 10px;
+  background-color: $mainColor;
+  border-bottom-left-radius: 50%;
+  color: $textColor;
+  box-shadow: -2px 2px 4px rgb(0 0 0 / 25%);
 }
 
 .pageContent {
