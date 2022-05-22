@@ -1,0 +1,27 @@
+@import '../../../styles/variables.scss';
+
+.messagePopUp {
+  position: fixed;
+  top: 110px;
+  right: 20px;
+  background-color: #a3e38cde;
+  box-shadow: -4px 4px 8px rgb(0 0 0 / 25%);
+  border: 1px solid $mainColor;
+  border-radius: 5px;
+  width: 320px;
+
+  p {
+    margin: 0;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.messagePopUpError {
+  background-color: #f85d74de;
+
+  p {
+    color: $turquoiseBgColor;
+  }
+}

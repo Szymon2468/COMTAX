@@ -10,14 +10,11 @@ import { useEffect, useState } from 'react';
 import { IReservation } from '../..';
 import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import classNames from 'classnames';
+import MessagePopup, {
+  IMessagePopup
+} from '../../../../src/components/MessagePopup/MessagePopup';
 
 export type IReservationFormAction = 'ADD' | 'PREVIEW' | 'EDIT';
-
-export interface IMessagePopUp {
-  visible: boolean;
-  message?: string;
-  type?: 'ERROR' | 'SUCCESS';
-}
 
 interface INewReservation {
   date: number;
@@ -54,11 +51,11 @@ const AdminReservationsForm = ({
   chosenDate,
   conferenceRoomId
 }: IReservationsFormProps) => {
-  const [messagePopUp, setMessagePopUp] = useState<IMessagePopUp>({
+  const [messagePopUp, setMessagePopUp] = useState<IMessagePopup>({
     visible: false
   });
 
-  const [initailValues, setInitialvalues] = useState<IReservation>({
+  const [initialValues, setInitialvalues] = useState<IReservation>({
     _id: '',
     startHour: '8:00',
     endHour: '8:30',
@@ -81,29 +78,10 @@ const AdminReservationsForm = ({
     }
   }, [reservation]);
 
-  useEffect(() => {
-    if (messagePopUp.visible) {
-      setTimeout(
-        () => {
-          setMessagePopUp({ visible: false });
-        },
-        messagePopUp.type === 'ERROR' ? 6000 : 3000
-      );
-    }
-  }, [messagePopUp]);
-
   return (
     <>
-      {messagePopUp.visible && (
-        <div
-          className={classNames(
-            styles.messagePopUp,
-            messagePopUp.type === 'ERROR' && styles.messagePopUpError
-          )}
-        >
-          <p>{messagePopUp.message}</p>
-        </div>
-      )}
+      <MessagePopup {...messagePopUp} />
+
       <div className={styles.reservationForm}>
         <h4>
           {action === 'ADD' && 'Dodaj nową rezerwację'}
@@ -113,7 +91,7 @@ const AdminReservationsForm = ({
         <div className={styles.form}>
           <Formik
             enableReinitialize={true}
-            initialValues={initailValues}
+            initialValues={initialValues}
             // validationSchema={FormValidationSchema}
             onSubmit={async (
               values: IReservation,

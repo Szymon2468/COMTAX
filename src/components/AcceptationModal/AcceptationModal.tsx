@@ -1,5 +1,6 @@
 import styles from './AcceptationModal.module.scss';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useEffect, useState } from 'react';
 
 interface IAcceptationModalButtons {
   yes?: boolean;
@@ -13,11 +14,22 @@ interface IAcceptationModalButtons {
 }
 
 export interface IAcceptationModal {
+  visible: boolean;
   message?: JSX.Element;
   buttons?: IAcceptationModalButtons;
 }
 
-const AcceptationModal = ({ message, buttons }: IAcceptationModal) => {
+const AcceptationModal = ({ message, buttons, visible }: IAcceptationModal) => {
+  const [display, setDisplay] = useState(false);
+
+  useEffect(() => {
+    setDisplay(visible);
+  }, [visible]);
+
+  if (!display) {
+    return null;
+  }
+
   return (
     <div className={styles.modal}>
       {buttons?.close && (

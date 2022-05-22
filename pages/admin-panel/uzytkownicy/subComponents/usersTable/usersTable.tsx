@@ -1,33 +1,31 @@
-import { emptyReservation, IReservation } from '../..';
-import { MdPreview } from 'react-icons/md';
-import { AiFillEdit } from 'react-icons/ai';
-import { TiDeleteOutline } from 'react-icons/ti';
-import styles from '../../AdminPanel.module.scss';
-import { v4 as uuidv4 } from 'uuid';
-import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import { useEffect, useState } from 'react';
+import { AiFillEdit } from 'react-icons/ai';
+import { MdPreview } from 'react-icons/md';
+import { TiDeleteOutline } from 'react-icons/ti';
+import { v4 as uuidv4 } from 'uuid';
+import { emptyUser, IUser } from '../..';
 import AcceptationModal, {
   IAcceptationModal
-} from '../../../../src/components/AcceptationModal/AcceptationModal';
-// import { IMessagePopUp } from '../AdminReservationsForm/AdminReservationsForm';
-import classNames from 'classnames';
+} from '../../../../../src/components/AcceptationModal/AcceptationModal';
 import MessagePopup, {
   IMessagePopup
-} from '../../../../src/components/MessagePopup/MessagePopup';
+} from '../../../../../src/components/MessagePopup/MessagePopup';
+import { HTTPRequest } from '../../../../../src/lib/httpRequest';
+import styles from '../../Users.module.scss';
 
-interface IReservationsTableProps {
-  reservations: IReservation[];
+interface IUsersTableProps {
+  users: IUser[];
   setAction: Function;
-  setChosenReservation: Function;
-  chosenReservation: IReservation | null;
+  setChosenUser: Function;
+  chosenUser: IUser | null;
 }
 
-const ReservationsTable = ({
-  reservations,
+const UsersTable = ({
+  users,
   setAction,
-  setChosenReservation,
-  chosenReservation
-}: IReservationsTableProps) => {
+  setChosenUser,
+  chosenUser
+}: IUsersTableProps) => {
   const [acceptationModal, setAcceptationModal] = useState<IAcceptationModal>({
     visible: false
   });
@@ -46,19 +44,14 @@ const ReservationsTable = ({
     }
   }, [messagePopUp]);
 
-  if (!reservations) {
+  if (!users) {
     return null;
   }
 
-  const handleDelete = async (reservation: IReservation) => {
-    const response = await HTTPRequest(
-      'DELETE',
-      `reservations?id=${reservation._id}`
-    );
+  const handleDelete = async (user: IUser) => {
+    const response = await HTTPRequest('DELETE', `users/${user._id}`);
     if (response.success) {
-      chosenReservation === null
-        ? setChosenReservation(emptyReservation)
-        : setChosenReservation(null);
+      chosenUser === null ? setChosenUser(emptyUser) : setChosenUser(null);
       setAction('ADD');
 
       setMessagePopUp({
@@ -86,48 +79,32 @@ const ReservationsTable = ({
       <table>
         <thead>
           <tr>
-            <th>Początek</th>
-            <th>Koniec</th>
-            <th>Na osobę</th>
+            <th>Imię i Nazwisko</th>
             <th>E-mail</th>
-            <th>Telefon</th>
-            <th>Firma</th>
+            <th>Rola</th>
             <th>Akcje</th>
           </tr>
         </thead>
         <tbody>
-          {reservations.map((reservation) => (
+          {users.map((user) => (
             <tr key={uuidv4()}>
-              <td>{reservation.startHour}</td>
-              <td>{reservation.endHour}</td>
               <td>
-                <div className={styles.scrollable}>
-                  {reservation.name} {reservation.surname}
-                </div>
+                {user.name} {user.surname}
               </td>
               <td>
-                <div className={styles.scrollable}>{reservation.email}</div>
+                <div className={styles.scrollable}>{user.email}</div>
               </td>
-              <td>
-                <div className={styles.scrollable}>{reservation.phone}</div>
-              </td>
-              <td>
-                <div className={styles.scrollable}>
-                  {reservation.company !== ''
-                    ? reservation.company
-                    : 'nie podano'}
-                </div>
-              </td>
+              <td>{user.role}</td>
               <td className={styles.actions}>
                 <MdPreview
                   onClick={() => {
-                    setChosenReservation(reservation);
+                    setChosenUser(user);
                     setAction('PREVIEW');
                   }}
                 />
                 <AiFillEdit
                   onClick={() => {
-                    setChosenReservation(reservation);
+                    setChosenUser(user);
                     setAction('EDIT');
                   }}
                 />
@@ -137,12 +114,10 @@ const ReservationsTable = ({
                       visible: true,
                       message: (
                         <>
-                          <h3>Czy na pewno chcesz usunąć tą rezerwację?</h3>
-                          <p>
-                            Rezerwacja od {reservation.startHour} do{' '}
-                            {reservation.endHour} na osobę {reservation.name}{' '}
-                            {reservation.surname}.
-                          </p>
+                          <h3>
+                            Czy na pewno chcesz usunąć użytownika {user.name}{' '}
+                            {user.surname}?
+                          </h3>
                         </>
                       ),
                       buttons: {
@@ -153,7 +128,7 @@ const ReservationsTable = ({
                         yes: true,
                         yesAction: async () => {
                           setAcceptationModal({ visible: false });
-                          await handleDelete(reservation);
+                          await handleDelete(user);
                         },
                         no: true,
                         noAction: () => setAcceptationModal({ visible: false })
@@ -170,4 +145,4 @@ const ReservationsTable = ({
   );
 };
 
-export default ReservationsTable;
+export default UsersTable;
