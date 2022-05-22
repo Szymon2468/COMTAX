@@ -1,0 +1,61 @@
+@import '../../../styles/variables.scss';
+
+.modal {
+  background-color: #79c05fee;
+  border-radius: 5px;
+  box-shadow: -4px 4px 8px rgb(0 0 0 / 25%);
+  padding: 10px 20px 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.closeBtn {
+  align-self: flex-end;
+  margin-bottom: 5px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: #f85d74de;
+    transform: scale(1.2);
+    transition: all 0.3s linear;
+  }
+}
+
+.acceptButtons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 10px;
+
+  button {
+    box-shadow: -2px 2px 4px rgb(0 0 0 / 25%);
+    background-color: $turquoiseBgColor;
+    border: none;
+    color: $textColor;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 5px 30px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-size: 20px;
+    border: 2px $textColor solid;
+    transition: linear all 0.2s;
+  }
+
+  .yesBtn:hover {
+    background-color: #a3e38c;
+    border: 2px $textColor solid;
+  }
+
+  .noBtn:hover {
+    background-color: #f85d74;
+    border: 2px $textColor solid;
+  }
+}

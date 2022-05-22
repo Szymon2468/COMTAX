@@ -63,14 +63,12 @@ const handleGet = async (req, res) => {
       return 0;
     });
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        count: result.length,
-        pagination: pagination ? pagination.pagination : null,
-        data: result
-      });
+    res.status(200).json({
+      success: true,
+      count: result.length,
+      pagination: pagination ? pagination.pagination : null,
+      data: result
+    });
   } catch (error) {
     console.error(error);
     res.status(400).json({ success: false, msg: error });
@@ -92,7 +90,7 @@ const handlePut = async (req, res) => {
     if (reservation.length && reservation.length !== 0) {
       res
         .status(400)
-        .json({ success: false, msg: 'Nie mona utworzyć rezerwacji' });
+        .json({ success: false, msg: 'Nie można utworzyć rezerwacji' });
       return;
     }
 

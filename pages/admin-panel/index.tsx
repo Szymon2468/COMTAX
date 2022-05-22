@@ -13,17 +13,17 @@ import AdminReservationsForm, {
 import ReservationsTable from './subComponents/ReservationsTable/ReservationsTable';
 import { MdPlaylistAdd } from 'react-icons/md';
 
-const emptyReservation: IReservation = {
+export const emptyReservation: IReservation = {
   _id: '',
-  startHour: '',
-  endHour: '',
+  startHour: '8:00',
+  endHour: '8:30',
   name: '',
   surname: '',
   email: '',
   phone: '',
   message: '',
   company: '',
-  numberOfPeople: '',
+  numberOfPeople: '1',
   street: '',
   city: '',
   zipCode: '',
@@ -104,6 +104,7 @@ const AdminPanelPage = () => {
   }, [chosenConferenceRoom, date]);
 
   useEffect(() => {
+    console.log('first');
     if (!initialRender.current) {
       getReservations(1);
     }
@@ -191,6 +192,7 @@ const AdminPanelPage = () => {
                   setChosenReservation={(value: IReservation) => {
                     setChosenReservation(value);
                   }}
+                  chosenReservation={chosenReservation}
                 />
               )}
               {!reservations ||

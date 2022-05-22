@@ -1,4 +1,5 @@
 import dbConnect from '../../../app/lib/dbConnect';
+import { paginate } from '../../../app/lib/paginate';
 import User from '../../../app/models/User';
 
 export default async function handler(req, res) {
@@ -9,8 +10,23 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const users = await User.find({}, 'name surname email role');
-        res.status(200).json({ success: true, data: users });
+        const users = User.find({}, 'name surname email role').sort('surname');
+
+        let result;
+        let pagination;
+        if (req.query.page && req.query.limit) {
+          pagination = await paginate(users, User, req);
+          result = pagination.results;
+        } else {
+          result = await users;
+        }
+
+        res.status(200).json({
+          success: true,
+          count: result.length,
+          pagination: pagination ? pagination.pagination : null,
+          data: result
+        });
       } catch (error) {
         console.error(error);
         res.status(400).json({ success: false });
