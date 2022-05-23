@@ -10,7 +10,7 @@ import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import Cookies from 'universal-cookie';
 import GancleLogo from '../../../../src/assets/gancle/GancleLogo';
 import useWindowSize from '../../../../src/hooks/useWindowSize';
-import { useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 interface IAsideProps {
   user: IUser;
@@ -19,6 +19,10 @@ interface IAsideProps {
 }
 
 const Aside = ({ user, active }: IAsideProps) => {
+  const windowSize = useWindowSize();
+  const [isAsideHidden, setIsAsideHidden] = useState(true);
+  const asideRef = useRef() as MutableRefObject<HTMLInputElement>;
+
   const handleLogout = async () => {
     await HTTPRequest('GET', 'auth/logout');
     const cookies = new Cookies();
@@ -26,18 +30,14 @@ const Aside = ({ user, active }: IAsideProps) => {
     window.location.href = '/admin-panel/autoryzacja/logowanie';
   };
 
-  if (!user) {
-    return null;
-  }
-
-  const windowSize = useWindowSize();
-  const [isAsideHidden, setIsAsideHidden] = useState(true);
-  const asideRef = useRef() as MutableRefObject<HTMLInputElement>;
-
   useEffect(() => {
     if (isAsideHidden) {
     }
   }, [isAsideHidden]);
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <aside

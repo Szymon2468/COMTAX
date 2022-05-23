@@ -34,6 +34,7 @@ const UsersTable = ({
   const [messagePopUp, setMessagePopUp] = useState<IMessagePopup>({
     visible: false
   });
+  const windowSize = useWindowSize();
 
   useEffect(() => {
     if (messagePopUp.visible) {
@@ -71,7 +72,6 @@ const UsersTable = ({
     }
   };
 
-  const windowSize = useWindowSize();
   if (windowSize.width > 576) {
     return (
       <>

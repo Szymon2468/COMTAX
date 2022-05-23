@@ -13,9 +13,14 @@ import {
 import styles from '../index.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 import * as Yup from 'yup';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../../../../../src/components/Button/Button';
 import { HTTPRequest } from '../../../../../src/lib/httpRequest';
+import {
+  getEndHours,
+  getStartHours,
+  IAvailableStartHours
+} from '../../../../../src/configs/roomReservation/roomPrototype';
 
 const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/;
 
@@ -41,27 +46,36 @@ const ReservationForm = ({
   conferenceRoom,
   date
 }: IReservationFormProps) => {
-  const startHours: string[] = [...availableStartHours];
-
-  startHours.splice(
-    0,
-    startHours.findIndex((el) => el === getStartHour(currentReservations || []))
-  );
+  const [initialStartHours, setInitialStartHours] =
+    useState<IAvailableStartHours>(getStartHours(currentReservations));
 
   const [startHour, setStartHour] = useState(
-    generateStartHours(startHours, currentReservations || [])[0]
+    initialStartHours.initialStartHour
   );
 
   const [endHours, setEndHours] = useState(
-    generateEndHours(startHour, currentReservations || [])
+    getEndHours(currentReservations, initialStartHours.initialStartHour)
+      .endHours
   );
 
   const [isMsgSent, setIsMsgSent] = useState(false);
   const [isMsgSendigError, setIsMsgSendigError] = useState(false);
 
   useEffect(() => {
-    setEndHours(generateEndHours(startHour, currentReservations || []));
+    setEndHours(getEndHours(currentReservations, startHour).endHours);
   }, [startHour]);
+
+  useEffect(() => {
+    console.log('siema');
+    const start = getStartHours(currentReservations);
+    const end = getEndHours(
+      currentReservations,
+      start.initialStartHour
+    ).endHours;
+    setInitialStartHours(start);
+    setStartHour(start.initialStartHour);
+    setEndHours(end);
+  }, [date]);
 
   if (!currentReservations) {
     return null;
@@ -131,13 +145,11 @@ const ReservationForm = ({
                     setStartHour(event.currentTarget.value);
                   }}
                 >
-                  {generateStartHours(startHours, currentReservations).map(
-                    (el) => (
-                      <option key={uuidv4()} value={el}>
-                        {el}
-                      </option>
-                    )
-                  )}
+                  {initialStartHours.startHours.map((el) => (
+                    <option key={uuidv4()} value={el}>
+                      {el}
+                    </option>
+                  ))}
                 </Field>
               </div>
 

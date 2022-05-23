@@ -33,6 +33,7 @@ const ReservationsTable = ({
   const [messagePopUp, setMessagePopUp] = useState<IMessagePopup>({
     visible: false
   });
+  const windowSize = useWindowSize();
 
   useEffect(() => {
     if (messagePopUp.visible) {
@@ -75,7 +76,6 @@ const ReservationsTable = ({
     }
   };
 
-  const windowSize = useWindowSize();
   if (windowSize.width > 1024) {
     return (
       <>
