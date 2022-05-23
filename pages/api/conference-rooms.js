@@ -15,6 +15,9 @@ export default async function handler(req, res) {
     case 'POST':
       await handlePost(req, res);
       break;
+    case 'DELETE':
+      await handleDelete(req, res);
+      break;
     default:
       res.status(400).json({ success: false });
       break;
@@ -54,6 +57,17 @@ const handlePost = async (req, res) => {
     res.status(200).json({ success: true, data: conferenceRoom });
   } catch (error) {
     console.error(error);
+    res.status(400).json({ success: false, msg: error });
+  }
+};
+
+const handleDelete = async (req, res) => {
+  try {
+    const conferenceRoom = await ConferenceRoom.deleteOne({
+      _id: req.query.id
+    });
+    res.status(200).json({ success: true, data: conferenceRoom });
+  } catch (error) {
     res.status(400).json({ success: false, msg: error });
   }
 };

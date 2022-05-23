@@ -1,5 +1,3 @@
-import Head from 'next/head';
-import Image from 'next/image';
 import OfferTileRight from '../src/components/OfferTile/OfferTileRight';
 import styles from './index.module.scss';
 import img from '../src/assets/homepage/photos/LandingPicture.png';
@@ -19,15 +17,6 @@ import Link from 'next/link';
 import MasterLayout from '../src/components/MasterLayout/MasterLayout';
 
 const Home = () => {
-  let pageDescription = '';
-
-  const windowSize: WindowSize = useWindowSize();
-
-  interface SetHomepageImgSizeReturnedValues {
-    width: number;
-    height: number;
-  }
-
   return (
     <>
       <MasterLayout>
@@ -78,9 +67,7 @@ const Home = () => {
                 </div>
                 <img
                   src={img.src}
-                  alt='photo lol idk what to write'
-                  // width={setHomepageImgSize().width}
-                  // height={setHomepageImgSize().height}
+                  alt='landing photo'
                   className={styles.homePageImg}
                 />
               </div>
