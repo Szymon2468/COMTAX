@@ -8,6 +8,16 @@
   padding-top: 50px;
   position: relative;
 
+  @include media('<=tablet-portrait') {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99998;
+    overflow: hidden;
+    overflow-y: hidden;
+  }
+
   p {
     color: $textColor;
     letter-spacing: 0.2px;
@@ -61,7 +71,27 @@
 
 .account {
   border-bottom: 1px solid $textColor;
-  padding-bottom: 10px;
+
+  div {
+    padding-top: 10px;
+  }
+
+  @include media('<=tablet-portrait') {
+    border: none;
+
+    button {
+      margin: 0 auto;
+
+      div {
+        width: 150px;
+        display: flex;
+
+        p {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
 }
 
 .options {
@@ -84,6 +114,22 @@
   button:first-of-type {
     border-top: none;
   }
+
+  @include media('<=tablet-portrait') {
+    button {
+      margin: 0 auto;
+      border: none;
+
+      div {
+        width: 150px;
+        display: flex;
+
+        p {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
 }
 
 .active {
@@ -105,12 +151,19 @@
   padding-top: 35px;
   border-top: 1px solid $textColor;
 
+  @include media('<=tablet-portrait') {
+    border: none;
+  }
+
   p {
     text-align: center;
     font-size: 14px;
     margin-bottom: 5px;
+    width: 50%;
+    margin: 0 auto;
 
     a {
+      margin: 0 auto;
       color: $turquoiseBgColor;
       text-decoration: underline;
 
@@ -125,7 +178,8 @@
     padding-top: 15px;
 
     svg {
-      width: 70%;
+      width: 150px;
+      height: 50px;
       height: fit-content;
 
       &:hover {

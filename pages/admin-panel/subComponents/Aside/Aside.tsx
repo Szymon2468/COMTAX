@@ -9,10 +9,13 @@ import Link from 'next/link';
 import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import Cookies from 'universal-cookie';
 import GancleLogo from '../../../../src/assets/gancle/GancleLogo';
+import useWindowSize from '../../../../src/hooks/useWindowSize';
+import { useEffect, useRef, useState } from 'react';
 
 interface IAsideProps {
   user: IUser;
   active: 'RESERVATIONS' | 'USERS' | 'ACCOUNT_SETTINGS';
+  isOpen: boolean;
 }
 
 const Aside = ({ user, active }: IAsideProps) => {
@@ -27,8 +30,21 @@ const Aside = ({ user, active }: IAsideProps) => {
     return null;
   }
 
+  const windowSize = useWindowSize();
+  const [isAsideHidden, setIsAsideHidden] = useState(true);
+  const asideRef = useRef() as MutableRefObject<HTMLInputElement>;
+
+  useEffect(() => {
+    if (isAsideHidden) {
+    }
+  }, [isAsideHidden]);
+
   return (
-    <aside className={styles.leftPanel}>
+    <aside
+      ref={asideRef}
+      className={styles.leftPanel}
+      onClick={() => setIsAsideHidden(!isAsideHidden)}
+    >
       <div className={styles.account}>
         <p className={styles.greetings}>Witaj, {user.name}!</p>
         <button
