@@ -76,7 +76,10 @@ const UsersPage = ({ startUsers, startPagination, count }: IUsersPageProps) => {
     <AdminPanelTemplate active={'USERS'}>
       <>
         <div className={styles.siteInfo}>
-          <h3>Zarządzaj Użytkownikami</h3>
+          <h3>
+            <span>Zarządzaj</span>
+            <span>Użytkownikami</span>
+          </h3>
         </div>
         <div className={styles.content}>
           <div className={styles.usersTable}>

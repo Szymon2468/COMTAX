@@ -1,15 +1,14 @@
-@import '../../styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 .siteInfo {
   position: sticky;
   top: 0;
   z-index: 9999;
-  // padding-top: 10px;
-  // padding-bottom: 5px;
-  padding: 10px 30px;
+  padding-top: 10px;
+  padding-bottom: 5px;
   background-color: $turquoiseBgColor;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
-  // padding-left: 50px;
+  padding-left: 50px;
 
   h3 {
     font-weight: 600;
@@ -28,62 +27,9 @@
   padding: 20px;
 }
 
-.filterReservations {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-bottom: 10px;
-
-  @include media('<=tablet-portrait') {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  @include media('<=mobile') {
-    width: 200px;
-  }
-
-  div {
-    @include media('<=mobile') {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-
-  p {
-    margin: 0;
-  }
-
-  label {
-    margin: 0;
-    margin-right: 10px;
-  }
-
-  select {
-    width: 300px;
-
-    @include media('<=mobile') {
-      width: 150px !important;
-    }
-  }
-}
-
-.datePicker {
-  input {
-    width: 120px;
-    text-align: center;
-    padding: 0;
-  }
-}
-
-.notFoundReservations {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.reservationsTable {
+.usersTable {
+  max-width: 800px;
   margin: 30px auto 0 auto;
-  max-width: 1400px;
 
   .scrollable {
     overflow: hidden;
@@ -114,7 +60,7 @@
   margin-top: 15px;
 }
 
-.newReservaion {
+.newUser {
   margin-top: 10px;
   padding-left: 20px;
 
@@ -176,7 +122,7 @@
   }
 }
 
-.reservationForm {
+.userForm {
   margin: 0 auto;
   margin-top: 50px;
   width: fit-content;
@@ -194,19 +140,7 @@
     gap: 50px;
     margin-bottom: 10px;
 
-    @include media('<=mobile') {
-      flex-direction: column;
-      gap: 10px;
-    }
-
     div {
-      white-space: nowrap;
-
-      @include media('<=mobile') {
-        width: fit-content;
-        margin: 0 auto;
-      }
-
       label {
         margin-right: 10px;
       }
@@ -251,39 +185,33 @@
     margin-top: 30px;
     display: flex;
     gap: 50px;
-    flex-wrap: wrap;
-    width: fit-content;
-
-    @include media('<=tablet-landscape') {
-      justify-content: center;
-    }
 
     .formContainer {
-      width: 360px;
-      height: 320px;
-      padding: 20px 10px;
+      padding: 20px;
       border: 2px solid $mainColor;
       border-radius: 5px;
+      width: fit-content;
       -webkit-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
       -moz-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
       box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
 
       @include media('<=mobile') {
-        width: 300px;
-        height: auto;
-
-        div {
-          margin: 0 auto 5px auto;
-        }
+        padding: 10px;
       }
 
       h5 {
+        display: flex;
+        gap: 5px;
         margin: 0;
         margin-top: -32px;
         margin-bottom: 20px;
         background-color: $turquoiseBgColor;
         width: fit-content;
         padding: 0 20px 0 5px;
+
+        @include media('<=mobile') {
+          flex-direction: column;
+        }
       }
 
       .formInputs {
@@ -304,15 +232,15 @@
               min-width: 200px;
             }
 
+            select {
+              height: 30px;
+              min-width: 200px;
+              max-width: 200px;
+            }
+
             textarea {
               min-width: 200px;
               min-height: 100px;
-            }
-
-            label {
-              @include media('<=mobile') {
-                display: none;
-              }
             }
           }
         }
@@ -328,41 +256,4 @@
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.reservationsContainer,
-.usersTableContainer {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-
-  .reservationContainer {
-    display: flex;
-    flex-direction: column;
-    box-shadow: -2px 2px 4px rgb(0 0 0 / 25%);
-    border: 2px solid #79c05f;
-    border-radius: 5px;
-    width: 300px;
-
-    .reservationRow {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      padding: 10px 20px;
-      align-items: center;
-
-      &:nth-of-type(2n) {
-        background-color: #a3e38c;
-      }
-
-      p {
-        margin: 0;
-      }
-
-      svg {
-        margin-left: 5px;
-      }
-    }
-  }
 }

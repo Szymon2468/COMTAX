@@ -10,11 +10,10 @@ import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import Cookies from 'universal-cookie';
 import GancleLogo from '../../../../src/assets/gancle/GancleLogo';
 import useWindowSize from '../../../../src/hooks/useWindowSize';
-import { useEffect, useRef, useState } from 'react';
 
 interface IAsideProps {
   user: IUser;
-  active: 'RESERVATIONS' | 'USERS' | 'ACCOUNT_SETTINGS';
+  active: 'RESERVATIONS' | 'USERS' | 'ACCOUNT_SETTINGS' | 'CONFERENCE_ROOMS';
   isOpen: boolean;
 }
 
@@ -31,20 +30,9 @@ const Aside = ({ user, active }: IAsideProps) => {
   }
 
   const windowSize = useWindowSize();
-  const [isAsideHidden, setIsAsideHidden] = useState(true);
-  const asideRef = useRef() as MutableRefObject<HTMLInputElement>;
-
-  useEffect(() => {
-    if (isAsideHidden) {
-    }
-  }, [isAsideHidden]);
 
   return (
-    <aside
-      ref={asideRef}
-      className={styles.leftPanel}
-      onClick={() => setIsAsideHidden(!isAsideHidden)}
-    >
+    <aside className={styles.leftPanel}>
       <div className={styles.account}>
         <p className={styles.greetings}>Witaj, {user.name}!</p>
         <button
@@ -86,6 +74,24 @@ const Aside = ({ user, active }: IAsideProps) => {
             </Link>
           )}
         </button>
+
+        <button
+          className={classNames(active === 'CONFERENCE_ROOMS' && styles.active)}
+        >
+          {active === 'CONFERENCE_ROOMS' && (
+            <div>
+              <AiOutlineSchedule /> <p>Sale konferencyjne</p>
+            </div>
+          )}
+          {active !== 'CONFERENCE_ROOMS' && (
+            <Link href='/admin-panel/sale-konferencyjne'>
+              <div>
+                <AiOutlineSchedule /> <p>Sale konferencyjne</p>
+              </div>
+            </Link>
+          )}
+        </button>
+
         <button className={classNames(active === 'USERS' && styles.active)}>
           {active === 'USERS' && (
             <div>

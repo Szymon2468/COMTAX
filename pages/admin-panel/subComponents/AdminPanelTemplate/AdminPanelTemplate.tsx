@@ -8,7 +8,7 @@ import classNames from 'classnames';
 
 interface IAdminPanelTemplate {
   children: JSX.Element;
-  active: 'RESERVATIONS' | 'USERS' | 'ACCOUNT_SETTINGS';
+  active: 'RESERVATIONS' | 'USERS' | 'ACCOUNT_SETTINGS' | 'CONFERENCE_ROOMS';
 }
 
 const AdminPanelTemplate = ({ children, active }: IAdminPanelTemplate) => {

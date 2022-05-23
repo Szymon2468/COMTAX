@@ -72,8 +72,11 @@
 .account {
   border-bottom: 1px solid $textColor;
 
-  div {
-    padding-top: 10px;
+  button {
+    div {
+      padding-top: 10px;
+      width: 180px;
+    }
   }
 
   @include media('<=tablet-portrait') {
@@ -83,7 +86,6 @@
       margin: 0 auto;
 
       div {
-        width: 150px;
         display: flex;
 
         p {
@@ -101,6 +103,10 @@
     // width: 80%;
     padding-top: 10px;
     border-top: 1px solid $grayBgColor;
+
+    div {
+      width: 180px;
+    }
 
     p {
       width: fit-content;
@@ -121,7 +127,6 @@
       border: none;
 
       div {
-        width: 150px;
         display: flex;
 
         p {
@@ -159,8 +164,11 @@
     text-align: center;
     font-size: 14px;
     margin-bottom: 5px;
-    width: 50%;
-    margin: 0 auto;
+
+    @include media('<=tablet-portrait') {
+      width: 50%;
+      margin: 0 auto;
+    }
 
     a {
       margin: 0 auto;
