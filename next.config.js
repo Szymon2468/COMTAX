@@ -1,9 +1,14 @@
 module.exports = {
-  async rewrites() {
+  async headers() {
     return [
       {
-        source: '/api/:path*',
-        destination: 'https://gancle-studio.tech/:path*'
+        source: '/_next/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://gancle-studio.tech'
+          }
+        ]
       }
     ];
   }
