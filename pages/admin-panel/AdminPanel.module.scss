@@ -4,15 +4,23 @@
   position: sticky;
   top: 0;
   z-index: 9999;
-  padding-top: 10px;
-  padding-bottom: 5px;
+  // padding-top: 10px;
+  // padding-bottom: 5px;
+  padding: 10px 30px;
   background-color: $turquoiseBgColor;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
-  padding-left: 50px;
+  // padding-left: 50px;
 
   h3 {
     font-weight: 600;
     margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+
+    @include media('<=extra-mobile') {
+      flex-direction: column;
+      gap: 0;
+    }
   }
 }
 
@@ -26,6 +34,22 @@
   gap: 30px;
   margin-bottom: 10px;
 
+  @include media('<=tablet-portrait') {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  @include media('<=mobile') {
+    width: 200px;
+  }
+
+  div {
+    @include media('<=mobile') {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
   p {
     margin: 0;
   }
@@ -36,7 +60,11 @@
   }
 
   select {
-    width: 300px !important;
+    width: 300px;
+
+    @include media('<=mobile') {
+      width: 150px !important;
+    }
   }
 }
 
@@ -193,6 +221,10 @@
     width: 100%;
     margin-top: 30px;
 
+    @include media('<=tablet-landscape') {
+      justify-content: center;
+    }
+
     .submitButton {
       box-shadow: -2px 2px 4px rgb(0 0 0 / 25%);
       background-color: $mainColor;
@@ -221,9 +253,13 @@
     flex-wrap: wrap;
     width: fit-content;
 
+    @include media('<=tablet-landscape') {
+      justify-content: center;
+    }
+
     .formContainer {
-      // height: 330px;
-      // width: 310px;
+      width: 360px;
+      height: 320px;
       padding: 20px 10px;
       border: 2px solid $mainColor;
       border-radius: 5px;
@@ -232,7 +268,12 @@
       box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
 
       @include media('<=mobile') {
-        width: fit-content;
+        width: 300px;
+        height: auto;
+
+        div {
+          margin: 0 auto 5px auto;
+        }
       }
 
       h5 {
@@ -288,7 +329,8 @@
   justify-content: center;
 }
 
-.reservationsContainer {
+.reservationsContainer,
+.usersTableContainer {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -315,6 +357,10 @@
 
       p {
         margin: 0;
+      }
+
+      svg {
+        margin-left: 5px;
       }
     }
   }

@@ -126,7 +126,10 @@ const AdminPanelPage = () => {
     <AdminPanelTemplate active={'RESERVATIONS'}>
       <>
         <div className={styles.siteInfo}>
-          <h3>Zarządzaj Rezerwacjami</h3>
+          <h3>
+            <span>Zarządzaj</span>
+            <span>Rezerwacjami</span>
+          </h3>
         </div>
         {!conferenceRooms && <h3>Loading...</h3>}
       </>
@@ -137,7 +140,10 @@ const AdminPanelPage = () => {
     <AdminPanelTemplate active={'RESERVATIONS'}>
       <>
         <div className={styles.siteInfo}>
-          <h3>Zarządzaj Rezerwacjami</h3>
+          <h3>
+            <span>Zarządzaj</span>
+            <span>Rezerwacjami</span>
+          </h3>
 
           {conferenceRooms && (
             <div className={styles.filterReservations}>
