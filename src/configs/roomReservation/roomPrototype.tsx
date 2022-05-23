@@ -1,4 +1,4 @@
-import { IReservation } from '../../../pages/admin-panel';
+import { IShortenReservation } from './roomReservation';
 
 const startHrs: string[] = [
   '8:00',
@@ -46,15 +46,18 @@ const endHrs = [
   '18:00'
 ];
 
-interface IAvailableStartHours {
+export interface IAvailableStartHours {
   initialStartHour: string;
   startHours: string[];
 }
 
 export const getStartHours = (
-  reservations: IReservation[]
+  reservations: IShortenReservation[]
 ): IAvailableStartHours => {
   let startHours: string[] = [...startHrs];
+  if (!reservations) {
+    return { initialStartHour: '8:00', startHours };
+  }
 
   reservations.map((reservation) => {
     const start = reservation.startHour;
@@ -89,17 +92,32 @@ interface IAvailableEndHours {
 }
 
 export const getEndHours = (
-  reservations: IReservation[],
+  reservations: IShortenReservation[],
   hour: string
 ): IAvailableEndHours => {
   let endHours: string[] = [...endHrs];
+  if (!reservations) {
+    return {
+      endHours,
+      initialEndHour: '8:30'
+    };
+  }
+  console.log('reservations', reservations);
+  console.log('hour', hour);
+  console.log('endHours', endHours);
 
-  endHours.splice(0, endHours.findIndex((el) => el === hour) + 1);
   const hourIndex = endHours.findIndex((e) => e === hour);
+  endHours.splice(0, endHours.findIndex((el) => el === hour) + 1);
   let hoursFound = false;
 
-  if (hourIndex === -1) {
+  if (hourIndex === -1 && reservations.length > 0) {
+    console.log('first');
     endHours = [];
+  } else if (hourIndex === -1 && reservations.length === 0) {
+    return {
+      endHours,
+      initialEndHour: endHours[0]
+    };
   } else {
     reservations.map((reservation) => {
       const start = reservation.startHour;
@@ -111,6 +129,8 @@ export const getEndHours = (
       }
     });
   }
+
+  console.log('finishEndHours', endHours);
 
   return {
     endHours,

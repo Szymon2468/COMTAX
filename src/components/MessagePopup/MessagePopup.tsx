@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import styles from './messagePopup.module.scss';
+import styles from './MessagePopup.module.scss';
 
 export interface IMessagePopup {
   visible: boolean;
