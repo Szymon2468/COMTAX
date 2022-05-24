@@ -1,11 +1,9 @@
-import { handleCors } from '../../../app/lib/cors';
 import dbConnect from '../../../app/lib/dbConnect';
 import sendTokenResponse from '../../../app/lib/sendTokenResponse';
 import User from '../../../app/models/User';
 
 export default async function handler(req, res) {
   const { method } = req;
-  const resp = await handleCors(req, res);
   console.log(resp);
 
   if (method !== 'POST') {
