@@ -4,7 +4,6 @@ import User from '../../../app/models/User';
 
 export default async function handler(req, res) {
   const { method } = req;
-  console.log(resp);
 
   if (method !== 'POST') {
     res.status(400).json({ success: false });
