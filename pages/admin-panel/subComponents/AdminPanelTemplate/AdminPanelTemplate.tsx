@@ -52,7 +52,11 @@ const AdminPanelTemplate = ({ children, active }: IAdminPanelTemplate) => {
               isAsideOpen && styles.hamburgerMenuOpen
             )}
           >
-            <Hamburger toggled={isAsideOpen} toggle={setIsAsideOpen} />
+            <Hamburger
+              toggled={isAsideOpen}
+              toggle={setIsAsideOpen}
+              size={18}
+            />
           </div>
         )}
         <main className={styles.pageContent}>{children}</main>
