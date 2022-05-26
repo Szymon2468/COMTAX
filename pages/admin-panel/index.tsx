@@ -104,7 +104,6 @@ const AdminPanelPage = () => {
   }, [chosenConferenceRoom, date]);
 
   useEffect(() => {
-    console.log('first');
     if (!initialRender.current) {
       getReservations(1);
     }

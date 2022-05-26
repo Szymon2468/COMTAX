@@ -134,6 +134,10 @@
     margin-bottom: 40px;
   }
 
+  @include media('<=tablet-portrait') {
+    width: 100%;
+  }
+
   .formSelects {
     display: flex;
     justify-content: center;
@@ -184,7 +188,9 @@
   .forms {
     margin-top: 30px;
     display: flex;
+    justify-content: center;
     gap: 50px;
+    width: 100%;
 
     .formContainer {
       padding: 20px;
@@ -193,6 +199,43 @@
       -webkit-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
       -moz-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
       box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+
+      @include media('<=tablet-portrait') {
+        width: 90%;
+        height: auto;
+
+        div {
+          margin: 0 auto 5px auto;
+          width: 100%;
+
+          input {
+            width: 60%;
+          }
+
+          select {
+            width: 60%;
+            max-width: none !important;
+          }
+        }
+      }
+
+      @include media('<=mobile') {
+        width: 100%;
+        height: auto;
+
+        div {
+          margin: 0 auto 5px auto;
+          width: 100%;
+
+          input {
+            width: 100% !important;
+          }
+
+          select {
+            width: 100% !important;
+          }
+        }
+      }
 
       h5 {
         margin: 0;
@@ -215,6 +258,12 @@
             display: flex;
             justify-content: space-between;
             gap: 20px;
+
+            label {
+              @include media('<=mobile') {
+                display: none;
+              }
+            }
 
             input {
               height: 30px;
@@ -260,4 +309,20 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.actions {
+  @include media('<=tablet-landscape') {
+    svg {
+      height: 24px !important;
+      width: 24px !important;
+
+      &:hover {
+        cursor: pointer;
+        color: $mainColor;
+        transform: scale(1.1);
+        transition: all 0.3s linear;
+      }
+    }
+  }
 }

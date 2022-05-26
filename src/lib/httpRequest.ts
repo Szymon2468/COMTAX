@@ -35,6 +35,7 @@ export const HTTPRequest = async (
         return null;
     }
   } catch (e) {
+    console.error(e);
     return { serverError: true };
   }
 };

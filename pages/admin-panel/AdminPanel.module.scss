@@ -137,12 +137,13 @@
 
 .pagination {
   margin-top: 10px;
-  width: 80%;
+  width: fit-content;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
   gap: 5px;
   padding-right: 20px;
+  margin-left: 10px;
 
   p {
     margin: 0;
@@ -268,12 +269,39 @@
       -moz-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
       box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
 
-      @include media('<=mobile') {
-        width: 300px;
+      @include media('<=tablet-portrait') {
+        width: 90%;
         height: auto;
 
         div {
           margin: 0 auto 5px auto;
+          width: 100%;
+
+          input {
+            width: 60%;
+          }
+
+          textarea {
+            width: 60%;
+          }
+        }
+      }
+
+      @include media('<=mobile') {
+        width: 100%;
+        height: auto;
+
+        div {
+          margin: 0 auto 5px auto;
+          width: 100%;
+
+          input {
+            width: 100%;
+          }
+
+          textarea {
+            width: 100%;
+          }
         }
       }
 
@@ -302,11 +330,19 @@
             input {
               height: 30px;
               min-width: 200px;
+
+              &::placeholder {
+                padding-left: 5px;
+              }
             }
 
             textarea {
               min-width: 200px;
               min-height: 100px;
+
+              &::placeholder {
+                padding-left: 5px;
+              }
             }
 
             label {
@@ -362,6 +398,21 @@
 
       svg {
         margin-left: 5px;
+      }
+
+      @include media('<=tablet-landscape') {
+        svg {
+          margin-left: 20px;
+          height: 24px;
+          width: 24px;
+
+          &:hover {
+            cursor: pointer;
+            color: $mainColor;
+            transform: scale(1.1);
+            transition: all 0.3s linear;
+          }
+        }
       }
     }
   }

@@ -52,21 +52,25 @@ const UsersPage = ({ startUsers, startPagination, count }: IUsersPageProps) => {
   });
   const [action, setAction] = useState<IUserFormAction>('ADD');
 
-  const initialRender = useRef(true);
-
   useEffect(() => {
-    if (!initialRender.current) {
-      getUsers(pagination.currentPage);
-    }
+    getUsers(pagination.currentPage);
   }, [pagination.currentPage]);
 
   const getUsers = async (page: number) => {
-    const response = await HTTPRequest('GET', `users?&page=${page}&limit=6`);
+    const response = await HTTPRequest(
+      'GET',
+      `users/users?page=${page}&limit=6`
+    );
+    console.log('first', response);
     if (response.success) {
       setUsers(response.data);
       setPagination(response.pagination);
     }
   };
+
+  useEffect(() => {
+    getUsers(1);
+  }, [chosenUser]);
 
   if (!users) {
     return null;
