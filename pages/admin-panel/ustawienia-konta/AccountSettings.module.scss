@@ -1,13 +1,278 @@
 @import '../../../styles/variables.scss';
 
 .siteInfo {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
   padding-top: 10px;
   padding-bottom: 5px;
   background-color: $turquoiseBgColor;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+  padding-left: 50px;
 
   h3 {
-    padding-left: 50px;
     font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+
+    @include media('<=extra-mobile') {
+      flex-direction: column;
+      gap: 0;
+    }
   }
+}
+
+.content {
+  padding: 20px;
+}
+
+.usersTable {
+  margin: 30px auto 0 auto;
+  max-width: 900px;
+
+  .scrollable {
+    overflow: hidden;
+    overflow-x: scroll;
+
+    /* height */
+    &::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: $textColor;
+      border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: black;
+    }
+  }
+}
+
+.lastRow {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.newUser {
+  margin-top: 10px;
+  padding-left: 20px;
+
+  p {
+    margin: 0;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $mainColor;
+      transform: scale(1.05);
+      transition: all 0.3s linear;
+    }
+  }
+}
+
+.pagination {
+  margin-top: 10px;
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+  padding-right: 20px;
+
+  p {
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  .paginationTile {
+    background-color: #79c05f55;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $mainColor;
+      transition: background-color 0.3s linear;
+    }
+  }
+
+  .activePagination {
+    background-color: $mainColor;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+}
+
+.userForm {
+  margin: 0 auto;
+  margin-top: 50px;
+  width: fit-content;
+  border-radius: 5px;
+
+  h4 {
+    margin: 10px auto;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .formSelects {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 10px;
+
+    div {
+      label {
+        margin-right: 10px;
+      }
+      select {
+        width: 150px !important;
+      }
+    }
+  }
+
+  .submitButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 30px;
+
+    @include media('<=tablet-landscape') {
+      justify-content: center;
+    }
+
+    .submitButton {
+      box-shadow: -2px 2px 4px rgb(0 0 0 / 25%);
+      background-color: $mainColor;
+      border: none;
+      color: #f8fff8;
+      width: fit-content;
+      padding: 5px 30px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      font-size: 20px;
+      border: 2px $mainColor solid;
+      transition: linear all 0.2s;
+
+      &:hover {
+        color: $mainColor;
+        background-color: #f8fff8;
+        border: 2px $mainColor solid;
+      }
+    }
+  }
+
+  .forms {
+    margin-top: 30px;
+    display: flex;
+    gap: 50px;
+
+    .formContainer {
+      padding: 20px;
+      border: 2px solid $mainColor;
+      border-radius: 5px;
+      -webkit-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+      -moz-box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+      box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+
+      @include media('<=mobile') {
+        div {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      h5 {
+        margin: 0;
+        margin-top: -32px;
+        margin-bottom: 20px;
+        background-color: $turquoiseBgColor;
+        width: fit-content;
+        padding: 0 20px 0 5px;
+      }
+
+      .formInputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: flex-start;
+        align-items: space-between;
+
+        @include media('<=mobile') {
+          gap: 20px;
+        }
+
+        .formInput {
+          div {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+
+            @include media('<=mobile') {
+              gap: 0;
+            }
+
+            input {
+              height: 30px;
+              min-width: 200px;
+
+              @include media('<=mobile') {
+                min-width: 0;
+                width: 150px;
+              }
+            }
+
+            select {
+              height: 30px;
+              min-width: 200px;
+              max-width: 200px;
+
+              @include media('<=mobile') {
+                min-width: 0;
+                width: 150px;
+              }
+            }
+
+            textarea {
+              min-width: 200px;
+              min-height: 100px;
+
+              @include media('<=mobile') {
+                min-width: 0;
+                width: 150px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.acceptationModal {
+  position: fixed;
+  top: 200px;
+  left: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
