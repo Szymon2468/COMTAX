@@ -13,32 +13,15 @@ export const setCookie = (res, name, value, options = {}) => {
 
 // Get token from model, create cookie and send response
 const sendTokenResponse = (user, statusCode, res) => {
-  // Create token
-  const token = user.getSignedJwtToken();
+  // @TODO: Create token (one line, use function declared in User model)
 
-  const options = {
+  res.status(200).json({
+    success: true,
+    token: token,
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true
-  };
-
-  if (process.env.NODE_ENV === 'production') {
-    options.secure = true;
-  }
-
-  // Calling our pure function using the `res` object, it will add the `set-cookie` header
-  setCookie(res, 'comtaxLoginToken', token, options);
-  // Return the `set-cookie` header so we can display it in the browser and show that it works!
-  res
-    .status(200)
-    .json({
-      success: true,
-      token: token,
-      expires: new Date(
-        Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-      )
-    });
+    )
+  });
 };
 
 export default sendTokenResponse;

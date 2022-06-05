@@ -11,32 +11,27 @@ export default async function handler(req, res) {
 
   await dbConnect();
 
-  req.body.email = req.body.email.toLowerCase();
-  const { email, password } = req.body;
+  /* @TODO:
 
-  // Validate email & password
-  if (!email || !password) {
+  > change req.body.email to be lower case
+
+  > check if email AND password are given, if not:
     res
       .status(400)
       .json({ success: false, msg: 'Please provide an email and password' });
     return;
-  }
 
-  // Check for user
-  const user = await User.findOne({ email }).select('+password');
+  > find user by email and select additionaly password use findOne mongoose method
 
-  if (!user) {
+  > check if user exists, if not:
     res.status(200).json({ success: false, msg: 'Invalid credentials' });
     return;
-  }
 
-  // Check if password matches
-  const isMatch = await user.matchPassword(password);
-
-  if (!isMatch) {
+  > check if given password is matching the current one in mongo, 
+    use one of functions declared in User model. If not:
     res.status(200).json({ success: false, msg: 'Invalid credentials' });
     return;
-  }
+  */
 
   sendTokenResponse(user, 200, res);
 }

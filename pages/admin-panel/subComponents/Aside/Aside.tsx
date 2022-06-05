@@ -6,8 +6,6 @@ import { AiOutlineSchedule } from 'react-icons/ai';
 import { FiUsers } from 'react-icons/fi';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { HTTPRequest } from '../../../../src/lib/httpRequest';
-import Cookies from 'universal-cookie';
 import GancleLogo from '../../../../src/assets/gancle/GancleLogo';
 import useWindowSize from '../../../../src/hooks/useWindowSize';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
@@ -24,10 +22,11 @@ const Aside = ({ user, active }: IAsideProps) => {
   const asideRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   const handleLogout = async () => {
-    await HTTPRequest('GET', 'auth/logout');
-    const cookies = new Cookies();
-    cookies.set('comtaxLoginToken', 'none', { path: '/' });
-    window.location.href = '/admin-panel/autoryzacja/logowanie';
+    /* @TODO: Logout the client
+    > comtaxLoginToken should be set to be empty, available in all aplication
+
+    > page should be redirected to /admin-panel/autoryzacja/logowanie
+    */
   };
 
   if (!user) {

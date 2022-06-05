@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import { HTTPRequest } from '../../../../src/lib/httpRequest';
 import { useState } from 'react';
-import Cookies from 'universal-cookie';
 
 const FormValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -41,22 +40,15 @@ const LoginPage = () => {
             ) => {
               const response = await HTTPRequest('POST', 'auth/login', values);
 
-              if (response.serverError) {
-                setServerError(true);
-                return;
-              }
+              /* @TODO: Handle server response to login user
+                > response.serverError is true then setServerError -> true and return
 
-              if (response.success) {
-                const cookies = new Cookies();
-                cookies.set('comtaxLoginToken', response.token, {
-                  path: '/',
-                  expires: new Date(response.expires)
-                });
-
-                window.location.href = '/admin-panel';
-              } else {
-                setInvalidCredentials(true);
-              }
+                > response.success is true then create a cookie comtaxLoginToken 
+                  with response.token and expiration date from response.expires
+                  This cookie should be available in all application
+                
+                > response.success is false then setInvalidCredentials(true);
+              */
               setSubmitting(false);
             }}
           >
