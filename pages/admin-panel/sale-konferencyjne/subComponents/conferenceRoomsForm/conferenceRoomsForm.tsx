@@ -96,7 +96,6 @@ const ConferenceRoomsForm = ({
                   <div className={styles.formContainer}>
                     <h5>
                       <span>Informacje o sali</span>
-                      <span>konferencyjnej</span>
                     </h5>
                     <div className={styles.formInputs}>
                       <div className={styles.formInput}>

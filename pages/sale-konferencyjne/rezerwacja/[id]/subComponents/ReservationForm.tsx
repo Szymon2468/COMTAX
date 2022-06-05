@@ -46,36 +46,26 @@ const ReservationForm = ({
   conferenceRoom,
   date
 }: IReservationFormProps) => {
-  const [initialStartHours, setInitialStartHours] =
-    useState<IAvailableStartHours>(getStartHours(currentReservations));
+  const startHrs = getStartHours(currentReservations);
+  const [startHours, setStartHours] = useState(startHrs);
+  const initialRender = useRef(true);
 
-  const [startHour, setStartHour] = useState(
-    initialStartHours.initialStartHour
-  );
-
-  const [endHours, setEndHours] = useState(
-    getEndHours(currentReservations, initialStartHours.initialStartHour)
-      .endHours
-  );
+  let endHours = getEndHours(
+    currentReservations,
+    startHrs.initialStartHour
+  ).endHours;
 
   const [isMsgSent, setIsMsgSent] = useState(false);
   const [isMsgSendigError, setIsMsgSendigError] = useState(false);
 
   useEffect(() => {
-    setEndHours(getEndHours(currentReservations, startHour).endHours);
-  }, [startHour]);
-
-  useEffect(() => {
-    console.log('siema');
-    const start = getStartHours(currentReservations);
-    const end = getEndHours(
-      currentReservations,
-      start.initialStartHour
-    ).endHours;
-    setInitialStartHours(start);
-    setStartHour(start.initialStartHour);
-    setEndHours(end);
-  }, [date]);
+    if (!initialRender.current) {
+      endHours = getEndHours(
+        currentReservations,
+        startHours.initialStartHour
+      ).endHours;
+    }
+  }, [startHours.initialStartHour]);
 
   if (!currentReservations) {
     return null;
@@ -87,7 +77,7 @@ const ReservationForm = ({
         <Formik
           enableReinitialize={true}
           initialValues={{
-            startHour: startHour,
+            startHour: startHours.initialStartHour,
             endHour: endHours[0],
             numberOfPeople: '1',
             name: '',
@@ -107,6 +97,8 @@ const ReservationForm = ({
             { setSubmitting }: FormikHelpers<IReservationFormValues>
           ) => {
             const data = JSON.parse(JSON.stringify(values, null, 2));
+            //@ts-ignore
+            data.startHour = document.getElementById('startHour').value;
             data.conferenceRoom = conferenceRoom.id;
             data.date = date.getTime();
 
@@ -125,6 +117,13 @@ const ReservationForm = ({
         >
           {({ errors, handleChange }) => (
             <Form>
+              {startHrs.startHours.length === 0 && (
+                <p className={classNames(styles.reservationsFull)}>
+                  Sala w podanym dniu jest w pełni zarezerwowana. <br />
+                  Zapraszamy do rezerwacji innej sali lub tej samej w inny
+                  dzień.
+                </p>
+              )}
               <div
                 className={classNames(
                   styles.inputContainer,
@@ -139,13 +138,16 @@ const ReservationForm = ({
                   as='select'
                   id='startHour'
                   name='startHour'
-                  value={startHour}
                   onChange={(event: React.FormEvent<HTMLSelectElement>) => {
                     handleChange(event);
-                    setStartHour(event.currentTarget.value);
+                    initialRender.current = false;
+                    setStartHours({
+                      ...startHours,
+                      initialStartHour: event.currentTarget.value
+                    });
                   }}
                 >
-                  {initialStartHours.startHours.map((el) => (
+                  {startHrs.startHours.map((el) => (
                     <option key={uuidv4()} value={el}>
                       {el}
                     </option>

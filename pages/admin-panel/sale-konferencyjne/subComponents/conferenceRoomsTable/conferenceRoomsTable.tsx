@@ -34,6 +34,7 @@ const ConferenceRoomsTable = ({
   const [messagePopUp, setMessagePopUp] = useState<IMessagePopup>({
     visible: false
   });
+  const windowSize = useWindowSize();
 
   useEffect(() => {
     if (messagePopUp.visible) {
@@ -76,7 +77,6 @@ const ConferenceRoomsTable = ({
     }
   };
 
-  const windowSize = useWindowSize();
   if (windowSize.width > 576) {
     return (
       <>

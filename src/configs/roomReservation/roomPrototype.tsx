@@ -102,16 +102,15 @@ export const getEndHours = (
       initialEndHour: '8:30'
     };
   }
-  console.log('reservations', reservations);
-  console.log('hour', hour);
-  console.log('endHours', endHours);
 
-  const hourIndex = endHours.findIndex((e) => e === hour);
-  endHours.splice(0, endHours.findIndex((el) => el === hour) + 1);
+  let hourIndex = endHours.findIndex((e) => e === hour);
+  endHours.splice(
+    0,
+    endHours.findIndex((el) => el === hour)
+  );
   let hoursFound = false;
 
   if (hourIndex === -1 && reservations.length > 0) {
-    console.log('first');
     endHours = [];
   } else if (hourIndex === -1 && reservations.length === 0) {
     return {
@@ -122,15 +121,19 @@ export const getEndHours = (
     reservations.map((reservation) => {
       const start = reservation.startHour;
       let startIndex = endHours.findIndex((e) => e === start);
+      hourIndex = endHours.findIndex((e) => e === hour);
 
       if (hourIndex < startIndex && !hoursFound) {
         endHours.splice(startIndex);
+        endHours.shift();
         hoursFound = true;
       }
     });
-  }
 
-  console.log('finishEndHours', endHours);
+    if (!hoursFound) {
+      endHours.shift();
+    }
+  }
 
   return {
     endHours,

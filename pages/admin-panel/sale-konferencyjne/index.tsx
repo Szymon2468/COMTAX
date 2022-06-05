@@ -5,6 +5,9 @@ import styles from './ConferenceRooms.module.scss';
 import ConferenceRoomsTable from './subComponents/conferenceRoomsTable/conferenceRoomsTable';
 import ConferenceRoomsForm from './subComponents/conferenceRoomsForm/conferenceRoomsForm';
 import { MdPlaylistAdd } from 'react-icons/md';
+import dbConnect from '../../../app/lib/dbConnect';
+
+const ConferenceRoom = require('../../../app/models/ConferenceRoom');
 
 export type IConferenceRoomFormAction = 'ADD' | 'PREVIEW' | 'EDIT';
 
@@ -22,8 +25,12 @@ export const emptyConferenceRoom: IConferenceRoom = {
   city: ''
 };
 
-function Index() {
-  const [conferenceRooms, setConferenceRooms] = useState([]);
+interface IUsersPageProps {
+  startConferenceRooms: IConferenceRoom[];
+}
+
+function AdminPanelConferenceRooms({ startConferenceRooms }: IUsersPageProps) {
+  const [conferenceRooms, setConferenceRooms] = useState(startConferenceRooms);
   const [chosenConferenceRoom, setChosenConferenceRoom] =
     useState<IConferenceRoom | null>(null);
   const [action, setAction] = useState<IConferenceRoomFormAction>('ADD');
@@ -38,9 +45,9 @@ function Index() {
 
   useEffect(() => {
     getConferenceRooms();
-  }, []);
+  }, [chosenConferenceRoom]);
 
-  if (conferenceRooms.length === 0) {
+  if (!conferenceRooms || conferenceRooms.length === 0) {
     return null;
   }
 
@@ -94,4 +101,18 @@ function Index() {
   );
 }
 
-export default Index;
+export async function getStaticProps() {
+  await dbConnect();
+  let conferenceRooms = await ConferenceRoom.find({}, 'name address city').sort(
+    'name'
+  );
+
+  return {
+    props: {
+      startConferenceRooms: JSON.parse(JSON.stringify(conferenceRooms))
+    },
+    revalidate: 3600
+  };
+}
+
+export default AdminPanelConferenceRooms;
