@@ -76,7 +76,7 @@ const AccountSettingsForm = () => {
               { setSubmitting }: FormikHelpers<IChangePassword>
             ) => {
               setSubmitting(false);
-              const data = await HTTPRequest(
+              const response = await HTTPRequest(
                 'PUT',
                 `/auth/updatepassword/${user._id}`,
                 {
@@ -84,6 +84,16 @@ const AccountSettingsForm = () => {
                   newPassword: values.newPassword
                 }
               );
+              if (response.success) {
+                (values.currentPassword = ''),
+                  (values.newPassword = ''),
+                  (values.newPasswordRep = '');
+                setMessagePopUp({
+                  visible: true,
+                  type: 'SUCCESS',
+                  message: 'Pomyślnie zapisano zmiany.'
+                });
+              }
             }}
           >
             {({ errors }) => (
@@ -100,6 +110,7 @@ const AccountSettingsForm = () => {
                           <Field
                             id='currentPassword'
                             name='currentPassword'
+                            type='password'
                             placeholder={'Aktualne hasło'}
                           />
                         </div>
@@ -112,6 +123,7 @@ const AccountSettingsForm = () => {
                           <Field
                             id='newPassword'
                             name='newPassword'
+                            type='password'
                             placeholder={'Nowe hasło'}
                           />
                         </div>
@@ -126,6 +138,7 @@ const AccountSettingsForm = () => {
                           <Field
                             id='newPasswordRep'
                             name='newPasswordRep'
+                            type='password'
                             placeholder={'Powtórz nowe hasło'}
                           />
                         </div>
